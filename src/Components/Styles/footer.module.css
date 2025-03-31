@@ -1,0 +1,78 @@
+.container {
+  height: 21.6875rem;
+  width: 100vw;
+  background: #000;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 10rem;
+  position: relative;
+  padding: 0rem 7.5rem;
+}
+
+.links::after {
+  content: "";
+  width: 100vw;
+  height: 0.125rem;
+  background: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.logoBox {
+  position: relative;
+}
+
+.logoBox::before {
+  content: "";
+  width: 0.25rem;
+  height: 6.625rem;
+  background: #db3539;
+  left: -0.9rem;
+  position: absolute;
+}
+
+.logo {
+  /* width: 6.375rem; */
+  height: 6.5625rem;
+}
+.linkBox {
+  height: 100%;
+  display: flex;
+  padding: 1.31rem 1.125rem;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 0.8125rem;
+}
+.linkBox a {
+  text-decoration: none;
+}
+
+.address {
+  width: 100%;
+  padding: 0.87rem 7.5rem;
+}
+.addressText {
+  color: #fff;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  width: 17.625rem;
+}
+
+.copyRight {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copyRightText {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: -0.04rem;
+  
+}
