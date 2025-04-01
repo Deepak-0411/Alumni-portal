@@ -1,11 +1,10 @@
-.container {
+.header {
   display: flex;
   width: 100vw;
   height: 7.75rem;
   padding: 1rem 7.5rem;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
 }
 
 .logo {

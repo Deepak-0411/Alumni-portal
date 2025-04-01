@@ -1,5 +1,5 @@
 import styles from "./Styles/footer.module.css";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 const Footer = () => {
   const x = (
     <svg
@@ -116,7 +116,7 @@ const Footer = () => {
   );
 
   return (
-    <div className={styles.container}>
+    <div className={styles.footer}>
       <div className={styles.links}>
         <div className={styles.logoBox}>
           <img className={styles.logo} src={logo} alt="Logo" />
