@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import styles from "../Styles/Register.module.css";
 
@@ -29,6 +30,8 @@ const Register = () => {
   });
   const [schoolList,setSchoolList]=useState([]);
   const [programmeList,setProgrammeList]=useState([]);
+
+  const navigate=useNavigate();
 
 
   // Handle input change
@@ -244,9 +247,11 @@ const Register = () => {
           </div> 
           <div className={styles.btnContainer}>
           <button type="submit" className={styles.submitButton}>Register</button>
-          <button className={styles.backToLoginBtn}>Back to login</button>
           </div>
         </form>
+          <div className={styles.btnContainer}>
+          <button className={styles.backToLoginBtn} onClick={()=>navigate("/alumni/login")}>Back to login</button>
+          </div>
       </div>
   );
 };

@@ -8,10 +8,10 @@ const Layout = () => {
   const location = useLocation();
   const showBtn= location.pathname==="/alumni" || location.pathname==="/alumni/home";
   return (
-    <div className={styles.container}>
+    <div className={styles.container} >
       <Header buttons={showBtn} />
-      <div className={styles.outlet}>
-        <Outlet />
+      <div className={styles.outlet} style={showBtn ? { padding: "0rem" } : {}}>
+      <Outlet />
       </div>
 
       <Footer />

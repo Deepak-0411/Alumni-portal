@@ -54,9 +54,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 1rem;
-  margin: 1rem 0rem;
 }
 
 .submitButton {
@@ -70,6 +67,7 @@
   border: none;
   border-radius: 0.375rem;
   background: #002e57;
+  margin: 1rem 0rem;
   box-shadow: 15px 23px 8px 0px rgba(0, 0, 0, 0),
     10px 15px 7px 0px rgba(0, 0, 0, 0.03), 6px 8px 6px 0px rgba(0, 0, 0, 0.09),
     2px 4px 4px 0px rgba(0, 0, 0, 0.15), 1px 1px 2px 0px rgba(0, 0, 0, 0.18);
@@ -87,4 +85,8 @@
   text-decoration-skip-ink: auto;
   text-decoration-thickness: auto;
   text-underline-offset: auto;
+  transition: transform 0.4s ease-in-out;
+}
+.backToLoginBtn:hover{
+  transform: scale(1.5);
 }

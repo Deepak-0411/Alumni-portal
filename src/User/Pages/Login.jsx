@@ -1,14 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import LOGO from "../../assets/LOGO.png";
 import styles from "../Styles/Login.module.css";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
 
+  const navigate = useNavigate();
+
   return (
-    <div className={styles.box}>
       <div className={styles.container}>
         <div className={styles.header}>
           <img className={styles.logo} src={LOGO} alt="logo" />
@@ -43,16 +46,18 @@ const Login = () => {
               Remember me
             </label>
           </div>
-          <div className={styles.btns}>
-            <button className={`${styles.btn} ${styles.loginBtn}`}>
+            <button
+              type="submit"
+              className={`${styles.btn} ${styles.loginBtn}`}
+            >
               Login
             </button>
-            <button className={styles.btn}>Forget Password</button>
-            <button className={styles.btn}>New Registration</button>
-          </div>
         </form>
+          <div className={styles.btns}>
+            <button className={styles.btn}>Forget Password</button>
+            <button className={styles.btn} onClick={()=>navigate("/alumni/register")} >New Registration</button>
+          </div>
       </div>
-    </div>
   );
 };
 export default Login;

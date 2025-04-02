@@ -1,0 +1,92 @@
+.container {
+  width: 100%;
+  background: #ffffff;
+}
+
+.studentPng,
+.VCCard {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-bottom: 3.06rem;
+}
+.pngs {
+  transform: translateY(0.3rem);
+}
+.png {
+  height: 21.0625rem;
+}
+.revertPng {
+  transform: scaleX(-1) translateY(2.2rem);
+}
+.tagline {
+  width: 74.875rem;
+  height: 19.5rem;
+  border-radius: 1.25rem 0rem 0rem 18.75rem;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.taglineText {
+  color: #fff;
+  font-family: Roboto;
+  font-size: 5rem;
+  font-weight: 600;
+  letter-spacing: -0.15rem;
+}
+
+.VCCard {
+  align-items: flex-start;
+}
+.card {
+  width: 64.625rem;
+  height: 24.4375rem;
+  border-radius: 0rem 21.84375rem 21.84375rem 0rem;
+  background: #000;
+  position: relative;
+}
+.VCwordsContainer {
+  display: flex;
+  width: 25.9375rem;
+  height: 20.6875rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  position: absolute;
+  top: 2.4rem;
+  left: 7rem;
+}
+.VCwords {
+  color: #fff;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 300;
+}
+.VCSignature {
+  color: #a1a1a1;
+  text-align: right;
+  font-family: Roboto;
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 500;
+}
+.VCimg {
+  width: 19.67644rem;
+  height: 20.6875rem;
+  position: absolute;
+  top: 1.87rem;
+  right: 2.26rem;
+}
+
+.notableAlumni{
+  margin-bottom: 3.06rem;
+}
+.notableAlumniText{
+    margin-left: 7rem;
+    color: #000;
+font-family: Inter;
+font-size: 3rem;
+font-weight: 600;
+}
