@@ -1,12 +1,3 @@
-.box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f4f5fb;
-  padding: 3rem 1rem;
-}
 .container {
   max-width: 70.3rem;
   padding: 1.5rem;

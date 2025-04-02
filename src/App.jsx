@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Layout from "./Components/Page/Layout";
 import Register from "./User/Pages/Register";
+import Login from "./User/Pages/Login";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/alumni" element={<Layout />}>
           <Route path="home" element={<Register />} />
           <Route path="register" element={<Register />} />
+          <Route path="login" element={<Login />} />
         </Route>
       </Routes>
     </Router>

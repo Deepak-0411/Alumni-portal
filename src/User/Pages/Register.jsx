@@ -47,7 +47,6 @@ const Register = () => {
   };
 
   return (
-    <div className={styles.box}>
       <div className={styles.container}>
         <h2 className={styles.title}>Alumni Registration Form</h2>
         <form className={styles.form}>
@@ -249,7 +248,6 @@ const Register = () => {
           </div>
         </form>
       </div>
-    </div>
   );
 };
 export default Register;
