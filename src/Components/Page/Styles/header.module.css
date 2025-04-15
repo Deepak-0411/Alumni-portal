@@ -5,62 +5,115 @@
   padding: 1rem 7.5rem;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box;
+  user-select: none;
 }
 
 .logo {
   display: flex;
   align-items: center;
   cursor: pointer;
+  flex-wrap: nowrap;
+}
+.textContainer {
+  padding: 0rem clamp(0.31rem, 1vw, 0.6rem);
+  border-right: 0.1rem solid #a1a1a1;
 }
 
 .logoImg {
-  width: 25.625rem;
-  height: 5.3125rem;
-  aspect-ratio: 82/17;
+  width: clamp(3rem, 8vw, 6.5rem);
+  height: clamp(3rem, 8vw, 6.5rem);
 }
+.GBUHindi {
+  font-family: Roboto;
+  font-size: clamp(0.5rem, 2.5vw, 1.2rem);
+  font-weight: 400;
+}
+
+.GBUEng {
+  font-family: Roboto;
+  font-size: clamp(0.625rem, 2.5vw, 1.12rem);
+  font-weight: 500;
+}
+.GBUText {
+  color: #949393;
+  font-family: Roboto;
+  font-size: clamp(0.4375rem, 2.5vw, 0.75rem);
+  font-weight: 500;
+}
+
 .textDiv {
   display: flex;
-  height: 5.3125rem;
-  padding: 0rem 0.9375rem;
+  padding: 0rem clamp(0.4rem, 1vw, 0.9375rem);
   align-items: center;
-  align-content: center;
-  gap: 0.625rem;
-  flex-wrap: wrap;
-  border-left: .1rem solid #a1a1a1;
 }
+
 .text {
   color: #a1a1a1;
   font-family: Roboto;
-  font-size: 1.4375rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.4375rem);
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
   letter-spacing: -0.04313rem;
-  /* max-width: 9rem; */
 }
+
 .btns {
   display: flex;
   align-items: center;
-  gap: 1.625rem;
+  gap: clamp(0.5rem, 2vw, 1.625rem);
 }
+
 .btn {
-  width: 7.5rem;
-  height: 3.125rem;
+  width: clamp(5.5rem, 13vw, 7.5rem);
+  height: clamp(1.8rem, 5.3vw, 3.125rem);
   padding: 0.625rem;
   border-radius: 5rem;
   color: #fff;
   font-family: Inter;
-  font-size: 1rem;
+  font-size: clamp(0.65rem, 2vw, 1rem);
   font-weight: 700;
   letter-spacing: -0.04rem;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .registerBtn {
   border: 0.05rem solid #000;
   background: #002e57;
 }
+
 .loginBtn {
   background: #a1a1a1;
   color: black;
   border: none;
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+@media (max-width: 1024px) {
+  .header {
+    padding: 1rem 4rem;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1rem 2rem;
+  }
+}
+@media (max-width: 650px) {
+  .textContainer {
+    display: none;
+  }
+
+}
+@media (max-width: 425px) {
+  .header {
+    padding: 1rem;
+  }
 }

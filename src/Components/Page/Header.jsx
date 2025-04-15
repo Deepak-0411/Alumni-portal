@@ -8,7 +8,14 @@ const Header = ({ buttons }) => {
   return (
     <div className={styles.header}>
       <div className={styles.logo} onClick={() => navigate("/")}>
-        <img className={styles.logoImg} src={GBULOGO} alt="LOGO" />
+          <img className={styles.logoImg} src={GBULOGO} alt="LOGO" />
+          <div className={styles.textContainer}>
+            <p className={styles.GBUHindi}>गौतम बुद्ध विश्वविद्यालय</p>
+            <p className={styles.GBUEng}>GAUTAM BUDDHA UNIVERSITY</p>
+            <p className={styles.GBUText}>
+              An Ultimate Destination for Higher Learning
+            </p>
+        </div>
         <div className={styles.textDiv}>
           <p className={styles.text}>
             Alumni <br /> Association
