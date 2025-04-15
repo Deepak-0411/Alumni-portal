@@ -3,13 +3,14 @@
   background: #000;
 }
 
+/* ===== TOP SECTION (LOGO + ICON LINKS) ===== */
 .links {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 10rem;
+  height: clamp(8rem, 15vw, 10rem);
+  padding: 0 clamp(1.5rem, 7vw, 7.5rem);
   position: relative;
-  padding: 0rem 7.5rem;
 }
 
 .links::after {
@@ -23,55 +24,80 @@
 }
 
 .logoBox {
-  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  border-left: .25rem solid #db3539;
+  padding-left: .5rem;
 }
 
-.logoBox::before {
-  content: "";
-  width: 0.25rem;
-  height: 6.625rem;
-  background: #db3539;
-  left: -0.9rem;
-  position: absolute;
-}
 
 .logo {
-  /* width: 6.375rem; */
-  height: 6.5625rem;
+  height: clamp(5.5rem, 9vw, 6.5625rem);
 }
+
+/* ===== SOCIAL LINKS ===== */
 .linkBox {
-  height: 100%;
   display: flex;
-  padding: 1.31rem 1.125rem;
+  padding:1.31rem 1.125rem;
   justify-content: center;
   align-items: flex-end;
-  gap: 0.8125rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
+
 .linkBox a {
   text-decoration: none;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  color: #fff;
+}
+.linkBox2{
+  display: none;
 }
 
+/* ===== ADDRESS SECTION ===== */
 .address {
   width: 100%;
-  padding: 0.87rem 7.5rem;
-}
-.addressText {
-  color: #fff;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  width: 17.625rem;
+  padding: clamp(1rem, 3vw, 1.5rem) clamp(1.5rem, 6vw, 7.5rem);
 }
 
+.addressText {
+  color: #fff;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  font-weight: 400;
+  max-width: 50rem;
+  line-height: 1.6;
+}
+
+/* ===== COPYRIGHT ===== */
 .copyRight {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  text-align: center;
 }
+
 .copyRightText {
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: -0.04rem;
-  
+  color: #fff;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  font-weight: 400;
+  letter-spacing: -0.04rem;
+}
+.copyRightText span{
+  color: gray;
+  font-weight: bolder;
+}
+
+/* ===== MEDIA QUERIES FOR EXTRA SMALL DEVICES ===== */
+
+@media (max-width: 480px) {
+  .linkBox1{
+    display: none;
+  }
+  .linkBox2{
+    display: flex;
+    justify-content: start;
+    padding: 0rem 1.5rem;
+  }
 }

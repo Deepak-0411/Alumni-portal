@@ -1,7 +1,7 @@
 .events {
   display: flex;
-  width: 65.25rem;
-  padding: 3rem 1.875rem;
+  max-width: 65.25rem;
+  padding: 3rem clamp(1.2rem, 6.5vw, 1.875rem);
   flex-direction: column;
   align-items: flex-start;
   gap: 1.875rem;
@@ -14,7 +14,7 @@
 }
 .eventTitle {
   color: #78335d;
-  font-size: 3rem;
+  font-size: clamp(1.8rem ,10vw,3rem);
   font-weight: 700;
 }
 .eventCard {
@@ -42,7 +42,7 @@
 .aboutEvent {
   color: #010101;
   font-family: Inter;
-  font-size: 1rem;
+  font-size: clamp(.75rem, 4vw ,1rem);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -52,7 +52,7 @@
   font-family: Inter;
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.625rem;
+  padding: clamp(.45rem , 2.5vw , 0.625rem);
   border-radius: 0.5rem;
   background: #002e57;
   border: none;

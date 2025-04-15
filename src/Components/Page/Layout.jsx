@@ -10,11 +10,11 @@ const Layout = () => {
   return (
     <div className={styles.container} >
       <Header buttons={showBtn} />
-      {/* <div className={styles.outlet} style={showBtn ? { padding: "0rem" } : {}}>
+      <div className={styles.outlet} style={showBtn ? { padding: "0rem" } : {}}>
       <Outlet />
       </div>
 
-      <Footer /> */}
+      <Footer />
     </div>
   );
 };

@@ -107,7 +107,7 @@
   }
 }
 @media (max-width: 650px) {
-  .textContainer {
+  .hideContainer {
     display: none;
   }
 
