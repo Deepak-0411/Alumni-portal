@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  width: 65.25rem;
+  padding: 3rem 1.875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.875rem;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.titleContainer {
+  width: 100%;
+  border-bottom: 2px solid #78335d;
+  padding: 0.625rem;
+}
+.title {
+  color: #002e57;
+  font-family: "Annapurna SIL";
+  font-size: 3rem;
+  font-weight: 700;
+}
+.card {
+  display: flex;
+  padding: 1.1875rem 0.875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  align-self: stretch;
+  border-right: 1px solid #a6a6a6;
+  border-bottom: 1px solid #a6a6a6;
+  background: #fff;
+  box-shadow: 149px 191px 68px 0px rgba(0, 0, 0, 0),
+    95px 122px 62px 0px rgba(0, 0, 0, 0), 54px 69px 52px 0px rgba(0, 0, 0, 0.01),
+    24px 31px 39px 0px rgba(0, 0, 0, 0.02), 6px 8px 21px 0px rgba(0, 0, 0, 0.02);
+}
+.cllgName {
+  color: #002e57;
+  font-family: Inter;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding: 0.625rem 0rem;
+}
+.text {
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: 0.3125rem 0.625rem;
+}

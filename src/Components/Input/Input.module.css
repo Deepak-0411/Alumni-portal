@@ -8,6 +8,7 @@
 
 .label,
 .input,
+.input option,
 .required span::after {
     width: 100%;
   font-size: 1rem;

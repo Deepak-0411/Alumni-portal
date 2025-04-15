@@ -25,13 +25,16 @@ const Home = () => {
         <div className={styles.card}>
           <div className={styles.VCwordsContainer}>
             <p className={styles.VCwords}>
-              Our alumni are the torchbearers of Gautam Buddha University,
+              "Our alumni are the torchbearers of Gautam Buddha University,
               illuminating the world with their knowledge, integrity, and
               innovation. This portal is a bridge to reconnect, collaborate, and
-              inspire future generations.
+              inspire future generations."
             </p>
-            <p className={styles.VCSignature}> — Prof. Rana Pratap Singh <br/>
-            Vice Chancellor</p>
+            <p className={styles.VCSignature}>
+              {" "}
+              — Prof. Rana Pratap Singh <br />
+              Vice Chancellor
+            </p>
           </div>
           <img className={styles.VCimg} src={VCimg} alt="Vice Chancellor" />
         </div>
@@ -39,6 +42,94 @@ const Home = () => {
 
       <div className={styles.notableAlumni}>
         <p className={styles.notableAlumniText}>Notable Alumni</p>
+      </div>
+
+      <div className={styles.events}>
+        <div className={styles.eventTitleContainer}>
+        <h2 className={styles.eventTitle}>EVENTS 2025</h2>
+        </div>
+        <div className={styles.eventList}>
+          <div className={styles.eventCard}>
+            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
+            <p className={styles.aboutEvent}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <div>
+              <button className={styles.registerBtn} type="button">
+                Register Now
+              </button>
+            </div>
+          </div>
+          <div className={styles.eventCard}>
+            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
+            <p className={styles.aboutEvent}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <div>
+              <button className={styles.registerBtn} type="button">
+                Register Now
+              </button>
+            </div>
+          </div>
+          <div className={styles.eventCard}>
+            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
+            <p className={styles.aboutEvent}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <div>
+              <button className={styles.registerBtn} type="button">
+                Register Now
+              </button>
+            </div>
+          </div>
+          <div className={styles.eventCard}>
+            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
+            <p className={styles.aboutEvent}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <div>
+              <button className={styles.registerBtn} type="button">
+                Register Now
+              </button>
+            </div>
+          </div>
+          <div className={styles.eventCard}>
+            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
+            <p className={styles.aboutEvent}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur.
+            </p>
+            <div>
+              <button className={styles.registerBtn} type="button">
+                Register Now
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,59 @@
+.events {
+  display: flex;
+  width: 65.25rem;
+  padding: 3rem 1.875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.875rem;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.eventTitleContainer {
+  width: 100%;
+  border-bottom: 0.13rem solid #ff0202;
+}
+.eventTitle {
+  color: #78335d;
+  font-size: 3rem;
+  font-weight: 700;
+}
+.eventCard {
+  display: flex;
+  padding: 1.1875rem 0.875rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  align-self: stretch;
+  border-right: .1rem solid #a6a6a6;
+  border-bottom: .1rem solid #a6a6a6;
+  background: #fff;
+  box-shadow: 149px 191px 68px 0px rgba(0, 0, 0, 0),
+    95px 122px 62px 0px rgba(0, 0, 0, 0), 54px 69px 52px 0px rgba(0, 0, 0, 0.01),
+    24px 31px 39px 0px rgba(0, 0, 0, 0.02), 6px 8px 21px 0px rgba(0, 0, 0, 0.02);
+}
+.eventName {
+  color: #002e57;
+  font-family: Inter;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.aboutEvent {
+  color: #010101;
+  font-family: Inter;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.registerBtn {
+  color: #fff;
+  font-family: Inter;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  background: #002e57;
+  border: none;
+}

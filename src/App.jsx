@@ -9,6 +9,8 @@ import Layout from "./Components/Page/Layout";
 import Register from "./User/Pages/Register";
 import Login from "./User/Pages/Login";
 import Home from "./User/Pages/Home";
+import Events from "./User/Pages/Events";
+import ContactUs from "./User/Pages/ContactUs";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
+          <Route path="events" element={<Events />} />
+          <Route path="contactUs" element={<ContactUs/>} />
         </Route>
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
