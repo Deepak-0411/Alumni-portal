@@ -64,7 +64,7 @@
 }
 
 .btn {
-  width: clamp(5.5rem, 13vw, 7.5rem);
+  width: clamp(5rem, 13vw, 7.5rem);
   height: clamp(1.8rem, 5.3vw, 3.125rem);
   padding: 0.625rem;
   border-radius: 5rem;
