@@ -1,4 +1,3 @@
-import { Outlet } from "react-router-dom";
 import styles from "../styles/modules/Navbar.module.css";
 import { Link, useLocation } from "react-router-dom";
 
@@ -15,8 +14,8 @@ const Navbar = () => {
       path: "/alumni/user/events",
     },
     {
-      name: "Membership",
-      path: "/alumni/user/membership",
+      name: "Membership Card",
+      path: "/alumni/user/membershipCard",
     },
     {
       name: "Contact Us",

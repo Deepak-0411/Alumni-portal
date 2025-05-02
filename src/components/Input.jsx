@@ -1,25 +1,25 @@
 import styles from "../styles/modules/Input.module.css";
 
 const Input = ({
-  type,
-  name,
-  placeHolder,
-  label,
-  required,
-  requiredMark,
+  type="",
+  name="",
+  placeHolder="",
+  label="",
+  required="",
+  requiredMark="",
   options=[],
-  value,
-  onChange,
+  value="",
+  onChange="",
 }) => {    
 
   return (
     <div className={styles.container}>
-      <label
+      {label &&<label
         htmlFor={label}
         className={`${styles.label} ${requiredMark ? styles.required : ""}`}
       >
         <span> {label} </span>
-      </label>
+      </label>}
 
       {type === "select" ? (
         <select
@@ -49,7 +49,7 @@ const Input = ({
           type={type}
           name={name}
           id={label}
-        //   placeholder={placeHolder}
+          placeholder={placeHolder}
           required={required}
           className={styles.input}
           value={value}

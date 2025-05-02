@@ -1,12 +1,13 @@
 .container {
   display: flex;
-  width: 33.375rem;
+  max-width: 33.375rem;
   padding: 3rem 2.5rem;
   flex-direction: column;
   align-items: flex-start;
   border-radius: 0.75rem;
   background: #fff;
   flex-wrap: wrap;
+  gap: 1.25rem;
 }
 .header {
   display: flex;
@@ -15,23 +16,22 @@
   align-items: center;
   gap: 1.25rem;
   align-self: stretch;
-  margin-bottom: 1.25rem;
 }
 .logo {
   width: 3.75rem;
   height: 3.75rem;
   aspect-ratio: 1/1;
 }
-.title{
-  font-size: clamp(1.2rem , 1.8vw, 1.8rem);
+.title {
+  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
 }
 .form {
   width: 100%;
-  margin-bottom: .62rem;
+  display: flex;
+  flex-direction: column;
+  gap: .62rem;
 }
-.input {
-  margin-bottom: 1.25rem;
-}
+
 .checkLabel {
   margin-left: 0.5rem;
   color: #000;
@@ -49,16 +49,19 @@
   background: #cfd7de;
   color: #000;
   font-family: Inter;
-  font-size: clamp(.75rem,1.6vw,1rem);
+  font-size: clamp(0.75rem, 1.6vw, 1rem);
   font-weight: 500;
   padding: 0.625rem;
   border-radius: 0.25rem;
   border: none;
   cursor: pointer;
 }
+.fullLengthBtn,
 .loginBtn {
   grid-column-start: 1;
   grid-column-end: 3;
+}
+.loginBtn {
   color: white;
   background-color: #5d60f4;
   font-weight: 600;
