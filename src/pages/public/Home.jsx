@@ -1,4 +1,4 @@
-import styles from "../Styles/Home.module.css";
+import styles from "../../styles/modules/Home.module.css";
 import png1 from "../../assets/studentsImg1.png";
 import png2 from "../../assets/studentsImg2.png";
 import png3 from "../../assets/studentsImg3.png";

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../Components/Input/Input";
-import LOGO from "../../assets/GBULOGO.png";
-import styles from "../Styles/Login.module.css";
+import LOGO from "../assets/GBULOGO.png";
+import Input from "../components/Input"
+import styles from "../styles/modules/Login.module.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");

@@ -1,6 +1,6 @@
-import styles from "./Styles/footer.module.css";
-import logo from "../../assets/logo.png";
-import SocialLinks from "../SocialLinks/SocialLinks";
+import styles from "../styles/modules/Footer.module.css";
+import logo from "../assets/logo.png";
+import SocialLinks from "../components/SocialLinks";
 
 const Footer = () => {
   return (

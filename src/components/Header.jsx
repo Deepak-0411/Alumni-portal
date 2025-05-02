@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import GBULOGO from "../../assets/GBULOGO.png";
-import styles from "./Styles/header.module.css";
+import GBULOGO from "../assets/GBULOGO.png";
+import styles from "../styles/modules/Header.module.css";
 
 const Header = ({ buttons }) => {
   const navigate = useNavigate();
