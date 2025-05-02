@@ -1,0 +1,31 @@
+/* ===== SOCIAL LINKS ===== */
+.linkBox {
+  display: flex;
+  padding: 1.31rem 1.125rem;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.linkBox a {
+  text-decoration: none;
+  font-size: clamp(0.75rem, 2vw, 1rem);
+  color: #fff;
+}
+.low {
+  display: none;
+}
+
+/* ===== MEDIA QUERIES FOR EXTRA SMALL DEVICES ===== */
+
+@media (max-width: 480px) {
+  .up {
+    display: none;
+  }
+  .low{
+    display: flex;
+    justify-content: start;
+    padding: 0rem 1.5rem;
+  }
+}

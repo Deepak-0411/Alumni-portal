@@ -1,6 +1,6 @@
 import styles from "./Styles/footer.module.css";
 import logo from "../../assets/logo.png";
-import SocialLinks from "../SocialLinks";
+import SocialLinks from "../SocialLinks/SocialLinks";
 
 const Footer = () => {
   return (
@@ -9,7 +9,7 @@ const Footer = () => {
         <div className={styles.logoBox}>
           <img className={styles.logo} src={logo} alt="Logo" />
         </div>
-        <SocialLinks className={styles.linkBox1} />
+        <SocialLinks location="up" />
       </div>
 
       <div className={styles.address}>
@@ -20,7 +20,7 @@ const Footer = () => {
         </p>
       </div>
 
-      <SocialLinks className={styles.linkBox2} />
+      <SocialLinks location="low" />
 
       <div className={styles.copyRight}>
         <p className={styles.copyRightText}>

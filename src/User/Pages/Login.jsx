@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
-import LOGO from "../../assets/LOGO.png";
+import LOGO from "../../assets/GBULOGO.png";
 import styles from "../Styles/Login.module.css";
 
 const Login = () => {
@@ -10,6 +10,9 @@ const Login = () => {
   const [remember, setRemember] = useState(false);
 
   const navigate = useNavigate();
+  const handleLogin=()=>{
+    navigate("/alumni/user/events")
+  };
 
   return (
       <div className={styles.container}>
@@ -49,6 +52,7 @@ const Login = () => {
             <button
               type="submit"
               className={`${styles.btn} ${styles.loginBtn}`}
+              onClick={handleLogin}
             >
               Login
             </button>

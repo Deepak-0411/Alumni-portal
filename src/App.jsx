@@ -18,16 +18,23 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/alumni" />} />
 
-        {/* Alumni routes with Layout */}
+        {/* Main Layout wrapper */}
         <Route path="/alumni" element={<Layout />}>
+          {/* First level inside Layout */}
           <Route index element={<Navigate to="home" />} />
           <Route path="home" element={<Home />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-          <Route path="events" element={<Events />} />
-          <Route path="contactUs" element={<ContactUs/>} />
+
+          {/* Nested route for user content wrapped in Navbar */}
+          <Route path="user" element={<Events />}>// navigation from layout Component
+            <Route index element={<Navigate to="events" />} />
+            <Route path="events" element={<Events />} />
+            <Route path="contactUs" element={<ContactUs />} />
+          </Route>
         </Route>
-        <Route path="/*" element={<PageNotFound />} />
+
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </Router>
   );

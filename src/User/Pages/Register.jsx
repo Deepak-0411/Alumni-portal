@@ -3,36 +3,25 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../Components/Input/Input";
 import styles from "../Styles/Register.module.css";
 
-const titleOptions = ["Mr.", "Mrs.", "Miss", "Dr.", "Prof."];
-const passingYears =[];
-
 const Register = () => {
   const [formData, setFormData] = useState({
-    title: "",
-    dob: "",
-    fName: "",
-    mName: "",
-    lName: "",
-    email: "",
-    phone: "",
-    password: "",
-    cnfpassword: "",
     enrollmentNo: "",
     rollNo: "",
-    school: "",
-    programme: "",
+    Name: "",
+    fathersName: "",
+    dob: "",
     yearOfPassing: "",
-    countryOfResidence: "",
-    address: "",
-    linkedin: "",
-    instagram: "",
-    twitter: "",
+    phoneNo: "",
+    email: "",
+    school: "",
+    department: "",
+    degreePic: "",
   });
-  const [schoolList,setSchoolList]=useState([]);
-  const [programmeList,setProgrammeList]=useState([]);
+  const [schoolList, setSchoolList] = useState([]);
+  const [programmeList, setProgrammeList] = useState([]);
+  const [passingYears, setPassingYears] = useState([]);
 
-  const navigate=useNavigate();
-
+  const navigate = useNavigate();
 
   // Handle input change
   const handleChange = (e) => {
@@ -40,7 +29,6 @@ const Register = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
-    
   };
 
   // Handle form submission
@@ -50,209 +38,136 @@ const Register = () => {
   };
 
   return (
-      <div className={styles.container}>
-        <h2 className={styles.title}>Alumni Registration Form</h2>
-        <form className={styles.form}>
-           <div className={styles.twoTiles}>
-            <Input
-              type={"select"}
-              name={"title"}
-              label={"Title"}
-              required={true}
-              requiredMark={true}
-              value={formData.title}
-              options={titleOptions}
-              onChange={handleChange}
-            />
-            <Input
-              type={"date"}
-              name={"dob"}
-              label={"DOB(dd/mm/yyyy)"}
-              required={true}
-              requiredMark={true}
-              value={formData.dob}
-              onChange={handleChange}
-            />
-          </div>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Alumni Registration Form</h2>
+      <form className={styles.form}>
+        <div className={styles.twoTiles}>
+          <Input
+            type={"number"}
+            name={"enrollmentNo"}
+            label={"Enrollment Number"}
+            required={true}
+            requiredMark={true}
+            value={formData.enrollmentNo}
+            onChange={handleChange}
+          />
+          <Input
+            type={"text"}
+            name={"rollNo"}
+            label={"Roll Number"}
+            required={true}
+            requiredMark={true}
+            value={formData.rollNo}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className={styles.threeTiles}>
-            <Input
-              type={"text"}
-              name={"fName"}
-              label={"First Name"}
-              required={true}
-              requiredMark={true}
-              value={formData.fName}
-              onChange={handleChange}
-            />
-            <Input
-              type={"text"}
-              name={"mName"}
-              label={"Midddle Name"}
-              value={formData.mName}
-              onChange={handleChange}
-            />
-            <Input
-              type={"text"}
-              name={"lName"}
-              label={"Last Name"}
-              value={formData.lName}
-              onChange={handleChange}
-            /> 
-          </div>
+        <div className={styles.threeTiles}>
+          <Input
+            type={"text"}
+            name={"Name"}
+            label={"Name"}
+            required={true}
+            requiredMark={true}
+            value={formData.Name}
+            onChange={handleChange}
+          />
+          <Input
+            type={"text"}
+            name={"fathersName"}
+            label={"Father's Name"}
+            required={true}
+            requiredMark={true}
+            value={formData.fathersName}
+            onChange={handleChange}
+          />
+          <Input
+            type={"date"}
+            name={"dob"}
+            label={"DOB(dd/mm/yyyy)"}
+            required={true}
+            requiredMark={true}
+            value={formData.dob}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className={styles.twoTiles}>
-            <Input
-              type={"password"}
-              name={"password"}
-              label={"Password"}
-              required={true}
-              requiredMark={true}
-              value={formData.password}
-              onChange={handleChange}
-            />
-            <Input
-              type={"password"}
-              name={"cnfpassword"}
-              label={"Confirm Password"}
-              required={true}
-              requiredMark={true}
-              value={formData.cnfpassword}
-              onChange={handleChange}
-            />
-            
-          </div> 
+        <div className={styles.twoTiles}>
+          <Input
+            type={"number"}
+            name={"phoneNo"}
+            label={"Phone Number"}
+            required={true}
+            requiredMark={true}
+            value={formData.phoneNo}
+            onChange={handleChange}
+          />
+          <Input
+            type={"email"}
+            name={"email"}
+            label={"E-mail"}
+            required={true}
+            requiredMark={true}
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
 
-          <div className={styles.threeTiles}>
+        <div className={styles.threeTiles}>
           <Input
-              type={"select"}
-              name={"school"}
-              label={"Select School"}
-              required={true}
-              requiredMark={true}
-              value={formData.school}
-              options={schoolList}
-              onChange={handleChange}
-            />
+            type={"select"}
+            name={"school"}
+            label={"Select School"}
+            required={true}
+            requiredMark={true}
+            value={formData.school}
+            options={schoolList}
+            onChange={handleChange}
+          />
           <Input
-              type={"select"}
-              name={"programme"}
-              label={"Select Programme"}
-              required={true}
-              requiredMark={true}
-              value={formData.programme}
-              options={programmeList}
-              onChange={handleChange}
-            />
+            type={"select"}
+            name={"programme"}
+            label={"Select Programme"}
+            required={true}
+            requiredMark={true}
+            value={formData.programme}
+            options={programmeList}
+            onChange={handleChange}
+          />
           <Input
-              type={"select"}
-              name={"yearOfPassing"}
-              label={"Year of Passing"}
-              required={true}
-              requiredMark={true}
-              value={formData.yearOfPassing}
-              options={passingYears}
-              onChange={handleChange}
-            />
-          </div>
-          <div className={styles.twoTiles}>
+            type={"select"}
+            name={"yearOfPassing"}
+            label={"Year of Passing"}
+            required={true}
+            requiredMark={true}
+            value={formData.yearOfPassing}
+            options={passingYears}
+            onChange={handleChange}
+          />
+        </div>
+        <div className={styles.twoTiles}>
           <Input
-              type={"email"}
-              name={"email"}
-              label={"Email"}
-              required={true}
-              requiredMark={true}
-              value={formData.email}
-              onChange={handleChange}
-            />
-          <Input
-              type={"number"}
-              name={"phone"}
-              label={"Phone"}
-              required={true}
-              requiredMark={true}
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
-    
-          <div className={styles.threeTiles}>
-          <Input
-              type={"number"}
-              name={"enrollmentNo"}
-              label={"Enrollment Number"}
-              required={true}
-              requiredMark={true}
-              value={formData.enrollmentNo}
-              onChange={handleChange}
-            />
-            <Input
-              type={"text"}
-              name={"rollNo"}
-              label={"Roll Number"}
-              required={true}
-              requiredMark={true}
-              value={formData.rollNo}
-              onChange={handleChange}
-            />
-            <Input 
             type={"file"}
-            name={"pfp"}
-            label={"Photograph"}
-            />
-          </div>
-          <div className={styles.twoTiles}>
-          <Input
-              type={"text"}
-              name={"countryOfResidence"}
-              label={"Country of Residence"}
-              required={true}
-              requiredMark={true}
-              value={formData.countryOfResidence}
-              onChange={handleChange}
-            />
-          <Input
-              type={"text"}
-              name={"address"}
-              label={"Address"}
-              required={true}
-              requiredMark={true}
-              value={formData.address}
-              onChange={handleChange}
-            />
-            
-          </div>
-          <div className={styles.threeTiles}>
-          <Input
-              type={"url"}
-              name={"linkedin"}
-              label={"Linkedin URL"}
-              value={formData.linkedin}
-              onChange={handleChange}
-            />
-          <Input
-              type={"url"}
-              name={"instagram"}
-              label={"Instagram URL"}
-              value={formData.instagram}
-              onChange={handleChange}
-            />
-          <Input
-              type={"url"}
-              name={"twitter"}
-              label={"Twitter URL"}
-              value={formData.twitter}
-              onChange={handleChange}
-            />
-          </div> 
-          <div className={styles.btnContainer}>
-          <button type="submit" className={styles.submitButton}>Register</button>
-          </div>
-        </form>
-          <div className={styles.btnContainer}>
-          <button className={styles.backToLoginBtn} onClick={()=>navigate("/alumni/login")}>Back to login</button>
-          </div>
+            name={"degreePic"}
+            label={"Photograph of degree"}
+          />
+        </div>
+
+        <div className={styles.btnContainer}>
+          <button type="submit" className={styles.submitButton}>
+            Register
+          </button>
+        </div>
+      </form>
+      <div className={styles.btnContainer}>
+        <button
+          className={styles.backToLoginBtn}
+          onClick={() => navigate("/alumni/login")}
+        >
+          Back to login
+        </button>
       </div>
+    </div>
   );
 };
 export default Register;

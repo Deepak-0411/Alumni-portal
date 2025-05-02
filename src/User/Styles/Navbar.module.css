@@ -1,0 +1,23 @@
+.navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right:8vw;
+  background: #002e57;
+}
+.navbarBtns {
+    padding: 0.625rem 0rem;
+
+}
+.navbarBtn {
+  margin-left: 1.8rem;
+  color: #fff;
+  font-family: Roboto;
+  font-size: clamp(0.65rem,3vw,1rem);
+  font-weight: 600;
+  text-decoration: none;
+}
+.navbarBtnActive{
+    text-decoration: underline;
+}

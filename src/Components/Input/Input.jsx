@@ -7,7 +7,7 @@ const Input = ({
   label,
   required,
   requiredMark,
-  options,
+  options=[],
   value,
   onChange,
 }) => {    

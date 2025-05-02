@@ -36,25 +36,6 @@
   height: clamp(5.5rem, 9vw, 6.5625rem);
 }
 
-/* ===== SOCIAL LINKS ===== */
-.linkBox {
-  display: flex;
-  padding:1.31rem 1.125rem;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.linkBox a {
-  text-decoration: none;
-  font-size: clamp(0.75rem, 2vw, 1rem);
-  color: #fff;
-}
-.linkBox2{
-  display: none;
-}
-
 /* ===== ADDRESS SECTION ===== */
 .address {
   width: 100%;
@@ -89,15 +70,4 @@
   font-weight: bolder;
 }
 
-/* ===== MEDIA QUERIES FOR EXTRA SMALL DEVICES ===== */
 
-@media (max-width: 480px) {
-  .linkBox1{
-    display: none;
-  }
-  .linkBox2{
-    display: flex;
-    justify-content: start;
-    padding: 0rem 1.5rem;
-  }
-}
