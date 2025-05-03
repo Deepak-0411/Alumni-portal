@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import styles from "../../styles/modules/CheckStatus.module.css";
 import Input from "../../components/Input";
 
 const CheckStatus = ({ forgetPassword = false }) => {
+  const location = useLocation();
   const [verified, setVerified] = useState(null);
   const [error, setError] = useState("");
-  const [enrollmentno, setEnrollmentno] = useState("");
+  const [email, setEmail] = useState(null);
+
+  useEffect(() => {
+    if (location.state?.email) {
+      setEmail(location.state.email);
+    }
+  }, [location.state]);
+
   const handleSearch = () => {
-    console.log(enrollmentno);
+    console.log(email); // or trigger API check
   };
+
   const handleClick = () => {
     console.log("Clicked");
   };
@@ -20,17 +30,17 @@ const CheckStatus = ({ forgetPassword = false }) => {
       </p>
       <div className={styles.searchBar}>
         <Input
-          type={"number"}
-          name={"enrollmentno"}
-          placeHolder={"Enrollment Number"}
+          type={"email"}
+          name={"email"}
+          placeHolder={"E-mail"}
           required={true}
-          value={enrollmentno}
-          onChange={(e) => setEnrollmentno(e.target.value)}
+          value={email || ""}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button
           className={styles.btn}
           onClick={handleSearch}
-          disabled={!enrollmentno}
+          disabled={!email}
         >
           Search
         </button>
@@ -53,4 +63,5 @@ const CheckStatus = ({ forgetPassword = false }) => {
     </div>
   );
 };
+
 export default CheckStatus;

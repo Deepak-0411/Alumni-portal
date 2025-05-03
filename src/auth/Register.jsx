@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import styles from "../styles/modules/Register.module.css";
+import LoadingScrn from "../components/Loading";
+import { apiRequest } from "../utility/apirequest";
+import { validateForm } from "../utility/validateForm";
+import { toast } from 'react-toastify';
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,71 +21,24 @@ const Register = () => {
     email: "",
     school: "",
     programme: "",
-    degreePic: "",
+    degree_picture: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [formErrors, setFormErrors] = useState({});
-
   const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
-
   const [schoolList, setSchoolList] = useState([
     "School of Engineering",
     "School of Science",
   ]);
-
   const [programmeList, setProgrammeList] = useState(["B.Tech", "M.Tech"]);
-
   const [passingYears, setPassingYears] = useState(["2021", "2022", "2023"]);
 
   const navigate = useNavigate();
 
-  const validateForm = () => {
-    const errors = {};
-    const nameRegex = /^[A-Za-z\s]+$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!nameRegex.test(formData.Name)) {
-      errors.Name = "Please enter a valid name.";
-    }
-
-    if (!nameRegex.test(formData.fathersName)) {
-      errors.fathersName = "Please enter a valid father's name.";
-    }
-
-    if (!formData.enrollmentNo || formData.enrollmentNo < 0) {
-      errors.enrollmentNo = "Enrollment Number must be a non-negative number.";
-    }
-
-    if (!formData.rollNo.trim()) {
-      errors.rollNo = "Roll Number is required.";
-    }
-
-    if (!/^\d{10}$/.test(formData.phoneNo)) {
-      errors.phoneNo = "Phone number must be a 10-digit number.";
-    }
-
-    if (!emailRegex.test(formData.email)) {
-      errors.email = "Please enter a valid email address.";
-    }
-
-    if (!formData.school) {
-      errors.school = "Please select a school.";
-    }
-
-    if (!formData.programme) {
-      errors.programme = "Please select a programme.";
-    }
-
-    if (!formData.yearOfPassing) {
-      errors.yearOfPassing = "Please select the year of passing.";
-    }
-
-    setFormErrors(errors);
-
-    return Object.keys(errors).length === 0;
-  };
 
   const handleChange = (e) => {
+    //this function will set values in formdata and clears error
     const { name, value, type, files } = e.target;
 
     if ((name === "enrollmentNo" || name === "phoneNo") && value < 0) return;
@@ -96,12 +54,26 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    if (!validateForm({formData,setFormErrors})) return;
+    
+    const response = await apiRequest({
+      url: "/alumin/register",
+      method: "POST",
+      body: { data: formData },
+      setLoading,
+    });
 
-    console.log("Form Data:", formData);
-    // Submit logic here
+    if (response.status === "success") {
+      toast.success("Registered Sucessfully!!! ");
+      navigate("/alumni/checkStatus", { state: { email: formData.email } });
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: ${response.message}`);
+    }
+
+
   };
 
   return (
@@ -236,15 +208,16 @@ const Register = () => {
         <div className={styles.twoTiles}>
           <Input
             type="file"
-            name="degreePic"
+            name="degree_picture"
             label="Photograph of degree"
             onChange={handleChange}
           />
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="submit" className={styles.submitButton}>
-            Register
+          <button type="submit" className={styles.submitButton}
+          disabled={loading}>
+            {loading ? <LoadingScrn size={"small"} color={"white"}/> :"Register"}
           </button>
         </div>
       </form>

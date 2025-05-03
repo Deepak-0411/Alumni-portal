@@ -1,15 +1,21 @@
-*,*::after,*::before{
-    box-sizing: border-box;
-    padding: 0px;
-    margin: 0px;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
-:root{
-    font-family: "Roboto","Poppins";
+:root {
+  font-family: "Roboto", "Poppins";
 }
 ::-webkit-scrollbar {
-    display: none;
-  }
-body{
-    height: 100vh;
-    width: 100vw;
+  display: none;
+}
+body {
+  height: 100vh;
+  width: 100vw;
+}
+.Toastify__toast {
+  max-width: 90vw; /* Prevent overflow */
+  margin: 1rem;
 }
