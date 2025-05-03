@@ -5,6 +5,7 @@ import styles from "../styles/modules/Register.module.css";
 
 const Register = () => {
   const [formData, setFormData] = useState({
+    title: "",
     enrollmentNo: "",
     rollNo: "",
     Name: "",
@@ -14,142 +15,230 @@ const Register = () => {
     phoneNo: "",
     email: "",
     school: "",
-    department: "",
+    programme: "",
     degreePic: "",
   });
-  const [schoolList, setSchoolList] = useState([]);
-  const [programmeList, setProgrammeList] = useState([]);
-  const [passingYears, setPassingYears] = useState([]);
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
+
+  const [schoolList, setSchoolList] = useState([
+    "School of Engineering",
+    "School of Science",
+  ]);
+
+  const [programmeList, setProgrammeList] = useState(["B.Tech", "M.Tech"]);
+
+  const [passingYears, setPassingYears] = useState(["2021", "2022", "2023"]);
 
   const navigate = useNavigate();
 
-  // Handle input change
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const validateForm = () => {
+    const errors = {};
+    const nameRegex = /^[A-Za-z\s]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!nameRegex.test(formData.Name)) {
+      errors.Name = "Please enter a valid name.";
+    }
+
+    if (!nameRegex.test(formData.fathersName)) {
+      errors.fathersName = "Please enter a valid father's name.";
+    }
+
+    if (!formData.enrollmentNo || formData.enrollmentNo < 0) {
+      errors.enrollmentNo = "Enrollment Number must be a non-negative number.";
+    }
+
+    if (!formData.rollNo.trim()) {
+      errors.rollNo = "Roll Number is required.";
+    }
+
+    if (!/^\d{10}$/.test(formData.phoneNo)) {
+      errors.phoneNo = "Phone number must be a 10-digit number.";
+    }
+
+    if (!emailRegex.test(formData.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!formData.school) {
+      errors.school = "Please select a school.";
+    }
+
+    if (!formData.programme) {
+      errors.programme = "Please select a programme.";
+    }
+
+    if (!formData.yearOfPassing) {
+      errors.yearOfPassing = "Please select the year of passing.";
+    }
+
+    setFormErrors(errors);
+
+    return Object.keys(errors).length === 0;
   };
 
-  // Handle form submission
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+
+    if ((name === "enrollmentNo" || name === "phoneNo") && value < 0) return;
+
+    setFormData({
+      ...formData,
+      [name]: type === "file" ? files[0] : value,
+    });
+
+    // Clear error when user starts correcting the field
+    if (formErrors[name]) {
+      setFormErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Data:", formData); // For now, just log the data
+    if (!validateForm()) return;
+
+    console.log("Form Data:", formData);
+    // Submit logic here
   };
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Alumni Registration Form</h2>
-      <form className={styles.form}>
-        <div className={styles.twoTiles}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <div className={styles.threeTiles}>
           <Input
-            type={"number"}
-            name={"enrollmentNo"}
-            label={"Enrollment Number"}
-            required={true}
-            requiredMark={true}
-            value={formData.enrollmentNo}
+            type="select"
+            name="title"
+            label="Title"
+            required
+            requiredMark
+            value={formData.title}
+            options={titleList}
             onChange={handleChange}
+            error={formErrors.title}
           />
           <Input
-            type={"text"}
-            name={"rollNo"}
-            label={"Roll Number"}
-            required={true}
-            requiredMark={true}
-            value={formData.rollNo}
+            type="text"
+            name="Name"
+            label="Name"
+            required
+            requiredMark
+            value={formData.Name}
             onChange={handleChange}
+            error={formErrors.Name}
+          />
+          <Input
+            type="text"
+            name="fathersName"
+            label="Father's Name"
+            required
+            requiredMark
+            value={formData.fathersName}
+            onChange={handleChange}
+            error={formErrors.fathersName}
           />
         </div>
 
         <div className={styles.threeTiles}>
           <Input
-            type={"text"}
-            name={"Name"}
-            label={"Name"}
-            required={true}
-            requiredMark={true}
-            value={formData.Name}
-            onChange={handleChange}
-          />
-          <Input
-            type={"text"}
-            name={"fathersName"}
-            label={"Father's Name"}
-            required={true}
-            requiredMark={true}
-            value={formData.fathersName}
-            onChange={handleChange}
-          />
-          <Input
-            type={"date"}
-            name={"dob"}
-            label={"DOB(dd/mm/yyyy)"}
-            required={true}
-            requiredMark={true}
+            type="date"
+            name="dob"
+            label="DOB(dd/mm/yyyy)"
+            required
+            requiredMark
             value={formData.dob}
             onChange={handleChange}
           />
+          <Input
+            type="number"
+            name="enrollmentNo"
+            label="Enrollment Number"
+            required
+            requiredMark
+            value={formData.enrollmentNo}
+            onChange={handleChange}
+            error={formErrors.enrollmentNo}
+          />
+          <Input
+            type="text"
+            name="rollNo"
+            label="Roll Number"
+            required
+            requiredMark
+            value={formData.rollNo}
+            onChange={handleChange}
+            error={formErrors.rollNo}
+          />
         </div>
 
         <div className={styles.twoTiles}>
           <Input
-            type={"number"}
-            name={"phoneNo"}
-            label={"Phone Number"}
-            required={true}
-            requiredMark={true}
+            type="number"
+            name="phoneNo"
+            label="Phone Number"
+            required
+            requiredMark
             value={formData.phoneNo}
             onChange={handleChange}
+            error={formErrors.phoneNo}
           />
           <Input
-            type={"email"}
-            name={"email"}
-            label={"E-mail"}
-            required={true}
-            requiredMark={true}
+            type="email"
+            name="email"
+            label="E-mail"
+            required
+            requiredMark
             value={formData.email}
             onChange={handleChange}
+            error={formErrors.email}
           />
         </div>
 
         <div className={styles.threeTiles}>
           <Input
-            type={"select"}
-            name={"school"}
-            label={"Select School"}
-            required={true}
-            requiredMark={true}
+            type="select"
+            name="school"
+            label="Select School"
+            required
+            requiredMark
             value={formData.school}
             options={schoolList}
             onChange={handleChange}
+            error={formErrors.school}
           />
           <Input
-            type={"select"}
-            name={"programme"}
-            label={"Select Programme"}
-            required={true}
-            requiredMark={true}
+            type="select"
+            name="programme"
+            label="Select Programme"
+            required
+            requiredMark
             value={formData.programme}
             options={programmeList}
             onChange={handleChange}
+            error={formErrors.programme}
           />
           <Input
-            type={"select"}
-            name={"yearOfPassing"}
-            label={"Year of Passing"}
-            required={true}
-            requiredMark={true}
+            type="select"
+            name="yearOfPassing"
+            label="Year of Passing"
+            required
+            requiredMark
             value={formData.yearOfPassing}
             options={passingYears}
             onChange={handleChange}
+            error={formErrors.yearOfPassing}
           />
         </div>
+
         <div className={styles.twoTiles}>
           <Input
-            type={"file"}
-            name={"degreePic"}
-            label={"Photograph of degree"}
+            type="file"
+            name="degreePic"
+            label="Photograph of degree"
+            onChange={handleChange}
           />
         </div>
 
@@ -159,6 +248,7 @@ const Register = () => {
           </button>
         </div>
       </form>
+
       <div className={styles.btnContainer}>
         <button
           className={styles.backToLoginBtn}
@@ -170,4 +260,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;

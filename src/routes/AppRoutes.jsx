@@ -13,7 +13,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 
 // User Pages
-// import Profile from "../pages/user/Profile";
+import Profile from "../pages/user/Profile";
 import Events from "../pages/user/Events";
 import MembershipCard from "../pages/user/MembershipCard";
 
@@ -42,8 +42,8 @@ const AppRoutes = () => {
 
       {/* User Routes (Protected) */}
       <Route path="/alumni/user" element={ <UserLayout /> } > {/*  <RequireAuth>   </RequireAuth> */}
-        <Route index element={<Navigate to="profile" />} />
-        {/* <Route path="profile" element={<Profile />} /> */}
+        <Route index element={<Navigate to="membershipCard" />} />
+        <Route path="profile" element={<Profile />} />
         <Route path="events" element={<Events />} />
         <Route path="membershipCard" element={<MembershipCard />} />
         <Route path="contactUs" element={<ContactUs />} />

@@ -9,7 +9,7 @@
 .input,
 .input option,
 .required span::after {
-    width: 100%;
+  width: 100%;
   font-size: 1rem;
   color: #000;
   font-family: Inter;
@@ -42,10 +42,19 @@
 }
 
 input[type="file"] {
-  padding: .52rem;
+  padding: 0.52rem;
 }
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
+}
+.errorText {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.errorInput {
+  border-color: red !important;
 }

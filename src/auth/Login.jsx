@@ -11,7 +11,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const handleLogin = () => {
-    navigate("/alumni/user/events");
+    navigate("/alumni/user/membershipCard");
   };
 
   return (

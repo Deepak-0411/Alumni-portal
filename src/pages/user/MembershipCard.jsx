@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DP from "../../assets/VCimg.png";
+import DP from "../../assets/user.png";
 
 import styles from "../../styles/modules/MembershipCard.module.css";
 
@@ -13,7 +13,7 @@ const ContactUs = () => {
     },
     {
       Residence: {
-        Country: "20/12/1994",
+        Country: "India",
       },
     },
     {
@@ -30,7 +30,7 @@ const ContactUs = () => {
       </div>
       <div className={styles.card}>
         <div className={styles.leftCol}>
-          <img className={styles.userdp} src={DP} alt="Profile Pic" />
+            <img className={styles.userdp} src={DP} alt="Profile Pic" />
           <p className={styles.name}> Deepak Kumar</p>
         </div>
         <div className={styles.rightCol}>

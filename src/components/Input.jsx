@@ -1,35 +1,40 @@
 import styles from "../styles/modules/Input.module.css";
 
 const Input = ({
-  type="",
-  name="",
-  placeHolder="",
-  label="",
-  required="",
-  requiredMark="",
-  options=[],
-  value="",
-  onChange="",
-}) => {    
+  type = "",
+  name = "",
+  placeHolder = "",
+  label = "",
+  required = false,
+  requiredMark = false,
+  options = [],
+  value = "",
+  onChange = () => {},
+  error = "",
+}) => {
+  const inputClass = `${styles.input} ${error ? styles.errorInput : ""}`;
 
   return (
     <div className={styles.container}>
-      {label &&<label
-        htmlFor={label}
-        className={`${styles.label} ${requiredMark ? styles.required : ""}`}
-      >
-        <span> {label} </span>
-      </label>}
+      {label && (
+        <label
+          htmlFor={name}
+          className={`${styles.label} ${requiredMark ? styles.required : ""}`}
+        >
+          <span>{label}</span>
+        </label>
+      )}
 
       {type === "select" ? (
         <select
-          id={label}
+          id={name}
           required={required}
-          className={styles.input}
+          className={inputClass}
           value={value}
           name={name}
-          onChange={(e)=>onChange(e)}
+          onChange={onChange}
         >
+          <option value=""> Select </option>
           {options.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -39,24 +44,29 @@ const Input = ({
       ) : type === "file" ? (
         <input
           type="file"
-          id={label}
+          id={name}
           required={required}
-          className={styles.input}
+          className={inputClass}
+          name={name}
+          onChange={onChange}
           accept="image/*"
         />
       ) : (
         <input
           type={type}
           name={name}
-          id={label}
+          id={name}
           placeholder={placeHolder}
           required={required}
-          className={styles.input}
+          className={inputClass}
           value={value}
-          onChange={(e)=>onChange(e)}
+          onChange={onChange}
         />
       )}
+
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );
 };
+
 export default Input;
