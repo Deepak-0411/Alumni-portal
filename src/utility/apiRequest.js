@@ -4,7 +4,7 @@ export const apiRequest = async ({
   url,
   method = "GET",
   body = null,
-  token = null,
+  token = true,
   headers = {},
   setLoading=()=>{}
 }) => {

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import styles from "../styles/modules/Register.module.css";
 import LoadingScrn from "../components/Loading";
-import { apiRequest } from "../utility/apirequest";
+import { apiRequest } from "../utility/apiRequest";
 import { validateForm } from "../utility/validateForm";
 import { toast } from 'react-toastify';
 
@@ -62,6 +62,7 @@ const Register = () => {
       url: "/alumin/register",
       method: "POST",
       body: { data: formData },
+      token : false,
       setLoading,
     });
 

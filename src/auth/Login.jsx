@@ -4,14 +4,17 @@ import LOGO from "../assets/GBULOGO.png";
 import Input from "../components/Input";
 import styles from "../styles/modules/Login.module.css";
 
-const Login = () => {
+const Login = ({ foradmin = false }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
+  const [remember, setRemember] = useState(false);  
 
   const navigate = useNavigate();
+
   const handleLogin = () => {
-    navigate("/alumni/user/membershipCard");
+    foradmin
+      ? navigate("/alumni/sub-admin/verify-Users")
+      : navigate("/alumni/user/membershipCard");
   };
 
   return (
@@ -57,26 +60,28 @@ const Login = () => {
           Login
         </button>
       </form>
-      <div className={styles.btns}>
-        <button
-          className={styles.btn}
-          onClick={() => navigate("/alumni/forgetPassword")}
-        >
-          Forget Password
-        </button>
-        <button
-          className={styles.btn}
-          onClick={() => navigate("/alumni/register")}
-        >
-          New Registration
-        </button>
-        <button
-          className={`${styles.btn} ${styles.fullLengthBtn}`}
-          onClick={() => navigate("/alumni/checkStatus")}
-        >
-          Check Status
-        </button>
-      </div>
+      {!foradmin && (
+        <div className={styles.btns}>
+          <button
+            className={styles.btn}
+            onClick={() => navigate("/alumni/forgetPassword")}
+          >
+            Forget Password
+          </button>
+          <button
+            className={styles.btn}
+            onClick={() => navigate("/alumni/register")}
+          >
+            New Registration
+          </button>
+          <button
+            className={`${styles.btn} ${styles.fullLengthBtn}`}
+            onClick={() => navigate("/alumni/checkStatus")}
+          >
+            Check Status
+          </button>
+        </div>
+      )}
     </div>
   );
 };
