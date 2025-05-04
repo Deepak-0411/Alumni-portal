@@ -68,10 +68,10 @@
     justify-content: center;
     gap: 1rem;
   }
-  .rejectBtn,.incorrectBtn,.acceptBtn{
+  .backBtn,.rejectBtn,.incorrectBtn,.acceptBtn,.nextBtn{
     border: none;
     padding: .5rem .8rem;
-    border-radius: .3rem;
+    border-radius: .4rem;
     cursor: pointer;
     color: white;
     font-family: Inter;
@@ -86,4 +86,16 @@
   }
   .acceptBtn{
     background-color: #05b41c;
+  }
+  .backBtn,.nextBtn{
+    background-color: #ffffff;
+    color: #000;
+    border: 1.5px solid black;
+
+  }
+  .backBtn:disabled,.nextBtn:disabled{
+    background-color: #eaeaea;
+    color: white;
+    border: none;
+    cursor: not-allowed;
   }

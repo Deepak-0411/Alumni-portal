@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/modules/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard";
 import ImageOverlay from "../../components/ImageOverlay";
@@ -23,14 +23,14 @@ const fallbackImage =
   "https://images.pexels.com/photos/355465/pexels-photo-355465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 const VerifyUsersList = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { state } = useLocation();
   const [userList] = useState(state?.userList || []);
-  const [currentIndex] = useState(state?.index || 0);
+  const [index, setIndex] = useState(state?.index || 0);
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const currentUser = userList[currentIndex];
+  const currentUser = userList[index];
   const userDetails = currentUser ? getUserDetails(currentUser) : [];
   const collegeDetails = currentUser ? getCollegeDetails(currentUser) : [];
   const imageURL = currentUser?.degreeURL || fallbackImage;
@@ -43,6 +43,19 @@ const VerifyUsersList = () => {
       navigate("/alumni/sub-admin/verify-users-list");
     }
   }, [state, navigate]);
+
+  const handleBack = () => {
+    if (index > 0) {
+      const newIndex = index - 1;
+      setIndex(newIndex);
+    }
+  };
+  const handleNext = () => {
+    if (index < userList.length - 1) {
+      const newIndex = index + 1;
+      setIndex(newIndex);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -68,9 +81,24 @@ const VerifyUsersList = () => {
         <ImageOverlay imageUrl={imageURL} onClose={handleCloseOverlay} />
       )}
       <div className={styles.btnsContainer}>
+        <button
+          className={styles.backBtn}
+          disabled={index == 0}
+          onClick={handleBack}
+        >
+          {" "}
+          &lt;- back{" "}
+        </button>
         <button className={styles.rejectBtn}>reject</button>
         <button className={styles.incorrectBtn}>incorrect information</button>
         <button className={styles.acceptBtn}>accept</button>
+        <button
+          className={styles.nextBtn}
+          disabled={index == userList.length-1}
+          onClick={handleNext}
+        >
+          next -&gt;{" "}
+        </button>
       </div>
     </div>
   );
