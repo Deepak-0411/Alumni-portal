@@ -1,4 +1,4 @@
-const baseURl="https://alumni-portal-ruddy.vercel.app/api";
+const baseURl="https://alumni-portal-iota.vercel.app/api";
 // const baseURl = "/api";
 
 export const apiRequest = async ({
@@ -24,13 +24,10 @@ export const apiRequest = async ({
     }
 
     if (body) {
-      options.body = body;
+      options.body = JSON.stringify(body);
     }
-    console.log("options",options);
-    
+
     const response = await fetch(baseURl+url, options);
-    const text = await response.text();
-console.log( text);
     
     const data = await response.json();
 

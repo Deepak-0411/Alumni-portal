@@ -12,13 +12,15 @@ const CheckStatus = ({ forgetPassword = false }) => {
   useEffect(() => {
     if (location.state?.email) {
       setEmail(location.state.email);
+      handleSearch(location.state.email);
     }
   }, [location.state]);
-
-  const handleSearch = () => {
-    console.log(email); // or trigger API check
+  
+  const handleSearch = (emailToSearch = email) => {
+    console.log("Searching for:", emailToSearch);
+    // trigger API call here
   };
-
+  
   const handleClick = () => {
     console.log("Clicked");
   };
@@ -39,7 +41,7 @@ const CheckStatus = ({ forgetPassword = false }) => {
         />
         <button
           className={styles.btn}
-          onClick={handleSearch}
+          onClick={()=>handleSearch()}
           disabled={!email}
         >
           Search
