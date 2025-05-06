@@ -13,7 +13,7 @@ const Login = ({ foradmin = false }) => {
 
   const handleLogin = () => {
     foradmin
-      ? navigate("/alumni/sub-admin/verify-Users")
+      ? navigate("/alumni/sub-admin/verify-users-list")
       : navigate("/alumni/user/membershipCard");
   };
 

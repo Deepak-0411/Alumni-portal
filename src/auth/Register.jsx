@@ -59,9 +59,9 @@ const Register = () => {
     if (!validateForm({formData,setFormErrors})) return;
     
     const response = await apiRequest({
-      url: "/alumin/register",
+      url: "/alumni/register",
       method: "POST",
-      body: { data: formData },
+      body: formData ,
       token : false,
       setLoading,
     });

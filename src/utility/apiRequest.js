@@ -1,4 +1,5 @@
 const baseURl="https://alumni-portal-ruddy.vercel.app/api";
+// const baseURl = "/api";
 
 export const apiRequest = async ({
   url,
@@ -11,7 +12,7 @@ export const apiRequest = async ({
   try {
     setLoading(true);
     const options = {
-      method,
+      method ,
       headers: {
         "Content-Type": "application/json",
         ...headers,
@@ -23,10 +24,14 @@ export const apiRequest = async ({
     }
 
     if (body) {
-      options.body = JSON.stringify(body);
+      options.body = body;
     }
-
+    console.log("options",options);
+    
     const response = await fetch(baseURl+url, options);
+    const text = await response.text();
+console.log( text);
+    
     const data = await response.json();
 
     if (!response.ok) {
