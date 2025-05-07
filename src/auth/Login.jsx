@@ -22,7 +22,7 @@ const Login = ({ foradmin = false }) => {
     if (!(userId && password)) return;
 
     const response = await apiRequest({
-      url: foradmin ? "/subadmin/login" : "/alumni/login",
+      url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
       method: "POST",
       body: { [foradmin ? "username" : "email"]: userId, password: password },
       token: false,
@@ -45,7 +45,7 @@ const Login = ({ foradmin = false }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <img className={styles.logo} src={LOGO} alt="logo" />
-        <h2 className={styles.title}>Alumni Login</h2>
+        <h2 className={styles.title}>{foradmin?"Sub Admin Login":"Alumni Login"}</h2>
       </div>
       <form className={styles.form} onSubmit={(e) => handleLogin(e)}>
         <Input

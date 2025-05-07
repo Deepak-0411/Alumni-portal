@@ -3,6 +3,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../../styles/modules/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard";
 import ImageOverlay from "../../components/ImageOverlay";
+import { toast } from "react-toastify";
+import { useAuth } from "../../routes/guards/AuthContext";
+import apiRequest from "../../utility/apiRequest";
+import Loading from "../../components/Loading";
 
 // Helper functions
 const getUserDetails = (user) => [
@@ -24,11 +28,13 @@ const fallbackImage =
 
 const VerifyUsersList = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   const { state } = useLocation();
-  const [userList] = useState(state?.userList || []);
+  const [userList, setUserList] = useState(state?.userList || []);
   const [index, setIndex] = useState(state?.index || 0);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const currentUser = userList[index];
   const userDetails = currentUser ? getUserDetails(currentUser) : [];
@@ -56,6 +62,51 @@ const VerifyUsersList = () => {
       setIndex(newIndex);
     }
   };
+  const handleUser = async (requestType) => {
+    let url = "";
+    let method = "";
+    const enrollmentNo = currentUser?.enrollmentNo || null;
+  
+    if (requestType === "accept") {
+      url = `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`;
+      method = "POST";
+    } else if (requestType === "reject") {
+      url = `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`;
+      method = "DELETE";
+    } else if (requestType === "incorrect information") {
+      url = "";
+    }
+  
+    const response = await apiRequest({
+      url,
+      method,
+      token,
+      setLoading,
+    });
+  
+    if (response.status === "success") {
+      toast.success(`Marked as ${requestType}`);
+  
+      if (requestType === "reject") {
+        const updatedUserList = userList.filter((user, userIndex) => userIndex !== index);
+        setUserList(updatedUserList);
+  
+        if (updatedUserList.length === 0) {
+          navigate("/alumni/sub-admin/verify-users-list");
+          return;
+        }
+  
+        // Adjust index if current index is now out of bounds
+        if (index >= updatedUserList.length) {
+          setIndex(updatedUserList.length - 1);
+        }
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: ${response.message}`);
+    }
+  };
+  
 
   return (
     <div className={styles.container}>
@@ -89,12 +140,34 @@ const VerifyUsersList = () => {
           {" "}
           &lt;- back{" "}
         </button>
-        <button className={styles.rejectBtn}>reject</button>
-        <button className={styles.incorrectBtn}>incorrect information</button>
-        <button className={styles.acceptBtn}>accept</button>
+        <button
+          className={styles.rejectBtn}
+          onClick={() => handleUser("reject")}
+          disabled={loading}
+        >
+          {loading ? <Loading color="white" size={"small"} /> : "reject"}
+        </button>
+        <button
+          className={styles.incorrectBtn}
+          onClick={() => handleUser("incorrect information")}
+          disabled={loading}
+        >
+          {loading ? (
+            <Loading color="white" size="small" />
+          ) : (
+            "rejincorrect informationect"
+          )}
+        </button>
+        <button
+          className={styles.acceptBtn}
+          onClick={() => handleUser("accept")}
+          disabled={loading}
+        >
+          {loading ? <Loading color="white" size="small" /> : "accept"}
+        </button>
         <button
           className={styles.nextBtn}
-          disabled={index == userList.length-1}
+          disabled={index == userList.length - 1}
           onClick={handleNext}
         >
           next -&gt;{" "}

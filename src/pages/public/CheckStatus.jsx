@@ -48,7 +48,7 @@ const CheckStatus = ({ forgetPassword = false }) => {
         />
         <button
           className={styles.btn}
-          onClick={(e) => forgetPass(e)}
+          
           disabled={!email}
         >
           Search
@@ -60,7 +60,7 @@ const CheckStatus = ({ forgetPassword = false }) => {
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
           {paid && (
-            <button className={styles.btn} onClick={handleGetClick}>
+            <button className={styles.btn} onClick={forgetPass}>
               Get Password on Mail
             </button>
           )}

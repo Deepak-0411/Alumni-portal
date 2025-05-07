@@ -37,7 +37,7 @@ const VerifyUsersList = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await apiRequest({
-        url: "/subadmin/pending-users",
+        url: "/api/subadmin/pending-users",
         method: "GET",
         token: token,
         setLoading,
@@ -45,7 +45,6 @@ const VerifyUsersList = () => {
 
       if (response.status === "success") {
         setUserList(response.data);
-        console.log(response.data);
       } else {
         console.error("Error:", response.message);
         toast.error(`Error: ${response.message}`);

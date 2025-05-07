@@ -59,7 +59,7 @@ const Register = () => {
     if (!validateForm({formData,setFormErrors})) return;
     
     const response = await apiRequest({
-      url: "/alumni/register",
+      url: "/api/alumni/register",
       method: "POST",
       body: formData ,
       token : false,
@@ -68,7 +68,7 @@ const Register = () => {
 
     if (response.status === "success") {
       toast.success("Registered Sucessfully!!! ");
-      navigate("/alumni/checkStatus", { state: { email: formData.email } });
+      // navigate("/alumni/checkStatus", { state: { email: formData.email } });
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);

@@ -1,4 +1,4 @@
-const baseURl="https://alumni-portal-iota.vercel.app/api";
+const baseURl="https://alumni-portal-iota.vercel.app";
 // const baseURl = "/api";
 
 const  apiRequest = async ({

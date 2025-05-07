@@ -19,3 +19,6 @@ body {
   max-width: 90vw; /* Prevent overflow */
   margin: 1rem;
 }
+button:disabled{
+  cursor: not-allowed;
+}
