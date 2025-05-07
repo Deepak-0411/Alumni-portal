@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import styles from "../styles/modules/Register.module.css";
 import LoadingScrn from "../components/Loading";
-import { apiRequest } from "../utility/apiRequest";
+import  apiRequest  from "../utility/apiRequest";
 import { validateForm } from "../utility/validateForm";
 import { toast } from 'react-toastify';
 

@@ -1,7 +1,7 @@
 const baseURl="https://alumni-portal-iota.vercel.app/api";
 // const baseURl = "/api";
 
-export const apiRequest = async ({
+const  apiRequest = async ({
   url,
   method = "GET",
   body = null,
@@ -54,3 +54,5 @@ export const apiRequest = async ({
     setLoading(false);
   }
 };
+
+export default apiRequest;

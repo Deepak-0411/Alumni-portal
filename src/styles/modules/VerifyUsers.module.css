@@ -99,3 +99,8 @@
     border: none;
     cursor: not-allowed;
   }
+  .noData{
+    color: #d9d9d9;
+    font-size: clamp(1.5rem, 8vw , 5rem);
+    font-weight: 600;
+  }

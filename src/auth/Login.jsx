@@ -4,8 +4,9 @@ import LOGO from "../assets/GBULOGO.png";
 import Input from "../components/Input";
 import LoadingScrn from "../components/Loading";
 import styles from "../styles/modules/Login.module.css";
-import { apiRequest } from "../utility/apiRequest";
+import apiRequest  from "../utility/apiRequest";
 import { toast } from "react-toastify";
+import { useAuth } from "../routes/guards/AuthContext";
 
 const Login = ({ foradmin = false }) => {
   const [userId, setUserId] = useState("");
@@ -14,6 +15,7 @@ const Login = ({ foradmin = false }) => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const {login}=useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -22,13 +24,14 @@ const Login = ({ foradmin = false }) => {
     const response = await apiRequest({
       url: foradmin ? "/subadmin/login" : "/alumni/login",
       method: "POST",
-      body: { userId, password },
+      body: { [foradmin ? "username" : "email"]: userId, password: password },
       token: false,
       setLoading,
     });
 
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
+      login(response.data.token);      
       foradmin
         ? navigate("/alumni/sub-admin/verify-users-list")
         : navigate("/alumni/user/membershipCard");
