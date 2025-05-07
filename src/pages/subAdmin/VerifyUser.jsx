@@ -62,51 +62,47 @@ const VerifyUsersList = () => {
       setIndex(newIndex);
     }
   };
-  const handleUser = async (requestType) => {
+  const verifyUser = async (requestType) => {
     let url = "";
     let method = "";
     const enrollmentNo = currentUser?.enrollmentNo || null;
-  
+
     if (requestType === "accept") {
       url = `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`;
       method = "POST";
     } else if (requestType === "reject") {
       url = `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`;
       method = "DELETE";
-    } else if (requestType === "incorrect information") {
-      url = "";
     }
-  
+
     const response = await apiRequest({
       url,
       method,
       token,
       setLoading,
     });
-  
+
     if (response.status === "success") {
       toast.success(`Marked as ${requestType}`);
-  
-      if (requestType === "reject" || requestType === "accept") {
-        const updatedUserList = userList.filter((user, userIndex) => userIndex !== index);
-        setUserList(updatedUserList);
-  
-        if (updatedUserList.length === 0) {
-          navigate("/alumni/sub-admin/verify-users-list");
-          return;
-        }
-  
-        // Adjust index if current index is now out of bounds
-        if (index >= updatedUserList.length) {
-          setIndex(updatedUserList.length - 1);
-        }
+
+      const updatedUserList = userList.filter(
+        (user, userIndex) => userIndex !== index
+      );
+      setUserList(updatedUserList);
+
+      if (updatedUserList.length === 0) {
+        navigate("/alumni/sub-admin/verify-users-list");
+        return;
+      }
+
+      if (index >= updatedUserList.length) {
+        setIndex(updatedUserList.length - 1);
       }
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
     }
   };
-  
 
   return (
     <div className={styles.container}>
@@ -142,25 +138,14 @@ const VerifyUsersList = () => {
         </button>
         <button
           className={styles.rejectBtn}
-          onClick={() => handleUser("reject")}
+          onClick={() => verifyUser("reject")}
           disabled={loading}
         >
           {loading ? <Loading color="white" size={"small"} /> : "reject"}
         </button>
         <button
-          className={styles.incorrectBtn}
-          onClick={() => handleUser("incorrect information")}
-          disabled={loading}
-        >
-          {loading ? (
-            <Loading color="white" size="small" />
-          ) : (
-            "rejincorrect informationect"
-          )}
-        </button>
-        <button
           className={styles.acceptBtn}
-          onClick={() => handleUser("accept")}
+          onClick={() => verifyUser("accept")}
           disabled={loading}
         >
           {loading ? <Loading color="white" size="small" /> : "accept"}
