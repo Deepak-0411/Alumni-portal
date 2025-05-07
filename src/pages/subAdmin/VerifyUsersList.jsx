@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../routes/guards/AuthContext";
 
 const getUserDetails = (user) => [
-  { label: "Name", value: user.name },
-  { label: "Father's Name", value: user.fatherName },
+  { label: "Name", value: user.Name },
+  { label: "Father's Name", value: user.fathersName },
   { label: "Roll Number", value: user.rollNo },
   { label: "Year Of Passing", value: user.yearOfPassing },
 ];

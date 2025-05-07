@@ -10,8 +10,8 @@ import Loading from "../../components/Loading";
 
 // Helper functions
 const getUserDetails = (user) => [
-  { label: "Name", value: user.name || "-" },
-  { label: "Father's Name", value: user.fatherName || "-" },
+  { label: "Name", value: user.Name || "-" },
+  { label: "Father's Name", value: user.fathersName || "-" },
 ];
 
 const getCollegeDetails = (user) => [
@@ -87,7 +87,7 @@ const VerifyUsersList = () => {
     if (response.status === "success") {
       toast.success(`Marked as ${requestType}`);
   
-      if (requestType === "reject") {
+      if (requestType === "reject" || requestType === "accept") {
         const updatedUserList = userList.filter((user, userIndex) => userIndex !== index);
         setUserList(updatedUserList);
   
