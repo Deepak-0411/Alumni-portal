@@ -80,7 +80,7 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Alumni Registration Form</h2>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={(e)=>(handleSubmit(e))}>
         <div className={styles.threeTiles}>
           <Input
             type="select"

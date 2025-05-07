@@ -56,6 +56,10 @@
   border: none;
   cursor: pointer;
 }
+.btn:disabled{
+  cursor: not-allowed;
+  opacity: .6;
+}
 .fullLengthBtn,
 .loginBtn {
   grid-column-start: 1;

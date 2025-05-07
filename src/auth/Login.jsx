@@ -2,19 +2,40 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LOGO from "../assets/GBULOGO.png";
 import Input from "../components/Input";
+import LoadingScrn from "../components/Loading";
 import styles from "../styles/modules/Login.module.css";
+import { apiRequest } from "../utility/apiRequest";
+import { toast } from "react-toastify";
 
 const Login = ({ foradmin = false }) => {
-  const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);  
+  const [remember, setRemember] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    foradmin
-      ? navigate("/alumni/sub-admin/verify-users-list")
-      : navigate("/alumni/user/membershipCard");
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!(userId && password)) return;
+
+    const response = await apiRequest({
+      url: foradmin ? "/subadmin/login" : "/alumni/login",
+      method: "POST",
+      body: { userId, password },
+      token: false,
+      setLoading,
+    });
+
+    if (response.status === "success") {
+      toast.success("LoggedIn Sucessfully!!! ");
+      foradmin
+        ? navigate("/alumni/sub-admin/verify-users-list")
+        : navigate("/alumni/user/membershipCard");
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: ${response.message}`);
+    }
   };
 
   return (
@@ -23,14 +44,14 @@ const Login = ({ foradmin = false }) => {
         <img className={styles.logo} src={LOGO} alt="logo" />
         <h2 className={styles.title}>Alumni Login</h2>
       </div>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={(e) => handleLogin(e)}>
         <Input
-          type={"text"}
-          name={"username"}
-          label={"Username"}
+          type={foradmin ? "text" :"email"}
+          name={"userId"}
+          label={foradmin ? "User-Id" :"E-mail"}
           required={true}
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={userId}
+          onChange={(e) => setUserId(e.target.value)}
         />
         <Input
           type={"password"}
@@ -55,9 +76,9 @@ const Login = ({ foradmin = false }) => {
         <button
           type="submit"
           className={`${styles.btn} ${styles.loginBtn}`}
-          onClick={handleLogin}
+          disabled={loading || !(userId && password)}
         >
-          Login
+          {loading ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
         </button>
       </form>
       {!foradmin && (

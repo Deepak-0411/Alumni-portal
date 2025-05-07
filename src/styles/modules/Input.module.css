@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 0.4rem;
   width: 100%;
+  position: relative;
 }
 
 .label,
@@ -48,6 +49,14 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+.passwordToggle {
+  background: transparent;
+  position: absolute;
+  right: 1rem;
+  bottom: .6rem;
+  display: flex;
+  align-items: center;
 }
 .errorText {
   color: red;
