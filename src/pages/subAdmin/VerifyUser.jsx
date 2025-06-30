@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../routes/guards/AuthContext";
 import apiRequest from "../../utility/apiRequest";
 import Loading from "../../components/Loading";
+import fallbackImage from "../../assets/imgNotFound.jpg";
 
 // Helper functions
 const getUserDetails = (user) => [
@@ -23,8 +24,6 @@ const getCollegeDetails = (user) => [
   { label: "Country", value: user.country || "-" },
 ];
 
-const fallbackImage =
-  "https://images.pexels.com/photos/355465/pexels-photo-355465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 const VerifyUsersList = () => {
   const navigate = useNavigate();

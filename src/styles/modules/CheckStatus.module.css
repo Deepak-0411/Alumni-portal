@@ -4,6 +4,10 @@
   justify-content: start;
   flex-direction: column;
   gap: 1.25rem;
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: .5rem;
+  height: 20rem;
 }
 .heading,
 .data,
@@ -37,7 +41,7 @@
   font-family: Inter;
   font-size: clamp(0.75rem, 1.6vw, 1rem);
   font-weight: 500;
-  padding: 0.4rem;
+  padding: 0.5rem;
   border-radius: 0.25rem;
   border: none;
   cursor: pointer;

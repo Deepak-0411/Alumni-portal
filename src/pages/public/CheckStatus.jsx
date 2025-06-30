@@ -2,13 +2,16 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import styles from "../../styles/modules/CheckStatus.module.css";
 import Input from "../../components/Input";
+import Loading from "../../components/Loading";
+import { toast } from "react-toastify";
+import apiRequest from "../../utility/apiRequest";
 
 const CheckStatus = ({ forgetPassword = false }) => {
   const location = useLocation();
-  const [verified] = useState(null);
-  const [paid] = useState(null);
-  const [error] = useState("");
+  const [verified, setVerified] = useState(null);
+  const [paid, setPaid] = useState(null);
   const [email, setEmail] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (location.state?.email) {
@@ -17,10 +20,28 @@ const CheckStatus = ({ forgetPassword = false }) => {
     }
   }, [location.state]);
 
-  const handleSearch = (e,emailToSearch = email) => {
+  const handleSearch = async (e, emailToSearch = email) => {
     e.preventDefault();
-    console.log("Searching for:", emailToSearch);
-    // trigger API call here
+    if (!email) return;
+
+    const response = await apiRequest({
+      url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
+      method: "POST",
+      body: { [foradmin ? "username" : "email"]: userId, password: password },
+      token: false,
+      setLoading,
+    });
+
+    if (response.status === "success") {
+      toast.success("LoggedIn Sucessfully!!! ");
+      login(response.data.token);
+      foradmin
+        ? navigate("/alumni/sub-admin/verify-users-list")
+        : navigate("/alumni/user/membershipCard");
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: ${response.message}`);
+    }
   };
 
   const forgetPass = (e) => {
@@ -36,27 +57,25 @@ const CheckStatus = ({ forgetPassword = false }) => {
       <p className={styles.heading}>
         {forgetPassword ? "Forget password" : "Check Account Status"}
       </p>
-      <form>
-      <div className={styles.searchBar}>
-        <Input
-          type={"email"}
-          name={"email"}
-          placeHolder={"E-mail"}
-          required={true}
-          value={email || ""}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <button
-          className={styles.btn}
-          
-          disabled={!email}
-        >
-          Search
-        </button>
-      </div>
+      <form onSubmit={(e) => handleSearch(e)}>
+        <div className={styles.searchBar}>
+          <Input
+            type={"email"}
+            name={"email"}
+            placeHolder={"E-mail"}
+            required={true}
+            value={email || ""}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <button className={styles.btn} type="submit" disabled={!email}>
+            Search
+          </button>
+        </div>
       </form>
 
-      {verified ? (
+      {loading ? (
+        <Loading />
+      ) : verified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
           {paid && (
@@ -77,7 +96,6 @@ const CheckStatus = ({ forgetPassword = false }) => {
           </div>
         )
       )}
-      {error && <p className={styles.error}> Error : {error}</p>}
     </div>
   );
 };
