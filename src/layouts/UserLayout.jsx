@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from "react-router-dom";
-import styles from "../styles/modules/Layout.module.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import styles from "../styles/modules/layout/Layout.module.css";
+import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
+import Navbar from "../components/Navbar/Navbar";
 
 const Layout = () => {
   const location = useLocation();

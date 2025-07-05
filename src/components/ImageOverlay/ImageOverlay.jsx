@@ -1,4 +1,4 @@
-import styles from "../styles/modules/ImageOverlay.module.css";
+import styles from "./ImageOverlay.module.css";
 
 const ImageOverlay = ({ imageUrl, onClose }) => {
   const handleOverlayClick = (e) => {

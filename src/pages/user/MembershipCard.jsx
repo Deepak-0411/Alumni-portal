@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DP from "../../assets/user.png";
 
-import styles from "../../styles/modules/MembershipCard.module.css";
+import styles from "../../styles/modules/user/MembershipCard.module.css";
 
 const ContactUs = () => {
   const [data, setData] = useState([

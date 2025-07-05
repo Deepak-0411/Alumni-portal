@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../components/Input";
-import styles from "../styles/modules/Register.module.css";
-import LoadingScrn from "../components/Loading";
+import Input from "../components/Input/Input";
+import styles from "../styles/modules/auth/Register.module.css";
+import LoadingScrn from "../components/Spinner/Loading";
 import  apiRequest  from "../utility/apiRequest";
 import { validateForm } from "../utility/validateForm";
 import { toast } from 'react-toastify';

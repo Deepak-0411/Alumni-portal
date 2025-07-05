@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "../../styles/modules/VerifyUsers.module.css";
-import DataCard from "../../components/DataCard";
-import Loading from "../../components/Loading";
+import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
+import DataCard from "../../components/DataCard/DataCard";
+import Loading from "../../components/Spinner/Loading";
 import  apiRequest  from "../../utility/apiRequest";
 import { toast } from "react-toastify";
-import { useAuth } from "../../routes/guards/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 const getUserDetails = (user) => [
   { label: "Name", value: user.Name },

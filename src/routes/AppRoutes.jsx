@@ -50,7 +50,7 @@ const AppRoutes = () => {
 
       {/* User Routes (Protected) */}
       <Route path="/alumni/user" element={<UserLayout />}>
-        {" "}
+        
         {/*  <RequireAuth>   </RequireAuth> */}
         <Route index element={<Navigate to="membershipCard" />} />
         <Route path="profile" element={<Profile />} />

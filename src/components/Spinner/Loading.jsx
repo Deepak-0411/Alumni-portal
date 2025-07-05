@@ -1,4 +1,4 @@
-import styles from "../styles/modules/Loading.module.css";
+import styles from "./Loading.module.css";
 
 const Loading = ({color,size="big"}) => {
 

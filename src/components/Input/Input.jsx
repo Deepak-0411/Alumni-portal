@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../styles/modules/Input.module.css";
+import styles from "./Input.module.css";
 
 const Input = ({
   type = "",

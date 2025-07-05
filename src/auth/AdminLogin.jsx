@@ -1,5 +1,5 @@
-import Header from "../components/Header";
-import styles from "../styles/modules/Layout.module.css";
+import Header from "../components/Header/Header";
+import styles from "../styles/modules/layout/Layout.module.css";
 import Login from "./Login";
 
 const AdminLogin = () => {

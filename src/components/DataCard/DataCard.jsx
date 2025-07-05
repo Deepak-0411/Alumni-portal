@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/modules/DataCard.module.css";
+import styles from "./DataCard.module.css";
 
 const DataCard = ({ heading, dataItems, image }) => {
   return (

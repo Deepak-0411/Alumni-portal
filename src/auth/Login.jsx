@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LOGO from "../assets/GBULOGO.png";
-import Input from "../components/Input";
-import LoadingScrn from "../components/Loading";
-import styles from "../styles/modules/Login.module.css";
+import Input from "../components/Input/Input";
+import LoadingScrn from "../components/Spinner/Loading";
+import styles from "../styles/modules/auth/Login.module.css";
 import apiRequest  from "../utility/apiRequest";
 import { toast } from "react-toastify";
-import { useAuth } from "../routes/guards/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const Login = ({ foradmin = false }) => {
   const [userId, setUserId] = useState("");

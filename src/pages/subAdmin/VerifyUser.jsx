@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import styles from "../../styles/modules/VerifyUsers.module.css";
-import DataCard from "../../components/DataCard";
-import ImageOverlay from "../../components/ImageOverlay";
+import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
+import DataCard from "../../components/DataCard/DataCard";
+import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
 import { toast } from "react-toastify";
-import { useAuth } from "../../routes/guards/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 import apiRequest from "../../utility/apiRequest";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Spinner/Loading";
 import fallbackImage from "../../assets/imgNotFound.jpg";
 
 // Helper functions

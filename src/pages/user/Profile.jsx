@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DP from "../../assets/user.png";
-import styles from "../../styles/modules/Profile.module.css";
-import DataCard from "../../components/DataCard";
+import styles from "../../styles/modules/user/Profile.module.css";
+import DataCard from "../../components/DataCard/DataCard";
 
 const Profile = () => {
   const [formData, setFormData] = useState({

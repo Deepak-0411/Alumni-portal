@@ -1,10 +1,10 @@
-import styles from "../styles/modules/Footer.module.css";
-import logo from "../assets/logo.png";
-import SocialLinks from "../components/SocialLinks";
+import styles from "./Footer.module.css";
+import logo from "../../assets/logo.png";
+import SocialLinks from "../SocialLinks/SocialLinks";
 
 const Footer = () => {
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.links}>
         <div className={styles.logoBox}>
           <img className={styles.logo} src={logo} alt="Logo" />
@@ -27,7 +27,7 @@ const Footer = () => {
           <span>&copy;</span> 2025 - Gautam Buddha University.
         </p>
       </div>
-    </div>
+    </footer>
   );
 };
 

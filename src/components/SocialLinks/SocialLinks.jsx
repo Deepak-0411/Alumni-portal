@@ -1,5 +1,5 @@
-import socialIcons from "../components/svgs.jsx";
-import styles from "../styles/modules/SocialLinks.module.css";
+import socialIcons from "../../utility/svgs";
+import styles from "./SocialLinks.module.css";
 const SocialLinks = ({ location = "" }) => {
     const links = [
       { name: "x", icon: socialIcons.x, url: "#" },

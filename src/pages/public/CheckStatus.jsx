@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import styles from "../../styles/modules/CheckStatus.module.css";
-import Input from "../../components/Input";
-import Loading from "../../components/Loading";
+import styles from "../../styles/modules/public/CheckStatus.module.css";
+import Input from "../../components/Input/Input";
+import Loading from "../../components/Spinner/Loading";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest";
 

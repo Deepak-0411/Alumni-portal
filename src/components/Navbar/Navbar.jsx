@@ -1,4 +1,4 @@
-import styles from "../styles/modules/Navbar.module.css";
+import styles from "./Navbar.module.css";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -23,19 +23,21 @@ const Navbar = () => {
     },
   ];
   return (
-    <div className={styles.navbar}>
+    <nav className={styles.navbar}>
       <div className={styles.navbarBtns}>
-        {navItems.map(({ name, path}) => (
+        {navItems.map(({ name, path }) => (
           <Link
-          key={name}
-          to={path}
-          className={`${styles.navbarBtn} ${location.pathname === path ? styles.navbarBtnActive : ""}`}
-        >
-          {name}
-        </Link>        
+            key={name}
+            to={path}
+            className={`${styles.navbarBtn} ${
+              location.pathname === path ? styles.navbarBtnActive : ""
+            }`}
+          >
+            {name}
+          </Link>
         ))}
       </div>
-      </div>
+    </nav>
   );
 };
 export default Navbar;

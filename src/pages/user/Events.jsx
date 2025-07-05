@@ -1,4 +1,4 @@
-import styles from "../../styles/modules/Events.module.css";
+import styles from "../../styles/modules/user/Events.module.css";
 
 const Events = () => {
   return (
