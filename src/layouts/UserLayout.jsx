@@ -17,12 +17,12 @@ const Layout = () => {
     <div className={styles.container}>
       <Header buttons={showBtns} />
       {showNavbar && <Navbar />}
-      <div
+      <main
         className={styles.outlet}
         style={showBtns ? { padding: "0rem" } : {}}
       >
         <Outlet />
-      </div>
+      </main>
       <Footer />
     </div>
   );

@@ -24,10 +24,14 @@ const Login = ({ foradmin = false }) => {
     const response = await apiRequest({
       url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
       method: "POST",
-      body: { [foradmin ? "username" : "email"]: userId, password: password },
+      body: { "username" : userId, credential: password },
       token: false,
       setLoading,
     });
+    console.log(foradmin);
+    
+    console.log(response);
+    
 
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
