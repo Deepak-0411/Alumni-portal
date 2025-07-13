@@ -4,8 +4,7 @@
   height: 100vh;
   width: 100vw;
 }
-.outlet,
-.outlet2 {
+.outlet {
   flex-grow: 1;
   width: 100%;
   display: flex;
@@ -16,6 +15,17 @@
   padding: 3rem 1rem;
 }
 .outlet2 {
-  justify-content: flex-start;
-  padding: 2rem 1.5rem;
+  
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  /* overflow: auto; */
 }
+
+
+/* .content {
+  margin: 1.5rem 1rem 2rem 1rem;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+} */

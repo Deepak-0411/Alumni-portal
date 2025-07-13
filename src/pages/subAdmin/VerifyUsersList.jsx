@@ -21,14 +21,14 @@ const VerifyUsersList = () => {
 
   const [userList, setUserList] = useState([
     // {
-    //   name: "Example Kumar",
-    //   fatherName: "Example",
+    //   Name: "Example Kumar",
+    //   fathersName: "Example",
     //   rollNo: "235UCS050",
     //   yearOfPassing: "2020",
     // },
     // {
-    //   name: "Example 2",
-    //   fatherName: "Example 2",
+    //   Name: "Example 2",
+    //   fathersName: "Example 2",
     //   rollNo: "235UCS058",
     //   yearOfPassing: "2020",
     // },

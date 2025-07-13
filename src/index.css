@@ -1,3 +1,4 @@
+@import "tailwindcss";
 *,
 *::after,
 *::before {
@@ -5,15 +6,23 @@
   padding: 0px;
   margin: 0px;
 }
+
 :root {
   font-family: "Roboto", "Poppins";
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
-body {
+} */
+/* body {
   height: 100vh;
   width: 100vw;
+} */
+/*  */
+
+body {
+  width: 100%;
+  max-width: 100vw;     /* Prevent body from stretching wider */
+  overflow-x: hidden;   /* Extra safety for horizontal overflow */
 }
 .Toastify__toast {
   max-width: 90vw; /* Prevent overflow */
@@ -22,3 +31,4 @@ body {
 button:disabled{
   cursor: not-allowed;
 }
+

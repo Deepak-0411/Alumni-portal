@@ -3,22 +3,22 @@ import styles from "../styles/modules/layout/Layout.module.css";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
+import UserInfo from "../components/UserInfo";
+import AdminNavbar from "../components/AdminNavbar";
 
-const Layout = () => {
+const AdminLayout = ({role}) => {
   const location = useLocation();
 
-  // Show Navbar only on user-related pages
-  const showNavbar = location.pathname.startsWith("/alumni/super-admin/");
 
   return (
     <div className={styles.container}>
-      <Header buttons={false} />
-      {showNavbar && <Navbar />}
-      <div className={styles.outlet2}>
+      <Header buttons={false} additionalComponent={<UserInfo/>} />
+      <main className={styles.outlet2}>
+       <AdminNavbar forPage={role}/>
         <Outlet />
-      </div>
+      </main>
     </div>
   );
 };
 
-export default Layout;
+export default AdminLayout;

@@ -1,16 +1,16 @@
-import error404 from "../assets/error404.svg";
-import {  useNavigate } from "react-router-dom";
-const Error404 = () => {
+import Error404 from "../assets/error404.svg?react";
+import { useNavigate } from "react-router-dom";
+const PageNotFound = () => {
   const container = {
     height: "100vh",
     width: "100vw",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection : "column",
-    background : "white",
+    flexDirection: "column",
+    background: "white",
   };
-  const retryBtn={
+  const retryBtn = {
     border: "none",
     borderRadius: ".5rem",
     color: "white",
@@ -23,11 +23,16 @@ const Error404 = () => {
 
   return (
     <div style={container}>
-      <img style={{ width: "100%", maxHeight : "80%" ,  marginBottom : "1rem"}} src={error404} alt="Error 404" />
-      <button style={retryBtn}
-      onClick={()=>navigate("/")}> Go Home </button>
+      {/* <img style={{ width: "100%", maxHeight : "80%" ,  marginBottom : "1rem"}} src={error404} alt="Error 404" /> */}
+      <Error404
+        style={{ width: "100%", maxHeight: "80%", marginBottom: "1rem" }}
+      />
+      <button style={retryBtn} onClick={() => navigate("/")}>
+        {" "}
+        Go Home{" "}
+      </button>
     </div>
   );
 };
 
-export default Error404;
+export default PageNotFound;

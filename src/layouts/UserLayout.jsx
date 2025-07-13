@@ -4,7 +4,7 @@ import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
 import Navbar from "../components/Navbar/Navbar";
 
-const Layout = () => {
+const UserLayout = () => {
   const location = useLocation();
 
   // Show "header buttons" only on specific routes
@@ -15,7 +15,7 @@ const Layout = () => {
 
   return (
     <div className={styles.container}>
-      <Header buttons={showBtns} />
+      <Header showButtonsButtons={showBtns} />
       {showNavbar && <Navbar />}
       <main
         className={styles.outlet}
@@ -28,4 +28,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default UserLayout;

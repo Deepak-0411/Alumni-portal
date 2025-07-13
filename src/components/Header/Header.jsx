@@ -2,14 +2,14 @@ import { useNavigate } from "react-router-dom";
 import GBULOGO from "../../assets/GBULOGO.png";
 import styles from "./Header.module.css";
 
-const Header = ({ buttons }) => {
+const Header = ({ showButtons ,additionalComponent = <></> }) => {
   const navigate = useNavigate();
 
   return (
     <header className={styles.header}>
       <div className={styles.logo} onClick={() => navigate("/")}>
         <img className={styles.logoImg} src={GBULOGO} alt="LOGO" />
-        <div className={`${styles.textContainer} ${buttons ? styles.hideContainer : ""}`}>
+        <div className={`${styles.textContainer} ${showButtons ? styles.hideContainer : ""}`}>
           <p className={styles.GBUHindi}>गौतम बुद्ध विश्वविद्यालय</p>
           <p className={styles.GBUEng}>GAUTAM BUDDHA UNIVERSITY</p>
           <p className={styles.GBUText}>
@@ -22,7 +22,7 @@ const Header = ({ buttons }) => {
           </p>
         </div>
       </div>
-      {buttons && (
+      {showButtons && (
         <div className={styles.btns}>
           <button
             className={`${styles.registerBtn} ${styles.btn}`}
@@ -38,6 +38,7 @@ const Header = ({ buttons }) => {
           </button>
         </div>
       )}
+      {additionalComponent}
     </header>
   );
 };

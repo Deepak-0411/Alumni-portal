@@ -28,10 +28,7 @@ const Login = ({ foradmin = false }) => {
       token: false,
       setLoading,
     });
-    console.log(foradmin);
-    
-    console.log(response);
-    
+
 
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
