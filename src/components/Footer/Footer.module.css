@@ -1,5 +1,5 @@
 .footer {
-  width: 100vw;
+  width: 100%;
   background: #000;
 }
 
@@ -15,7 +15,7 @@
 
 .links::after {
   content: "";
-  width: 100vw;
+  width: 100%;
   height: 0.125rem;
   background: #fff;
   position: absolute;

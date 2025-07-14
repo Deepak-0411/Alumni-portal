@@ -13,9 +13,12 @@ const UserLayout = () => {
   // Show Navbar only on user-related pages
   const showNavbar = location.pathname.startsWith("/alumni/user");
 
+  console.log(showBtns);
+  
+
   return (
     <div className={styles.container}>
-      <Header showButtonsButtons={showBtns} />
+      <Header showButtons={showBtns} />
       {showNavbar && <Navbar />}
       <main
         className={styles.outlet}

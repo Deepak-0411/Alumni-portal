@@ -12,6 +12,7 @@
 }
 .pngs {
   transform: translateY(0.3rem);
+  display: flex;
 }
 .png {
   height: clamp(6rem, 26.3vw, 21.0625rem);

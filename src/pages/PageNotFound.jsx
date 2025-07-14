@@ -2,8 +2,8 @@ import Error404 from "../assets/error404.svg?react";
 import { useNavigate } from "react-router-dom";
 const PageNotFound = () => {
   const container = {
-    height: "100vh",
-    width: "100vw",
+    height: "100%",
+    width: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
