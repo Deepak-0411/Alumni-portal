@@ -1,11 +1,11 @@
-const UserInfo = ({ name = "Deepak Kumar", role = "Admin", image = null }) => {
+const UserInfo = ({ name = "Harsh Singh", role = "Admin", image = null }) => {
   const getInitial = (name) => name?.charAt(0)?.toUpperCase() || "U";
 
   return (
-    <div className="flex items-center gap-3 px-2 py-4 rounded-3xl bg-purple-200/60 border border-purple-200 shadow-md backdrop-blur-md hover:shadow-lg transition-all duration-300">
+    <div className="flex items-center gap-3 px-3 py-2 cursor-pointer rounded-3xl bg-purple-200/60 border border-purple-200 shadow-md backdrop-blur-md hover:shadow-lg transition-all duration-300">
       <div className="text-right">
         <p className="text-base font-semibold text-purple-600">{name}</p>
-        <p className="text-sm font-medium text-purple-400">{role}</p>
+        <p className="text-sm font-medium text-purple-500">{role}</p>
       </div>
 
       {image ? (
@@ -17,11 +17,12 @@ const UserInfo = ({ name = "Deepak Kumar", role = "Admin", image = null }) => {
           />
         </div>
       ) : (
-        <div className="w-11 h-11 rounded-full bg-white text-purple-700 border border-purple-300 flex items-center justify-center font-bold text-lg cursor-pointer shadow">
+        <div className="w-11 h-11 rounded-full bg-white text-purple-600 border border-purple-300 flex items-center justify-center font-bold text-lg  shadow">
           {getInitial(name)}
         </div>
       )}
     </div>
   );
 };
+
 export default UserInfo;
