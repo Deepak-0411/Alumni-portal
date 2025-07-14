@@ -22,24 +22,28 @@ const AdminNavbar = ({ forPage }) => {
   })();
 
   return (
-    <div className=" w-56 flex flex-col items-center py-10 space-y-6 bg-transparent">
-      {navlinks.map(({ name, path }) => (
-        <NavLink
-          key={name}
-          to={path}
-          end
-          className={({ isActive }) =>
-            `w-44 py-3 px-6 rounded-full text-[15px] tracking-wide transition-all duration-300 cursor-pointer border shadow-md ${
-              isActive
-                ? "bg-purple-200/60 text-purple-600 font-semibold border-purple-200"
-                : "bg-gray-200/30 text-purple-500 border-gray-200 hover:bg-gray-200"
-            }`
-          }
-        >
-          {name}
-        </NavLink>
-      ))}
+    // <aside className="w-58 bg-gray-50 shadow-md border-r  border-gray-200">
+    <div className="w-60 bg-gray-50 shadow-md border-r  border-gray-200">
+      <div className="flex pt-10 flex-col  items-center text-center  space-y-6 bg-transparent">
+        {navlinks.map(({ name, path }) => (
+          <NavLink
+            key={path}
+            to={path}
+            end
+            className={({ isActive }) =>
+              `w-45 py-3 px-6 rounded-full text-base tracking-wide transition-all duration-600 cursor-pointer border shadow-md${
+                isActive
+                  ? " bg-purple-200/60 text-purple-600 font-semibold border-purple-200"
+                  : " bg-gray-200/40 text-purple-500 border-gray-200 hover:bg-gray-200"
+              }`
+            }
+          >
+            {name}
+          </NavLink>
+        ))}
+      </div>
     </div>
+    // </aside>
   );
 };
 
