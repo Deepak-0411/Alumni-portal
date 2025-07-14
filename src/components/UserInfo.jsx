@@ -2,7 +2,7 @@ const UserInfo = ({ name = "Deepak Kumar", role = "Admin", image = null }) => {
   const getInitial = (name) => name?.charAt(0)?.toUpperCase() || "U";
 
   return (
-    <div className="flex items-center gap-3 px-2 py-4 rounded-3xl bg-purple-200/60 border border-purple-200 shadow-md backdrop-blur-md hover:shadow-lg transition-all duration-300">
+    <div className="flex items-center gap-3 !px-4 !py-4 rounded-3xl bg-purple-200/60 border border-purple-200 shadow-md backdrop-blur-md hover:shadow-lg transition-all duration-300">
       <div className="text-right">
         <p className="text-base font-semibold text-purple-600">{name}</p>
         <p className="text-sm font-medium text-purple-400">{role}</p>

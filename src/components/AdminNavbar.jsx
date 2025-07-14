@@ -22,7 +22,7 @@ const AdminNavbar = ({ forPage }) => {
   })();
 
   return (
-    <div className=" w-56 flex flex-col items-center py-10 space-y-6 bg-transparent">
+    <nav className=" w-56 flex flex-col items-center py-10 space-y-6 bg-transparent">
       {navlinks.map(({ name, path }) => (
         <NavLink
           key={name}
@@ -39,7 +39,7 @@ const AdminNavbar = ({ forPage }) => {
           {name}
         </NavLink>
       ))}
-    </div>
+    </nav>
   );
 };
 
