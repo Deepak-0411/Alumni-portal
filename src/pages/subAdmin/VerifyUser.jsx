@@ -105,7 +105,7 @@ const VerifyUsersList = () => {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>Verify User</h2>
+      {/* <h2 className={styles.heading}>Verify User</h2> */}
       <div className={styles.userListBox}>
         <div className={styles.imageBox}>
           <img

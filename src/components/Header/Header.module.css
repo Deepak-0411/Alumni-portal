@@ -1,3 +1,4 @@
+/* ========== Base Styles ========== */
 .header {
   display: flex;
   width: 100%;
@@ -9,21 +10,31 @@
   user-select: none;
 }
 
+/* ========== Logo Section ========== */
 .logo {
   display: flex;
   align-items: center;
   cursor: pointer;
   flex-wrap: nowrap;
 }
-.textContainer {
-  padding: 0rem clamp(0.31rem, 1vw, 0.6rem);
-  border-right: 0.1rem solid #a1a1a1;
-}
 
 .logoImg {
   width: clamp(3rem, 8vw, 6.5rem);
   height: clamp(3rem, 8vw, 6.5rem);
 }
+
+.textContainer {
+  padding: 0rem clamp(0.31rem, 1vw, 0.6rem);
+  border-right: 0.1rem solid #a1a1a1;
+}
+
+.textDiv {
+  display: flex;
+  padding: 0rem clamp(0.4rem, 1vw, 0.9375rem);
+  align-items: center;
+}
+
+/* ========== Typography ========== */
 .GBUHindi {
   font-family: Roboto;
   font-size: clamp(0.5rem, 2.5vw, 1.2rem);
@@ -35,17 +46,12 @@
   font-size: clamp(0.625rem, 2.5vw, 1.12rem);
   font-weight: 500;
 }
+
 .GBUText {
   color: #949393;
   font-family: Roboto;
   font-size: clamp(0.4375rem, 2.5vw, 0.75rem);
   font-weight: 500;
-}
-
-.textDiv {
-  display: flex;
-  padding: 0rem clamp(0.4rem, 1vw, 0.9375rem);
-  align-items: center;
 }
 
 .text {
@@ -57,6 +63,7 @@
   letter-spacing: -0.04313rem;
 }
 
+/* ========== Buttons ========== */
 .btns {
   display: flex;
   align-items: center;
@@ -68,7 +75,6 @@
   height: clamp(1.8rem, 5.3vw, 3.125rem);
   padding: 0.625rem;
   border-radius: 5rem;
-  color: #fff;
   font-family: Inter;
   font-size: clamp(0.65rem, 2vw, 1rem);
   font-weight: 700;
@@ -82,6 +88,7 @@
 .registerBtn {
   border: 0.05rem solid #000;
   background: #002e57;
+  color: #fff;
 }
 
 .loginBtn {
@@ -90,8 +97,7 @@
   border: none;
 }
 
-/* // dynamic header  ADMIN */
-
+/* ========== Admin-Specific Styles ========== */
 .adminHeaderHeader {
   display: flex;
   align-items: center;
@@ -116,23 +122,20 @@
   font-size: 1.2rem;
 }
 
-
+/* ========== Additional ========== */
 .userInfoWrapper {
   display: flex;
   text-align: center;
   margin-right: 16px;
-
 }
 
 
 
-/* ===== Responsive Breakpoints ===== */
-
+/* ========== Responsive Breakpoints ========== */
 @media (max-width: 1024px) {
   .header {
     padding: 1rem 4rem;
     height: auto;
-    flex-direction: row;
     flex-wrap: nowrap;
   }
 }
@@ -142,12 +145,13 @@
     padding: 1rem 2rem;
   }
 }
+
 @media (max-width: 650px) {
   .hideContainer {
     display: none;
   }
-
 }
+
 @media (max-width: 425px) {
   .header {
     padding: 1rem;

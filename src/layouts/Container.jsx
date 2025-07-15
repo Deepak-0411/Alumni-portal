@@ -1,6 +1,6 @@
 const Container = ({ heading, placeholder }) => {
   return (
-    <div className="my-5">
+    <div className="my-5 h-[calc(100vh-7rem)]" >
       <div className="flex justify-between items-center mb-2">
         <h1 className="text-3xl text-gray- border-l-4 border-violet-500 pl-3">
           {heading}

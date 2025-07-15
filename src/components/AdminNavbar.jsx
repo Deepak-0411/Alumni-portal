@@ -23,8 +23,8 @@ const AdminNavbar = ({ forPage }) => {
 
   return (
     // <aside className="w-58 bg-gray-50 shadow-md border-r  border-gray-200">
-    <div className="w-60 bg-gray-50 shadow-md border-r  border-gray-200">
-      <div className="flex pt-10 flex-col  items-center text-center  space-y-6 bg-transparent">
+    <div className="w-60 bg-gray-50 shadow-md border-r  border-gray-200 " >
+      <nav className="flex pt-10 flex-col  items-center text-center  space-y-6 bg-transparent">
         {navlinks.map(({ name, path }) => (
           <NavLink
             key={path}
@@ -41,7 +41,7 @@ const AdminNavbar = ({ forPage }) => {
             {name}
           </NavLink>
         ))}
-      </div>
+      </nav>
     </div>
     // </aside>
   );

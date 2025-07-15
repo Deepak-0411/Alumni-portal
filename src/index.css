@@ -12,6 +12,10 @@ body {
   height: 100dvh;
   overflow-x: hidden;   /* Extra safety for horizontal overflow */
 }
+#root{
+  width: 100%;
+  height: 100%;
+}
 .Toastify__toast {
   max-width: 90vw; /* Prevent overflow */
   margin: 1rem;

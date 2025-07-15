@@ -20,18 +20,78 @@ const VerifyUsersList = () => {
   const [loading, setLoading] = useState(false);
 
   const [userList, setUserList] = useState([
-    // {
-    //   Name: "Example Kumar",
-    //   fathersName: "Example",
-    //   rollNo: "235UCS050",
-    //   yearOfPassing: "2020",
-    // },
-    // {
-    //   Name: "Example 2",
-    //   fathersName: "Example 2",
-    //   rollNo: "235UCS058",
-    //   yearOfPassing: "2020",
-    // },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example Kumar",
+      fathersName: "Example",
+      rollNo: "235UCS050",
+      yearOfPassing: "2020",
+    },
+    {
+      Name: "Example 2",
+      fathersName: "Example 2",
+      rollNo: "235UCS058",
+      yearOfPassing: "2020",
+    },
   ]);
 
   useEffect(() => {

@@ -12,7 +12,7 @@ const AdminLayout = ({role}) => {
 
   return (
     <div className={styles.container}>
-      <Header buttons={false} additionalComponent={<UserInfo/>} />
+      <Header buttons={false} additionalComponent={<UserInfo/>} isAdmin={true} />
       <main className={styles.outlet2}>
        <AdminNavbar forPage={role}/>
         <Outlet />
