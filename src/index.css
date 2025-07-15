@@ -8,7 +8,8 @@
 
 body {
   width: 100%;
-  max-width: 100vw;     /* Prevent body from stretching wider */
+  max-width: 100dvw;     /* Prevent body from stretching wider */
+  height: 100dvh;
   overflow-x: hidden;   /* Extra safety for horizontal overflow */
 }
 .Toastify__toast {
