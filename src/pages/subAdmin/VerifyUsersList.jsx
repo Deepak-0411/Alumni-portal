@@ -55,7 +55,6 @@ const VerifyUsersList = () => {
 
   const handleClick = (index) => {
     navigate("/alumni/sub-admin/verify-user", { state: { index, userList } });
-    console.log("Clicked index:", index);
   };
 
   return (
