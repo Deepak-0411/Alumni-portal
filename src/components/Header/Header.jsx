@@ -9,22 +9,46 @@ const Header = ({ showButtons, additionalComponent = <></> }) => {
   const isAdmin = location.pathname.startsWith("/alumni/superadmin");
 
   return (
-    <header className={`${styles.header} ${isAdmin ? styles.adminHeader : ""}`}>
+    <header
+      className={`${styles.header} ${isAdmin ? styles.adminHeaderHeader : ""}`}
+    >
       <div className={styles.logo} onClick={() => navigate("/alumni")}>
         <img className={styles.logoImg} src={GBULOGO} alt="LOGO" />
+
         <div
           className={`${styles.textContainer} ${
             showButtons ? styles.hideContainer : ""
           }`}
         >
-          <p className={styles.GBUHindi}>गौतम बुद्ध विश्वविद्यालय</p>
-          <p className={styles.GBUEng}>GAUTAM BUDDHA UNIVERSITY</p>
-          <p className={styles.GBUText}>
+          <p
+            className={`${styles.GBUHindi} ${
+              isAdmin ? styles.adminHeaderAll : ""
+            }`}
+          >
+            गौतम बुद्ध विश्वविद्यालय
+          </p>
+          <p
+            className={`${styles.GBUEng} ${
+              isAdmin ? styles.adminHeaderAll : ""
+            }`}
+          >
+            GAUTAM BUDDHA UNIVERSITY
+          </p>
+          <p
+            className={`${styles.GBUText} ${
+              isAdmin ? styles.adminHeaderAll : ""
+            }`}
+          >
             An Ultimate Destination for Higher Learning
           </p>
         </div>
+
         <div className={styles.textDiv}>
-          <p className={styles.text}>
+          <p
+            className={`${styles.text} ${
+              isAdmin ? styles.adminHeaderChota : ""
+            }`}
+          >
             Alumni <br /> Association
           </p>
         </div>
