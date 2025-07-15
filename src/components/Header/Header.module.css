@@ -2,7 +2,7 @@
 .header {
   display: flex;
   width: 100%;
-  height: 7.75rem;
+  height: 7rem;
   padding: 1rem 7.5rem;
   justify-content: space-between;
   align-items: center;
@@ -19,8 +19,8 @@
 }
 
 .logoImg {
-  width: clamp(3rem, 8vw, 6.5rem);
-  height: clamp(3rem, 8vw, 6.5rem);
+  width: clamp(3rem, 7vw, 5rem);
+  height: clamp(3rem, 7vw, 5rem);
 }
 
 .textContainer {

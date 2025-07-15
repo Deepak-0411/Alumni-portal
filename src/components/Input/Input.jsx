@@ -11,14 +11,21 @@ const Input = ({
   options = [],
   value = "",
   onChange = () => {},
+  className = "",
+  addonClassName = "",
   error = "",
   ...props
 }) => {
-  const inputClass = `${styles.input} ${error ? styles.errorInput : ""}`;
+  const inputClass = `
+  ${className || styles.input}
+  ${error ? styles.errorInput : ""}
+  ${addonClassName || ""}
+`.trim();
+
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={styles.container}>
+    <div className={`${className ? "" : styles.container}`}>
       {label && (
         <label
           htmlFor={name}
@@ -70,7 +77,7 @@ const Input = ({
             className={styles.passwordToggle}
             onClick={() => setShowPassword((prev) => !prev)}
           >
-            {showPassword ?  showPasswordSVG  :  hidePasswordSVG }
+            {showPassword ? showPasswordSVG : hidePasswordSVG}
           </span>
         </>
       ) : (
