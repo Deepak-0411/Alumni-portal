@@ -110,7 +110,7 @@ const VerifyUsersList = () => {
         toast.error(`Error: ${response.message}`);
       }
     };
-    fetchData();
+    // fetchData();
   }, []);
 
   const handleClick = (index) => {

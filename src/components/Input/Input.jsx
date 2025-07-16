@@ -25,7 +25,7 @@ const Input = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={`${className ? "" : styles.container}`}>
+    <div className={`${styles.container}`}>
       {label && (
         <label
           htmlFor={name}

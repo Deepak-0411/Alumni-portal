@@ -27,7 +27,7 @@ const Container = ({ heading, placeholder, isSuperadmin = true }) => {
       </div>
 
       <div className={styles.contentContainer}>
-        <div>
+        <div className="flex gap-4 flex-col">
           {Array(20)
             .fill()
             .map((_, idx) => (
