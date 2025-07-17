@@ -70,7 +70,7 @@ const AppRoutes = () => {
         <Route path="verify-users" element={<VerifyUsersList />} />
         <Route
           path="active-users"
-          element={<VerifyUsersList isForActiveUser={true} />}
+          element={<VerifyUsersList isForActiveUsers={true} />}
         />
       </Route>
 

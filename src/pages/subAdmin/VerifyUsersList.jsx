@@ -1,6 +1,6 @@
-import { useAuth } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
+import VerifyUser from "./VerifyUser";
 
 const VerifyUsersList = ({ isForActiveUsers = false }) => {
   const {
@@ -8,7 +8,12 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     setVerifyUsersList,
     activeUsersList,
     setActiveUsersList,
-  } = useData();
+  } = useData();  
+  
+  const dataList = isForActiveUsers ? activeUsersList : verifyUsersList;
+  const setDataList = isForActiveUsers
+    ? setActiveUsersList
+    : setVerifyUsersList;
 
   const config = {
     isSuperadmin: false,
@@ -40,8 +45,16 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
       "rollNo",
       "yearOfPassing",
     ],
-    dataList: isForActiveUsers ? activeUsersList : verifyUsersList,
-    setDataList: isForActiveUsers ? setVerifyUsersList : setVerifyUsersList,
+    dataList,
+    setDataList,
+    dataOverlayContent: ({ index, onClose }) => (
+      <VerifyUser
+        usersList={dataList}
+        setUsersList={setDataList}
+        currentIndex={index}
+        onClose={onClose}
+      />
+    ),
   };
   return <ContentBox {...config} />;
 };

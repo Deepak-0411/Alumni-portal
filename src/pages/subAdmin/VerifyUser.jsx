@@ -1,11 +1,13 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard/DataCard";
 import Overlay from "../../components/Overlay/Overlay";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest";
+import { getNextIndex } from "../../utility/navigateIndex";
 import Loading from "../../components/Spinner/Loading";
 import fallbackImage from "../../assets/imgNotFound.jpg";
+import useIndexNavigation from "../../hooks/useIndexNavigation.js";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -32,36 +34,10 @@ const VerifyUsersList = ({
   const [showOverlay, setShowOverlay] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (showOverlay) {
-        if (e.key === "Escape") {
-          setShowOverlay(false);
-        }
-        return;
-      }
-
-      switch (e.key) {
-        case "ArrowLeft":
-          handleIndexChange(-1);
-          break;
-        case "ArrowRight":
-          handleIndexChange(1);
-          break;
-        case "a":
-          verifyUser("accept");
-          break;
-        case "r":
-          verifyUser("reject");
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [index, usersList, showOverlay, currentUser]);
+  useIndexNavigation({
+    handleIndexChange: handleIndexChange,
+    disabled: showOverlay,
+  });
 
   const currentUser = useMemo(
     () => usersList[index] || null,
@@ -82,12 +58,10 @@ const VerifyUsersList = ({
   const handleImageClick = () => setShowOverlay(true);
   const handleCloseOverlay = () => setShowOverlay(false);
 
-  const handleIndexChange = (direction) => {
-    const newIndex = index + direction;
-    if (newIndex >= 0 && newIndex < usersList.length) {
-      setIndex(newIndex);
-    }
-  };
+  function handleIndexChange(direction) {
+    const newIndex = getNextIndex(index, usersList.length, direction);
+    setIndex(newIndex);
+  }
 
   const verifyUser = async (type) => {
     if (!currentUser) return;

@@ -5,6 +5,7 @@ const Overlay = ({ imageUrl, children, onClose }) => {
   const handleOverlayClick = (e) => {
     // Close only if background is clicked
     if (e.target.classList.contains(styles.overlay)) {
+      e.stopPropagation();
       onClose();
     }
   };

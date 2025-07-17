@@ -19,6 +19,7 @@ const ContentBox = ({
   tableColumn,
   dataList = [],
   setDataList,
+  dataOverlayContent,
 }) => {
   const [searchTerm, setSearchTearm] = useState("");
 
@@ -83,6 +84,7 @@ const ContentBox = ({
         filteredData={filteredData}
         idKey={idKey}
         tableColumn={tableColumn}
+        dataOverlayContent={dataOverlayContent}
       />
     </div>
   );
