@@ -11,7 +11,7 @@ const Alumni = () => {
     apiGet: ``,
     apiDelete: ``,
     apiEndPointCreate: ``,
-    searchBoxPlaceholder: "Search by name or roll no.",
+    searchBoxPlaceholder: "Search by card no. or roll no.",
     idKey: "rollNo",
     nameKey: "Name",
     formFields: {
@@ -26,9 +26,9 @@ const Alumni = () => {
       "Father's Name",
       "School",
       "Roll no.",
-      "Year of Passing",
+      "Card No",
     ],
-    tableColumn: ["Name", "fathersName", "school", "rollNo", "yearOfPassing"],
+    tableColumn: ["Name", "fathersName", "school", "rollNo", "cardNo"],
     dataList: alumniList,
     setDataList: setAlumniList,
     dataOverlayContent: ({ index, onClose }) => (

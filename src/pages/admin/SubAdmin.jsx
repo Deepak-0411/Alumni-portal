@@ -1,9 +1,45 @@
-import Container from "../../layouts/ContentBox"
+import { useData } from "../../context/DataContext";
+import ContentBox from "../../layouts/ContentBox";
+import VerifyUsersList from "../subAdmin/VerifyUser";
 
 const SubAdmin = () => {
-  return (
-        <Container heading={"Sub Admin"} placeholder={"Search sub-admin"} />
+  const { subAdminList, setSubAdminList } = useData();
 
-  )
-}
-export default SubAdmin
+  const config = {
+    createBtnOpen:true,
+    title: "Sub-Admins",
+    apiGet: ``,
+    apiDelete: ``,
+    apiEndPointCreate: ``,
+    searchBoxPlaceholder: "Search by username.",
+    idKey: "username",
+    nameKey: "username",
+    formFields: {
+      fName: { value: "", placeholder: "Name", role: "text" },
+      teacherId: { value: "", placeholder: "Teacher ID", role: "text" },
+      username: { value: "", placeholder: "Username", role: "text" },
+      password: { value: "", placeholder: "Password", role: "text" },
+      schoolName: { value: "", placeholder: "School Name", role: "text" },
+    },
+    tableHeading: [
+      "School",
+      "Name",
+      "Username",
+
+    ],
+    tableColumn: ["school", "Name", "username"],
+    dataList: subAdminList ,
+    setDataList: setSubAdminList ,
+    dataOverlayContent: ({ index, onClose }) => {
+      // <VerifyUsersList
+      //   usersList={alumniList}
+      //   setUsersList={setAlumniList}
+      //   currentIndex={index}
+      //   onClose={onClose}
+      // />
+  },
+  };
+
+  return <ContentBox {...config} />;
+};
+export default SubAdmin;

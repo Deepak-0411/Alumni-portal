@@ -242,6 +242,8 @@ export const DataProvider = ({ children }) => {
     },
   ]);
 
+  const [subAdminList, setSubAdminList] = useState([]);
+
   return (
     <DataContext.Provider
       value={{
@@ -251,6 +253,8 @@ export const DataProvider = ({ children }) => {
         setActiveUsersList,
         alumniList,
         setAlumniList,
+        subAdminList,
+        setSubAdminList,
       }}
     >
       {children}
