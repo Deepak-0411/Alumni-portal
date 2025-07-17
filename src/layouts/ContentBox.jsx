@@ -3,9 +3,11 @@ import Input from "../components/Input/Input";
 import Table from "../components/Table/Table";
 import styles from "../styles/modules/layout/Container.module.css";
 import useDebouncedValue from "../hooks/Debounce";
+import apiRequest from "../utility/apiRequest";
 
 const ContentBox = ({
   isSuperadmin = true,
+  createBtnOpen = true,
   title,
   apiGet,
   apiDelete,
@@ -43,7 +45,7 @@ const ContentBox = ({
 
   useEffect(() => {
     if (!Array.isArray(dataList) || dataList.length === 0) {
-      fetchData();
+      // fetchData();
     }
   }, []);
 
@@ -71,7 +73,7 @@ const ContentBox = ({
             onChange={(e) => setSearchTearm(e.target.value)}
             className={styles.searchbar}
           />
-          {isSuperadmin && (
+          {createBtnOpen && (
             <div>
               <button className={styles.createBtn}>+ {addText}</button>
             </div>

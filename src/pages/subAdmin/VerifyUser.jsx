@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard/DataCard";
 import Overlay from "../../components/Overlay/Overlay";
@@ -33,11 +33,7 @@ const VerifyUsersList = ({
   const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  useIndexNavigation({
-    handleIndexChange: handleIndexChange,
-    disabled: showOverlay,
-  });
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const currentUser = useMemo(
     () => usersList[index] || null,
@@ -54,6 +50,15 @@ const VerifyUsersList = ({
     () => getCollegeDetails(currentUser || {}),
     [currentUser]
   );
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [imageURL]);
+
+  useIndexNavigation({
+    handleIndexChange: handleIndexChange,
+    disabled: showOverlay,
+  });
 
   const handleImageClick = () => setShowOverlay(true);
   const handleCloseOverlay = () => setShowOverlay(false);
@@ -111,8 +116,15 @@ const VerifyUsersList = ({
             className={styles.image}
             src={imageURL}
             alt="Degree Picture"
+            onLoad={() => setImageLoaded(true)}
             onClick={handleImageClick}
           />
+          {/* Loader overlay */}
+          {!imageLoaded && (
+            <div className={styles.imageLoaderOverlay}>
+              <Loading />
+            </div>
+          )}
         </div>
         <DataCard dataItems={userDetails} heading="Personal Details" />
         <DataCard dataItems={collegeDetails} heading="College Details" />

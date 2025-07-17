@@ -66,7 +66,7 @@ const AppRoutes = () => {
         path="/alumni/sub-admin/"
         element={<AdminLayout role={"subAdmin"} />}
       >
-        <Route index element={<Navigate to="verify-users-list" />} />
+        <Route index element={<Navigate to="verify-users" />} />
         <Route path="verify-users" element={<VerifyUsersList />} />
         <Route
           path="active-users"

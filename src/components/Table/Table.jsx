@@ -3,11 +3,11 @@ import styles from "./Table.module.css";
 import Overlay from "../Overlay/Overlay";
 
 const Table = ({
-  tableHeadings,
-  filteredData,
-  idKey,
-  tableColumn,
-  dataOverlayContent, // now a function
+  tableHeadings=[],
+  filteredData=[],
+  idKey="",
+  tableColumn=[],
+  dataOverlayContent=()=>{}, 
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayIndex, setOverlayIndex] = useState(null);

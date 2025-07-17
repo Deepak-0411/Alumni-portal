@@ -17,6 +17,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
 
   const config = {
     isSuperadmin: false,
+    createBtnOpen:false,
     title: isForActiveUsers ? "Active Users" : "Verify Users",
     apiGet: ``,
     apiDelete: ``,
@@ -41,7 +42,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     tableColumn: [
       "Name",
       "fathersName",
-      "schoolName",
+      "school",
       "rollNo",
       "yearOfPassing",
     ],
