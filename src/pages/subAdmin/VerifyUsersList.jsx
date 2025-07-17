@@ -1,146 +1,49 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
-import DataCard from "../../components/DataCard/DataCard";
-import Loading from "../../components/Spinner/Loading";
-import  apiRequest  from "../../utility/apiRequest";
-import { toast } from "react-toastify";
 import { useAuth } from "../../context/AuthContext";
+import { useData } from "../../context/DataContext";
+import ContentBox from "../../layouts/ContentBox";
 
-const getUserDetails = (user) => [
-  { label: "Name", value: user.Name },
-  { label: "Father's Name", value: user.fathersName },
-  { label: "Roll Number", value: user.rollNo },
-  { label: "Year Of Passing", value: user.yearOfPassing },
-];
+const VerifyUsersList = ({ isForActiveUsers = false }) => {
+  const {
+    verifyUsersList,
+    setVerifyUsersList,
+    activeUsersList,
+    setActiveUsersList,
+  } = useData();
 
-const VerifyUsersList = () => {
-  const navigate = useNavigate();
-  const {token} =useAuth();
-  const [loading, setLoading] = useState(false);
-
-  const [userList, setUserList] = useState([
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
+  const config = {
+    isSuperadmin: false,
+    title: isForActiveUsers ? "Active Users" : "Verify Users",
+    apiGet: ``,
+    apiDelete: ``,
+    apiEndPointCreate: ``,
+    searchBoxPlaceholder: "Search by name or roll no.",
+    idKey: "rollNo",
+    nameKey: "Name",
+    formFields: {
+      fName: { value: "", placeholder: "Name", role: "text" },
+      teacherId: { value: "", placeholder: "Teacher ID", role: "text" },
+      username: { value: "", placeholder: "Username", role: "text" },
+      password: { value: "", placeholder: "Password", role: "text" },
+      schoolName: { value: "", placeholder: "School Name", role: "text" },
     },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example Kumar",
-      fathersName: "Example",
-      rollNo: "235UCS050",
-      yearOfPassing: "2020",
-    },
-    {
-      Name: "Example 2",
-      fathersName: "Example 2",
-      rollNo: "235UCS058",
-      yearOfPassing: "2020",
-    },
-  ]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await apiRequest({
-        url: "/api/subadmin/pending-users",
-        method: "GET",
-        token: token,
-        setLoading,
-      });
-
-      if (response.status === "success") {
-        setUserList(response.data);
-      } else {
-        console.error("Error:", response.message);
-        toast.error(`Error: ${response.message}`);
-      }
-    };
-    // fetchData();
-  }, []);
-
-  const handleClick = (index) => {
-    navigate("/alumni/sub-admin/verify-user", { state: { index, userList } });
+    tableHeading: [
+      "Name",
+      "Father's Name",
+      "School",
+      "Roll no.",
+      "Year of Passing",
+    ],
+    tableColumn: [
+      "Name",
+      "fathersName",
+      "schoolName",
+      "rollNo",
+      "yearOfPassing",
+    ],
+    dataList: isForActiveUsers ? activeUsersList : verifyUsersList,
+    setDataList: isForActiveUsers ? setVerifyUsersList : setVerifyUsersList,
   };
-
-  return (
-    <div className={styles.container}>
-      <h2 className={styles.heading}>Users List</h2>
-      {loading ? (
-        <Loading />
-      ) : (
-        <div className={styles.userListBox}>
-          {userList.length > 0 ? (
-            userList.map((user, index) => {
-              const details = getUserDetails(user);
-
-              return (
-                <div key={index} onClick={() => handleClick(index)}>
-                  <DataCard dataItems={details} />
-                </div>
-              );
-            })
-          ) : (
-            <p className={styles.noData}>No data found.</p>
-          )}
-        </div>
-      )}
-    </div>
-  );
+  return <ContentBox {...config} />;
 };
 
 export default VerifyUsersList;

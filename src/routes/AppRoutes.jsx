@@ -20,7 +20,6 @@ import MembershipCard from "../pages/user/MembershipCard";
 //Sub Admin Pages
 import AdminLogin from "../auth/AdminLogin";
 import VerifyUsersList from "../pages/subAdmin/VerifyUsersList";
-import VerifyUser from "../pages/subAdmin/VerifyUser";
 
 // Admin Pages
 import Alumni from "../pages/admin/Alumni";
@@ -68,8 +67,11 @@ const AppRoutes = () => {
         element={<AdminLayout role={"subAdmin"} />}
       >
         <Route index element={<Navigate to="verify-users-list" />} />
-        <Route path="verify-users-list" element={<VerifyUsersList />} />
-        <Route path="verify-user" element={<VerifyUser />} />
+        <Route path="verify-users" element={<VerifyUsersList />} />
+        <Route
+          path="active-users"
+          element={<VerifyUsersList isForActiveUser={true} />}
+        />
       </Route>
 
       {/* Admin Routes (Protected and Role-Restricted) */}

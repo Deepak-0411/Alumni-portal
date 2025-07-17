@@ -14,7 +14,7 @@ const AdminNavbar = ({ forPage }) => {
       case "subAdmin":
         return [
           { name: "Active Users", path: "active-users" },
-          { name: "Verify Users", path: "verify-users-list" },
+          { name: "Verify Users", path: "verify-users" },
         ];
       default:
         return [];

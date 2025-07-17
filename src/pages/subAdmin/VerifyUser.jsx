@@ -1,15 +1,13 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
 import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard/DataCard";
-import ImageOverlay from "../../components/ImageOverlay/ImageOverlay";
+import Overlay from "../../components/Overlay/Overlay";
 import { toast } from "react-toastify";
-import { useAuth } from "../../context/AuthContext";
 import apiRequest from "../../utility/apiRequest";
 import Loading from "../../components/Spinner/Loading";
 import fallbackImage from "../../assets/imgNotFound.jpg";
 
-// Helper functions
+// ----- Helper Functions -----
 const getUserDetails = (user) => [
   { label: "Name", value: user.Name || "-" },
   { label: "Father's Name", value: user.fathersName || "-" },
@@ -24,79 +22,107 @@ const getCollegeDetails = (user) => [
   { label: "Country", value: user.country || "-" },
 ];
 
-
-const VerifyUsersList = () => {
-  const navigate = useNavigate();
-  const { token } = useAuth();
-
-  const { state } = useLocation();
-  const [userList, setUserList] = useState(state?.userList || []);
-  const [index, setIndex] = useState(state?.index || 0);
+const VerifyUsersList = ({
+  currentIndex,
+  usersList,
+  setUsersList,
+  onClose,
+}) => {
+  const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const currentUser = userList[index];
-  const userDetails = currentUser ? getUserDetails(currentUser) : [];
-  const collegeDetails = currentUser ? getCollegeDetails(currentUser) : [];
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (showOverlay) {
+        if (e.key === "Escape") {
+          setShowOverlay(false);
+        }
+        return;
+      }
+
+      switch (e.key) {
+        case "ArrowLeft":
+          handleIndexChange(-1);
+          break;
+        case "ArrowRight":
+          handleIndexChange(1);
+          break;
+        case "a":
+          verifyUser("accept");
+          break;
+        case "r":
+          verifyUser("reject");
+          break;
+        default:
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [index, usersList, showOverlay, currentUser]);
+
+  const currentUser = useMemo(
+    () => usersList[index] || null,
+    [usersList, index]
+  );
+
   const imageURL = currentUser?.degreeURL || fallbackImage;
+
+  const userDetails = useMemo(
+    () => getUserDetails(currentUser || {}),
+    [currentUser]
+  );
+  const collegeDetails = useMemo(
+    () => getCollegeDetails(currentUser || {}),
+    [currentUser]
+  );
 
   const handleImageClick = () => setShowOverlay(true);
   const handleCloseOverlay = () => setShowOverlay(false);
 
-  useEffect(() => {
-    if (!state || !state.userList || state.userList.length === 0) {
-      navigate("/alumni/sub-admin/verify-users-list");
-    }
-  }, [state, navigate]);
-
-  const handleBack = () => {
-    if (index > 0) {
-      const newIndex = index - 1;
+  const handleIndexChange = (direction) => {
+    const newIndex = index + direction;
+    if (newIndex >= 0 && newIndex < usersList.length) {
       setIndex(newIndex);
     }
   };
-  const handleNext = () => {
-    if (index < userList.length - 1) {
-      const newIndex = index + 1;
-      setIndex(newIndex);
-    }
-  };
-  const verifyUser = async (requestType) => {
-    let url = "";
-    let method = "";
-    const enrollmentNo = currentUser?.enrollmentNo || null;
 
-    if (requestType === "accept") {
-      url = `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`;
-      method = "POST";
-    } else if (requestType === "reject") {
-      url = `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`;
-      method = "DELETE";
-    }
+  const verifyUser = async (type) => {
+    if (!currentUser) return;
 
-    const response = await apiRequest({
-      url,
-      method,
-      token,
-      setLoading,
-    });
+    const enrollmentNo = currentUser.enrollmentNo;
+    if (!enrollmentNo) return toast.error("Missing enrollment number.");
+
+    const requestConfig = {
+      accept: {
+        method: "POST",
+        url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
+      },
+      reject: {
+        method: "DELETE",
+        url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`,
+      },
+    };
+
+    const { method, url } = requestConfig[type] || {};
+
+    const response = await apiRequest({ url, method, token, setLoading });
 
     if (response.status === "success") {
-      toast.success(`Marked as ${requestType}`);
+      toast.success(`Marked as ${type}`);
 
-      const updatedUserList = userList.filter(
-        (user, userIndex) => userIndex !== index
-      );
-      setUserList(updatedUserList);
+      const updatedUserList = usersList.filter((_, i) => i !== index);
+      setUsersList(updatedUserList);
 
       if (updatedUserList.length === 0) {
-        navigate("/alumni/sub-admin/verify-users-list");
+        onClose();
         return;
       }
 
-      if (index >= updatedUserList.length) {
-        setIndex(updatedUserList.length - 1);
-      }
+      // Adjust index if needed
+      setIndex((prevIndex) => Math.min(prevIndex, updatedUserList.length - 1));
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
@@ -105,7 +131,6 @@ const VerifyUsersList = () => {
 
   return (
     <div className={styles.container}>
-      {/* <h2 className={styles.heading}>Verify User</h2> */}
       <div className={styles.userListBox}>
         <div className={styles.imageBox}>
           <img
@@ -115,46 +140,46 @@ const VerifyUsersList = () => {
             onClick={handleImageClick}
           />
         </div>
-        {currentUser && (
-          <>
-            <DataCard dataItems={userDetails} heading="Personal Details" />
-            <DataCard dataItems={collegeDetails} heading="College Details" />
-          </>
-        )}
+        <DataCard dataItems={userDetails} heading="Personal Details" />
+        <DataCard dataItems={collegeDetails} heading="College Details" />
       </div>
 
       {showOverlay && (
-        <ImageOverlay imageUrl={imageURL} onClose={handleCloseOverlay} />
+        <Overlay imageUrl={imageURL} onClose={handleCloseOverlay} />
       )}
+
+      {/* Navigation & Action Buttons */}
       <div className={styles.btnsContainer}>
         <button
           className={styles.backBtn}
-          disabled={index == 0}
-          onClick={handleBack}
+          disabled={index === 0}
+          onClick={() => handleIndexChange(-1)}
         >
-          {" "}
-          &lt;- back{" "}
+          &lt;- Back
         </button>
+
         <button
           className={styles.rejectBtn}
           onClick={() => verifyUser("reject")}
           disabled={loading}
         >
-          {loading ? <Loading color="white" size={"small"} /> : "reject"}
+          {loading ? <Loading color="white" size="small" /> : "Reject"}
         </button>
+
         <button
           className={styles.acceptBtn}
           onClick={() => verifyUser("accept")}
           disabled={loading}
         >
-          {loading ? <Loading color="white" size="small" /> : "accept"}
+          {loading ? <Loading color="white" size="small" /> : "Accept"}
         </button>
+
         <button
           className={styles.nextBtn}
-          disabled={index == userList.length - 1}
-          onClick={handleNext}
+          disabled={index >= usersList.length - 1}
+          onClick={() => handleIndexChange(1)}
         >
-          next -&gt;{" "}
+          Next -&gt;
         </button>
       </div>
     </div>

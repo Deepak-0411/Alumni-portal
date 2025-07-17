@@ -1,4 +1,4 @@
-const UserInfo = ({ name = "Harsh Singh", role = "Admin", image = null }) => {
+const UserInfo = ({ name = "User", role = "Admin", image = null }) => {
   const getInitial = (name) => name?.charAt(0)?.toUpperCase() || "U";
 
   return (
