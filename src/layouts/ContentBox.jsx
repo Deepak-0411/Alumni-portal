@@ -4,6 +4,8 @@ import Table from "../components/Table/Table";
 import styles from "../styles/modules/layout/Container.module.css";
 import useDebouncedValue from "../hooks/Debounce";
 import apiRequest from "../utility/apiRequest";
+import Overlay from "../components/Overlay/Overlay";
+import Create from "../components/Create/Create";
 
 const ContentBox = ({
   isSuperadmin = true,
@@ -24,6 +26,7 @@ const ContentBox = ({
   dataOverlayContent,
 }) => {
   const [searchTerm, setSearchTearm] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
 
   const debouncedSearchTerm = useDebouncedValue(searchTerm, 300);
 
@@ -62,6 +65,13 @@ const ContentBox = ({
 
   return (
     <div className={styles.container}>
+
+      {isCreating && (
+        <Overlay onClose={()=>setIsCreating(false)}>
+          <Create dataToSend={formFields} apiEndPointSingle={apiEndPointCreate}/>
+        </Overlay>
+      )}
+
       <div className={styles.headingDiv}>
         <h1 className={styles.heading}>{title}</h1>
         <div className={styles.interactionSide}>
@@ -75,7 +85,7 @@ const ContentBox = ({
           />
           {createBtnOpen && (
             <div>
-              <button className={styles.createBtn}>+ {addText}</button>
+              <button className={styles.createBtn} onClick={()=>setIsCreating(true)}>+ {addText}</button>
             </div>
           )}
         </div>

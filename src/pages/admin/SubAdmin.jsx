@@ -6,7 +6,7 @@ const SubAdmin = () => {
   const { subAdminList, setSubAdminList } = useData();
 
   const config = {
-    createBtnOpen:true,
+    createBtnOpen: true,
     title: "Sub-Admins",
     apiGet: ``,
     apiDelete: ``,
@@ -14,22 +14,17 @@ const SubAdmin = () => {
     searchBoxPlaceholder: "Search by username.",
     idKey: "username",
     nameKey: "username",
+    addText: "Create Sub-Admin",
     formFields: {
-      fName: { value: "", placeholder: "Name", role: "text" },
-      teacherId: { value: "", placeholder: "Teacher ID", role: "text" },
+      Name: { value: "", placeholder: "Name", role: "text" },
       username: { value: "", placeholder: "Username", role: "text" },
-      password: { value: "", placeholder: "Password", role: "text" },
+      password: { value: "", placeholder: "Password", role: "password" },
       schoolName: { value: "", placeholder: "School Name", role: "text" },
     },
-    tableHeading: [
-      "School",
-      "Name",
-      "Username",
-
-    ],
+    tableHeading: ["School", "Name", "Username"],
     tableColumn: ["school", "Name", "username"],
-    dataList: subAdminList ,
-    setDataList: setSubAdminList ,
+    dataList: subAdminList,
+    setDataList: setSubAdminList,
     dataOverlayContent: ({ index, onClose }) => {
       // <VerifyUsersList
       //   usersList={alumniList}
@@ -37,7 +32,7 @@ const SubAdmin = () => {
       //   currentIndex={index}
       //   onClose={onClose}
       // />
-  },
+    },
   };
 
   return <ContentBox {...config} />;
