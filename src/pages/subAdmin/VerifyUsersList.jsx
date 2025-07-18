@@ -48,9 +48,10 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     ],
     dataList,
     setDataList,
-    dataOverlayContent: ({ index, onClose }) => (
+    dataOverlayContent: ({ index, onClose ,data}) => (
       <VerifyUser
         usersList={dataList}
+        sortedData={data}
         setUsersList={setDataList}
         currentIndex={index}
         onClose={onClose}

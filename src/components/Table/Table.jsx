@@ -13,7 +13,7 @@ const Table = ({
   dataOverlayContent,
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
-  const [overlayIndex, setOverlayIndex] = useState(null);
+  const [selectedSortedIndex, setSelectedSortedIndex] = useState(null);
 
   const sortedData = showToggleBtn
     ? [...filteredData].sort(
@@ -21,16 +21,16 @@ const Table = ({
       )
     : filteredData;
 
-  const handleRowClick = (index) => {
+  const handleRowClick = (sortedIndex) => {
     if (dataOverlayContent) {
-      setOverlayIndex(index);
+      setSelectedSortedIndex(sortedIndex);
       setShowOverlay(true);
     }
   };
 
   const handleOverlayClose = () => {
     setShowOverlay(false);
-    setOverlayIndex(null);
+    setSelectedSortedIndex(null);
   };
 
   const renderTableHeadings = () => (
@@ -43,27 +43,29 @@ const Table = ({
     </tr>
   );
 
-  const renderRow = (item, index) => (
-    <tr
-      key={`${item[idKey] || index}`}
-      onClick={() => handleRowClick(index)}
-      className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
-    >
-      <td>{index + 1}</td>
-      {tableColumn.map((colKey) => (
-        <td key={`${colKey}-${index}`}>{item[colKey]}</td>
-      ))}
-      {showToggleBtn && (
-        <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
-          <Input
-            type="check"
-            value={item.isActive}
-            onChange={() => handleToggleBtn(item)}
-          />
-        </td>
-      )}
-    </tr>
-  );
+  const renderRow = (item, sortedIndex) => {
+    return (
+      <tr
+        key={`${item[idKey] || sortedIndex}`}
+        onClick={() => handleRowClick(sortedIndex)}
+        className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
+      >
+        <td>{sortedIndex + 1}</td>
+        {tableColumn.map((colKey) => (
+          <td key={`${colKey}-${sortedIndex}`}>{item[colKey]}</td>
+        ))}
+        {showToggleBtn && (
+          <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
+            <Input
+              type="check"
+              value={item.isActive}
+              onChange={() => handleToggleBtn(item[idKey])}
+            />
+          </td>
+        )}
+      </tr>
+    );
+  };
 
   const renderTableBody = () => {
     if (!sortedData.length) {
@@ -88,10 +90,11 @@ const Table = ({
         </table>
       </div>
 
-      {showOverlay && dataOverlayContent && (
+      {showOverlay && dataOverlayContent && selectedSortedIndex !== null && (
         <Overlay onClose={handleOverlayClose}>
           {dataOverlayContent({
-            index: overlayIndex,
+            data: sortedData,
+            index: selectedSortedIndex,
             onClose: handleOverlayClose,
           })}
         </Overlay>

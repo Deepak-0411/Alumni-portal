@@ -53,8 +53,22 @@ const ContentBox = ({
     }
   }, []);
 
-  const handleToggleBtn = (user) => {
-    console.log(user);
+  const handleToggleBtn = (userId) => {
+    if (!Array.isArray(dataList)) return;
+    console.log(userId);
+    
+
+    const exists = dataList.some((user) => user[idKey] === userId);
+    if (!exists) {
+      toast.error("User not found.");
+      return;
+    }
+
+    const updated = dataList.map((user) =>
+      user[idKey] === userId ? { ...user, isActive: !user.isActive } : user
+    );
+
+    setDataList(updated);
   };
 
   const filteredData = Array.isArray(dataList)

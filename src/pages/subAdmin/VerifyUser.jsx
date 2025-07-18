@@ -26,6 +26,7 @@ const getCollegeDetails = (user) => [
 
 const VerifyUsersList = ({
   currentIndex,
+  sortedData,
   usersList,
   setUsersList,
   onClose,
@@ -36,8 +37,8 @@ const VerifyUsersList = ({
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const currentUser = useMemo(
-    () => usersList[index] || null,
-    [usersList, index]
+    () => sortedData[index] || null,
+    [sortedData, index]
   );
 
   const imageURL = currentUser?.degreeURL || fallbackImage;
@@ -55,6 +56,12 @@ const VerifyUsersList = ({
     setImageLoaded(false);
   }, [imageURL]);
 
+  useEffect(() => {
+    if (sortedData.length === 0) {
+      onClose();
+    }
+  }, [sortedData, onClose]);
+
   useIndexNavigation({
     handleIndexChange: handleIndexChange,
     disabled: showOverlay,
@@ -64,14 +71,33 @@ const VerifyUsersList = ({
   const handleCloseOverlay = () => setShowOverlay(false);
 
   function handleIndexChange(direction) {
-    const newIndex = getNextIndex(index, usersList.length, direction);
+    const newIndex = getNextIndex(index, sortedData.length, direction);
     setIndex(newIndex);
   }
 
   const verifyUser = async (type) => {
     if (!currentUser) return;
-
     const enrollmentNo = currentUser.enrollmentNo;
+
+    // just checking the functionality
+
+    // const updatedUserList = usersList.filter(
+    //   (user) => user.enrollmentNo !== enrollmentNo
+    // );
+
+    // setLoading(true);
+
+    // // Simulate delay
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   setUsersList(updatedUserList);
+
+    //   // Index correction (no need to check length here)
+    //   setIndex((prevIndex) => Math.max(0, prevIndex - 1));
+
+    //   toast.success(`Marked as ${type}`);
+    // }, 500);
+
     if (!enrollmentNo) return toast.error("Missing enrollment number.");
 
     const requestConfig = {
@@ -87,21 +113,16 @@ const VerifyUsersList = ({
 
     const { method, url } = requestConfig[type] || {};
 
-    const response = await apiRequest({ url, method, token, setLoading });
+    const response = await apiRequest({ url, method, setLoading });
 
     if (response.status === "success") {
       toast.success(`Marked as ${type}`);
 
-      const updatedUserList = usersList.filter((_, i) => i !== index);
+      const updatedUserList = usersList.filter(
+        (user) => user.enrollmentNo !== enrollmentNo
+      );
       setUsersList(updatedUserList);
-
-      if (updatedUserList.length === 0) {
-        onClose();
-        return;
-      }
-
-      // Adjust index if needed
-      setIndex((prevIndex) => Math.min(prevIndex, updatedUserList.length - 1));
+      setIndex((prevIndex) => Math.max(0, prevIndex - 1));
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
@@ -162,7 +183,7 @@ const VerifyUsersList = ({
 
         <button
           className={styles.nextBtn}
-          disabled={index >= usersList.length - 1}
+          disabled={index >= sortedData.length - 1}
           onClick={() => handleIndexChange(1)}
         >
           Next -&gt;
