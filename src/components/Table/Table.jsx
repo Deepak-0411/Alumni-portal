@@ -13,24 +13,18 @@ const Table = ({
   dataOverlayContent,
 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
-  const [selectedSortedIndex, setSelectedSortedIndex] = useState(null);
+  const [overlayIndex, setOverlayIndex] = useState(null);
 
-  const sortedData = showToggleBtn
-    ? [...filteredData].sort(
-        (a, b) => (b.isActive === true) - (a.isActive === true)
-      )
-    : filteredData;
-
-  const handleRowClick = (sortedIndex) => {
+  const handleRowClick = (index) => {
     if (dataOverlayContent) {
-      setSelectedSortedIndex(sortedIndex);
+      setOverlayIndex(index);
       setShowOverlay(true);
     }
   };
 
   const handleOverlayClose = () => {
     setShowOverlay(false);
-    setSelectedSortedIndex(null);
+    setOverlayIndex(null);
   };
 
   const renderTableHeadings = () => (
@@ -43,32 +37,30 @@ const Table = ({
     </tr>
   );
 
-  const renderRow = (item, sortedIndex) => {
-    return (
-      <tr
-        key={`${item[idKey] || sortedIndex}`}
-        onClick={() => handleRowClick(sortedIndex)}
-        className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
-      >
-        <td>{sortedIndex + 1}</td>
-        {tableColumn.map((colKey) => (
-          <td key={`${colKey}-${sortedIndex}`}>{item[colKey]}</td>
-        ))}
-        {showToggleBtn && (
-          <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
-            <Input
-              type="check"
-              value={item.isActive}
-              onChange={() => handleToggleBtn(item[idKey])}
-            />
-          </td>
-        )}
-      </tr>
-    );
-  };
+  const renderRow = (item, index) => (
+    <tr
+      key={`${item[idKey] || index}`}
+      onClick={() => handleRowClick(index)}
+      className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
+    >
+      <td>{index + 1}</td>
+      {tableColumn.map((colKey) => (
+        <td key={`${colKey}-${index}`}>{item[colKey]}</td>
+      ))}
+      {showToggleBtn && (
+        <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
+          <Input
+            type="check"
+            value={item.isActive}
+            onChange={() => handleToggleBtn(item[idKey])}
+          />
+        </td>
+      )}
+    </tr>
+  );
 
   const renderTableBody = () => {
-    if (!sortedData.length) {
+    if (!filteredData.length) {
       return (
         <tr>
           <td colSpan={2 + tableHeadings.length} className={styles.noData}>
@@ -78,7 +70,7 @@ const Table = ({
       );
     }
 
-    return sortedData.map(renderRow);
+    return filteredData.map(renderRow);
   };
 
   return (
@@ -90,11 +82,12 @@ const Table = ({
         </table>
       </div>
 
-      {showOverlay && dataOverlayContent && selectedSortedIndex !== null && (
+      {showOverlay && dataOverlayContent && (
         <Overlay onClose={handleOverlayClose}>
+          {/* {console.log("filteredData", filteredData)} */}
           {dataOverlayContent({
-            data: sortedData,
-            index: selectedSortedIndex,
+            index: overlayIndex,
+            data: filteredData,
             onClose: handleOverlayClose,
           })}
         </Overlay>

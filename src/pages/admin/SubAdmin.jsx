@@ -7,6 +7,7 @@ const SubAdmin = () => {
 
   const config = {
     createBtnOpen: true,
+    showToggleBtn: true,
     title: "Sub-Admins",
     apiGet: ``,
     apiDelete: ``,

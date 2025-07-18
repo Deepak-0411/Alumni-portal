@@ -1,12 +1,13 @@
 import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
-import VerifyUsersList from "../subAdmin/VerifyUser";
+import VerifyUser from "../subAdmin/VerifyUser";
 
 const Alumni = () => {
   const { alumniList, setAlumniList } = useData();
 
   const config = {
     createBtnOpen: false,
+    showToggleBtn: true,
     title: "Alumni",
     apiGet: ``,
     apiDelete: ``,
@@ -21,28 +22,23 @@ const Alumni = () => {
       password: { value: "", placeholder: "Password", role: "text" },
       schoolName: { value: "", placeholder: "School Name", role: "text" },
     },
-    tableHeading: [
-      "Name",
-      "Father's Name",
-      "School",
-      "Roll no.",
-      "Card No",
-    ],
+    tableHeading: ["Name", "Father's Name", "School", "Roll no.", "Card No"],
     tableColumn: ["Name", "fathersName", "school", "rollNo", "cardNo"],
     dataList: alumniList,
     setDataList: setAlumniList,
-    dataOverlayContent: ({ index, onClose }) => (
-      <VerifyUsersList
-        usersList={alumniList}
+    dataOverlayContent: ({ index, onClose, data }) => {
+      // console.log("data",data);
+      return(
+      <VerifyUser
+        filteredData={data}
         setUsersList={setAlumniList}
         currentIndex={index}
         onClose={onClose}
-      />
-    ),
+      />)
+      
+    },
   };
 
-  return (
-    <ContentBox {...config} />
-  );
+  return <ContentBox {...config} />;
 };
 export default Alumni;

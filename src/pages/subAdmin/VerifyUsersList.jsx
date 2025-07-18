@@ -8,8 +8,8 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     setVerifyUsersList,
     activeUsersList,
     setActiveUsersList,
-  } = useData();  
-  
+  } = useData();
+
   const dataList = isForActiveUsers ? activeUsersList : verifyUsersList;
   const setDataList = isForActiveUsers
     ? setActiveUsersList
@@ -17,7 +17,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
 
   const config = {
     isSuperadmin: false,
-    createBtnOpen:false,
+    createBtnOpen: false,
     title: isForActiveUsers ? "Active Users" : "Verify Users",
     apiGet: ``,
     apiDelete: ``,
@@ -39,24 +39,20 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
       "Roll no.",
       "Year of Passing",
     ],
-    tableColumn: [
-      "Name",
-      "fathersName",
-      "school",
-      "rollNo",
-      "yearOfPassing",
-    ],
+    tableColumn: ["Name", "fathersName", "school", "rollNo", "yearOfPassing"],
     dataList,
     setDataList,
-    dataOverlayContent: ({ index, onClose ,data}) => (
+    dataOverlayContent: ({ index, onClose, data }) => {
+      console.log("data",data);
+      return(
       <VerifyUser
-        usersList={dataList}
-        sortedData={data}
+        filteredData={data}
         setUsersList={setDataList}
         currentIndex={index}
         onClose={onClose}
-      />
-    ),
+      />)
+      
+    },
   };
   return <ContentBox {...config} />;
 };

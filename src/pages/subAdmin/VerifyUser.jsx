@@ -8,6 +8,7 @@ import { getNextIndex } from "../../utility/navigateIndex";
 import Loading from "../../components/Spinner/Loading";
 import fallbackImage from "../../assets/imgNotFound.jpg";
 import useIndexNavigation from "../../hooks/useIndexNavigation.js";
+import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -25,20 +26,19 @@ const getCollegeDetails = (user) => [
 ];
 
 const VerifyUsersList = ({
-  currentIndex,
-  sortedData,
-  usersList,
+  currentIndex=0,
+  filteredData=[],
   setUsersList,
   onClose,
 }) => {
   const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);  
 
   const currentUser = useMemo(
-    () => sortedData[index] || null,
-    [sortedData, index]
+    () => filteredData[index] || null,
+    [filteredData, index]
   );
 
   const imageURL = currentUser?.degreeURL || fallbackImage;
@@ -57,10 +57,10 @@ const VerifyUsersList = ({
   }, [imageURL]);
 
   useEffect(() => {
-    if (sortedData.length === 0) {
+    if (filteredData.length === 0) {
       onClose();
     }
-  }, [sortedData, onClose]);
+  }, [filteredData, onClose]);
 
   useIndexNavigation({
     handleIndexChange: handleIndexChange,
@@ -71,7 +71,7 @@ const VerifyUsersList = ({
   const handleCloseOverlay = () => setShowOverlay(false);
 
   function handleIndexChange(direction) {
-    const newIndex = getNextIndex(index, sortedData.length, direction);
+    const newIndex = getNextIndex(index, filteredData.length, direction);
     setIndex(newIndex);
   }
 
@@ -81,52 +81,46 @@ const VerifyUsersList = ({
 
     // just checking the functionality
 
-    // const updatedUserList = usersList.filter(
-    //   (user) => user.enrollmentNo !== enrollmentNo
-    // );
+    setLoading(true);
 
-    // setLoading(true);
-
-    // // Simulate delay
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   setUsersList(updatedUserList);
-
-    //   // Index correction (no need to check length here)
-    //   setIndex((prevIndex) => Math.max(0, prevIndex - 1));
-
-    //   toast.success(`Marked as ${type}`);
-    // }, 500);
-
-    if (!enrollmentNo) return toast.error("Missing enrollment number.");
-
-    const requestConfig = {
-      accept: {
-        method: "POST",
-        url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
-      },
-      reject: {
-        method: "DELETE",
-        url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`,
-      },
-    };
-
-    const { method, url } = requestConfig[type] || {};
-
-    const response = await apiRequest({ url, method, setLoading });
-
-    if (response.status === "success") {
-      toast.success(`Marked as ${type}`);
-
-      const updatedUserList = usersList.filter(
-        (user) => user.enrollmentNo !== enrollmentNo
-      );
-      setUsersList(updatedUserList);
+    // Simulate delay
+    setTimeout(() => {
+      setLoading(false);
+       removeFromStateByKey([setUsersList],"enrollmentNo",enrollmentNo);
+       console.log("enrollmentNo",enrollmentNo);
+       
       setIndex((prevIndex) => Math.max(0, prevIndex - 1));
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Error: ${response.message}`);
-    }
+
+      toast.success(`Marked as ${type}`);
+    }, 500);
+
+    // actual code
+
+    // if (!enrollmentNo) return toast.error("Missing enrollment number.");
+
+    // const requestConfig = {
+    //   accept: {
+    //     method: "POST",
+    //     url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
+    //   },
+    //   reject: {
+    //     method: "DELETE",
+    //     url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`,
+    //   },
+    // };
+
+    // const { method, url } = requestConfig[type] || {};
+
+    // const response = await apiRequest({ url, method, setLoading });
+
+    // if (response.status === "success") {
+    //   toast.success(`Marked as ${type}`);
+    //   removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+    //   setIndex((prevIndex) => Math.max(0, prevIndex - 1));
+    // } else {
+    //   console.error("Error:", response.message);
+    //   toast.error(`Error: ${response.message}`);
+    // }
   };
 
   return (
@@ -183,7 +177,7 @@ const VerifyUsersList = ({
 
         <button
           className={styles.nextBtn}
-          disabled={index >= sortedData.length - 1}
+          disabled={index >= filteredData.length - 1}
           onClick={() => handleIndexChange(1)}
         >
           Next -&gt;

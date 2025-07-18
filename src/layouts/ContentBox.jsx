@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 
 const ContentBox = ({
   isSuperadmin = true,
+  showToggleBtn=false,
   createBtnOpen = true,
   title,
   apiGet,
@@ -56,7 +57,6 @@ const ContentBox = ({
   const handleToggleBtn = (userId) => {
     if (!Array.isArray(dataList)) return;
     console.log(userId);
-    
 
     const exists = dataList.some((user) => user[idKey] === userId);
     if (!exists) {
@@ -81,6 +81,12 @@ const ContentBox = ({
         );
       })
     : [];
+
+  const sortedData = showToggleBtn
+    ? [...filteredData].sort(
+        (a, b) => (b.isActive === true) - (a.isActive === true)
+      )
+    : filteredData;
 
   return (
     <div className={styles.container}>
@@ -119,12 +125,12 @@ const ContentBox = ({
 
       <Table
         tableHeadings={tableHeading}
-        filteredData={filteredData}
+        filteredData={sortedData}
         idKey={idKey}
         handleToggleBtn={handleToggleBtn}
         tableColumn={tableColumn}
         dataOverlayContent={dataOverlayContent}
-        showToggleBtn={isSuperadmin}
+        showToggleBtn={showToggleBtn}
       />
     </div>
   );
