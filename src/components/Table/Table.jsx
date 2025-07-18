@@ -48,11 +48,19 @@ const Table = ({
         <td key={`${colKey}-${index}`}>{item[colKey]}</td>
       ))}
       {showToggleBtn && (
-        <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
+        <td
+          onClick={(e) => e.stopPropagation()}
+          className={`${styles.noClick} "${item["rollNo"]}" `}
+        >
           <Input
             type="check"
             value={item.isActive}
-            onChange={() => handleToggleBtn(item[idKey])}
+            addonClassName={item["rollNo"]}
+            id={item["rollNo"]}
+            onChange={() => {
+              console.log(idKey,item["rollNo"]);
+              handleToggleBtn(item[idKey]);
+            }}
           />
         </td>
       )}

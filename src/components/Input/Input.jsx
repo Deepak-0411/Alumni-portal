@@ -24,7 +24,12 @@ const Input = ({
     ${addonClassName || ""}
   `.trim();
 
-  const inputId = props.id || name || "input-component";
+  const generateRandomId = () => {
+    return Math.floor(100000 + Math.random() * 900000);
+  };
+
+  const idPrefix = props.id || name || "input-component";
+  const inputId = idPrefix + generateRandomId();
 
   if (type === "check") {
     return (
