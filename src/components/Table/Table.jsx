@@ -15,6 +15,12 @@ const Table = ({
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayIndex, setOverlayIndex] = useState(null);
 
+  const sortedData = showToggleBtn
+    ? [...filteredData].sort(
+        (a, b) => (b.isActive === true) - (a.isActive === true)
+      )
+    : filteredData;
+
   const handleRowClick = (index) => {
     if (dataOverlayContent) {
       setOverlayIndex(index);
@@ -38,7 +44,11 @@ const Table = ({
   );
 
   const renderRow = (item, index) => (
-    <tr key={`${item[idKey] || index}`} onClick={() => handleRowClick(index)}>
+    <tr
+      key={`${item[idKey] || index}`}
+      onClick={() => handleRowClick(index)}
+      className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
+    >
       <td>{index + 1}</td>
       {tableColumn.map((colKey) => (
         <td key={`${colKey}-${index}`}>{item[colKey]}</td>
@@ -56,7 +66,7 @@ const Table = ({
   );
 
   const renderTableBody = () => {
-    if (!filteredData.length) {
+    if (!sortedData.length) {
       return (
         <tr>
           <td colSpan={2 + tableHeadings.length} className={styles.noData}>
@@ -66,7 +76,7 @@ const Table = ({
       );
     }
 
-    return filteredData.map(renderRow);
+    return sortedData.map(renderRow);
   };
 
   return (

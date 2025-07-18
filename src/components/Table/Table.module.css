@@ -51,6 +51,9 @@
   background-color: #f6f6f6;
   cursor: pointer;
 }
+.fadeText{
+  color: #8a8a8a;
+}
 
 .noClick {
  cursor: default;
