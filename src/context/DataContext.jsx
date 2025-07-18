@@ -137,6 +137,7 @@ export const DataProvider = ({ children }) => {
       yearOfPassing: "2020",
       degreeURL:
         "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
+      isActive: true,
     },
     {
       Name: "Anjali Mehta",
@@ -148,6 +149,7 @@ export const DataProvider = ({ children }) => {
       country: "India",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d",
+      isActive: false,
     },
     {
       Name: "Rohan Sharma",
@@ -160,6 +162,7 @@ export const DataProvider = ({ children }) => {
       yearOfPassing: "2020",
       degreeURL:
         "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png",
+      isActive: true,
     },
     {
       Name: "Sneha Verma",
@@ -171,6 +174,7 @@ export const DataProvider = ({ children }) => {
       country: "India",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      isActive: false,
     },
     {
       Name: "Aditya Joshi",
@@ -182,6 +186,7 @@ export const DataProvider = ({ children }) => {
       country: "Bhutan",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      isActive: true,
     },
     {
       Name: "Neha Kapoor",
@@ -193,6 +198,7 @@ export const DataProvider = ({ children }) => {
       country: "India",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
+      isActive: false,
     },
     {
       Name: "Arjun Singh",
@@ -205,6 +211,7 @@ export const DataProvider = ({ children }) => {
       yearOfPassing: "2020",
       degreeURL:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fronalpstock_big.jpg/800px-Fronalpstock_big.jpg",
+      isActive: true,
     },
     {
       Name: "Isha Chauhan",
@@ -216,6 +223,7 @@ export const DataProvider = ({ children }) => {
       country: "Bangladesh",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+      isActive: false,
     },
     {
       Name: "Manav Desai",
@@ -227,6 +235,7 @@ export const DataProvider = ({ children }) => {
       country: "India",
       yearOfPassing: "2020",
       degreeURL: "https://images.unsplash.com/photo-1549921296-3a6b5d250c18",
+      isActive: true,
     },
     {
       Name: "Kritika Sinha",
@@ -239,6 +248,7 @@ export const DataProvider = ({ children }) => {
       yearOfPassing: "2020",
       degreeURL:
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Golde33443.jpg/800px-Golde33443.jpg",
+      isActive: false,
     },
   ]);
 

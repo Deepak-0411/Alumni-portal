@@ -2,19 +2,20 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 1rem 0 1rem 1rem;
   border-radius: 8px;
-  padding: 1rem 0rem 1rem 1rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  background: white;
 }
+
 .tableBox {
   flex-grow: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
   width: 100%;
-  background: white;
-  /* padding-right: .5rem; */
   position: relative;
 }
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -23,37 +24,36 @@
 .table th,
 .table td {
   padding: 0.9rem;
-  border-bottom: 0.1rem solid #ddd;
+  border-bottom: 1px solid #ddd;
   text-align: left;
-  width: auto;
 }
-.table tr{
+
+.tableHead {
+  background: #9a93e9;
+  color: #fff;
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tableHead th:first-child {
+  border-top-left-radius: 0.8rem;
+}
+
+.tableHead th:last-child {
+  border-top-right-radius: 0.8rem;
+}
+
+.tableBody tr:hover {
+  background-color: #f6f6f6;
   cursor: pointer;
 }
 
-.table tr:hover {
-  background-color: #f6f6f6;
-}
-.tableHead {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-}
-
-.tableHeading {
-  background: #9a93e9;
-  color: #fff;
-  font-family: Roboto;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: default;
-}
-
-.tableHeading:first-child {
-  border-top-left-radius: 0.8rem;
-}
-.tableHeading:last-child {
-  border-top-right-radius: 0.8rem;
+.noClick {
+ cursor: default;
 }
 
 .noData {

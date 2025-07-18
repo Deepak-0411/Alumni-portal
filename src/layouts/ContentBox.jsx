@@ -6,6 +6,7 @@ import useDebouncedValue from "../hooks/Debounce";
 import apiRequest from "../utility/apiRequest";
 import Overlay from "../components/Overlay/Overlay";
 import Create from "../components/Create/Create";
+import { toast } from "react-toastify";
 
 const ContentBox = ({
   isSuperadmin = true,
@@ -52,6 +53,10 @@ const ContentBox = ({
     }
   }, []);
 
+  const handleToggleBtn = (user) => {
+    console.log(user);
+  };
+
   const filteredData = Array.isArray(dataList)
     ? dataList.filter((item) => {
         const name = item[nameKey]?.toLowerCase() || "";
@@ -65,10 +70,12 @@ const ContentBox = ({
 
   return (
     <div className={styles.container}>
-
       {isCreating && (
-        <Overlay onClose={()=>setIsCreating(false)}>
-          <Create dataToSend={formFields} apiEndPointSingle={apiEndPointCreate}/>
+        <Overlay onClose={() => setIsCreating(false)}>
+          <Create
+            dataToSend={formFields}
+            apiEndPointSingle={apiEndPointCreate}
+          />
         </Overlay>
       )}
 
@@ -85,7 +92,12 @@ const ContentBox = ({
           />
           {createBtnOpen && (
             <div>
-              <button className={styles.createBtn} onClick={()=>setIsCreating(true)}>+ {addText}</button>
+              <button
+                className={styles.createBtn}
+                onClick={() => setIsCreating(true)}
+              >
+                + {addText}
+              </button>
             </div>
           )}
         </div>
@@ -95,8 +107,10 @@ const ContentBox = ({
         tableHeadings={tableHeading}
         filteredData={filteredData}
         idKey={idKey}
+        handleToggleBtn={handleToggleBtn}
         tableColumn={tableColumn}
         dataOverlayContent={dataOverlayContent}
+        showToggleBtn={isSuperadmin}
       />
     </div>
   );
