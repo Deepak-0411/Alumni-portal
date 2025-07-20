@@ -1,0 +1,40 @@
+.modal {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  min-width: 300px;
+  text-align: center;
+}
+.text {
+  font-family: "Roboto";
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.buttons {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+button.confirm {
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: #f44336;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+}
+
+button.cancel {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(23, 23, 23);
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  border: 1.5px solid black;
+  cursor: pointer;
+}

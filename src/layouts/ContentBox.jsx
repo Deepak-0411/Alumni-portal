@@ -7,10 +7,11 @@ import apiRequest from "../utility/apiRequest";
 import Overlay from "../components/Overlay/Overlay";
 import Create from "../components/Create/Create";
 import { toast } from "react-toastify";
+import ConfirmationBox from "../components/ConfirmationBox/ConfirmationBox";
 
 const ContentBox = ({
   isSuperadmin = true,
-  showToggleBtn=false,
+  showToggleBtn = false,
   createBtnOpen = true,
   title,
   apiGet,
@@ -29,6 +30,9 @@ const ContentBox = ({
 }) => {
   const [searchTerm, setSearchTearm] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [userId, setUserId] = useState(false);
+  const [msgText, setMsgText] = useState("");
 
   const debouncedSearchTerm = useDebouncedValue(searchTerm, 300);
 
@@ -54,10 +58,8 @@ const ContentBox = ({
     }
   }, []);
 
-  const handleToggleBtn = (userId) => {
+  const confirmDelete = () => {
     if (!Array.isArray(dataList)) return;
-    console.log(userId);
-
     const exists = dataList.some((user) => user[idKey] === userId);
     if (!exists) {
       toast.error("User not found.");
@@ -69,6 +71,18 @@ const ContentBox = ({
     );
 
     setDataList(updated);
+    setShowConfirm(false);
+  };
+
+  const cancelDelete = () => {
+    setShowConfirm(false);
+    setUserId(null);
+  };
+
+  const handleToggleBtn = (user) => {
+    setShowConfirm(true);
+    setUserId(user[idKey]);
+    setMsgText(user.isActive ? "Disable" : "Enable");
   };
 
   const filteredData = Array.isArray(dataList)
@@ -95,6 +109,17 @@ const ContentBox = ({
           <Create
             dataToSend={formFields}
             apiEndPointSingle={apiEndPointCreate}
+          />
+        </Overlay>
+      )}
+
+      {showConfirm && (
+        <Overlay onClose={cancelDelete}>
+          <ConfirmationBox
+            message={`Do you really want to ${msgText.toLowerCase()} user ${userId} ?`}
+            onConfirm={confirmDelete}
+            onCancel={cancelDelete}
+            action={msgText}
           />
         </Overlay>
       )}

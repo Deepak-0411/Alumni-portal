@@ -57,10 +57,7 @@ const Table = ({
             value={item.isActive}
             addonClassName={item["rollNo"]}
             id={item["rollNo"]}
-            onChange={() => {
-              console.log(idKey,item["rollNo"]);
-              handleToggleBtn(item[idKey]);
-            }}
+            onChange={() => handleToggleBtn(item)}
           />
         </td>
       )}
