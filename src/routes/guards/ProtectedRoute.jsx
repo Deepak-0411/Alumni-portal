@@ -1,12 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "./AuthContext";
 import { useEffect, useState, useMemo } from "react";
 import Logo from "../../../public/FAVICON.png";
 import styles from "../../styles/modules/ProtectedRoute.module.css";
 import { toast } from "react-toastify";
 
 const ProtectedRoute = ({ element, user }) => {
-  const { token } = useAuth();
   const [isAuthorized, setIsAuthorized] = useState(null);
   let defaultRoot = "";
   let url = "";
@@ -22,14 +20,12 @@ const ProtectedRoute = ({ element, user }) => {
     url = "";
   }
   
-  const authToken = useMemo(() => token, [token]);
 
   useEffect(() => {
     const checkAuth = async () => {
       const response = await apiRequest({
         url: url,
         method: "GET",
-        token: token,
       });
 
       if (response.status === "success") {

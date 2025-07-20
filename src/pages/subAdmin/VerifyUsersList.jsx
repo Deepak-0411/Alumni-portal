@@ -19,7 +19,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     isSuperadmin: false,
     createBtnOpen: false,
     title: isForActiveUsers ? "Active Users" : "Verify Users",
-    apiGet: ``,
+    apiGet: `/api/approval/pending-users`,
     apiDelete: ``,
     apiEndPointCreate: ``,
     searchBoxPlaceholder: "Search by name or roll no.",
@@ -39,7 +39,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
       "Roll no.",
       "Year of Passing",
     ],
-    tableColumn: ["Name", "fathersName", "school", "rollNo", "yearOfPassing"],
+    tableColumn: ["alumniName", "fatherName", "schoolName", "rollNo", "yearOfPassing"],
     dataList,
     setDataList,
     dataOverlayContent: ({ index, onClose, data }) => {

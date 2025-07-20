@@ -1,35 +1,39 @@
-const baseURl="https://gbu-alumniserver.vercel.app";
+const baseURl = "https://gbu-alumniserver.vercel.app";
 // const baseURl = "/api";
 
-const  apiRequest = async ({
+const apiRequest = async ({
   url,
   method = "GET",
   body = null,
-  token = true,
   headers = {},
-  setLoading=()=>{}
+  setLoading = () => {},
 }) => {
   try {
     setLoading(true);
     const options = {
-      method ,
+      method,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         ...headers,
       },
     };
 
-    if (token) {
-      options.headers["Authorization"] = `Bearer ${token}`;
-    }
-
     if (body) {
       options.body = JSON.stringify(body);
     }
-
-    const response = await fetch(baseURl+url, options);
     
-    const data = await response.json();
+    const response = await fetch(baseURl + url, options);
+    const rawText = await response.text();
+
+    let data;
+    try {
+      data = rawText ? JSON.parse(rawText) : {};
+    } catch {
+      data = { message: rawText }; // fallback if not valid JSON
+    }
+    console.log(data);
+    
 
     if (!response.ok) {
       return {
@@ -50,7 +54,7 @@ const  apiRequest = async ({
       message: error.message || "Unknown error occurred",
       data: null,
     };
-  } finally{
+  } finally {
     setLoading(false);
   }
 };

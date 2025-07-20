@@ -18,10 +18,11 @@ import Events from "../pages/user/Events";
 import MembershipCard from "../pages/user/MembershipCard";
 
 //Sub Admin Pages
-import AdminLogin from "../auth/AdminLogin";
+import SubAdminLogin from "../auth/SubAdminLogin";
 import VerifyUsersList from "../pages/subAdmin/VerifyUsersList";
 
 // Admin Pages
+import AdminLogin from "../auth/AdminLogin";
 import Alumni from "../pages/admin/Alumni";
 import Finance from "../pages/admin/Finance";
 import School from "../pages/admin/School";
@@ -61,7 +62,7 @@ const AppRoutes = () => {
       </Route>
 
       {/* Sub Admin Routes (Protected and Role-Restricted) */}
-      <Route path="/alumni/sub-admin/login" element={<AdminLogin />} />
+      <Route path="/alumni/sub-admin/login" element={<SubAdminLogin />} />
       <Route
         path="/alumni/sub-admin/"
         element={<AdminLayout role={"subAdmin"} />}
@@ -75,6 +76,7 @@ const AppRoutes = () => {
       </Route>
 
       {/* Admin Routes (Protected and Role-Restricted) */}
+      <Route path="/alumni/superAdmin/login" element={<AdminLogin />} />
       <Route
         path="/alumni/superAdmin/"
         element={<AdminLayout role={"admin"} />}

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
 import styles from "./Create.module.css";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest";
@@ -13,7 +12,6 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
     )
   );
 
-  const { token } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +28,6 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
       url: apiEndPointSingle,
       method: "POST",
       body: data,
-      token: token,
       setLoading: setIsUploading,
     });
 

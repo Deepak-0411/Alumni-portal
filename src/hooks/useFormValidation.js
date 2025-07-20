@@ -19,17 +19,17 @@ export const useFormValidation = (fieldsToValidate = []) => {
     }
 
     if (
-      shouldValidate("Name") &&
-      (!formData.Name || !nameRegex.test(formData.Name.trim()))
+      shouldValidate("alumniName") &&
+      (!formData.alumniName || !nameRegex.test(formData.alumniName.trim()))
     ) {
-      errors.Name = "Please enter a valid name.";
+      errors.alumniName = "Please enter a valid name.";
     }
 
     if (
-      shouldValidate("fathersname") &&
-      (!formData.fathersname || !nameRegex.test(formData.fathersname.trim()))
+      shouldValidate("fathername") &&
+      (!formData.fathername || !nameRegex.test(formData.fathername.trim()))
     ) {
-      errors.fathersname = "Please enter a valid father's name.";
+      errors.fathername = "Please enter a valid father's name.";
     }
 
     const enrollmentNum = Number(formData.enrollmentNo);
@@ -102,10 +102,10 @@ export const useFormValidation = (fieldsToValidate = []) => {
     }
 
     if (
-      shouldValidate("degree_picture") &&
-      (!formData.degree_picture || !(formData.degree_picture instanceof File))
+      shouldValidate("imgOfDegree") &&
+      (!formData.imgOfDegree || !(formData.imgOfDegree instanceof File))
     ) {
-      errors.degree_picture = "Please upload a degree certificate image.";
+      errors.imgOfDegree = "Please upload a degree certificate image.";
     }
 
     // Display errors via toast

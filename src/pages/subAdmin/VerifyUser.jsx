@@ -13,15 +13,15 @@ import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
-  { label: "Name", value: user.Name || "-" },
-  { label: "Father's Name", value: user.fathersName || "-" },
+  { label: "Name", value: user.alumniName || "-" },
+  { label: "Father's Name", value: user.fatherName || "-" },
 ];
 
 const getCollegeDetails = (user) => [
   { label: "Enrollment Number", value: user.enrollmentNo || "-" },
   { label: "Roll Number", value: user.rollNo || "-" },
   { label: "Year Of Passing", value: user.yearOfPassing || "-" },
-  { label: "School", value: user.school || "-" },
+  { label: "School", value: user.schoolName || "-" },
   { label: "Programme", value: user.programme || "-" },
   { label: "Country", value: user.country || "-" },
 ];
@@ -43,7 +43,7 @@ const VerifyUsersList = ({
     () => filteredData[index] || null,
     [filteredData, index]
   );
-  const imageURL = currentUser?.degreeURL || fallbackImage;
+  const imageURL = currentUser?.imgOfDegree || fallbackImage;
 
   const userDetails = useMemo(
     () => getUserDetails(currentUser || {}),

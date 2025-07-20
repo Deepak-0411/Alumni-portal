@@ -4,38 +4,62 @@ import LOGO from "../assets/GBULOGO.png";
 import Input from "../components/Input/Input";
 import LoadingScrn from "../components/Spinner/Loading";
 import styles from "../styles/modules/auth/Login.module.css";
-import apiRequest  from "../utility/apiRequest";
+import apiRequest from "../utility/apiRequest";
 import { toast } from "react-toastify";
-import { useAuth } from "../context/AuthContext";
 
-const Login = ({ foradmin = false }) => {
+const Login = ({ user = "user" }) => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const {login}=useAuth();
+
+  let URL;
+  let reqForward;
+  let title;
+  let inputType;
+  let inputLabel;
+
+  switch (user) {
+    case "superAdmin":
+      URL = ``;
+      reqForward = `/alumni/superAdmin/`;
+      title = "Admin Login";
+      inputType = "text";
+      inputLabel = "User-Id";
+      break;
+    case "subAdmin":
+      URL = `/api/subadmin/login`;
+      reqForward = `/alumni/sub-admin/verify-users`;
+      title = "Sub Admin Login";
+      inputType = "text";
+      inputLabel = "User-Id";
+      break;
+    case "user":
+      URL = `/api/alumni/login`;
+      reqForward = `/alumni/user/membershipCard`;
+      title = "Alumni Login";
+      inputType = "email";
+      inputLabel = "E-mail";
+      break;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!(userId && password)) return;
 
     const response = await apiRequest({
-      url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
+      url: URL,
       method: "POST",
-      body: { "username" : userId, credential: password },
-      token: false,
+      body: { username: userId, credential: password },
       setLoading,
     });
 
-
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
-      login(response.data.token);      
-      foradmin
-        ? navigate("/alumni/sub-admin/verify-users-list")
-        : navigate("/alumni/user/membershipCard");
+
+      navigate(reqForward);
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
@@ -46,13 +70,13 @@ const Login = ({ foradmin = false }) => {
     <div className={styles.container}>
       <div className={styles.header}>
         <img className={styles.logo} src={LOGO} alt="logo" />
-        <h2 className={styles.title}>{foradmin?"Sub Admin Login":"Alumni Login"}</h2>
+        <h2 className={styles.title}>{title}</h2>
       </div>
       <form className={styles.form} onSubmit={(e) => handleLogin(e)}>
         <Input
-          type={foradmin ? "text" :"email"}
+          type={inputType}
           name={"userId"}
-          label={foradmin ? "User-Id" :"E-mail"}
+          label={inputLabel}
           required={true}
           value={userId}
           onChange={(e) => setUserId(e.target.value)}
@@ -85,7 +109,7 @@ const Login = ({ foradmin = false }) => {
           {loading ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
         </button>
       </form>
-      {!foradmin && (
+      {user === "user" && (
         <div className={styles.btns}>
           <button
             className={styles.btn}

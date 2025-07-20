@@ -2,14 +2,14 @@ import Header from "../components/Header/Header";
 import styles from "../styles/modules/layout/Layout.module.css";
 import Login from "./Login";
 
-const AdminLogin = () => {
+const SubAdminLogin = () => {
   return (
     <div className={styles.container}>
       <Header buttons={false} />
       <div className={styles.outlet}>
-        <Login user={"superAdmin"} />
+        <Login user={"subAdmin"} />
       </div>
     </div>
   );
 };
-export default AdminLogin;
+export default SubAdminLogin;

@@ -8,6 +8,7 @@ import Overlay from "../components/Overlay/Overlay";
 import Create from "../components/Create/Create";
 import { toast } from "react-toastify";
 import ConfirmationBox from "../components/ConfirmationBox/ConfirmationBox";
+import Loading from "../components/Spinner/Loading";
 
 const ContentBox = ({
   isSuperadmin = true,
@@ -15,7 +16,7 @@ const ContentBox = ({
   createBtnOpen = true,
   title,
   apiGet,
-  apiDelete,
+  apiToggle,
   apiEndPointCreate,
   searchBoxPlaceholder,
   idKey,
@@ -29,6 +30,7 @@ const ContentBox = ({
   dataOverlayContent,
 }) => {
   const [searchTerm, setSearchTearm] = useState("");
+  const [loading, setLoading] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [userId, setUserId] = useState(false);
@@ -40,12 +42,13 @@ const ContentBox = ({
     const response = await apiRequest({
       url: apiGet,
       method: "GET",
-      token: token,
       setLoading,
     });
 
     if (response.status === "success") {
-      setDataList(response.data.entries);
+      if (response?.data) {
+        setDataList(response.data);
+      }
     } else {
       console.error("Error:", response.message);
       toast.error(`Error: Failed to fetch data.`);
@@ -54,7 +57,7 @@ const ContentBox = ({
 
   useEffect(() => {
     if (!Array.isArray(dataList) || dataList.length === 0) {
-      // fetchData();
+      fetchData();
     }
   }, []);
 
@@ -148,15 +151,21 @@ const ContentBox = ({
         </div>
       </div>
 
-      <Table
-        tableHeadings={tableHeading}
-        filteredData={sortedData}
-        idKey={idKey}
-        handleToggleBtn={handleToggleBtn}
-        tableColumn={tableColumn}
-        dataOverlayContent={dataOverlayContent}
-        showToggleBtn={showToggleBtn}
-      />
+      {loading ? (
+        <div className="w-full h-full">
+          <Loading />
+        </div>
+      ) : (
+        <Table
+          tableHeadings={tableHeading}
+          filteredData={sortedData}
+          idKey={idKey}
+          handleToggleBtn={handleToggleBtn}
+          tableColumn={tableColumn}
+          dataOverlayContent={dataOverlayContent}
+          showToggleBtn={showToggleBtn}
+        />
+      )}
     </div>
   );
 };

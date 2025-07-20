@@ -12,15 +12,15 @@ const Register = () => {
     title: "",
     enrollmentNo: "",
     rollNo: "",
-    Name: "",
-    fathersName: "",
+    alumniName: "",
+    fatherName: "",
     dob: "",
     yearOfPassing: "",
     phoneNo: "",
     email: "",
     school: "",
     programme: "",
-    degree_picture: "",
+    imgOfDegree: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -71,7 +71,6 @@ const Register = () => {
       url: "/api/alumni/register",
       method: "POST",
       body: formData,
-      token: false,
       setLoading,
     });
 

@@ -28,13 +28,11 @@ const CheckStatus = ({ forgetPassword = false }) => {
       url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
       method: "POST",
       body: { [foradmin ? "username" : "email"]: userId, password: password },
-      token: false,
       setLoading,
     });
 
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
-      login(response.data.token);
       foradmin
         ? navigate("/alumni/sub-admin/verify-users-list")
         : navigate("/alumni/user/membershipCard");
