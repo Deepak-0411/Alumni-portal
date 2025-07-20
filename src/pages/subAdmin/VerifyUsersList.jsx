@@ -43,7 +43,6 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     dataList,
     setDataList,
     dataOverlayContent: ({ index, onClose, data }) => {
-      console.log("data",data);
       return(
       <VerifyUser
         filteredData={data}

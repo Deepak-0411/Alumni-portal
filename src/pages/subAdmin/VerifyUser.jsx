@@ -8,7 +8,8 @@ import { getNextIndex } from "../../utility/navigateIndex";
 import Loading from "../../components/Spinner/Loading";
 import fallbackImage from "../../assets/imgNotFound.jpg";
 import useIndexNavigation from "../../hooks/useIndexNavigation.js";
-import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
+import { removeFromStateByKey } from "../../utility/removeFromStateByKey";
+import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -26,21 +27,22 @@ const getCollegeDetails = (user) => [
 ];
 
 const VerifyUsersList = ({
-  currentIndex=0,
-  filteredData=[],
+  currentIndex = 0,
+  filteredData = [],
   setUsersList,
   onClose,
 }) => {
   const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [showRejectOverlay, setShowRejectOverlay] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState("");
   const [loading, setLoading] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);  
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const currentUser = useMemo(
     () => filteredData[index] || null,
     [filteredData, index]
   );
-
   const imageURL = currentUser?.degreeURL || fallbackImage;
 
   const userDetails = useMemo(
@@ -52,75 +54,69 @@ const VerifyUsersList = ({
     [currentUser]
   );
 
-  useEffect(() => {
-    setImageLoaded(false);
-  }, [imageURL]);
+  useEffect(() => setImageLoaded(false), [imageURL]);
 
   useEffect(() => {
-    if (filteredData.length === 0) {
-      onClose();
-    }
+    if (filteredData.length === 0) onClose();
   }, [filteredData, onClose]);
 
   useIndexNavigation({
-    handleIndexChange: handleIndexChange,
-    disabled: showOverlay,
+    handleIndexChange,
+    disabled: showOverlay || loading,
   });
-
-  const handleImageClick = () => setShowOverlay(true);
-  const handleCloseOverlay = () => setShowOverlay(false);
 
   function handleIndexChange(direction) {
     const newIndex = getNextIndex(index, filteredData.length, direction);
     setIndex(newIndex);
   }
 
+  const handleImageClick = () => setShowOverlay(true);
+  const handleCloseOverlay = () => setShowOverlay(false);
+
   const verifyUser = async (type) => {
-    if (!currentUser) return;
+    if (!currentUser?.enrollmentNo)
+      return toast.error("Missing enrollment number.");
+
     const enrollmentNo = currentUser.enrollmentNo;
-
-    // just checking the functionality
-
+    setShowRejectOverlay(false);
     setLoading(true);
 
-    // Simulate delay
+    // ---- Simulate Request ----
     setTimeout(() => {
       setLoading(false);
-       removeFromStateByKey([setUsersList],"enrollmentNo",enrollmentNo);
-       console.log("enrollmentNo",enrollmentNo);
-       
-      setIndex((prevIndex) => Math.max(0, prevIndex - 1));
-
+      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+      setIndex((prev) => Math.max(0, prev - 1));
       toast.success(`Marked as ${type}`);
+      setRejectionReason(""); // clear reason after use
     }, 500);
 
-    // actual code
+    // ---- Real API Request (uncomment for production) ----
+    /*
+  const requestConfig = {
+    accept: {
+      method: "POST",
+      url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
+    },
+    reject: {
+      method: "DELETE",
+      url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}&reason=${encodeURIComponent(rejectionReason)}`,
+    },
+  };
 
-    // if (!enrollmentNo) return toast.error("Missing enrollment number.");
+  const { method, url } = requestConfig[type];
 
-    // const requestConfig = {
-    //   accept: {
-    //     method: "POST",
-    //     url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
-    //   },
-    //   reject: {
-    //     method: "DELETE",
-    //     url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}`,
-    //   },
-    // };
+  const response = await apiRequest({ method, url, setLoading });
 
-    // const { method, url } = requestConfig[type] || {};
+  if (response.status === "success") {
+    toast.success(`Marked as ${type}`);
+    removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+    setIndex((prev) => Math.max(0, prev - 1));
+  } else {
+    toast.error(`Error: ${response.message}`);
+  }
 
-    // const response = await apiRequest({ url, method, setLoading });
-
-    // if (response.status === "success") {
-    //   toast.success(`Marked as ${type}`);
-    //   removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
-    //   setIndex((prevIndex) => Math.max(0, prevIndex - 1));
-    // } else {
-    //   console.error("Error:", response.message);
-    //   toast.error(`Error: ${response.message}`);
-    // }
+  setRejectionReason("");
+  */
   };
 
   return (
@@ -134,13 +130,13 @@ const VerifyUsersList = ({
             onLoad={() => setImageLoaded(true)}
             onClick={handleImageClick}
           />
-          {/* Loader overlay */}
           {!imageLoaded && (
             <div className={styles.imageLoaderOverlay}>
               <Loading />
             </div>
           )}
         </div>
+
         <DataCard dataItems={userDetails} heading="Personal Details" />
         <DataCard dataItems={collegeDetails} heading="College Details" />
       </div>
@@ -149,11 +145,35 @@ const VerifyUsersList = ({
         <Overlay imageUrl={imageURL} onClose={handleCloseOverlay} />
       )}
 
+      {showRejectOverlay && (
+        <Overlay
+          onClose={() => {
+            setShowRejectOverlay(false);
+            setRejectionReason("");
+          }}
+        >
+          <ConfirmationBox
+            message="Please specify a reason to reject."
+            showInput
+            inputPlaceholder="Reason..."
+            inputValue={rejectionReason}
+            setInputValue={setRejectionReason}
+            confirmDisabled={!rejectionReason.trim()}
+            onConfirm={() => verifyUser("reject")}
+            onCancel={() => {
+              setShowRejectOverlay(false);
+              setRejectionReason("");
+            }}
+            action="Reject"
+          />
+        </Overlay>
+      )}
+
       {/* Navigation & Action Buttons */}
       <div className={styles.btnsContainer}>
         <button
           className={styles.backBtn}
-          disabled={index === 0}
+          disabled={index === 0 || loading}
           onClick={() => handleIndexChange(-1)}
         >
           &lt;- Back
@@ -161,7 +181,7 @@ const VerifyUsersList = ({
 
         <button
           className={styles.rejectBtn}
-          onClick={() => verifyUser("reject")}
+          onClick={() => setShowRejectOverlay(true)}
           disabled={loading}
         >
           {loading ? <Loading color="white" size="small" /> : "Reject"}
@@ -177,7 +197,7 @@ const VerifyUsersList = ({
 
         <button
           className={styles.nextBtn}
-          disabled={index >= filteredData.length - 1}
+          disabled={index >= filteredData.length - 1 || loading}
           onClick={() => handleIndexChange(1)}
         >
           Next -&gt;
