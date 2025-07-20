@@ -3,6 +3,7 @@ import DP from "../../assets/user.png";
 import styles from "../../styles/modules/user/Profile.module.css";
 import DataCard from "../../components/DataCard/DataCard";
 import Input from "../../components/Input/Input";
+import { useFormValidation } from "../../hooks/useFormValidation";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -23,9 +24,20 @@ const Profile = () => {
     linkedIn: "",
     gitHub: "",
   });
+  const editableFields = [
+    "phoneNo",
+    "email",
+    "country",
+    "linkedIn",
+    "gitHub",
+    "x",
+    "insta",
+  ];
 
   const [draftData, setDraftData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const { formErrors, setFormErrors, validate } =
+    useFormValidation(editableFields);
 
   const startEdit = () => {
     setDraftData(formData);
@@ -38,8 +50,11 @@ const Profile = () => {
   };
 
   const saveEdit = () => {
+    if (!validate(draftData)) return;
+
     setFormData(draftData);
     setIsEditing(false);
+    setFormErrors({});
   };
 
   const handleChange = (e) => {
@@ -59,6 +74,7 @@ const Profile = () => {
           value={value}
           onChange={handleChange}
           type={type}
+          error={formErrors[name]}
         />
       ) : (
         {

@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import styles from "../styles/modules/auth/Register.module.css";
 import LoadingScrn from "../components/Spinner/Loading";
-import  apiRequest  from "../utility/apiRequest";
-import { validateForm } from "../utility/validateForm";
-import { toast } from 'react-toastify';
-
+import apiRequest from "../utility/apiRequest";
+import { toast } from "react-toastify";
+import { useFormValidation } from "../hooks/useFormValidation";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +24,6 @@ const Register = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
   const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
   const [schoolList, setSchoolList] = useState([
     "School of Engineering",
@@ -36,33 +34,44 @@ const Register = () => {
 
   const navigate = useNavigate();
 
+  const fieldsToValidate = [
+    "title",
+    "enrollmentNo",
+    "rollNo",
+    "Name",
+    "fathersname",
+    "dob",
+    "yearOfPassing",
+    "phoneNo",
+    "email",
+    "school",
+    "programme",
+    "degree_picture",
+  ];
+
+  const { formErrors, setFormErrors, validate } =
+    useFormValidation(fieldsToValidate);
 
   const handleChange = (e) => {
-    //this function will set values in formdata and clears error
     const { name, value, type, files } = e.target;
 
-    if ((name === "enrollmentNo" || name === "phoneNo") && value < 0) return;
+    if ((name === "enrollmentNo" || name === "phoneNo") && +value < 0) return;
 
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: type === "file" ? files[0] : value,
-    });
-
-    // Clear error when user starts correcting the field
-    if (formErrors[name]) {
-      setFormErrors((prev) => ({ ...prev, [name]: "" }));
-    }
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm({formData,setFormErrors})) return;
-    
+    if (!validate(formData)) return;
+
     const response = await apiRequest({
       url: "/api/alumni/register",
       method: "POST",
-      body: formData ,
-      token : false,
+      body: formData,
+      token: false,
       setLoading,
     });
 
@@ -73,14 +82,12 @@ const Register = () => {
       console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
     }
-
-
   };
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Alumni Registration Form</h2>
-      <form className={styles.form} onSubmit={(e)=>(handleSubmit(e))}>
+      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
         <div className={styles.threeTiles}>
           <Input
             type="select"
@@ -216,9 +223,16 @@ const Register = () => {
         </div>
 
         <div className={styles.btnContainer}>
-          <button type="submit" className={styles.submitButton}
-          disabled={loading}>
-            {loading ? <LoadingScrn size={"small"} color={"white"}/> :"Register"}
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={loading}
+          >
+            {loading ? (
+              <LoadingScrn size={"small"} color={"white"} />
+            ) : (
+              "Register"
+            )}
           </button>
         </div>
       </form>
