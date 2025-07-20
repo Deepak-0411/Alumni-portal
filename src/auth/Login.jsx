@@ -23,7 +23,7 @@ const Login = ({ user = "user" }) => {
 
   switch (user) {
     case "superAdmin":
-      URL = ``;
+      URL = `/api/root/login`;
       reqForward = `/alumni/superAdmin/`;
       title = "Admin Login";
       inputType = "text";
