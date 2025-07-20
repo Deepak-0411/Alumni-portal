@@ -18,23 +18,22 @@
   margin-top: 1.5rem;
 }
 
-button.confirm {
+.cancel,
+.confirm {
   font-size: 0.9rem;
   font-weight: 500;
-  background: #f44336;
-  color: white;
   padding: 0.3rem 0.8rem;
   border-radius: 9999px;
-  border: none;
   cursor: pointer;
 }
 
-button.cancel {
-  font-size: 0.9rem;
-  font-weight: 500;
+.confirm {
+  background: #f44336;
+  color: white;
+  border: none;
+}
+
+.cancel {
   color: rgb(23, 23, 23);
-  padding: 0.3rem 0.8rem;
-  border-radius: 9999px;
   border: 1.5px solid black;
-  cursor: pointer;
 }

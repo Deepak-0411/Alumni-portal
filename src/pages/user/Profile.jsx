@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import DP from "../../assets/user.png";
 import styles from "../../styles/modules/user/Profile.module.css";
 import DataCard from "../../components/DataCard/DataCard";
+import Input from "../../components/Input/Input";
 
 const Profile = () => {
   const [formData, setFormData] = useState({
@@ -17,57 +18,130 @@ const Profile = () => {
     programme: "B.Tech",
     country: "",
     dp: "",
+    x: "",
+    insta: "",
+    linkedIn: "",
+    gitHub: "",
   });
 
-  const profileDataItems = [{ label: "Name", value: formData.Name }];
+  const [draftData, setDraftData] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
-  const personalDataItems = [
-    { label: "Date Of Birth", value: formData.dob },
-    { label: "Father's Name", value: formData.Fathername },
-  ];
+  const startEdit = () => {
+    setDraftData(formData);
+    setIsEditing(true);
+  };
 
-  const contactDataItems = [
-    { label: "Phone Number", value: formData.phoneNo },
-    { label: "E-mail", value: formData.email },
-  ];
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setDraftData({});
+  };
 
-  const collegeInfoItems = [
-    { label: "Enrollment Number", value: formData.enrollmentNo },
-    { label: "Roll Number", value: formData.rollNo },
-    { label: "Year Of Passing", value: formData.yearOfPassing },
-    { label: "School", value: formData.school },
-    { label: "Programme", value: formData.programme },
-    { label: "Country", value: formData.country },
-  ];
+  const saveEdit = () => {
+    setFormData(draftData);
+    setIsEditing(false);
+  };
 
-  const socialMediaItems = [
-    { label: "X", value: formData.x },
-    { label: "Insta", value: formData.insta },
-    { label: "LinkedIn", value: formData.linkedIn },
-    { label: "Github", value: formData.gitHub },
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDraftData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const buildItems = (fields) =>
+    fields.map(({ label, name, editable = false, type = "text" }) => {
+      const value = isEditing ? draftData[name] : formData[name];
+
+      return isEditing && editable ? (
+        <Input
+          key={name}
+          label={label}
+          name={name}
+          value={value}
+          onChange={handleChange}
+          type={type}
+        />
+      ) : (
+        {
+          label,
+          value,
+        }
+      );
+    });
+
+  const sections = [
+    {
+      heading: "Profile Data",
+      dataItems: buildItems([{ label: "Name", name: "Name" }]),
+      image: formData.dp || DP,
+    },
+    {
+      heading: "Personal Data",
+      dataItems: buildItems([
+        { label: "Date Of Birth", name: "dob" },
+        { label: "Father's Name", name: "Fathername" },
+      ]),
+    },
+    {
+      heading: "Contact",
+      dataItems: buildItems([
+        { label: "Phone Number", name: "phoneNo", type: "tel", editable: true },
+        { label: "E-mail", name: "email", type: "email", editable: true },
+      ]),
+    },
+    {
+      heading: "College Info",
+      dataItems: buildItems([
+        { label: "Enrollment Number", name: "enrollmentNo" },
+        { label: "Roll Number", name: "rollNo" },
+        { label: "Year Of Passing", name: "yearOfPassing" },
+        { label: "School", name: "school" },
+        { label: "Programme", name: "programme" },
+        { label: "Country", name: "country", editable: true },
+      ]),
+    },
+    {
+      heading: "Social Media",
+      dataItems: buildItems([
+        { label: "X", name: "x", editable: true, type: "url" },
+        { label: "Insta", name: "insta", editable: true, type: "url" },
+        { label: "LinkedIn", name: "linkedIn", type: "url", editable: true },
+        { label: "Github", name: "gitHub", type: "url", editable: true },
+      ]),
+    },
   ];
 
   return (
     <div className={styles.container}>
       <div className={styles.editBtn}>
-        <span>{editBtn}</span>
+        {isEditing ? (
+          <>
+            <button onClick={saveEdit} className={styles.saveBtn}>
+              Save
+            </button>
+            <button onClick={cancelEdit} className={styles.cancelBtn}>
+              Cancel
+            </button>
+          </>
+        ) : (
+          <span onClick={startEdit}>{editBtnSVG}</span>
+        )}
       </div>
 
-      <DataCard
-        heading="Profile Data"
-        image={formData.dp || DP}
-        dataItems={profileDataItems}
-      />
-      <DataCard heading="Personal Data" dataItems={personalDataItems} />
-      <DataCard heading="Contact" dataItems={contactDataItems} />
-      <DataCard heading="College Info" dataItems={collegeInfoItems} />
-      <DataCard heading="Social Media" dataItems={socialMediaItems} />
+      {sections.map((section, idx) => (
+        <DataCard
+          key={idx}
+          heading={section.heading}
+          dataItems={section.dataItems}
+          image={section.image}
+        />
+      ))}
     </div>
   );
 };
+
 export default Profile;
 
-const editBtn = (
+const editBtnSVG = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="26"

@@ -9,12 +9,19 @@ const DataCard = ({ heading, dataItems, image }) => {
           <h2 className={styles.heading}>{heading}</h2>
         </div>
       )}
+
       <div className={image ? styles.pbox : styles.box}>
         {image && <img className={styles.dp} src={image} alt="Profile Pic" />}
         {dataItems.map((item, index) => (
           <div className={styles.subBox} key={index}>
-            <p className={styles.title}>{item.label}</p>
-            <p className={styles.data}>{item.value || "-"}</p>
+            {React.isValidElement(item) ? (
+              item
+            ) : (
+              <>
+                <p className={styles.title}>{item.label}</p>
+                <p className={styles.data}>{item.value || "-"}</p>
+              </>
+            )}
           </div>
         ))}
       </div>

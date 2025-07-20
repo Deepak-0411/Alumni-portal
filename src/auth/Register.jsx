@@ -149,7 +149,7 @@ const Register = () => {
 
         <div className={styles.twoTiles}>
           <Input
-            type="number"
+            type="tel"
             name="phoneNo"
             label="Phone Number"
             required

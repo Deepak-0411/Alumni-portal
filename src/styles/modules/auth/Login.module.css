@@ -52,7 +52,7 @@
   font-size: clamp(0.75rem, 1.6vw, 1rem);
   font-weight: 500;
   padding: 0.625rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   border: none;
   cursor: pointer;
 }

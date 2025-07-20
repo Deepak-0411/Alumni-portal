@@ -11,10 +11,9 @@
 .input option,
 .required span::after {
   width: 100%;
-  font-size: 1rem;
-  color: #000;
+  font-size: .95rem;
+  color: #111827;
   font-family: Inter;
-  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -28,11 +27,12 @@
 }
 
 .input {
-  padding: 0.7rem;
+  padding: 0.625rem;
   border: 1.6px solid #aaaaaa;
-  border-radius: 0.35rem;
+  border-radius: 0.52rem;
   outline: none;
   transition: border-color 0.3s;
+  background-color: #f9fafb;
 }
 .input::placeholder {
   color: #a6a6a6;
