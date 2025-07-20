@@ -1,26 +1,24 @@
 @import "tailwindcss";
 
-
 :root {
   font-family: "Roboto", "Poppins";
 }
 
-
 body {
   width: 100%;
-  max-width: 100dvw;     /* Prevent body from stretching wider */
+  max-width: 100dvw; /* Prevent body from stretching wider */
   height: 100dvh;
-  overflow-x: hidden;   /* Extra safety for horizontal overflow */
+  overflow-x: hidden; /* Extra safety for horizontal overflow */
 }
-#root{
+#root {
   width: 100%;
   height: 100%;
 }
 .Toastify__toast {
-  max-width: 90vw; /* Prevent overflow */
+  max-width: 90vw;
   margin: 1rem;
+  border-radius: 0.5rem !important;
 }
-button:disabled{
+button:disabled {
   cursor: not-allowed;
 }
-

@@ -72,6 +72,20 @@ export const useFormValidation = (fieldsToValidate = []) => {
     }
 
     if (
+      shouldValidate("x") &&
+      formData.x &&
+      !urlRegex.test(formData.x.trim())
+    ) {
+      errors.x = "Please enter a valid X URL.";
+    }
+    if (
+      shouldValidate("insta") &&
+      formData.insta &&
+      !urlRegex.test(formData.insta.trim())
+    ) {
+      errors.insta = "Please enter a valid Insta URL.";
+    }
+    if (
       shouldValidate("linkedIn") &&
       formData.linkedIn &&
       !urlRegex.test(formData.linkedIn.trim())
