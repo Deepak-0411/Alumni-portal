@@ -32,7 +32,7 @@ const apiRequest = async ({
     } catch {
       data = { message: rawText }; // fallback if not valid JSON
     }
-    console.log(data);
+    // console.log(data);
     
 
     if (!response.ok) {
