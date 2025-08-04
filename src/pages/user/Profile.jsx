@@ -47,6 +47,7 @@ const Profile = () => {
   const cancelEdit = () => {
     setIsEditing(false);
     setDraftData({});
+    setFormErrors({});
   };
 
   const saveEdit = () => {

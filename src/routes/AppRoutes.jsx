@@ -45,7 +45,7 @@ const AppRoutes = () => {
         <Route path="login" element={<Login />} />
         <Route
           path="forgetPassword"
-          element={<CheckStatus forgetPassword={true} />}
+          element={<h1>Comming Soon</h1>}
         />
         <Route path="register" element={<Register />} />
         <Route path="checkStatus" element={<CheckStatus />} />

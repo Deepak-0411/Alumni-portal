@@ -6,12 +6,11 @@
   gap: 1.25rem;
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   height: 20rem;
 }
 .heading,
-.data,
-.error {
+.data {
   color: #000000;
   font-family: "Roboto";
   font-size: 1.75rem;
@@ -24,25 +23,26 @@
 }
 .data {
   color: #a6a6a6;
+  font-size: 1.5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 .verified {
   color: #00a100;
+  font-size: 1.75rem;
+  margin-top: 1.8rem;
 }
-.error {
-  color: #ff3232;
-}
+
 .btn {
   background: #5a6dff;
   color: #ffffff;
   font-family: Inter;
   font-size: clamp(0.75rem, 1.6vw, 1rem);
   font-weight: 500;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 10rem;
   border: none;
   cursor: pointer;
 }

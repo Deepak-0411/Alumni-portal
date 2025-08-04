@@ -23,7 +23,8 @@
   aspect-ratio: 1/1;
 }
 .title {
-  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  font-size: clamp(1.2rem, 2vw, 1.9rem);
+  font-weight: 600;
 }
 .form {
   width: 100%;

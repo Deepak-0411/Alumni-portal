@@ -6,46 +6,19 @@ import Loading from "../../components/Spinner/Loading";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest";
 
-const CheckStatus = ({ forgetPassword = false }) => {
-  const location = useLocation();
+const CheckStatus = () => {
   const [verified, setVerified] = useState(null);
   const [paid, setPaid] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (location.state?.email) {
-      setEmail(location.state.email);
-      handleSearch(location.state.email);
-    }
-  }, [location.state]);
 
-  const handleSearch = async (e, emailToSearch = email) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
     if (!email) return;
 
-    const response = await apiRequest({
-      url: foradmin ? "/api/subadmin/login" : "/api/alumni/login",
-      method: "POST",
-      body: { [foradmin ? "username" : "email"]: userId, password: password },
-      setLoading,
-    });
-
-    if (response.status === "success") {
-      toast.success("LoggedIn Sucessfully!!! ");
-      foradmin
-        ? navigate("/alumni/sub-admin/verify-users-list")
-        : navigate("/alumni/user/membershipCard");
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Error: ${response.message}`);
-    }
   };
 
-  const forgetPass = (e) => {
-    e.preventDefault();
-    console.log("Get Clicked");
-  };
   const handlePayClick = () => {
     console.log("Pay Clicked");
   };
@@ -53,7 +26,7 @@ const CheckStatus = ({ forgetPassword = false }) => {
   return (
     <div className={styles.container}>
       <p className={styles.heading}>
-        {forgetPassword ? "Forget password" : "Check Account Status"}
+        Check Account Status
       </p>
       <form onSubmit={(e) => handleSearch(e)}>
         <div className={styles.searchBar}>
@@ -62,7 +35,7 @@ const CheckStatus = ({ forgetPassword = false }) => {
             name={"email"}
             placeHolder={"E-mail"}
             required={true}
-            value={email || ""}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <button className={styles.btn} type="submit" disabled={!email}>
@@ -76,19 +49,14 @@ const CheckStatus = ({ forgetPassword = false }) => {
       ) : verified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
-          {paid && (
-            <button className={styles.btn} onClick={forgetPass}>
-              Get Password on Mail
-            </button>
-          )}
-          {!paid && (
+          {paid===false && (
             <button className={styles.btn} onClick={handlePayClick}>
               Proceed to Pay
             </button>
           )}
         </div>
       ) : (
-        verified != null && (
+        verified===false && (
           <div className={styles.data}>
             <p> We'll let you know as soon as your verification is complete.</p>
           </div>

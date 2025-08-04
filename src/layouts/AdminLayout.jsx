@@ -6,17 +6,21 @@ import Navbar from "../components/Navbar/Navbar";
 import UserInfo from "../components/UserInfo";
 import AdminNavbar from "../components/AdminNavbar";
 
-const AdminLayout = ({role}) => {
+const AdminLayout = ({ role }) => {
   const location = useLocation();
-
 
   return (
     <div className={styles.container}>
-      <Header buttons={false} additionalComponent={<UserInfo/>} isAdmin={true} />
+      <Header
+        buttons={false}
+        additionalComponent={<UserInfo />}
+        isAdmin={true}
+      />
       <main className={styles.outlet2}>
-       <AdminNavbar forPage={role}/>
+        <AdminNavbar forPage={role} />
         <Outlet />
       </main>
+      <Footer onlyDevTeamFooter={true} />
     </div>
   );
 };

@@ -27,10 +27,9 @@
   display: flex;
   flex-wrap: wrap;
   align-content: center;
-  border-left: .25rem solid #db3539;
-  padding-left: .5rem;
+  border-left: 0.25rem solid #db3539;
+  padding-left: 0.5rem;
 }
-
 
 .logo {
   height: clamp(5.5rem, 9vw, 6.5625rem);
@@ -51,23 +50,26 @@
 }
 
 /* ===== COPYRIGHT ===== */
-.copyRight {
+.copyRightDiv,
+.devTeamDiv {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(0.75rem, 2vw, 1.25rem);
   text-align: center;
+  padding-top: 0.2rem;
 }
 
-.copyRightText {
+.copyRightText,
+.devTeam {
   color: #fff;
   font-size: clamp(0.75rem, 2vw, 1rem);
   font-weight: 400;
-  letter-spacing: -0.04rem;
 }
-.copyRightText span{
+.copyRightText span {
   color: gray;
   font-weight: bolder;
 }
-
-
+.devName {
+  color: #5c94f2;
+  cursor: pointer;
+}
