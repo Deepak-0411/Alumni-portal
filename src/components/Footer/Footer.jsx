@@ -1,10 +1,13 @@
 import styles from "./Footer.module.css";
 import logo from "../../assets/logo.png";
 import SocialLinks from "../SocialLinks/SocialLinks";
+import { useNavigate } from "react-router-dom";
 
 const Footer = ({ onlyDevTeamFooter = false }) => {
+  const navigate = useNavigate();
+
   const handleDevClick = () => {
-    console.log("Name Clicked");
+    navigate("/devTeam");
   };
 
   return (
@@ -46,19 +49,19 @@ const Footer = ({ onlyDevTeamFooter = false }) => {
         <p className={styles.devTeam}>
           Designed & Developed By
           <span className={styles.devName} onClick={handleDevClick}>
-            {" Ansh Gusain"}
+            {" Ansh"}
           </span>
           ,
           <span className={styles.devName} onClick={handleDevClick}>
-            {" Daksh Verma"}
+            {" Daksh"}
           </span>
           ,
           <span className={styles.devName} onClick={handleDevClick}>
-            {" Deepak Kumar "}
+            {" Deepak "}
           </span>
           &
           <span className={styles.devName} onClick={handleDevClick}>
-            {" Harsh Singh"}
+            {" Harsh"}
           </span>
         </p>
       </div>

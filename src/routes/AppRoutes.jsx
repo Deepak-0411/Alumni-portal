@@ -7,6 +7,7 @@ import PageNotFound from "../pages/PageNotFound";
 import Home from "../pages/public/Home";
 import ContactUs from "../pages/public/ContactUs";
 import CheckStatus from "../pages/public/CheckStatus";
+import Devs from "../pages/devs";
 
 // Auth Pages
 import Login from "../auth/Login";
@@ -36,6 +37,7 @@ import CreateEvents from "../pages/admin/CreateEvents";
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="devTeam" element={<Devs />} />
       <Route path="/" element={<Navigate to="/alumni" />} />
       {/* Public Layout */}
       <Route path="/alumni" element={<UserLayout />}>
@@ -43,10 +45,7 @@ const AppRoutes = () => {
         <Route path="home" element={<Home />} />
         <Route path="contactUs" element={<ContactUs />} />
         <Route path="login" element={<Login />} />
-        <Route
-          path="forgetPassword"
-          element={<h1>Comming Soon</h1>}
-        />
+        <Route path="forgetPassword" element={<h1>Comming Soon</h1>} />
         <Route path="register" element={<Register />} />
         <Route path="checkStatus" element={<CheckStatus />} />
       </Route>
