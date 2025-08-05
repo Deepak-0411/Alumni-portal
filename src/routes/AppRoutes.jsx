@@ -31,8 +31,7 @@ import SubAdmin from "../pages/admin/SubAdmin";
 import CreateEvents from "../pages/admin/CreateEvents";
 
 // Route Guards
-// import RequireAuth from "./guards/RequireAuth";
-// import RequireAdmin from "./guards/RequireAdmin";
+import ProtectedRoute from "./guards/ProtectedRoute";
 
 const AppRoutes = () => {
   return (
@@ -51,8 +50,10 @@ const AppRoutes = () => {
       </Route>
 
       {/* User Routes (Protected) */}
-      <Route path="/alumni/user" element={<UserLayout />}>
-        {/*  <RequireAuth>   </RequireAuth> */}
+      <Route
+        path="/alumni/user"
+        element={<ProtectedRoute element={<UserLayout />} user={"user"} />}
+      >
         <Route index element={<Navigate to="membershipCard" />} />
         <Route path="profile" element={<Profile />} />
         <Route path="events" element={<Events />} />
@@ -64,7 +65,12 @@ const AppRoutes = () => {
       <Route path="/alumni/sub-admin/login" element={<SubAdminLogin />} />
       <Route
         path="/alumni/sub-admin/"
-        element={<AdminLayout role={"subAdmin"} />}
+        element={
+          <ProtectedRoute
+            element={<AdminLayout role={"subAdmin"} />}
+            user={"sub-Admin"}
+          />
+        }
       >
         <Route index element={<Navigate to="verify-users" />} />
         <Route path="verify-users" element={<VerifyUsersList />} />
@@ -78,7 +84,12 @@ const AppRoutes = () => {
       <Route path="/alumni/superAdmin/login" element={<AdminLogin />} />
       <Route
         path="/alumni/superAdmin/"
-        element={<AdminLayout role={"admin"} />}
+        element={
+          <ProtectedRoute
+            element={<AdminLayout role={"admin"} />}
+            user={"super-Admin"}
+          />
+        }
       >
         <Route index element={<Navigate to="alumni" />} />
         <Route path="alumni" element={<Alumni />} />

@@ -10,7 +10,7 @@ const SubAdmin = () => {
     showToggleBtn: true,
     title: "Sub-Admins",
     apiGet: `/api/panel/view-subadmins`,
-    apiToggle: ``,
+    apiToggle: `/api/panel/toggle/`,
     apiEndPointCreate: `/api/subadmin/signup`,
     searchBoxPlaceholder: "Search by username.",
     idKey: "username",
@@ -23,7 +23,7 @@ const SubAdmin = () => {
       schoolName: { value: "", placeholder: "School Name", role: "text" },
     },
     tableHeading: ["School", "Name", "Username"],
-    tableColumn: ["school", "name", "username"],
+    tableColumn: ["schoolName", "name", "username"],
     dataList: subAdminList,
     setDataList: setSubAdminList,
     dataOverlayContent: ({ index, onClose }) => {

@@ -1,9 +1,11 @@
 import React from "react";
 import Input from "../Input/Input";
 import styles from "./ConfirmationBox.module.css";
+import Loading from "../Spinner/Loading";
 
 function ConfirmationBox({
   message,
+  loading,
   onConfirm,
   onCancel,
   action = "Confirm",
@@ -43,7 +45,7 @@ function ConfirmationBox({
           className={styles.confirm}
           disabled={confirmDisabled}
         >
-          {action}
+          {loading ? <Loading color={"white"} size={"small"} /> : action}
         </button>
       </div>
     </div>

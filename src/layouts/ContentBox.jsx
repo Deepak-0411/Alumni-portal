@@ -33,6 +33,7 @@ const ContentBox = ({
   const [loading, setLoading] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
   const [userId, setUserId] = useState(false);
   const [msgText, setMsgText] = useState("");
 
@@ -48,6 +49,8 @@ const ContentBox = ({
     if (response.status === "success") {
       if (response?.data.entries) {
         setDataList(response.data.entries);
+        console.log(response.data.entries);
+        
       }
     } else {
       console.error("Error:", response.message);
@@ -61,20 +64,32 @@ const ContentBox = ({
     }
   }, []);
 
-  const confirmDelete = () => {
+  const confirmToggle = async () => {
     if (!Array.isArray(dataList)) return;
     const exists = dataList.some((user) => user[idKey] === userId);
     if (!exists) {
       toast.error("User not found.");
       return;
     }
+    const response = await apiRequest({
+      url: apiToggle + userId,
+      method: "PATCH",
+      setLoading: setEditLoading,
+    });
+    console.log(apiToggle + userId);
 
-    const updated = dataList.map((user) =>
-      user[idKey] === userId ? { ...user, isActive: !user.isActive } : user
-    );
+    if (response.status === "success") {
+      const updated = dataList.map((user) =>
+        user[idKey] === userId ? { ...user, status: !user.status } : user
+      );
 
-    setDataList(updated);
-    setShowConfirm(false);
+      setDataList(updated);
+      setShowConfirm(false);
+      toast.success(`Sucessfully ${msgText.toLowerCase()} user ${userId}`);
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Failed to ${msgText.toLowerCase()} user ${userId}.`);
+    }
   };
 
   const cancelDelete = () => {
@@ -85,7 +100,7 @@ const ContentBox = ({
   const handleToggleBtn = (user) => {
     setShowConfirm(true);
     setUserId(user[idKey]);
-    setMsgText(user.isActive ? "Disable" : "Enable");
+    setMsgText(user.status ? "Disable" : "Enable");
   };
 
   const filteredData = Array.isArray(dataList)
@@ -101,7 +116,7 @@ const ContentBox = ({
 
   const sortedData = showToggleBtn
     ? [...filteredData].sort(
-        (a, b) => (b.isActive === true) - (a.isActive === true)
+        (a, b) => (b.status === true) - (a.status === true)
       )
     : filteredData;
 
@@ -120,9 +135,10 @@ const ContentBox = ({
         <Overlay onClose={cancelDelete}>
           <ConfirmationBox
             message={`Do you really want to ${msgText.toLowerCase()} user ${userId} ?`}
-            onConfirm={confirmDelete}
+            onConfirm={confirmToggle}
             onCancel={cancelDelete}
             action={msgText}
+            loading={editLoading}
           />
         </Overlay>
       )}

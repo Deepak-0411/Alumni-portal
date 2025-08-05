@@ -10,7 +10,7 @@ const Alumni = () => {
     showToggleBtn: true,
     title: "Alumni",
     apiGet: `/api/panel/view-alumni`,
-    apiToggle: `/api/panel/delete-alumni/:enrollmentNo`,
+    apiToggle: `/api/panel/alumnitoggle/`,
     apiEndPointCreate: ``,
     searchBoxPlaceholder: "Search by card no. or roll no.",
     idKey: "rollNo",

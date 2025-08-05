@@ -19,7 +19,9 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
     isSuperadmin: false,
     createBtnOpen: false,
     title: isForActiveUsers ? "Active Users" : "Verify Users",
-    apiGet: `/api/approval/pending-users`,
+    apiGet: isForActiveUsers
+      ? `/api/panel/view-alumni`
+      : `/api/approval/pending-users`,
     apiDelete: ``,
     apiEndPointCreate: ``,
     searchBoxPlaceholder: "Search by name or roll no.",
@@ -39,18 +41,24 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
       "Roll no.",
       "Year of Passing",
     ],
-    tableColumn: ["alumniName", "fatherName", "schoolName", "rollNo", "yearOfPassing"],
+    tableColumn: [
+      "alumniName",
+      "fatherName",
+      "schoolName",
+      "rollNo",
+      "yearOfPassing",
+    ],
     dataList,
     setDataList,
     dataOverlayContent: ({ index, onClose, data }) => {
-      return(
-      <VerifyUser
-        filteredData={data}
-        setUsersList={setDataList}
-        currentIndex={index}
-        onClose={onClose}
-      />)
-      
+      return (
+        <VerifyUser
+          filteredData={data}
+          setUsersList={setDataList}
+          currentIndex={index}
+          onClose={onClose}
+        />
+      );
     },
   };
   return <ContentBox {...config} />;

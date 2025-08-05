@@ -41,7 +41,7 @@ const Table = ({
     <tr
       key={`${item[idKey] || index}`}
       onClick={() => handleRowClick(index)}
-      className={showToggleBtn && !item.isActive ? styles.fadeText : ""}
+      className={showToggleBtn && !item.status ? styles.fadeText : ""}
     >
       <td>{index + 1}</td>
       {tableColumn.map((colKey) => (
@@ -54,7 +54,7 @@ const Table = ({
         >
           <Input
             type="check"
-            value={item.isActive}
+            value={item.status}
             addonClassName={item["rollNo"]}
             id={item["rollNo"]}
             onChange={() => handleToggleBtn(item)}

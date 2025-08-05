@@ -1,5 +1,5 @@
 import styles from "./Footer.module.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import SocialLinks from "../SocialLinks/SocialLinks";
 import { useNavigate } from "react-router-dom";
 
