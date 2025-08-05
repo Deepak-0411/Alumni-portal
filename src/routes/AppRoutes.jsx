@@ -7,7 +7,7 @@ import PageNotFound from "../pages/PageNotFound";
 import Home from "../pages/public/Home";
 import ContactUs from "../pages/public/ContactUs";
 import CheckStatus from "../pages/public/CheckStatus";
-import Devs from "../pages/devs";
+import Devs from "../pages/Devs";
 
 // Auth Pages
 import Login from "../auth/Login";
