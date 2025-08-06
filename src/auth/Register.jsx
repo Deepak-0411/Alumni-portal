@@ -26,7 +26,7 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false);
   const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
-  const { schoolData: schoolList, setSchoolData: setSchoolList } = useData();
+  const { schoolData: schoolList, fetchSchoolData } = useData();
   const [passingYears, setPassingYears] = useState(["2021", "2022", "2023"]);
 
   const navigate = useNavigate();
@@ -46,26 +46,9 @@ const Register = () => {
     "degree_picture",
   ];
 
-  const fetchData = async () => {
-
-    const response = await apiRequest({
-      url: `/api/data/filter `,
-      method: "GET",
-    });
-
-    if (response.status === "success") {
-      if (response?.data) {
-        setSchoolList(response.data);
-      }
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Error: Failed to fetch school list.`);
-    }
-  };
-
   useEffect(() => {
     if (!Array.isArray(schoolList) || schoolList.length === 0) {
-      fetchData();
+      fetchSchoolData();
     }
   }, []);
 

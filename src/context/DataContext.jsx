@@ -19,6 +19,43 @@ export const DataProvider = ({ children }) => {
   // School & branch Data
   const [schoolData, setSchoolData] = useState([]);
 
+  // others
+  const [events, setEvents] = useState([]);
+
+  // functions
+
+  const fetchSchoolData = async () => {
+    const response = await apiRequest({
+      url: `/api/data/filter `,
+      method: "GET",
+    });
+
+    if (response.status === "success") {
+      if (response?.data) {
+        setSchoolData(response.data);
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: Failed to fetch school list.`);
+    }
+  };
+
+  const fetchEvents = async () => {
+    const response = await apiRequest({
+      url: `/api/events/`,
+      method: "GET",
+    });
+
+    if (response.status === "success") {
+      if (response?.data.entries) {
+        setEvents(response.data.entries);
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Failed to load events`);
+    }
+  };
+
   return (
     <DataContext.Provider
       value={{
@@ -34,6 +71,12 @@ export const DataProvider = ({ children }) => {
         setCurrentUser,
         schoolData,
         setSchoolData,
+        events,
+        setEvents,
+
+        // Functions
+        fetchSchoolData,
+        fetchEvents,
       }}
     >
       {children}

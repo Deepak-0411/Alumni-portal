@@ -3,7 +3,17 @@ import png1 from "../../assets/studentsImg1.png";
 import png2 from "../../assets/studentsImg2.png";
 import png3 from "../../assets/studentsImg3.png";
 import VCimg from "../../assets/VCimg.png";
+import { useData } from "../../context/DataContext";
+import { useEffect } from "react";
 const Home = () => {
+  const { events, fetchEvents } = useData();
+
+  useEffect(() => {
+    if (!Array.isArray(events) || events.length === 0) {
+      fetchEvents();
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.studentPng}>

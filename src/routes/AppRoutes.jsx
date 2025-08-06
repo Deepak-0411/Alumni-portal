@@ -26,7 +26,6 @@ import VerifyUsersList from "../pages/subAdmin/VerifyUsersList";
 import AdminLogin from "../auth/AdminLogin";
 import Alumni from "../pages/admin/Alumni";
 import Finance from "../pages/admin/Finance";
-import School from "../pages/admin/School";
 import SubAdmin from "../pages/admin/SubAdmin";
 import CreateEvents from "../pages/admin/CreateEvents";
 
@@ -95,7 +94,6 @@ const AppRoutes = () => {
         <Route path="alumni" element={<Alumni />} />
         <Route path="events" element={<CreateEvents />} />
         <Route path="finance" element={<Finance />} />
-        <Route path="school" element={<School />} />
         <Route path="subAdmin" element={<SubAdmin />} />
       </Route>
       {/* <Route

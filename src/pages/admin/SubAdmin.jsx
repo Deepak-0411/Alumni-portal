@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import VerifyUsers from "../subAdmin/VerifyUser";
+import { object } from "motion/react-client";
 
 const SubAdmin = () => {
-  const { subAdminList, setSubAdminList } = useData();
+  const { subAdminList, setSubAdminList, fetchSchoolData, schoolData } =
+    useData();
+
+  useEffect(() => {
+    if (!Array.isArray(schoolData) || schoolData.length === 0) {
+      fetchSchoolData();
+    }
+  }, []);
 
   const config = {
     createBtnOpen: true,
@@ -20,7 +29,12 @@ const SubAdmin = () => {
       name: { value: "", placeholder: "Name", role: "text" },
       username: { value: "", placeholder: "Username", role: "text" },
       credential: { value: "", placeholder: "Password", role: "password" },
-      schoolName: { value: "", placeholder: "School Name", role: "text" },
+      schoolName: {
+        value: "",
+        placeholder: "School Name",
+        role: "select",
+        options: Object.keys(schoolData),
+      },
     },
     tableHeading: ["School", "Name", "Username"],
     tableColumn: ["schoolName", "name", "username"],

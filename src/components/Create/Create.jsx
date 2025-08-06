@@ -56,6 +56,7 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
                 type={dataToSend[key].role}
                 name={key}
                 placeHolder={dataToSend[key].placeholder}
+                options={dataToSend[key].options}
                 required={true}
                 value={data[key] || ""}
                 onChange={(e) => handleChange(e)}
