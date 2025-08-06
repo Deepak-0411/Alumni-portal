@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import styles from "../styles/modules/auth/Register.module.css";
@@ -6,6 +6,7 @@ import LoadingScrn from "../components/Spinner/Loading";
 import apiRequest from "../utility/apiRequest";
 import { toast } from "react-toastify";
 import { useFormValidation } from "../hooks/useFormValidation";
+import { useData } from "../context/DataContext";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -25,11 +26,7 @@ const Register = () => {
 
   const [loading, setLoading] = useState(false);
   const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
-  const [schoolList, setSchoolList] = useState([
-    "School of Engineering",
-    "School of Science",
-  ]);
-  const [programmeList, setProgrammeList] = useState(["B.Tech", "M.Tech"]);
+  const { schoolData: schoolList, setSchoolData: setSchoolList } = useData();
   const [passingYears, setPassingYears] = useState(["2021", "2022", "2023"]);
 
   const navigate = useNavigate();
@@ -48,6 +45,29 @@ const Register = () => {
     "programme",
     "degree_picture",
   ];
+
+  const fetchData = async () => {
+
+    const response = await apiRequest({
+      url: `/api/data/filter `,
+      method: "GET",
+    });
+
+    if (response.status === "success") {
+      if (response?.data) {
+        setSchoolList(response.data);
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Error: Failed to fetch school list.`);
+    }
+  };
+
+  useEffect(() => {
+    if (!Array.isArray(schoolList) || schoolList.length === 0) {
+      fetchData();
+    }
+  }, []);
 
   const { formErrors, setFormErrors, validate } =
     useFormValidation(fieldsToValidate);
@@ -184,7 +204,7 @@ const Register = () => {
             required
             requiredMark
             value={formData.school}
-            options={schoolList}
+            options={Object.keys(schoolList)}
             onChange={handleChange}
             error={formErrors.school}
           />
@@ -195,7 +215,7 @@ const Register = () => {
             required
             requiredMark
             value={formData.programme}
-            options={programmeList}
+            options={schoolList[formData?.school]}
             onChange={handleChange}
             error={formErrors.programme}
           />

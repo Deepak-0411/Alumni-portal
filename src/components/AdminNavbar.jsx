@@ -42,7 +42,6 @@ const AdminNavbar = ({ forPage }) => {
       method: "POST",
       setLoading,
     });
-    console.log(response);
     
     if (response.status === "success") {
       navigate(redirectPath);

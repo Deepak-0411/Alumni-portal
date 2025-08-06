@@ -95,7 +95,7 @@ const VerifyUsersList = ({
   const requestConfig = {
     accept: {
       method: "POST",
-      url: `/api/subadmin/approve-user?enrollmentNo=${enrollmentNo}`,
+      url: `/api/subadmin/approve-user/${enrollmentNo}`,
     },
     reject: {
       method: "DELETE",
