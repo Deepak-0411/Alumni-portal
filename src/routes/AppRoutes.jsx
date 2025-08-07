@@ -72,10 +72,13 @@ const AppRoutes = () => {
         }
       >
         <Route index element={<Navigate to="verify-users" />} />
-        <Route path="verify-users" element={<VerifyUsersList />} />
+        <Route
+          path="verify-users"
+          element={<VerifyUsersList key="verify" isForActiveUsers={false} />}
+        />
         <Route
           path="active-users"
-          element={<VerifyUsersList isForActiveUsers={true} />}
+          element={<VerifyUsersList key="active" isForActiveUsers={true} />}
         />
       </Route>
 

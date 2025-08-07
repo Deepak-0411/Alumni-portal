@@ -28,7 +28,7 @@ const ContentBox = ({
   dataList = [],
   setDataList,
   dataOverlayContent,
-}) => {
+}) => {  
   const [searchTerm, setSearchTearm] = useState("");
   const [loading, setLoading] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -46,9 +46,7 @@ const ContentBox = ({
       setLoading,
     });
 
-    if (response.status === "success") {
-      console.log(response);
-      
+    if (response.status === "success") {      
       if (response?.data.entries) {
         setDataList(response.data.entries);
         
@@ -60,7 +58,11 @@ const ContentBox = ({
   };
 
   useEffect(() => {
+    console.log("hello",dataList);
+    
     if (!Array.isArray(dataList) || dataList.length === 0) {
+      console.log("hii");
+      
       fetchData();
     }
   }, []);

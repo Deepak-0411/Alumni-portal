@@ -6,6 +6,7 @@ import VCimg from "../../assets/VCimg.png";
 import { useData } from "../../context/DataContext";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Spinner/Loading";
+import NotableAlumni from "../../components/NotableAlumni/NotableAlumni";
 const Home = () => {
   const { events, fetchEvents } = useData();
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
+      {/* students pngs */}
       <div className={styles.studentPng}>
         <div className={styles.pngs}>
           <img
@@ -33,6 +35,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* vc sir section */}
       <div className={styles.VCCard}>
         <div className={styles.card}>
           <div className={styles.VCwordsContainer}>
@@ -53,10 +56,13 @@ const Home = () => {
         </div>
       </div>
 
-      {/* <div className={styles.notableAlumni}>
+      {/* notable alumni's section */}
+      <div className={styles.notableAlumni}>
         <p className={styles.notableAlumniText}>Notable Alumni</p>
-      </div> */}
+        <NotableAlumni/>
+      </div>
 
+      {/* events section */}
       <div className={styles.events}>
         <div className={styles.eventTitleContainer}>
           <h2 className={styles.eventTitle}>EVENTS 2025</h2>

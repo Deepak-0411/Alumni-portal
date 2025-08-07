@@ -1,0 +1,76 @@
+.outerdiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.swiper {
+  width: 100%;
+  max-width: 600px;
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #000;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  gap: 15px;
+}
+
+.avatar {
+  width: 100%;
+  max-width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  align-self: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.year {
+  font-size: 1.1em;
+  margin: 0;
+}
+
+.desc {
+  font-size: 0.95em;
+}
+
+.socials a {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 1.2em;
+  transition: color 0.2s ease-in-out;
+}
+
+.socials a:hover {
+  color: #0af;
+}
