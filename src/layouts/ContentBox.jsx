@@ -57,12 +57,8 @@ const ContentBox = ({
     }
   };
 
-  useEffect(() => {
-    console.log("hello",dataList);
-    
-    if (!Array.isArray(dataList) || dataList.length === 0) {
-      console.log("hii");
-      
+  useEffect(() => {    
+    if (!Array.isArray(dataList) || dataList.length === 0) {      
       fetchData();
     }
   }, []);

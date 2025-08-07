@@ -2,26 +2,50 @@ import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import VerifyUser from "./VerifyUser";
 
-const VerifyUsersList = ({ isForActiveUsers = false }) => {
+const UsersList = ({ role }) => {
   const {
     verifyUsersList,
     setVerifyUsersList,
     activeUsersList,
     setActiveUsersList,
+    approvedUsersList,
+    setApprovedUsersList,
   } = useData();
 
-  const dataList = isForActiveUsers ? activeUsersList : verifyUsersList;
-  const setDataList = isForActiveUsers
-    ? setActiveUsersList
-    : setVerifyUsersList;
+  const [dataList, setDataList, apiGet, title] = (() => {
+    switch (role) {
+      case "active":
+        return [
+          activeUsersList,
+          setActiveUsersList,
+          "/api/panel/activeUsers",
+          "Active Users",
+        ];
+      case "approved":
+        return [
+          approvedUsersList,
+          setApprovedUsersList,
+          "/api/approval/approved-users",
+          "Approved Users",
+        ];
+      case "verify":
+        return [
+          verifyUsersList,
+          setVerifyUsersList,
+          "/api/approval/pending-users",
+          "Verify Users",
+        ];
+
+      default:
+        return [[], () => {}, "", ""];
+    }
+  })();
 
   const config = {
     isSuperadmin: false,
     createBtnOpen: false,
-    title: isForActiveUsers ? "Active Users" : "Verify Users",
-    apiGet: isForActiveUsers
-      ? `/api/panel/view-alumni`
-      : `/api/approval/pending-users`,
+    title: title,
+    apiGet: apiGet,
     apiDelete: ``,
     apiEndPointCreate: ``,
     searchBoxPlaceholder: "Search by name or roll no.",
@@ -57,6 +81,7 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
           setUsersList={setDataList}
           currentIndex={index}
           onClose={onClose}
+          showBtns={role === "verify" ? true : false}
         />
       );
     },
@@ -64,4 +89,4 @@ const VerifyUsersList = ({ isForActiveUsers = false }) => {
   return <ContentBox {...config} />;
 };
 
-export default VerifyUsersList;
+export default UsersList;

@@ -20,7 +20,7 @@ import MembershipCard from "../pages/user/MembershipCard";
 
 //Sub Admin Pages
 import SubAdminLogin from "../auth/SubAdminLogin";
-import VerifyUsersList from "../pages/subAdmin/VerifyUsersList";
+import VerifyUsersList from "../pages/subAdmin/UsersList";
 
 // Admin Pages
 import AdminLogin from "../auth/AdminLogin";
@@ -74,11 +74,15 @@ const AppRoutes = () => {
         <Route index element={<Navigate to="verify-users" />} />
         <Route
           path="verify-users"
-          element={<VerifyUsersList key="verify" isForActiveUsers={false} />}
+          element={<VerifyUsersList key="verify" role={"verify"} />}
         />
         <Route
           path="active-users"
-          element={<VerifyUsersList key="active" isForActiveUsers={true} />}
+          element={<VerifyUsersList key="active" role={"active"} />}
+        />
+        <Route
+          path="approved-users"
+          element={<VerifyUsersList key="approved" role={"approved"} />}
         />
       </Route>
 

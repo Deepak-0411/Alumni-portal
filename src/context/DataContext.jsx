@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
   // Sub-Admin Data
   const [verifyUsersList, setVerifyUsersList] = useState([]);
   const [activeUsersList, setActiveUsersList] = useState([]);
+  const [approvedUsersList, setApprovedUsersList] = useState([]);
 
   // Admin Data
   const [alumniList, setAlumniList] = useState([]);
@@ -61,6 +62,8 @@ export const DataProvider = ({ children }) => {
         verifyUsersList,
         setVerifyUsersList,
         activeUsersList,
+        approvedUsersList,
+        setApprovedUsersList,
         setActiveUsersList,
         alumniList,
         setAlumniList,

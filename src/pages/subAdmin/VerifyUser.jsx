@@ -1,15 +1,15 @@
 import { useState, useMemo, useEffect } from "react";
 import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
-import DataCard from "../../components/DataCard/DataCard";
-import Overlay from "../../components/Overlay/Overlay";
+import DataCard from "../../components/DataCard/DataCard.jsx";
+import Overlay from "../../components/Overlay/Overlay.jsx";
 import { toast } from "react-toastify";
-import apiRequest from "../../utility/apiRequest";
-import { getNextIndex } from "../../utility/navigateIndex";
-import Loading from "../../components/Spinner/Loading";
+import apiRequest from "../../utility/apiRequest.js";
+import { getNextIndex } from "../../utility/navigateIndex.js";
+import Loading from "../../components/Spinner/Loading.jsx";
 import fallbackImage from "../../assets/imgNotFound.jpg";
-import useIndexNavigation from "../../hooks/useIndexNavigation.js";
-import { removeFromStateByKey } from "../../utility/removeFromStateByKey";
-import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox";
+import useIndexNavigation from "../../hooks/useIndexNavigation.js.js";
+import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
+import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox.jsx";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -26,11 +26,12 @@ const getCollegeDetails = (user) => [
   { label: "Country", value: user.country || "-" },
 ];
 
-const VerifyUsersList = ({
+const VerifyUser = ({
   currentIndex = 0,
   filteredData = [],
   setUsersList,
   onClose,
+  showBtns = false,
 }) => {
   const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -82,41 +83,42 @@ const VerifyUsersList = ({
     setLoading(true);
 
     // ---- Simulate Request ----
-    setTimeout(() => {
-      setLoading(false);
-      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
-      setIndex((prev) => Math.max(0, prev - 1));
-      toast.success(`Marked as ${type}`);
-      setRejectionReason(""); // clear reason after use
-    }, 500);
+    // setTimeout(() => {
+    //   setLoading(false);
+    //   removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+    //   setIndex((prev) => Math.max(0, prev - 1));
+    //   toast.success(`Marked as ${type}`);
+    //   setRejectionReason(""); // clear reason after use
+    // }, 500);
 
     // ---- Real API Request (uncomment for production) ----
-    /*
-  const requestConfig = {
-    accept: {
-      method: "POST",
-      url: `/api/subadmin/approve-user/${enrollmentNo}`,
-    },
-    reject: {
-      method: "DELETE",
-      url: `/api/subadmin/reject-user?enrollmentNo=${enrollmentNo}&reason=${encodeURIComponent(rejectionReason)}`,
-    },
-  };
+    // /*
+    const requestConfig = {
+      accept: {
+        method: "POST",
+        url: `/api/approval/approve-user/${enrollmentNo}`,
+      },
+      reject: {
+        method: "DELETE",
+        url: `/api/approval/reject-user/${enrollmentNo}`,
+        body: { rejectReason: rejectionReason },
+      },
+    };
 
-  const { method, url } = requestConfig[type];
+    const { method, url } = requestConfig[type];
 
-  const response = await apiRequest({ method, url, setLoading });
+    const response = await apiRequest({ method, url, setLoading });
 
-  if (response.status === "success") {
-    toast.success(`Marked as ${type}`);
-    removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
-    setIndex((prev) => Math.max(0, prev - 1));
-  } else {
-    toast.error(`Error: ${response.message}`);
-  }
+    if (response.status === "success") {
+      toast.success(`Marked as ${type}`);
+      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+      setIndex((prev) => Math.max(0, prev - 1));
+    } else {
+      toast.error(`Error: ${response.message}`);
+    }
 
-  setRejectionReason("");
-  */
+    setRejectionReason("");
+    // */
   };
 
   return (
@@ -179,21 +181,25 @@ const VerifyUsersList = ({
           &lt;- Back
         </button>
 
-        <button
-          className={styles.rejectBtn}
-          onClick={() => setShowRejectOverlay(true)}
-          disabled={loading}
-        >
-          {loading ? <Loading color="white" size="small" /> : "Reject"}
-        </button>
+        {showBtns && (
+          <>
+            <button
+              className={styles.rejectBtn}
+              onClick={() => setShowRejectOverlay(true)}
+              disabled={loading}
+            >
+              {loading ? <Loading color="white" size="small" /> : "Reject"}
+            </button>
 
-        <button
-          className={styles.acceptBtn}
-          onClick={() => verifyUser("accept")}
-          disabled={loading}
-        >
-          {loading ? <Loading color="white" size="small" /> : "Accept"}
-        </button>
+            <button
+              className={styles.acceptBtn}
+              onClick={() => verifyUser("accept")}
+              disabled={loading}
+            >
+              {loading ? <Loading color="white" size="small" /> : "Accept"}
+            </button>
+          </>
+        )}
 
         <button
           className={styles.nextBtn}
@@ -207,4 +213,4 @@ const VerifyUsersList = ({
   );
 };
 
-export default VerifyUsersList;
+export default VerifyUser;

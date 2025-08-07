@@ -25,6 +25,7 @@ const AdminNavbar = ({ forPage }) => {
     case "subAdmin":
       navlinks = [
         { name: "Active Users", path: "active-users" },
+        { name: "Approved Users", path: "approved-users" },
         { name: "Verify Users", path: "verify-users" },
       ];
       logoutApi = `/api/subadmin/logout`;
@@ -72,7 +73,7 @@ const AdminNavbar = ({ forPage }) => {
 
       <div className=" py-6">
         <button
-          className=" w-45 py-3 px-6 rounded-full text-base tracking-wide transition-all duration-600 cursor-pointer border flex items-center justify-center gap-3 "
+          className=" w-45 py-3 px-6 rounded-full  text-base tracking-wide transition-all duration-600 cursor-pointer border flex items-center justify-center gap-3 "
           onClick={handleLogout}
         >
           {loading ? (
