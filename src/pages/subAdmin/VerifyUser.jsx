@@ -105,9 +105,9 @@ const VerifyUser = ({
       },
     };
 
-    const { method, url } = requestConfig[type];
+    const { method, url, body } = requestConfig[type];
 
-    const response = await apiRequest({ method, url, setLoading });
+    const response = await apiRequest({ method, url, body, setLoading });
 
     if (response.status === "success") {
       toast.success(`Marked as ${type}`);
