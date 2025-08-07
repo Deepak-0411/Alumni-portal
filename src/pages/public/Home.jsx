@@ -4,13 +4,15 @@ import png2 from "../../assets/studentsImg2.png";
 import png3 from "../../assets/studentsImg3.png";
 import VCimg from "../../assets/VCimg.png";
 import { useData } from "../../context/DataContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../../components/Spinner/Loading";
 const Home = () => {
   const { events, fetchEvents } = useData();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!Array.isArray(events) || events.length === 0) {
-      fetchEvents();
+      fetchEvents(setLoading);
     }
   }, []);
 
@@ -59,40 +61,29 @@ const Home = () => {
         <div className={styles.eventTitleContainer}>
           <h2 className={styles.eventTitle}>EVENTS 2025</h2>
         </div>
-        <div className={styles.eventList}>
-          <div className={styles.eventCard}>
-            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
-            <p className={styles.aboutEvent}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
-            {/* <div>
-              <button className={styles.registerBtn} type="button">
-                Register Now
-              </button>
-            </div> */}
+        {loading ? (
+          <Loading color={"white"} />
+        ) : events.length > 0 ? (
+          <div className={styles.eventList}>
+            {events.map((event) => {
+              return (
+                <div className={styles.eventCard} key={event._id}>
+                  <h3 className={styles.eventName}>{event.title}</h3>
+                  {event.tags.map((tag) => {
+                    return (
+                      <div className={styles.eventTagsContainer}>
+                        <span className={styles.eventTags}>{tag}</span>
+                      </div>
+                    );
+                  })}
+                  <p className={styles.aboutEvent}>{event.description}</p>
+                </div>
+              );
+            })}
           </div>
-          <div className={styles.eventCard}>
-            <h3 className={styles.eventName}>Dawat-E-Gbu</h3>
-            <p className={styles.aboutEvent}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </p>
-            {/* <div>
-              <button className={styles.registerBtn} type="button">
-                Register Now
-              </button>
-            </div> */}
-          </div>
-        </div>
+        ) : (
+          <p className={styles.eventName}>Comming Soon</p>
+        )}
       </div>
     </div>
   );

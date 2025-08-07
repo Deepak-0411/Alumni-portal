@@ -27,7 +27,6 @@ export const DataProvider = ({ children }) => {
   const fetchSchoolData = async () => {
     const response = await apiRequest({
       url: `/api/data/filter `,
-      method: "GET",
     });
 
     if (response.status === "success") {
@@ -40,10 +39,10 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const fetchEvents = async () => {
+  const fetchEvents = async (setLoading) => {
     const response = await apiRequest({
       url: `/api/events/`,
-      method: "GET",
+      setLoading,
     });
 
     if (response.status === "success") {
