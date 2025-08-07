@@ -15,35 +15,42 @@ const Login = ({ user = "user" }) => {
 
   const navigate = useNavigate();
 
-  let URL;
-  let reqForward;
-  let title;
-  let inputType;
-  let inputLabel;
-
-  switch (user) {
-    case "superAdmin":
-      URL = `/api/root/login`;
-      reqForward = `/alumni/superAdmin/`;
-      title = "Admin Login";
-      inputType = "text";
-      inputLabel = "User-Id";
-      break;
-    case "subAdmin":
-      URL = `/api/subadmin/login`;
-      reqForward = `/alumni/sub-admin/verify-users`;
-      title = "Sub Admin Login";
-      inputType = "text";
-      inputLabel = "User-Id";
-      break;
-    case "user":
-      URL = `/api/alumni/login`;
-      reqForward = `/alumni/user/membershipCard`;
-      title = "Alumni Login";
-      inputType = "email";
-      inputLabel = "E-mail";
-      break;
-  }
+  const { URL, reqForward, title, inputType, inputLabel } = (() => {
+    switch (user) {
+      case "superAdmin":
+        return {
+          URL: "/api/root/login",
+          reqForward: "/alumni/superAdmin/",
+          title: "Admin Login",
+          inputType: "text",
+          inputLabel: "User-Id",
+        };
+      case "subAdmin":
+        return {
+          URL: "/api/subadmin/login",
+          reqForward: "/alumni/sub-admin/verify-users",
+          title: "Sub Admin Login",
+          inputType: "text",
+          inputLabel: "User-Id",
+        };
+      case "user":
+        return {
+          URL: "/api/alumni/login",
+          reqForward: "/alumni/user/membershipCard",
+          title: "Alumni Login",
+          inputType: "email",
+          inputLabel: "E-mail",
+        };
+      default:
+        return {
+          URL: "",
+          reqForward: "",
+          title: "",
+          inputType: "",
+          inputLabel: "",
+        };
+    }
+  })();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,7 +59,10 @@ const Login = ({ user = "user" }) => {
     const response = await apiRequest({
       url: URL,
       method: "POST",
-      body: { username: userId, credential: password },
+      body: {
+        [user === "user" ? "email" : "username"]: userId,
+        credential: password,
+      },
       setLoading,
     });
 

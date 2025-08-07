@@ -12,32 +12,32 @@ const UsersList = ({ role }) => {
     setApprovedUsersList,
   } = useData();
 
-  const [dataList, setDataList, apiGet, title] = (() => {
+  const { dataList, setDataList, apiGet, title } = (() => {
     switch (role) {
       case "active":
-        return [
-          activeUsersList,
-          setActiveUsersList,
-          "/api/panel/activeUsers",
-          "Active Users",
-        ];
+        return {
+          dataList: activeUsersList,
+          setDataList: setActiveUsersList,
+          apiGet: "/api/panel/activeUsers",
+          title: "Active Users",
+        };
       case "approved":
-        return [
-          approvedUsersList,
-          setApprovedUsersList,
-          "/api/approval/approved-users",
-          "Approved Users",
-        ];
+        return {
+          dataList: approvedUsersList,
+          setDataList: setApprovedUsersList,
+          apiGet: "/api/approval/approved-users",
+          title: "Approved Users",
+        };
       case "verify":
-        return [
-          verifyUsersList,
-          setVerifyUsersList,
-          "/api/approval/pending-users",
-          "Verify Users",
-        ];
+        return {
+          dataList: verifyUsersList,
+          setDataList: setVerifyUsersList,
+          apiGet: "/api/approval/pending-users",
+          title: "Verify Users",
+        };
 
       default:
-        return [[], () => {}, "", ""];
+        return { dataList: [], setDataList: () => {}, apiGet: "", title: "" };
     }
   })();
 
