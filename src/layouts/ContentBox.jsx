@@ -47,6 +47,8 @@ const ContentBox = ({
     });
 
     if (response.status === "success") {
+      console.log(response);
+      
       if (response?.data.entries) {
         setDataList(response.data.entries);
         

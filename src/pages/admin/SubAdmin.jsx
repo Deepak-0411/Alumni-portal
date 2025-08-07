@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import VerifyUsers from "../subAdmin/VerifyUser";
-import { object } from "motion/react-client";
 
 const SubAdmin = () => {
   const { subAdminList, setSubAdminList, fetchSchoolData, schoolData } =
@@ -40,14 +39,14 @@ const SubAdmin = () => {
     tableColumn: ["schoolName", "name", "username"],
     dataList: subAdminList,
     setDataList: setSubAdminList,
-    dataOverlayContent: ({ index, onClose }) => {
+    // dataOverlayContent: ({ index, onClose }) => {
       // <VerifyUsers
       //   usersList={alumniList}
       //   setUsersList={setAlumniList}
       //   currentIndex={index}
       //   onClose={onClose}
       // />
-    },
+    // },
   };
 
   return <ContentBox {...config} />;

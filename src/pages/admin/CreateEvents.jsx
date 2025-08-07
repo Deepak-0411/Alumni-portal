@@ -2,11 +2,11 @@ import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 
 const CreateEvents = () => {
-  const { subAdminList, setSubAdminList } = useData();
+  const { events, setEvents } = useData();
 
   const config = {
     createBtnOpen: true,
-    showToggleBtn: true,
+    showToggleBtn: false,
     title: "Events",
     apiGet: `/api/events/`,
     apiToggle: `/api/panel/toggle/`,
@@ -16,23 +16,25 @@ const CreateEvents = () => {
     nameKey: "name",
     addText: "Create a Event",
     formFields: {
-      name: { value: "", placeholder: "Name", role: "text" },
-      username: { value: "", placeholder: "Username", role: "text" },
-      credential: { value: "", placeholder: "Password", role: "password" },
-      schoolName: { value: "", placeholder: "School Name", role: "text" },
+      title: { value: "", placeholder: "Title", role: "text" },
+      description: { value: "", placeholder: "Description", role: "text" },
+      date: { value: "", placeholder: "Date", role: "date" },
+      venue: { value: "", placeholder: "Venue", role: "text" },
+      imageURL: { value: "", placeholder: "Image", role: "file" },
+      tags: { value: "", placeholder: "tags", role: "text" },
     },
-    tableHeading: ["School", "Name", "Username"],
-    tableColumn: ["schoolName", "name", "username"],
-    dataList: subAdminList,
-    setDataList: setSubAdminList,
-    dataOverlayContent: ({ index, onClose }) => {
+    tableHeading: ["Title", "Date", "Venue", "Description"],
+    tableColumn: ["title", "date", "venue", "description"],
+    dataList: events,
+    setDataList: setEvents,
+    // dataOverlayContent: ({ index, onClose }) => {
       // <VerifyUsers
       //   usersList={alumniList}
       //   setUsersList={setAlumniList}
       //   currentIndex={index}
       //   onClose={onClose}
       // />
-    },
+    // },
   };
 
   return <ContentBox {...config} />;
