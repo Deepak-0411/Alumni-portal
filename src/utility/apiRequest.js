@@ -8,6 +8,29 @@ const apiRequest = async ({
   headers = {},
   setLoading = () => {},
 }) => {
+  const redirectTOLogin = (message) => {
+    const currentPath = window.location.pathname;
+
+    const loginPaths = [
+      "/alumni/superAdmin/login",
+      "/alumni/login",
+      "/alumni/sub-admin/login",
+    ];
+
+    if (message === "No token provided.") {
+      if (!loginPaths.includes(currentPath)) {
+        // Navigate to login pages
+        if (currentPath.startsWith("/alumni/superAdmin")) {
+          window.location.href = "/alumni/superAdmin/login";
+        } else if (currentPath.startsWith("/alumni/sub-admin")) {
+          window.location.href = "/alumni/sub-admin/login";
+        } else {
+          window.location.href = "/alumni/login";
+        }
+      }
+    }
+  };
+
   try {
     setLoading(true);
     const options = {
@@ -22,7 +45,7 @@ const apiRequest = async ({
     if (body) {
       options.body = JSON.stringify(body);
     }
-    
+
     const response = await fetch(baseURl + url, options);
     const rawText = await response.text();
 
@@ -33,9 +56,9 @@ const apiRequest = async ({
       data = { message: rawText }; // fallback if not valid JSON
     }
     // console.log(data);
-    
 
     if (!response.ok) {
+      redirectTOLogin(data.message);
       return {
         status: "error",
         message: data.message || `Error ${response.status}`,
@@ -49,6 +72,7 @@ const apiRequest = async ({
       data,
     };
   } catch (error) {
+    redirectTOLogin(error.message);
     return {
       status: "error",
       message: error.message || "Unknown error occurred",

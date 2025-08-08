@@ -70,6 +70,9 @@ export const useFormValidation = (fieldsToValidate = []) => {
     if (shouldValidate("programme") && !formData.programme) {
       errors.programme = "Please select a programme.";
     }
+    if (shouldValidate("branch") && !formData.branch) {
+      errors.programme = "Please select a branch.";
+    }
 
     if (
       shouldValidate("x") &&

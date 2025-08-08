@@ -21,6 +21,7 @@ const Register = () => {
     email: "",
     school: "",
     programme: "",
+    branch: "",
     imgOfDegree: "",
   });
 
@@ -43,6 +44,7 @@ const Register = () => {
     "email",
     "school",
     "programme",
+    "branch",
     "degree_picture",
   ];
 
@@ -198,10 +200,24 @@ const Register = () => {
             required
             requiredMark
             value={formData.programme}
-            options={schoolList[formData?.school]}
+            options={Object.keys(schoolList[formData?.school] ?? {})}
             onChange={handleChange}
             error={formErrors.programme}
           />
+          <Input
+            type="select"
+            name="branch"
+            label="Select Branch"
+            required
+            requiredMark
+            value={formData.branch}
+            options={schoolList[formData?.school]?.[formData.programme] || []}
+            onChange={handleChange}
+            error={formErrors.programme}
+          />
+        </div>
+
+        <div className={styles.twoTiles}>
           <Input
             type="select"
             name="yearOfPassing"
@@ -213,9 +229,6 @@ const Register = () => {
             onChange={handleChange}
             error={formErrors.yearOfPassing}
           />
-        </div>
-
-        <div className={styles.twoTiles}>
           <Input
             type="file"
             name="degree_picture"

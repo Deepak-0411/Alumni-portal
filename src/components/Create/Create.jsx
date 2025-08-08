@@ -42,7 +42,7 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
       );
     } else {
       console.error("Error:", response.message);
-      toast.error(`Upload failed: ${response.data || "Unknown error"}`);
+      toast.error(`Upload failed: ${response.message || "Unknown error"}`);
     }
   };
 
