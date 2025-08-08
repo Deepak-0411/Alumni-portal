@@ -142,7 +142,7 @@ const ContentBox = ({
       )}
 
       <div className={styles.headingDiv}>
-        <h1 className={styles.heading}>{title}</h1>
+        <h1 className={styles.heading}>{title}({dataList.length})</h1>
         <div className={styles.interactionSide}>
           <Input
             type={"text"}

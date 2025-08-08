@@ -75,13 +75,13 @@ const Home = () => {
               return (
                 <div className={styles.eventCard} key={event._id}>
                   <h3 className={styles.eventName}>{event.title}</h3>
-                  {event.tags.map((tag) => {
+                  {/* {event.tags.map((tag) => {
                     return (
                       <div className={styles.eventTagsContainer}>
                         <span className={styles.eventTags}>{tag}</span>
                       </div>
                     );
-                  })}
+                  })} */}
                   <p className={styles.aboutEvent}>{event.description}</p>
                 </div>
               );
