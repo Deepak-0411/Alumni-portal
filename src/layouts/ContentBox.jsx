@@ -75,7 +75,6 @@ const ContentBox = ({
       method: "PATCH",
       setLoading: setEditLoading,
     });
-    console.log(apiToggle + userId);
 
     if (response.status === "success") {
       const updated = dataList.map((user) =>

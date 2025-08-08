@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  background: #000;
+  background: #202020;
 }
 
 /* ===== TOP SECTION (LOGO + ICON LINKS) ===== */
@@ -70,6 +70,6 @@
   font-weight: bolder;
 }
 .devName {
-  color: #5c94f2;
+  color: #a097ff;
   cursor: pointer;
 }

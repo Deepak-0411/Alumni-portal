@@ -1,8 +1,8 @@
-import { MdOutlineLogout } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import apiRequest from "../utility/apiRequest";
 import { useState } from "react";
 import Loading from "./Spinner/Loading";
+import { FiLogOut } from "react-icons/fi";
 
 const AdminNavbar = ({ forPage }) => {
   const [loading, setLoading] = useState(false);
@@ -73,14 +73,14 @@ const AdminNavbar = ({ forPage }) => {
 
       <div className=" py-6">
         <button
-          className=" w-45 py-3 px-6 rounded-full  text-base tracking-wide transition-all duration-600 cursor-pointer border flex items-center justify-center gap-3 "
+          className=" w-45 py-3 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.35px] flex items-center justify-center gap-3 "
           onClick={handleLogout}
         >
           {loading ? (
             <Loading color="blue" size="small" />
           ) : (
             <>
-              Logout <MdOutlineLogout />
+              Logout <FiLogOut size={18} strokeWidth={2.65}  />
             </>
           )}
         </button>
