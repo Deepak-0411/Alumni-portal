@@ -26,10 +26,10 @@ export const useFormValidation = (fieldsToValidate = []) => {
     }
 
     if (
-      shouldValidate("fathername") &&
-      (!formData.fathername || !nameRegex.test(formData.fathername.trim()))
+      shouldValidate("fatherName") &&
+      (!formData.fatherName || !nameRegex.test(formData.fatherName.trim()))
     ) {
-      errors.fathername = "Please enter a valid father's name.";
+      errors.fathername = "Please enter a valid father's name.";      
     }
 
     const enrollmentNum = Number(formData.enrollmentNo);

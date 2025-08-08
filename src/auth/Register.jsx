@@ -36,8 +36,8 @@ const Register = () => {
     "title",
     "enrollmentNo",
     "rollNo",
-    "Name",
-    "fathersname",
+    "alumniName",
+    "fatherName",
     "dob",
     "yearOfPassing",
     "phoneNo",
@@ -71,7 +71,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate(formData)) return;
-
+    
     const response = await apiRequest({
       url: "/api/alumni/register",
       method: "POST",
@@ -106,23 +106,23 @@ const Register = () => {
           />
           <Input
             type="text"
-            name="Name"
+            name="alumniName"
             label="Name"
             required
             requiredMark
-            value={formData.Name}
+            value={formData.alumniName}
             onChange={handleChange}
-            error={formErrors.Name}
+            error={formErrors.alumniName}
           />
           <Input
             type="text"
-            name="fathersName"
+            name="fatherName"
             label="Father's Name"
             required
             requiredMark
-            value={formData.fathersName}
+            value={formData.fatherName}
             onChange={handleChange}
-            error={formErrors.fathersName}
+            error={formErrors.fatherName}
           />
         </div>
 
