@@ -1,6 +1,7 @@
 import { navigateTo } from "./navigation";
 
-const baseURl = "https://gbu-alumniserver.vercel.app";
+// const baseURl = "https://gbu-alumniserver.vercel.app";
+const baseURl = "http://192.168.137.12:1212";
 // const baseURl = "/api";
 
 const apiRequest = async ({
