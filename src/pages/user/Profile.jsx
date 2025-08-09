@@ -29,8 +29,10 @@ const Profile = () => {
     insta: "",
     linkedIn: "",
     gitHub: "",
+    description:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda voluptatem ab molestias id velit minus laboriosam, quidem libero minima corrupti.",
   });
-  const editableFields = [
+  const toVerifyFields = [
     "phoneNo",
     "email",
     "country",
@@ -43,7 +45,7 @@ const Profile = () => {
   const [draftData, setDraftData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const { formErrors, setFormErrors, validate } =
-    useFormValidation(editableFields);
+    useFormValidation(toVerifyFields);
 
   const startEdit = () => {
     setDraftData(formData);
@@ -85,22 +87,55 @@ const Profile = () => {
     fields.map(({ label, name, editable = false, type = "text" }) => {
       const value = isEditing ? draftData[name] : formData[name];
 
-      return isEditing && editable ? (
-        <Input
-          key={name}
-          label={label}
-          name={name}
-          value={value}
-          onChange={handleChange}
-          type={type}
-          error={formErrors[name]}
-        />
-      ) : (
-        {
+      if (isEditing && editable) {
+        if (name == "description") {
+          return (
+            <textarea
+              id="description"
+              key={name}
+              label={label}
+              name={name}
+              value={value}
+              onChange={handleChange}
+              className={styles.textarea}
+            ></textarea>
+          );
+        } else {
+          return (
+            <Input
+              key={name}
+              label={label}
+              name={name}
+              value={value}
+              onChange={handleChange}
+              type={type}
+              error={formErrors[name]}
+            />
+          );
+        }
+      } else {
+        return {
           label,
           value,
-        }
-      );
+        };
+      }
+
+      // return isEditing && editable ? (
+      //   <Input
+      //     key={name}
+      //     label={label}
+      //     name={name}
+      //     value={value}
+      //     onChange={handleChange}
+      //     type={type}
+      //     error={formErrors[name]}
+      //   />
+      // ) : (
+      //   {
+      //     label,
+      //     value,
+      //   }
+      // );
     });
 
   const sections = [
@@ -141,6 +176,17 @@ const Profile = () => {
         { label: "Insta", name: "insta", editable: true, type: "url" },
         { label: "LinkedIn", name: "linkedIn", type: "url", editable: true },
         { label: "Github", name: "gitHub", type: "url", editable: true },
+      ]),
+    },
+    {
+      heading: "About",
+      dataItems: buildItems([
+        {
+          label: "Description",
+          name: "description",
+          editable: true,
+          type: "text",
+        },
       ]),
     },
   ];

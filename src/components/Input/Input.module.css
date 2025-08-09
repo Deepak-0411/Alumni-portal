@@ -11,7 +11,7 @@
 .input option,
 .required span::after {
   width: 100%;
-  font-size: .95rem;
+  font-size: .875rem;
   color: #111827;
   font-family: Inter;
   font-weight: 500;
@@ -27,7 +27,7 @@
 }
 
 .input {
-  padding: 0.625rem;
+  padding: 0.5rem;
   border: 1.6px solid #aaaaaa;
   border-radius: 0.52rem;
   outline: none;

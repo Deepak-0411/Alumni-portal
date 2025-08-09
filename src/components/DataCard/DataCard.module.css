@@ -24,6 +24,16 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem 1rem;
 }
+.singleBox {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: .5rem;
+  flex-direction: column;
+}
+.subBox{
+  width: 100%;
+}
 .heading {
   color: #002e57;
   font-size: 1.1rem;
@@ -40,7 +50,7 @@
 .data {
   color: black;
   font-family: Inter;
-  font-size: 1rem;
+  font-size: .875rem;
   font-style: normal;
   font-weight: 500;
   border: 1.6px solid #aaaaaa;
