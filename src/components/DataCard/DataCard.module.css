@@ -22,7 +22,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
+  gap: 0.5rem 1rem;
 }
 .heading {
   color: #002e57;
@@ -31,20 +31,23 @@
 }
 
 .title {
-  color: #002e57;
-  font-family: Inter;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-}
-.data {
   color: #a6a6a6;
   font-family: Inter;
+  font-size: .8rem;
+  font-weight: 500;
+  margin-bottom: .5rem;
+}
+.data {
+  color: black;
+  font-family: Inter;
   font-size: 1rem;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
+  border: 1.6px solid #aaaaaa;
+  border-radius: .625rem;
+  padding: .4rem;
+  /* display: inline; */
+  
 }
 @media (max-width: 512px) {
   .box {

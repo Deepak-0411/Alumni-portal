@@ -1,3 +1,5 @@
+import { navigateTo } from "./navigation";
+
 const baseURl = "https://gbu-alumniserver.vercel.app";
 // const baseURl = "/api";
 
@@ -8,6 +10,7 @@ const apiRequest = async ({
   headers = {},
   setLoading = () => {},
 }) => {
+  
   const redirectTOLogin = (message) => {
     const currentPath = window.location.pathname;
 
@@ -21,11 +24,11 @@ const apiRequest = async ({
       if (!loginPaths.includes(currentPath)) {
         // Navigate to login pages
         if (currentPath.startsWith("/alumni/superAdmin")) {
-          window.location.href = "/alumni/superAdmin/login";
+          navigateTo("/alumni/superAdmin/login");
         } else if (currentPath.startsWith("/alumni/sub-admin")) {
-          window.location.href = "/alumni/sub-admin/login";
+          navigateTo("/alumni/sub-admin/login");
         } else {
-          window.location.href = "/alumni/login";
+          navigateTo("/alumni/login");
         }
       }
     }
