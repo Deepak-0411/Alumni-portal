@@ -71,7 +71,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate(formData)) return;
-    
+
     const response = await apiRequest({
       url: "/api/alumni/register",
       method: "POST",
@@ -253,12 +253,15 @@ const Register = () => {
       </form>
 
       <div className={styles.btnContainer}>
-        <button
-          className={styles.backToLoginBtn}
-          onClick={() => navigate("/alumni/login")}
-        >
-          Back to login
-        </button>
+        <span className={styles.backToLoginSpan}>
+          Alrerady have an account? &nbsp;
+          <button
+            className={styles.backToLoginBtn}
+            onClick={() => navigate("/alumni/login")}
+          >
+            log in
+          </button>
+        </span>
       </div>
     </div>
   );

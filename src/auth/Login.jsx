@@ -99,46 +99,55 @@ const Login = ({ user = "user" }) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div>
-          <input
-            type="checkbox"
-            id="check"
-            className={styles.checkBox}
-            value={remember}
-            onClick={(prev) => setRemember(!prev)}
-          />
-          <label className={styles.checkLabel} htmlFor="check">
-            Remember me
-          </label>
+        <div className={styles.btns}>
+          <div className={styles.rememberMe}>
+            <input
+              type="checkbox"
+              id="check"
+              className={styles.checkBox}
+              value={remember}
+              checked={true}
+              onChange={() => {}}
+            />
+            <label className={styles.checkLabel} htmlFor="check">
+              Remember me
+            </label>
+          </div>
+          {user === "user" && (
+            <button
+              className={styles.btn}
+              onClick={() => navigate("/alumni/forgetPassword")}
+            >
+              Forget Password
+            </button>
+          )}
         </div>
         <button
           type="submit"
-          className={`${styles.btn} ${styles.loginBtn}`}
+          className={styles.loginBtn}
           disabled={loading || !(userId && password)}
         >
           {loading ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
         </button>
       </form>
       {user === "user" && (
-        <div className={styles.btns}>
+        <div >
           <button
-            className={styles.btn}
-            onClick={() => navigate("/alumni/forgetPassword")}
-          >
-            Forget Password
-          </button>
-          <button
-            className={styles.btn}
-            onClick={() => navigate("/alumni/register")}
-          >
-            New Registration
-          </button>
-          <button
-            className={`${styles.btn} ${styles.fullLengthBtn}`}
+            className={styles.checkStatusBtn}
             onClick={() => navigate("/alumni/checkStatus")}
           >
             Check Status
           </button>
+          <span className={styles.checkLabel}>
+            {"Not registered? "}
+            <button
+              className={styles.btn}
+              onClick={() => navigate("/alumni/register")}
+            >
+              Create account
+            </button>
+          </span>
+          
         </div>
       )}
     </div>

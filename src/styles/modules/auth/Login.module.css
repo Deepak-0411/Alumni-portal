@@ -30,45 +30,55 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: .62rem;
-}
-
-.checkLabel {
-  margin-left: 0.5rem;
-  color: #000;
-  font-family: Inter;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.btns {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   gap: 0.62rem;
 }
-.btn {
-  background: #cfd7de;
+.btns,
+.rememberMe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkBox {
+  width: 0.7rem;
+}
+.checkLabel {
+  margin-left: 0.3rem;
   color: #000;
   font-family: Inter;
-  font-size: clamp(0.75rem, 1.6vw, 1rem);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.btn {
+  color: #1d4ed8;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+.btn:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.loginBtn,
+.checkStatusBtn {
+  color: white;
+  background-color: #5d60f4;
+  font-weight: 600;
+  width: 100%;
+  font-family: Inter;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
   font-weight: 500;
   padding: 0.625rem;
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
 }
-.btn:disabled{
+.checkStatusBtn {
+  background: #cfd7de;
+  color: #000;
+    margin-bottom: .5rem;
+}
+.loginBtn:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
-  opacity: .6;
-}
-.fullLengthBtn,
-.loginBtn {
-  grid-column-start: 1;
-  grid-column-end: 3;
-}
-.loginBtn {
-  color: white;
-  background-color: #5d60f4;
-  font-weight: 600;
-  width: 100%;
 }

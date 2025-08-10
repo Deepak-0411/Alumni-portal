@@ -66,10 +66,11 @@ const CheckStatus = () => {
       ) : isVerified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
-          {isPaid === false && (
+          {isPaid === false && (<>
+            <p>Pay a one time alumni membership  </p>
             <button className={styles.btn} onClick={handlePayClick} disabled={payAPIloading}>
               Proceed to Pay {payAPIloading && <Loading size="small" color="white" />}
-            </button>
+            </button>X</>
           )}
           {isPaid  && (
             <button className={styles.btn} onClick={()=>{navigate("/alumni/login")}}>
@@ -80,7 +81,7 @@ const CheckStatus = () => {
       ) : (
         isVerified === false && (
           <div className={styles.data}>
-            <p> Pending </p>
+            <p> Pending... </p>
           </div>
         )
       )}
