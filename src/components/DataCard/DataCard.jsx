@@ -1,7 +1,9 @@
 import React from "react";
 import styles from "./DataCard.module.css";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
-const DataCard = ({ heading, dataItems=[], image }) => {
+const DataCard = ({ heading, dataItems = [], image, loading = false }) => {
   return (
     <div className={styles.dataBox}>
       {heading && (
@@ -12,10 +14,18 @@ const DataCard = ({ heading, dataItems=[], image }) => {
 
       <div
         className={
-          image ? styles.pbox : dataItems.length > 1 ? styles.box : styles.singleBox
+          image
+            ? styles.pbox
+            : dataItems.length > 1
+            ? styles.box
+            : styles.singleBox
         }
       >
-        {image && <img className={styles.dp} src={image} alt="Profile Pic" />}
+        {loading && image ? (
+          <Skeleton circle height={80} width={80} />
+        ) : (
+          image && <img className={styles.dp} src={image} alt="Profile Pic" />
+        )}
         {dataItems.map((item, index) => (
           <div className={styles.subBox} key={index}>
             {React.isValidElement(item) ? (
@@ -23,7 +33,17 @@ const DataCard = ({ heading, dataItems=[], image }) => {
             ) : (
               <>
                 <p className={styles.title}>{item.label}</p>
-                <p className={styles.data}>{item.value || "-"}</p>
+                {loading ? (
+                  <Skeleton
+                    height={30}
+                    width={"100%"}
+                    style={{ maxWidth: "15rem" ,
+                      minWidth:"8rem",
+                    }}
+                  />
+                ) : (
+                  <p className={styles.data}>{item.value || "-"}</p>
+                )}
               </>
             )}
           </div>

@@ -1,11 +1,11 @@
 .container {
-  width: clamp(18.5rem,70vw ,36rem);
+  width: clamp(22rem, 90vw, 32rem);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   background-color: #f4f5fb;
 }
-.titleBox{
+.titleBox {
   width: 100%;
   border-bottom: 2px solid #78335d;
 }
@@ -25,23 +25,23 @@
 }
 .leftCol {
   flex-grow: 1;
-  min-width: 6.5rem;
+  /* min-width: 6.5rem; */
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 1.8rem;
-  padding: 1.875rem 0rem;
+  padding: 1.875rem 0.5rem;
   background: #002e57;
 }
 .userdp {
-  width: clamp(4rem,13vw,6rem);
-  height: clamp(4rem,13vw,6rem);
+  width: clamp(4rem, 13vw, 6rem);
+  height: clamp(4rem, 13vw, 6rem);
   border-radius: 50%;
 }
 .name {
   color: #fff;
   font-family: Roboto;
-  font-size: clamp(.7rem, 3vw,1rem);
+  font-size: clamp(0.75rem, 3vw, 1rem);
   font-weight: 600;
 }
 .rightCol {
@@ -49,35 +49,36 @@
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: clamp(.8rem , 3.8vw , 1.88rem);
+  gap: 0.5rem;
 }
 .box {
   display: flex;
   flex-direction: column;
-  gap: 0.62rem;
+  gap: 0.4rem;
 }
 .innerBox {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: .5rem;
 }
 .subBox {
   display: flex;
   flex-direction: column;
 }
 .heading {
-  padding: 0.62rem 0rem;
+  padding: clamp(0.2rem , 1vw ,.5rem ) 0rem;
   width: 100%;
   border-bottom: 1.5px solid #ababab;
   color: #002e57;
   font-family: Roboto;
-  font-size: clamp(.75rem, 4vw,1rem);
+  font-size: clamp(0.75rem, 4vw, 1rem);
   font-weight: 600;
 }
 .subHeading,
 .data {
   color: #000;
   font-family: Roboto;
-  font-size: clamp(.7rem , 2.5vw ,0.8rem);
+  font-size: clamp(0.7rem, 2.5vw, 0.8rem);
   font-weight: 500;
 }
 .data {
