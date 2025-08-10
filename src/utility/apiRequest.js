@@ -9,6 +9,7 @@ const apiRequest = async ({
   method = "GET",
   body = null,
   headers = {},
+  credentials=true,
   setLoading = () => {},
 }) => {
   
@@ -39,16 +40,14 @@ const apiRequest = async ({
     setLoading(true);
     const options = {
       method,
-      credentials: "include",
+      ...(credentials && { credentials: "include" }),
       headers: {
         "Content-Type": "application/json",
         ...headers,
       },
+        ...(body && { body: JSON.stringify(body) }),
     };
 
-    if (body) {
-      options.body = JSON.stringify(body);
-    }
 
     const response = await fetch(baseURl + url, options);
     const rawText = await response.text();

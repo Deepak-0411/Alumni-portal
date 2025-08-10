@@ -6,6 +6,7 @@ export default async function makePayment(email, setLoading = () => {}) {
   const response = await apiRequest({
     url: `/api/payment/initiate-payment/?email=${email}`,
     method: "POST",
+    credentials:false,
     setLoading,
   });
 
