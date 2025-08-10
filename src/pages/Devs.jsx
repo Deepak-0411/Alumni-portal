@@ -40,7 +40,7 @@ function Devs() {
           twitter
           github
         />
-        <DevCard
+        {/* <DevCard
           image="https://images.pexels.com/photos/977796/pexels-photo-977796.jpeg"
           name="Daksh Verma"
           role="Figma"
@@ -49,7 +49,7 @@ function Devs() {
           linkedin
           twitter
           github
-        />
+        /> */}
       </div>
     </div>
   );
