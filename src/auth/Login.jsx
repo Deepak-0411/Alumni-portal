@@ -115,6 +115,7 @@ const Login = ({ user = "user" }) => {
           </div>
           {user === "user" && (
             <button
+              type="button"
               className={styles.btn}
               onClick={() => navigate("/alumni/forgetPassword")}
             >
@@ -131,8 +132,9 @@ const Login = ({ user = "user" }) => {
         </button>
       </form>
       {user === "user" && (
-        <div >
+        <div>
           <button
+            type="button"
             className={styles.checkStatusBtn}
             onClick={() => navigate("/alumni/checkStatus")}
           >
@@ -141,13 +143,13 @@ const Login = ({ user = "user" }) => {
           <span className={styles.checkLabel}>
             {"Not registered? "}
             <button
+              type="button"
               className={styles.btn}
               onClick={() => navigate("/alumni/register")}
             >
               Create account
             </button>
           </span>
-          
         </div>
       )}
     </div>
