@@ -14,26 +14,6 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   Name: "Mr. Example",
-  //   Fathername: "Example",
-  //   dob: "12/12/2012",
-  //   phoneNo: "1234567890",
-  //   email: "example@gmail.com",
-  //   enrollmentNo: "222211244",
-  //   rollNo: "235UCS050",
-  //   yearOfPassing: "2027",
-  //   school: "School Of ICT",
-  //   programme: "B.Tech",
-  //   country: "",
-  //   dp: "",
-  //   x: "",
-  //   insta: "",
-  //   linkedIn: "",
-  //   gitHub: "",
-  //   description:
-  //     " Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda voluptatem ab molestias id velit minus laboriosam, quidem libero minima corrupti.",
-  // });
 
   const toVerifyFields = [
     "phoneNo",
@@ -51,17 +31,19 @@ const Profile = () => {
     useFormValidation(toVerifyFields);
   const {
     fetchUser,
+    clearAll,
     userLoading: loading,
-    currentUser: formData,
+    currentUser,
     setCurrentUser: setFormData,
   } = useData();
 
   useEffect(() => {
-    if (!Array.isArray(formData) || formData.length === 0) {
+    if (!Array.isArray(currentUser) || currentUser.length === 0) {
       fetchUser();
     }
   }, []);
 
+  const formData = currentUser[0] || {};
   const startEdit = () => {
     setDraftData(formData);
     setIsEditing(true);
@@ -94,6 +76,7 @@ const Profile = () => {
     });
 
     if (response.status === "success") {
+      clearAll();
       navigate("/alumni/login");
     } else {
       toast.error("Failed to logout");
@@ -136,23 +119,6 @@ const Profile = () => {
           value,
         };
       }
-
-      // return isEditing && editable ? (
-      //   <Input
-      //     key={name}
-      //     label={label}
-      //     name={name}
-      //     value={value}
-      //     onChange={handleChange}
-      //     type={type}
-      //     error={formErrors[name]}
-      //   />
-      // ) : (
-      //   {
-      //     label,
-      //     value,
-      //   }
-      // );
     });
 
   const sections = [

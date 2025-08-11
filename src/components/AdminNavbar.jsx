@@ -4,9 +4,11 @@ import { useState } from "react";
 import Loading from "./Spinner/Loading";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
+import { useData } from "../context/DataContext";
 
 const AdminNavbar = ({ forPage }) => {
   const [loading, setLoading] = useState(false);
+  const { clearAll } = useData();
   const navigate = useNavigate();
   let logoutApi;
   let redirectPath;
@@ -46,6 +48,7 @@ const AdminNavbar = ({ forPage }) => {
     });
 
     if (response.status === "success") {
+      clearAll();
       navigate(redirectPath);
     } else {
       toast.error("Failed to logout");

@@ -3,86 +3,15 @@
   align-items: center;
   justify-content: center;
   padding: 40px 0;
+  position: relative; /* make it the reference point */
 }
 
 .swiper {
   width: 100%;
-  position: relative;
-
 }
 
-.slides {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  gap: 1rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background: #000;
-  color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 100%;
-  box-sizing: border-box;
-  text-align: left;
-  gap: 15px;
-}
-
-.avatar {
-  width: 100%;
-  max-width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  align-self: center;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.topRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.name {
-  font-size: 1.5em;
-  margin: 0;
-}
-
-.year {
-  font-size: 1.1em;
-  margin: 0;
-}
-
-.desc {
-  font-size: 0.95em;
-}
-
-.socials a {
-  color: #fff;
-  margin-left: 10px;
-  font-size: 1.2em;
-  transition: color 0.2s ease-in-out;
-}
-
-.socials a:hover {
-  color: #0af;
-}
-
-/* styles.css */
-/* .slider-container {
-} */
-
-/* .custom-prev,
-.custom-next {
+.customPrev,
+.customNext {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -94,17 +23,51 @@
   cursor: pointer;
   font-size: 20px;
   z-index: 10;
+  transition: all 0.3s ease;
 }
 
-.custom-prev:hover,
-.custom-next:hover {
+.customPrev:hover,
+.customNext:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
-.custom-prev {
+/* Desktop positioning */
+.customPrev {
   left: 10px;
 }
-
-.custom-next {
+.customNext {
   right: 10px;
-} */
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .customPrev,
+  .customNext {
+    padding: 10px;
+    font-size: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .customPrev,
+  .customNext {
+    padding: 8px;
+    font-size: 16px;
+  }
+  .customPrev {
+    left: 5px;
+  }
+  .customNext {
+    right: 5px;
+  }
+}
+
+/* Very small devices */
+@media (max-width: 480px) {
+  .customPrev,
+  .customNext {
+    padding: 6px;
+    font-size: 14px;
+  }
+}

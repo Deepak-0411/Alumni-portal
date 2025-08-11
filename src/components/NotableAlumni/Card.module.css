@@ -1,0 +1,71 @@
+.card {
+  display: flex;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  width: clamp(20rem, 88vw, 40rem);
+  height: clamp(10rem, 46vw, 20rem);
+}
+
+.imageSection {
+  flex: 1;
+  max-width: 32%;
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.textSection {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: calc(100% - 32%);
+  max-height: 100%;
+}
+.userInfo {
+  overflow: hidden;
+}
+
+.name {
+  margin: 0;
+  font-size:clamp(1rem, 4vw , 1.8rem);
+}
+
+.year {
+  margin: 0 0 clamp(.3rem,1.2vw,1rem) 0;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.description {
+  font-size: clamp(.75rem, 3vw, 0.85rem);
+  line-height: 1.4;
+  color: #ddd;
+}
+
+.socials {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.OverlayDiv{
+    background-color: black;
+    color: #ddd;
+    border-radius: .625rem;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-x: scroll;
+    padding: 1rem;
+}

@@ -13,7 +13,7 @@ const AdminLayout = ({ role }) => {
     <div className={styles.container}>
       <Header
         buttons={false}
-        additionalComponent={<UserInfo />}
+        additionalComponent={<UserInfo role={role} />}
         isAdmin={true}
       />
       <main className={styles.outlet2}>

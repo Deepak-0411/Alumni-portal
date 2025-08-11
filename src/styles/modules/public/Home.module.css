@@ -82,10 +82,10 @@
   margin-bottom: 3.06rem;
 }
 .notableAlumniText {
-  margin-left: 7rem;
+  margin-left: clamp(1.5rem, 6.5vw , 7rem);
   color: #000;
   font-family: Inter;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 8vw,3rem);
   font-weight: 600;
 }
 

@@ -32,7 +32,7 @@ const ProtectedRoute = ({ element, user }) => {
         setIsAuthorized(true);
       } else {
         console.error("Error:", response.message);
-        toast.error(`Failed to verify`);
+        toast.info(`Session expired. Login again!!!`);
         setIsAuthorized(false);
       }
     };

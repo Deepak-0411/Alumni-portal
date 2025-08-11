@@ -15,7 +15,7 @@ export const DataProvider = ({ children }) => {
   const [subAdminList, setSubAdminList] = useState([]);
 
   // User Data
-  const [currentUser, setCurrentUser] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]); // this is for all i.e user/admin/subAdmin
   const [userLoading, setUserLoading] = useState(false);
 
   // School & branch Data
@@ -25,16 +25,38 @@ export const DataProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
   // functions
+  const clearAll = () => {
+    setVerifyUsersList([]);
+    setActiveUsersList([]);
+    setApprovedUsersList([]);
+    setAlumniList([]);
+    setSubAdminList([]);
+    setCurrentUser([]);
+  };
 
-  const fetchUser = async () => {
+  const fetchUser = async (forUser = "user") => {
+    const url = (() => {
+      switch (forUser) {
+        case "user":
+          return "/api/alumni/profile";
+        case "subAdmin":
+          return "/api/subadmin/profile";
+        case "superAdmin":
+          return "/api/root/profile";
+        default:
+          return null;
+      }
+    })();
+
     const response = await apiRequest({
-      url: `/api/alumni/profile`,
+      url: url,
       setLoading: setUserLoading,
     });
+    // console.log(response);
 
     if (response.status === "success") {
       if (response?.data) {
-        setCurrentUser(response.data.entries);
+        setCurrentUser([response.data.entries]);
       }
     } else {
       console.error("Error:", response.message);
@@ -96,6 +118,7 @@ export const DataProvider = ({ children }) => {
         setUserLoading,
 
         // Functions
+        clearAll,
         fetchUser,
         fetchSchoolData,
         fetchEvents,
