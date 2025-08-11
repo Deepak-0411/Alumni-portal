@@ -3,6 +3,7 @@ import apiRequest from "../utility/apiRequest";
 import { useState } from "react";
 import Loading from "./Spinner/Loading";
 import { FiLogOut } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 const AdminNavbar = ({ forPage }) => {
   const [loading, setLoading] = useState(false);
@@ -43,9 +44,11 @@ const AdminNavbar = ({ forPage }) => {
       method: "POST",
       setLoading,
     });
-    
+
     if (response.status === "success") {
       navigate(redirectPath);
+    } else {
+      toast.error("Failed to logout");
     }
   };
 
@@ -80,7 +83,7 @@ const AdminNavbar = ({ forPage }) => {
             <Loading color="blue" size="small" />
           ) : (
             <>
-              Logout <FiLogOut size={18} strokeWidth={2.65}  />
+              Logout <FiLogOut size={18} strokeWidth={2.65} />
             </>
           )}
         </button>

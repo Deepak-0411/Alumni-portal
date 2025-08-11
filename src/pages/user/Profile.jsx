@@ -10,6 +10,7 @@ import Loading from "../../components/Spinner/Loading";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../utility/apiRequest";
 import { useData } from "../../context/DataContext";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
@@ -89,11 +90,13 @@ const Profile = () => {
     const response = await apiRequest({
       url: `/api/alumni/logout`,
       method: "POST",
-      setLoading: logoutLoading,
+      setLoading: setLogoutLoading,
     });
 
     if (response.status === "success") {
       navigate("/alumni/login");
+    } else {
+      toast.error("Failed to logout");
     }
   };
 
@@ -242,7 +245,7 @@ const Profile = () => {
           className=" w-45 py-3 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3 "
           onClick={handleLogout}
         >
-          {loading ? (
+          {logoutLoading ? (
             <Loading color="blue" size="small" />
           ) : (
             <>
