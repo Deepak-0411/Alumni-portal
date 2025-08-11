@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DP from "../../assets/user.png";
 import styles from "../../styles/modules/user/Profile.module.css";
 import DataCard from "../../components/DataCard/DataCard";
@@ -9,29 +9,31 @@ import { FiLogOut } from "react-icons/fi";
 import Loading from "../../components/Spinner/Loading";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../utility/apiRequest";
+import { useData } from "../../context/DataContext";
 
 const Profile = () => {
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    Name: "Mr. Example",
-    Fathername: "Example",
-    dob: "12/12/2012",
-    phoneNo: "1234567890",
-    email: "example@gmail.com",
-    enrollmentNo: "222211244",
-    rollNo: "235UCS050",
-    yearOfPassing: "2027",
-    school: "School Of ICT",
-    programme: "B.Tech",
-    country: "",
-    dp: "",
-    x: "",
-    insta: "",
-    linkedIn: "",
-    gitHub: "",
-    description:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda voluptatem ab molestias id velit minus laboriosam, quidem libero minima corrupti.",
-  });
+  const [logoutLoading, setLogoutLoading] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   Name: "Mr. Example",
+  //   Fathername: "Example",
+  //   dob: "12/12/2012",
+  //   phoneNo: "1234567890",
+  //   email: "example@gmail.com",
+  //   enrollmentNo: "222211244",
+  //   rollNo: "235UCS050",
+  //   yearOfPassing: "2027",
+  //   school: "School Of ICT",
+  //   programme: "B.Tech",
+  //   country: "",
+  //   dp: "",
+  //   x: "",
+  //   insta: "",
+  //   linkedIn: "",
+  //   gitHub: "",
+  //   description:
+  //     " Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda voluptatem ab molestias id velit minus laboriosam, quidem libero minima corrupti.",
+  // });
+
   const toVerifyFields = [
     "phoneNo",
     "email",
@@ -46,6 +48,18 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const { formErrors, setFormErrors, validate } =
     useFormValidation(toVerifyFields);
+  const {
+    fetchUser,
+    userLoading: loading,
+    currentUser: formData,
+    setCurrentUser: setFormData,
+  } = useData();
+
+  useEffect(() => {
+    if (!Array.isArray(formData) || formData.length === 0) {
+      fetchUser();
+    }
+  }, []);
 
   const startEdit = () => {
     setDraftData(formData);
@@ -75,7 +89,7 @@ const Profile = () => {
     const response = await apiRequest({
       url: `/api/alumni/logout`,
       method: "POST",
-      setLoading,
+      setLoading: logoutLoading,
     });
 
     if (response.status === "success") {
@@ -141,14 +155,14 @@ const Profile = () => {
   const sections = [
     {
       heading: "Profile Data",
-      dataItems: buildItems([{ label: "Name", name: "Name" }]),
+      dataItems: buildItems([{ label: "Name", name: "alumniName" }]),
       image: formData.dp || DP,
     },
     {
       heading: "Personal Data",
       dataItems: buildItems([
         { label: "Date Of Birth", name: "dob" },
-        { label: "Father's Name", name: "Fathername" },
+        { label: "Father's Name", name: "fatherName" },
       ]),
     },
     {
@@ -164,7 +178,7 @@ const Profile = () => {
         { label: "Enrollment Number", name: "enrollmentNo" },
         { label: "Roll Number", name: "rollNo" },
         { label: "Year Of Passing", name: "yearOfPassing" },
-        { label: "School", name: "school" },
+        { label: "School", name: "schoolName" },
         { label: "Programme", name: "programme" },
         { label: "Country", name: "country", editable: true },
       ]),
@@ -219,6 +233,7 @@ const Profile = () => {
           heading={section.heading}
           dataItems={section.dataItems}
           image={section.image}
+          loading={loading}
         />
       ))}
 

@@ -7,7 +7,7 @@
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  height: 20rem;
+  min-height: 20rem;
 }
 .heading,
 .data {

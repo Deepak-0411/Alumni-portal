@@ -5,6 +5,7 @@ import styles from "../../styles/modules/user/MembershipCard.module.css";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useData } from "../../context/DataContext";
 
 function MembershipCardSkeleton(data) {
   return (
@@ -38,7 +39,14 @@ function MembershipCardSkeleton(data) {
 }
 
 const MembershipCard = () => {
-  const [loading, setLoading] = useState(true);
+  const { fetchUser, userLoading:loading, currentUser } = useData();
+
+  useEffect(() => {
+    if (!Array.isArray(currentUser) || currentUser.length === 0) {
+      fetchUser();
+    }
+  }, []);
+
   const data = [
     {
       "Personal Information": {

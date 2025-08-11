@@ -1,7 +1,14 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaInstagram,
+  FaArrowLeft,
+  FaArrowRight,
+} from "react-icons/fa";
+
+import { FaXTwitter } from "react-icons/fa6";
 import styles from "./NotableAlumni.module.css";
 
 import "swiper/css";
@@ -59,19 +66,23 @@ const NotableAlumni = () => {
     <div className={styles.outerdiv}>
       <Swiper
         modules={[Navigation, Autoplay]}
-        navigation
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 500000, disableOnInteraction: false }}
         loop
         slidesPerView={1}
+        navigation={{
+          nextEl: ".custom-next",
+          prevEl: ".custom-prev",
+        }}
         breakpoints={{
           640: { slidesPerView: 1 },
-          768: { slidesPerView: 1 },
-          1024: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
         }}
         className={styles.swiper}
+        wrapperClass={styles.slides}
       >
         {alumni.map((alum, index) => (
-          <SwiperSlide key={index} className={styles.slide}>
+          <SwiperSlide key={index}>
             <div className={styles.card}>
               <img src={alum.image} alt={alum.name} className={styles.avatar} />
               <div className={styles.content}>
@@ -97,7 +108,7 @@ const NotableAlumni = () => {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      <FaTwitter />
+                      <FaXTwitter />
                     </a>
                   </div>
                 </div>
@@ -110,6 +121,13 @@ const NotableAlumni = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      {/* Custom buttons with icons */}
+      {/* <button className={`custom-prev ${styles.custom - prev}`}>
+        <FaArrowLeft />
+      </button>
+      <button className={`custom-next ${styles.custom - next}`}>
+        <FaArrowRight />
+      </button> */}
     </div>
   );
 };

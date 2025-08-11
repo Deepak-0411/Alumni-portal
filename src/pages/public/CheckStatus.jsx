@@ -32,14 +32,14 @@ const CheckStatus = () => {
     if (response.status === "success") {
       setIsPaid(response.data?.isPaid);
       setIsVerified(response.data?.isVerified);
-          } else {
+    } else {
       console.error("Error:", response.message);
       toast.error(`${response.message}`);
     }
   };
 
   const handlePayClick = () => {
-    makePayment(email,setPayAPILoading)
+    makePayment(email, setPayAPILoading);
   };
 
   return (
@@ -56,7 +56,7 @@ const CheckStatus = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <button className={styles.btn} type="submit" disabled={!email}>
-             Search
+            Search
           </button>
         </div>
       </form>
@@ -66,14 +66,27 @@ const CheckStatus = () => {
       ) : isVerified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
-          {isPaid === false && (<>
-            <p>Pay a one time alumni membership  </p>
-            <button className={styles.btn} onClick={handlePayClick} disabled={payAPIloading}>
-              Proceed to Pay {payAPIloading && <Loading size="small" color="white" />}
-            </button>X</>
+          {isPaid === false && (
+            <>
+              {/* <p>Join the Alumni Association Today — One-time Membership ₹1000
+Stay connected, network with fellow graduates, and enjoy exclusive member benefits for life. </p> */}
+              <button
+                className={styles.btn}
+                onClick={handlePayClick}
+                disabled={payAPIloading}
+              >
+                Proceed to Pay
+                {payAPIloading && <Loading size="small" color="white" />}
+              </button>
+            </>
           )}
-          {isPaid  && (
-            <button className={styles.btn} onClick={()=>{navigate("/alumni/login")}}>
+          {isPaid && (
+            <button
+              className={styles.btn}
+              onClick={() => {
+                navigate("/alumni/login");
+              }}
+            >
               Proceed to Login
             </button>
           )}
@@ -81,7 +94,12 @@ const CheckStatus = () => {
       ) : (
         isVerified === false && (
           <div className={styles.data}>
-            <p> Pending... </p>
+            <p>
+              You are not yet verified — please wait a moment.
+              <br />
+              We’re verifying your details and will confirm once the process is
+              complete.
+            </p>
           </div>
         )
       )}

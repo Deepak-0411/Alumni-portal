@@ -16,6 +16,7 @@ export const DataProvider = ({ children }) => {
 
   // User Data
   const [currentUser, setCurrentUser] = useState([]);
+  const [userLoading, setUserLoading] = useState(false);
 
   // School & branch Data
   const [schoolData, setSchoolData] = useState([]);
@@ -24,6 +25,22 @@ export const DataProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
 
   // functions
+
+  const fetchUser = async () => {
+    const response = await apiRequest({
+      url: `/api/alumni/profile`,
+      setLoading: setUserLoading,
+    });
+
+    if (response.status === "success") {
+      if (response?.data) {
+        setCurrentUser(response.data.entries);
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Failed to fetch user`);
+    }
+  };
 
   const fetchSchoolData = async () => {
     const response = await apiRequest({
@@ -75,8 +92,11 @@ export const DataProvider = ({ children }) => {
         setSchoolData,
         events,
         setEvents,
+        userLoading,
+        setUserLoading,
 
         // Functions
+        fetchUser,
         fetchSchoolData,
         fetchEvents,
       }}

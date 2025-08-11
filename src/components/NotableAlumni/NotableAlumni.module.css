@@ -7,13 +7,15 @@
 
 .swiper {
   width: 100%;
-  max-width: 600px;
+  position: relative;
+
 }
 
-.slide {
-  display: flex;
+.slides {
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  gap: 1rem;
 }
 
 .card {
@@ -74,3 +76,35 @@
 .socials a:hover {
   color: #0af;
 }
+
+/* styles.css */
+/* .slider-container {
+} */
+
+/* .custom-prev,
+.custom-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 10;
+}
+
+.custom-prev:hover,
+.custom-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.custom-prev {
+  left: 10px;
+}
+
+.custom-next {
+  right: 10px;
+} */
