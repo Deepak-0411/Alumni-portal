@@ -17,9 +17,8 @@ const Home = () => {
     }
   }, []);
 
-  return (
-    <div className={styles.container}>
-      {/* students pngs */}
+  const StudentPngSection = () => {
+    return (
       <div className={styles.studentPng}>
         <div className={styles.pngs}>
           <img
@@ -34,8 +33,10 @@ const Home = () => {
           <h1 className={styles.taglineText}>Reconnect. Inspire. Grow.</h1>
         </div>
       </div>
-
-      {/* vc sir section */}
+    );
+  };
+  const VcSirSection = () => {
+    return (
       <div className={styles.VCCard}>
         <div className={styles.card}>
           <div className={styles.VCwordsContainer}>
@@ -55,14 +56,19 @@ const Home = () => {
           </div>
         </div>
       </div>
+    );
+  };
 
-      {/* notable alumni's section */}
+  const NotableAlumniSection = () => {
+    return (
       <div className={styles.notableAlumni}>
         <p className={styles.notableAlumniText}>Notable Alumni</p>
-        <NotableAlumni/>
+        <NotableAlumni />
       </div>
-
-      {/* events section */}
+    );
+  };
+  const EventsSection = () => {
+    return (
       <div className={styles.events}>
         <div className={styles.eventTitleContainer}>
           <h2 className={styles.eventTitle}>EVENTS 2025</h2>
@@ -91,6 +97,22 @@ const Home = () => {
           <p className={styles.eventName}>Comming Soon</p>
         )}
       </div>
+    );
+  };
+
+  return (
+    <div className={styles.container}>
+      {/* students pngs */}
+      <StudentPngSection />
+
+      {/* vc sir section */}
+      <VcSirSection />
+
+      {/* notable alumni's section */}
+      <NotableAlumniSection />
+
+      {/* events section */}
+      <EventsSection />
     </div>
   );
 };

@@ -23,7 +23,7 @@ const getCollegeDetails = (user) => [
   { label: "Year Of Passing", value: user.yearOfPassing || "-" },
   { label: "School", value: user.schoolName || "-" },
   { label: "Programme", value: user.programme || "-" },
-  { label: "Country", value: user.country || "-" },
+  { label: "Branch", value: user.branch || "-" },
 ];
 
 const VerifyUser = ({
