@@ -62,6 +62,20 @@ const Register = () => {
 
     if ((name === "enrollmentNo" || name === "phoneNo") && +value < 0) return;
 
+    if (type === "file") {
+      const file = e.target.files[0];
+      const maxSize = 2 * 1024 * 1024; 
+
+      if (file && file.size > maxSize) {
+        toast.info("Image size must be less than 2MB");
+        e.target.value = "";
+        return;
+      }
+    }
+
+    // Continue with your normal logic
+    console.log("File is valid:", file);
+
     setFormData((prev) => ({
       ...prev,
       [name]: type === "file" ? files[0] : value,
@@ -232,7 +246,7 @@ const Register = () => {
           <Input
             type="file"
             name="degree_picture"
-            label="Photograph of degree"
+            label="Upload Degree/Marksheet (max size 2MB)"
             onChange={handleChange}
           />
         </div>

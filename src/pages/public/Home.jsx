@@ -6,7 +6,8 @@ import VCimg from "../../assets/VCimg.png";
 import { useData } from "../../context/DataContext";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Spinner/Loading";
-import NotableAlumni from "../../components/NotableAlumni/NotableAlumni";
+import Card from "../../components/NotableAlumni/Card";
+import HomeWriteup from "../../components/HomeWriteup/HomeWriteup";
 const Home = () => {
   const { events, fetchEvents } = useData();
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ const Home = () => {
     return (
       <div className={styles.notableAlumni}>
         <p className={styles.notableAlumniText}>Notable Alumni</p>
-        <NotableAlumni />
+        <Card />
       </div>
     );
   };
@@ -113,6 +114,8 @@ const Home = () => {
 
       {/* events section */}
       <EventsSection />
+
+      <HomeWriteup/>
     </div>
   );
 };
