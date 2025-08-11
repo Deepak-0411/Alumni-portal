@@ -51,19 +51,19 @@ const MembershipCard = () => {
   const data = [
     {
       "Personal Information": {
-        DOB: user["dob"] || "-",
-        "Phone No.": user["phoneNo"] || "-",
+        DOB: user?.["dob"] || "-",
+        "Phone No.": user?.["phoneNo"] || "-",
       },
     },
     {
       Residence: {
-        Country: user["country"] || "-",
+        Country: user?.["country"] || "-",
       },
     },
     {
       "Card Information": {
-        Batch: user["batch"] || "-",
-        Validity: user["validity"] || "Lifetime",
+        Batch: user?.["batch"] || "-",
+        Validity: user?.["validity"] || "Lifetime",
       },
     },
   ];
