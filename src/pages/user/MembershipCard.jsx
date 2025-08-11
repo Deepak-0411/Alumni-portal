@@ -62,7 +62,7 @@ const MembershipCard = () => {
     },
     {
       "Card Information": {
-        Batch: user?.["batch"] || "-",
+        Batch: user?.["yearOfPassing"] || "-",
         Validity: user?.["validity"] || "Lifetime",
       },
     },
@@ -80,7 +80,7 @@ const MembershipCard = () => {
       <div className={styles.card}>
         <div className={styles.leftCol}>
           <img className={styles.userdp} src={DP} alt="Profile Pic" />
-          <p className={styles.name}> Deepak Kumar</p>
+          <p className={styles.name}> { user?.["alumniName"] || "User"}</p>
         </div>
         <div className={styles.rightCol}>
           {data.map((section, index) => {
