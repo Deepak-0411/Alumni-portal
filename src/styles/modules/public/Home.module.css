@@ -1,6 +1,23 @@
 .container {
   width: 100%;
-  background: #ffffff;
+  background: #fff;
+
+  background-image: linear-gradient(
+    180deg,
+    hsl(0deg 0% 100%) 0%,
+    hsl(212deg 100% 100%) 3%,
+    hsl(212deg 100% 99%) 7%,
+    hsl(212deg 100% 99%) 11%,
+    hsl(212deg 100% 98%) 15%,
+    hsl(212deg 100% 98%) 20%,
+    hsl(212deg 100% 97%) 26%,
+    hsl(212deg 100% 97%) 32%,
+    hsl(212deg 100% 96%) 40%,
+    hsl(212deg 100% 96%) 49%,
+    hsl(212deg 100% 96%) 60%,
+    hsl(212deg 100% 96%) 75%,
+    hsl(213deg 100% 95%) 100%
+  );
 }
 
 .studentPng,
@@ -80,12 +97,13 @@
 
 .notableAlumni {
   margin-bottom: 3.06rem;
+  background-color: #f0f7ff;
 }
 .notableAlumniText {
-  margin-left: clamp(1.5rem, 6.5vw , 7rem);
+  margin-left: clamp(1.5rem, 6.5vw, 7rem);
   color: #000;
   font-family: Inter;
-  font-size: clamp(1.5rem, 8vw,3rem);
+  font-size: clamp(1.5rem, 8vw, 3rem);
   font-weight: 600;
 }
 
@@ -139,17 +157,17 @@
   font-size: clamp(1.6rem, 5vw, 3rem);
   font-weight: 600;
 }
-.eventTagsContainer{
+.eventTagsContainer {
   width: 100%;
 }
 .eventTags {
   color: #fff;
   font-family: Inter;
-  font-size: clamp(0.5rem, 2vw, .8rem);
+  font-size: clamp(0.5rem, 2vw, 0.8rem);
   font-weight: 300;
   background-color: #f7f7f759;
   border-radius: 0.5rem;
-  padding: .3rem;
+  padding: 0.3rem;
   margin-right: 1rem;
 }
 .aboutEvent {

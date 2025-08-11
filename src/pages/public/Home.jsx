@@ -109,13 +109,15 @@ const Home = () => {
       {/* vc sir section */}
       <VcSirSection />
 
+      {/* WriteUp Section */}
+      <HomeWriteup/>
+
       {/* notable alumni's section */}
       <NotableAlumniSection />
 
       {/* events section */}
       <EventsSection />
 
-      <HomeWriteup/>
     </div>
   );
 };

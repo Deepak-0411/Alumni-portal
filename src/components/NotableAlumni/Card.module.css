@@ -66,6 +66,6 @@
     border-radius: .625rem;
     max-width: 90vw;
     max-height: 80vh;
-    overflow-x: scroll;
+    overflow: auto;
     padding: 1rem;
 }

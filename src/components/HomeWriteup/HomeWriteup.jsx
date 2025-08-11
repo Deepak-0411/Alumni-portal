@@ -4,19 +4,26 @@ import { FaLinkedin, FaStar } from "react-icons/fa6";
 import { BsGlobe2 } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
 import fallBackUserPng from "../../assets/user.png";
+import fallBackAssociationPng from "../../assets/imgNotFound.jpg";
+import AutoSwiper from "../AutoSlider/AutoSwiper";
 
-const alumniCard = ({ dp, name, post, desc,linkedInUrl }) => {
+const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
   return (
     <div className={styles.alumniCard} key={name}>
       <div className={styles.leftSection}>
-        <img src={dp || fallBackUserPng} alt={name} className={styles.alumniDP} />
+        <img
+          src={dp || fallBackUserPng}
+          alt={name}
+          className={styles.alumniDP}
+        />
       </div>
       <div className={styles.rightSection}>
         <h4>
           {name}
-          <span>
-          <FaLinkedin />
-          </span>
+          <a href={linkedInUrl} target="_blank" rel="noopener noreferrer">
+            <FaLinkedin />
+          </a>
+          <span></span>
         </h4>
         <h5>{post}</h5>
         <p>{desc}</p>
@@ -61,6 +68,13 @@ const distAlumniData = [
     desc: "Manager- Content at UpGrad. He is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
     linkedInUrl: "",
   },
+];
+const AssociationImages = [
+  fallBackAssociationPng,
+  fallBackAssociationPng,
+  fallBackAssociationPng,
+  fallBackAssociationPng,
+  fallBackAssociationPng,
 ];
 
 export default function HomeWriteup() {
@@ -135,21 +149,25 @@ export default function HomeWriteup() {
       </div>
 
       <div className={styles.distinguishedAlumni}>
-        <h3 className={styles.subHeading}>
-          &nbsp;	Distinguished Alumni
-        </h3>
+        <h3 className={styles.subHeading}>&nbsp; Distinguished Alumni</h3>
         <div className={styles.distinguishedAlumniCards}>
           {distAlumniData.map((data) => alumniCard(data))}
         </div>
       </div>
 
       <div className={styles.imgGallery}>
-        <h3 className={styles.subHeading}>
-          &nbsp; Gallery
-        </h3>
-        
+        <h3 className={styles.subHeading}>&nbsp; Gallery</h3>
+        <AutoSwiper>
+          {AssociationImages.map((AssociationImage, index) => (
+            <img
+              src={AssociationImage}
+              alt="Image"
+              key={index}
+              className={styles.associationImage}
+            />
+          ))}
+        </AutoSwiper>
       </div>
-
     </div>
   );
 }

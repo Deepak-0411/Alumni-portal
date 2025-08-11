@@ -172,3 +172,6 @@
 .imgGallery{
   width: 100%;
 }
+.associationImage{
+  width: clamp(20rem, 88vw, 40rem);
+}
