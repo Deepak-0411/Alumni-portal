@@ -32,7 +32,6 @@ export const DevCard = ({
         src={image}
         alt={`${name} - ${role || "Developer"}`}
         className="w-full h-full object-cover"
-        loading="lazy"
       />
 
       {/* Overlay */}
