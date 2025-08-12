@@ -215,7 +215,7 @@ const Profile = () => {
       <div className="w-[100%] flex items-center justify-center gap-6 flex-wrap">
         <button
           className="py-2.5 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3 "
-          onClick={() => navigate("/alumni/changePassword")}
+          onClick={() => navigate("/alumni/user/changePassword")}
         >
           Change Password
         </button>

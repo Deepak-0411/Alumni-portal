@@ -11,7 +11,7 @@ const ProtectedRoute = ({ element, user }) => {
   let url = "";
 
   if (user === "user") {
-    defaultRoot = "/alumni/home";
+    defaultRoot = "/alumni/login";
     url = "/api/members-only/alumni-auth";
   } else if (user === "sub-Admin") {
     defaultRoot = "/alumni/sub-admin/login";

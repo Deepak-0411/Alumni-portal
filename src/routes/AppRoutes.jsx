@@ -55,10 +55,9 @@ const AppRoutes = () => {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="forgetPassword" element={<ForgetPassword />} />
-        <Route path="changePassword" element={<ChangePass />} />
         <Route
           path="/alumni/forgetPassword/reset/:token"
-          element={<ChangePass />}
+          element={<ChangePass isForgotMode={true} />}
         />
         <Route path="payment-success" element={<h1>payment success</h1>} />
         <Route path="payment-failure" element={<h1>payment Failed</h1>} />
@@ -75,6 +74,7 @@ const AppRoutes = () => {
         <Route path="events" element={<Events />} />
         <Route path="membershipCard" element={<MembershipCard />} />
         <Route path="contactUs" element={<ContactUs />} />
+        <Route path="changePassword" element={<ChangePass />} />
       </Route>
 
       {/* Sub Admin Routes (Protected and Role-Restricted) */}

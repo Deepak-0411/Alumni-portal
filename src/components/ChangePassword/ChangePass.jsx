@@ -6,7 +6,7 @@ import Input from "../Input/Input";
 import Loading from "../Spinner/Loading";
 import apiRequest from "../../utility/apiRequest";
 
-const ChangePass = () => {
+const ChangePass = ({ isForgotMode = false }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [data, setData] = useState({ oldPass: "", newPass: "", cnfPass: "" });
   const [errors, setErrors] = useState({
@@ -18,7 +18,6 @@ const ChangePass = () => {
   const navigate = useNavigate();
   const { token } = useParams();
 
-  const isForgotMode = Boolean(token);
 
   // Validate confirm password
   useEffect(() => {
@@ -71,7 +70,6 @@ const ChangePass = () => {
       toast.error(`${response.message || "Unknown error"}`);
     } else {
       console.error("Error:", response.message);
-      toast.error(`Something went wrong`);
       toast.error(`${response.message || "Unknown error"}`);
     }
   };
