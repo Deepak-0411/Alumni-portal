@@ -17,6 +17,7 @@ export const DataProvider = ({ children }) => {
   // User Data
   const [currentUser, setCurrentUser] = useState([]); // this is for all i.e user/admin/subAdmin
   const [userLoading, setUserLoading] = useState(false);
+  const [card, setCard] = useState([]);
 
   // School & branch Data
   const [schoolData, setSchoolData] = useState([]);
@@ -32,6 +33,7 @@ export const DataProvider = ({ children }) => {
     setAlumniList([]);
     setSubAdminList([]);
     setCurrentUser([]);
+    setCard([]);
   };
 
   const fetchUser = async (forUser = "user") => {
@@ -56,11 +58,27 @@ export const DataProvider = ({ children }) => {
 
     if (response.status === "success") {
       if (response?.data) {
-        setCurrentUser([response.data.entries]);
+        setCurrentUser([response.data?.entries]);
       }
     } else {
       console.error("Error:", response.message);
       toast.error(`Failed to fetch user`);
+    }
+  };
+
+  const fetchCard = async () => {
+    const response = await apiRequest({
+      url: "/api/alumni/profile/card",
+      setLoading: setUserLoading,
+    });
+
+    if (response.status === "success") {
+      if (response?.data) {
+        setCard([response.data?.entries]);
+      }
+    } else {
+      console.error("Error:", response.message);
+      toast.error(`Failed to fetch Card`);
     }
   };
 
@@ -116,10 +134,13 @@ export const DataProvider = ({ children }) => {
         setEvents,
         userLoading,
         setUserLoading,
+        card,
+        setCard,
 
         // Functions
         clearAll,
         fetchUser,
+        fetchCard,
         fetchSchoolData,
         fetchEvents,
       }}

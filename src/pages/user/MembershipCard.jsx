@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import DP from "../../assets/user.png";
+import Logo from "../../assets/GBULOGO.png";
 
 import styles from "../../styles/modules/user/MembershipCard.module.css";
 
@@ -39,14 +40,25 @@ function MembershipCardSkeleton(data) {
 }
 
 const MembershipCard = () => {
-  const { fetchUser, userLoading: loading, currentUser } = useData();
+  const {
+    fetchUser,
+    fetchCard,
+    userLoading: loading,
+    currentUser,
+    card,
+  } = useData();
 
   useEffect(() => {
     if (!Array.isArray(currentUser) || currentUser.length === 0) {
       fetchUser();
     }
+    if (!Array.isArray(card) || card.length === 0) {
+      fetchCard();
+      
+    }
   }, []);
-  const user = currentUser[0];
+  const user = card[0];
+  
 
   const data = [
     {
@@ -56,8 +68,8 @@ const MembershipCard = () => {
       },
     },
     {
-      Residence: {
-        Country: user?.["country"] || "-",
+      "Card Information": {
+        "Card Number": user?.["cardNo"] || "-",
       },
     },
     {
@@ -80,7 +92,7 @@ const MembershipCard = () => {
       <div className={styles.card}>
         <div className={styles.leftCol}>
           <img className={styles.userdp} src={DP} alt="Profile Pic" />
-          <p className={styles.name}> { user?.["alumniName"] || "User"}</p>
+          <p className={styles.name}> {user?.["alumniName"] || "User"}</p>
         </div>
         <div className={styles.rightCol}>
           {data.map((section, index) => {
@@ -100,6 +112,7 @@ const MembershipCard = () => {
               </div>
             );
           })}
+          <img src={Logo} alt="Logo" className={styles.logo} />
         </div>
       </div>
     </div>

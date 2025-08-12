@@ -31,15 +31,20 @@ const Profile = () => {
     useFormValidation(toVerifyFields);
   const {
     fetchUser,
+    fetchCard,
     clearAll,
     userLoading: loading,
     currentUser,
     setCurrentUser: setFormData,
+    card,
   } = useData();
 
   useEffect(() => {
     if (!Array.isArray(currentUser) || currentUser.length === 0) {
       fetchUser();
+    }
+    if (!Array.isArray(card) || card.length === 0) {
+      fetchCard();
     }
   }, []);
 
