@@ -64,7 +64,7 @@ const Register = () => {
 
     if (type === "file") {
       const file = e.target.files[0];
-      const maxSize = 2 * 1024 * 1024; 
+      const maxSize = 2 * 1024 * 1024;
 
       if (file && file.size > maxSize) {
         toast.info("Image size must be less than 2MB");
@@ -72,9 +72,6 @@ const Register = () => {
         return;
       }
     }
-
-    // Continue with your normal logic
-    console.log("File is valid:", file);
 
     setFormData((prev) => ({
       ...prev,
@@ -95,6 +92,21 @@ const Register = () => {
 
     if (response.status === "success") {
       toast.success("Registered Sucessfully!!! ");
+      setFormData({
+        title: "",
+        enrollmentNo: "",
+        rollNo: "",
+        alumniName: "",
+        fatherName: "",
+        dob: "",
+        yearOfPassing: "",
+        phoneNo: "",
+        email: "",
+        school: "",
+        programme: "",
+        branch: "",
+        imgOfDegree: "",
+      });
       // navigate("/alumni/checkStatus", { state: { email: formData.email } });
     } else {
       console.error("Error:", response.message);

@@ -5,14 +5,13 @@ import Loading from "../../components/Spinner/Loading";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest";
 import { useNavigate } from "react-router-dom";
-import makePayment from "../../utility/makePayment";
+import Payment from "../../components/Payment/Payment";
 
 const CheckStatus = () => {
   const [isVerified, setIsVerified] = useState(null);
   const [isPaid, setIsPaid] = useState(null);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [payAPIloading, setPayAPILoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = async (e) => {
@@ -36,10 +35,6 @@ const CheckStatus = () => {
       console.error("Error:", response.message);
       toast.error(`${response.message}`);
     }
-  };
-
-  const handlePayClick = () => {
-    makePayment(email, setPayAPILoading);
   };
 
   return (
@@ -66,20 +61,7 @@ const CheckStatus = () => {
       ) : isVerified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
-          {isPaid === false && (
-            <>
-              {/* <p>Join the Alumni Association Today — One-time Membership ₹1000
-Stay connected, network with fellow graduates, and enjoy exclusive member benefits for life. </p> */}
-              <button
-                className={styles.btn}
-                onClick={handlePayClick}
-                disabled={payAPIloading}
-              >
-                Proceed to Pay
-                {payAPIloading && <Loading size="small" color="white" />}
-              </button>
-            </>
-          )}
+          {isPaid === false && <Payment email={email} />}
           {isPaid && (
             <button
               className={styles.btn}

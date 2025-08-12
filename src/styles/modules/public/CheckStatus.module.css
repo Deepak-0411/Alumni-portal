@@ -8,6 +8,7 @@
   padding: 1.5rem;
   border-radius: 0.5rem;
   min-height: 20rem;
+  max-width: 40rem;
 }
 .heading,
 .data {

@@ -1,0 +1,40 @@
+.changePassContainer {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 24rem;
+  gap: 1.5rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.uploadBtn {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+}
+
+.uploadBtn {
+  background: #000000;
+  color: white;
+}
+
+.uploadBtn:disabled {
+  background: #656565;
+  cursor: not-allowed;
+}

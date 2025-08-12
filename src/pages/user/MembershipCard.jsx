@@ -7,6 +7,7 @@ import styles from "../../styles/modules/user/MembershipCard.module.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useData } from "../../context/DataContext";
+import Payment from "../../components/Payment/Payment";
 
 function MembershipCardSkeleton(data) {
   return (
@@ -54,11 +55,9 @@ const MembershipCard = () => {
     }
     if (!Array.isArray(card) || card.length === 0) {
       fetchCard();
-      
     }
   }, []);
   const user = card[0];
-  
 
   const data = [
     {
@@ -82,6 +81,10 @@ const MembershipCard = () => {
 
   if (loading) {
     return MembershipCardSkeleton(data);
+  }
+
+  if (!currentUser[0]?.isPaid) {
+    return <div className={styles.container}><Payment email={currentUser[0]?.email}/></div>;
   }
 
   return (

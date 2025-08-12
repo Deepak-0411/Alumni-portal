@@ -78,7 +78,7 @@ export const DataProvider = ({ children }) => {
       }
     } else {
       console.error("Error:", response.message);
-      toast.error(`Failed to fetch Card`);
+      // toast.error(`Failed to fetch Card`);
     }
   };
 

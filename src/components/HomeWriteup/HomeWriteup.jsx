@@ -27,7 +27,14 @@ const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
           <span></span>
         </h4>
         <h5>{post}</h5>
-        <p>{desc}</p>
+        <p>
+          {desc.split("\n").map((line, i) => (
+            <React.Fragment key={i}>
+              {line}
+              <br />
+            </React.Fragment>
+          ))}
+        </p>
       </div>
     </div>
   );
@@ -45,7 +52,7 @@ const distAlumniData = [
     dp: "",
     name: "Mr Vikram Singh",
     post: "Treasurer GBUAA",
-    desc: "Manager- Content at UpGrad. He is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
+    desc: "Manager- Content at UpGrad.\nHe is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
     linkedInUrl: "",
   },
 
@@ -53,14 +60,14 @@ const distAlumniData = [
     dp: "",
     name: "Mr Amit Jha",
     post: "Vice President GBUAA",
-    desc: "HR Manager at JSW Energy Ltd.He is a seasoned corporate leader with expertise in PerformanceManagement System, PolicyDrafting & Development, Talent Acquisition & Talent Management.",
+    desc: "HR Manager at JSW Energy Ltd.\nHe is a seasoned corporate leader with expertise in Performance Management System, PolicyDrafting & Development, Talent Acquisition & Talent Management.",
     linkedInUrl: "",
   },
   {
     dp: "",
     name: "Mr. Sunil Sharma",
     post: "Secretary GBUAA",
-    desc: "Assistant General Manager - IT at CSElectric.He contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
+    desc: "Assistant General Manager - IT at CSElectric.\nHe contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
     linkedInUrl: "",
   },
 
@@ -68,7 +75,7 @@ const distAlumniData = [
     dp: "",
     name: "Dr. Ajit Kumar",
     post: "President GBUAA",
-    desc: "Director of Public Relations at Sharda University.He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
+    desc: "Director of Public Relations at Sharda University.\n He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
     linkedInUrl: "",
   },
 ];
@@ -82,7 +89,7 @@ const AssociationImages = [
 ];
 
 export default function HomeWriteup() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <div className={styles.alumniContainer}>
       <h1 className={styles.title}>
@@ -149,7 +156,12 @@ export default function HomeWriteup() {
             Join the GBU Alumni Association to network, contribute and inspire
             future generations.
           </p>
-          <button className={styles.registerBtn} onClick={()=>(navigate("/alumni/register"))}>Register as Alumni</button>
+          <button
+            className={styles.registerBtn}
+            onClick={() => navigate("/alumni/register")}
+          >
+            Register as Alumni
+          </button>
         </div>
       </div>
 
