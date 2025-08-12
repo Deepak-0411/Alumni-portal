@@ -11,7 +11,7 @@
 .input option,
 .required span::after {
   width: 100%;
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: #111827;
   font-family: Inter;
   font-weight: 500;
@@ -50,14 +50,23 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.passwordWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .passwordToggle {
   background: transparent;
   position: absolute;
   right: 1rem;
-  bottom: .6rem;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
+
 .errorText {
   color: red;
   font-size: 0.8rem;
