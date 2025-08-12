@@ -8,6 +8,12 @@
   width: 24rem;
   gap: 1.5rem;
 }
+.heading {
+  color: #000000;
+  font-family: "Roboto";
+  font-size: 1.75rem;
+  font-weight: 700;
+}
 
 .form {
   display: flex;
@@ -17,7 +23,10 @@
 
 .uploadBtn {
   width: 100%;
+  background: #000000;
+  color: white;
   padding: 0.8rem;
+  margin-top: .5rem;
   font-size: 1rem;
   border: 1px solid black;
   border-radius: 0.5rem;
@@ -26,12 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .8rem;
-}
-
-.uploadBtn {
-  background: #000000;
-  color: white;
+  gap: 0.8rem;
 }
 
 .uploadBtn:disabled {

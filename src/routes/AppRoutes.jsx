@@ -7,6 +7,8 @@ import PageNotFound from "../pages/PageNotFound";
 import Home from "../pages/public/Home";
 import ContactUs from "../pages/public/ContactUs";
 import CheckStatus from "../pages/public/CheckStatus";
+import ForgetPassword from "../pages/public/ForgetPassword";
+import ChangePass from "../components/ChangePassword/ChangePass";
 import Devs from "../pages/Devs";
 
 // Auth Pages
@@ -37,7 +39,7 @@ import { setGlobalNavigate } from "../utility/navigation";
 const AppRoutes = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {    
+  useEffect(() => {
     setGlobalNavigate(navigate);
   }, []);
 
@@ -52,7 +54,12 @@ const AppRoutes = () => {
         <Route path="contactUs" element={<ContactUs />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="forgetPassword" element={<h1>Comming Soon</h1>} />
+        <Route path="forgetPassword" element={<ForgetPassword />} />
+        <Route path="changePassword" element={<ChangePass />} />
+        <Route
+          path="/alumni/forgetPassword/reset/:token"
+          element={<ChangePass />}
+        />
         <Route path="payment-success" element={<h1>payment success</h1>} />
         <Route path="payment-failure" element={<h1>payment Failed</h1>} />
         <Route path="checkStatus" element={<CheckStatus />} />

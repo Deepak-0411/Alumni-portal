@@ -7,106 +7,13 @@ import { useFormValidation } from "../../hooks/useFormValidation";
 import { FaUserEdit } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import Loading from "../../components/Spinner/Loading";
-import Overlay from "../../components/Overlay/Overlay";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../utility/apiRequest";
 import { useData } from "../../context/DataContext";
 import { toast } from "react-toastify";
 
-const ChangePass = () => {
-  const [isUploading, setIsUploading] = useState(false);
-  const [data, setData] = useState({ oldPass: "", newPass: "", cnfPass: "" });
-  const [errors, setErrors] = useState({
-    oldPass: "",
-    newPass: "",
-    cnfPass: "",
-  });
-
-  useEffect(() => {
-    if (data.cnfPass && data.newPass && data.cnfPass !== data.newPass) {
-      setErrors((prev) => ({ ...prev, cnfPass: "Passwords do not match." }));
-    } else {
-      setErrors((prev) => ({ ...prev, cnfPass: "" }));
-    }
-  }, [data.cnfPass, data.newPass]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (errors.cnfPass) {
-      toast.error("Please fix form errors before submitting.");
-      return;
-    }
-
-    const response = await apiRequest({
-      url: "/api/alumni/profile/change-password",
-      method: "POST",
-      body: {
-        credential: data.oldPass,
-        newCredential: data.cnfPass,
-      },
-      setLoading: setIsUploading,
-    });
-
-    if (response.status === "success") {
-      toast.success(`Password changed! ${response.data.message}`);
-    } else if (response.data?.error) {
-      toast.error(`Upload failed: ${response.data.error}`, { autoClose: 5000 });
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Upload failed: ${response.message || "Unknown error"}`);
-    }
-  };
-
-  const fields = [
-    { name: "oldPass", placeholder: "Old Password" },
-    { name: "newPass", placeholder: "New Password" },
-    { name: "cnfPass", placeholder: "Confirm Password" },
-  ];
-
-  return (
-    <div className={styles.changePassContainer}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        {fields.map(({ name, placeholder }) => (
-          <div key={name}>
-            <Input
-              type="password"
-              name={name}
-              placeholder={placeholder}
-              value={data[name]}
-              required
-              onChange={handleChange}
-              error={errors[name]}
-            />
-          </div>
-        ))}
-
-        <button
-          type="submit"
-          className={styles.uploadBtn}
-          disabled={isUploading}
-        >
-          {isUploading ? (
-            <>
-              Change <Loading size={"small"} color={"white"} />
-            </>
-          ) : (
-            "Change"
-          )}
-        </button>
-      </form>
-    </div>
-  );
-};
-
 const Profile = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
-  const [showChangePass, setShowChangePass] = useState(false);
 
   const toVerifyFields = [
     "phoneNo",
@@ -126,22 +33,22 @@ const Profile = () => {
     fetchUser,
     fetchCard,
     clearAll,
+    cardLoaded,
+    userLoaded,
     userLoading: loading,
-    currentUser,
+    currentUser: formData,
     setCurrentUser: setFormData,
-    card,
   } = useData();
 
   useEffect(() => {
-    if (!Array.isArray(currentUser) || currentUser.length === 0) {
+    if (!userLoaded) {
       fetchUser();
     }
-    if (!Array.isArray(card) || card.length === 0) {
+    if (!cardLoaded) {
       fetchCard();
     }
   }, []);
 
-  const formData = currentUser[0] || {};
   const startEdit = () => {
     setDraftData(formData);
     setIsEditing(true);
@@ -308,7 +215,7 @@ const Profile = () => {
       <div className="w-[100%] flex items-center justify-center gap-6 flex-wrap">
         <button
           className="py-2.5 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3 "
-          onClick={() => setShowChangePass(true)}
+          onClick={() => navigate("/alumni/changePassword")}
         >
           Change Password
         </button>
@@ -325,12 +232,6 @@ const Profile = () => {
           )}
         </button>
       </div>
-
-      {showChangePass && (
-        <Overlay onClose={() => setShowChangePass(false)}>
-          <ChangePass />
-        </Overlay>
-      )}
     </div>
   );
 };

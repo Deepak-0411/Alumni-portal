@@ -24,6 +24,8 @@ export const DataProvider = ({ children }) => {
 
   // others
   const [events, setEvents] = useState([]);
+  const [cardLoaded, setCardLoaded] = useState(false);
+  const [userLoaded, setUserLoaded] = useState(false);
 
   // functions
   const clearAll = () => {
@@ -55,10 +57,11 @@ export const DataProvider = ({ children }) => {
       setLoading: setUserLoading,
     });
     // console.log(response);
+    setUserLoaded(true);
 
     if (response.status === "success") {
       if (response?.data) {
-        setCurrentUser([response.data?.entries]);
+        setCurrentUser(response.data?.entries);
       }
     } else {
       console.error("Error:", response.message);
@@ -72,9 +75,10 @@ export const DataProvider = ({ children }) => {
       setLoading: setUserLoading,
     });
 
+    setCardLoaded(true);
     if (response.status === "success") {
       if (response?.data) {
-        setCard([response.data?.entries]);
+        setCard(response.data?.entries);
       }
     } else {
       console.error("Error:", response.message);
@@ -136,6 +140,8 @@ export const DataProvider = ({ children }) => {
         setUserLoading,
         card,
         setCard,
+        cardLoaded,
+        userLoaded,
 
         // Functions
         clearAll,

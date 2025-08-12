@@ -44,20 +44,21 @@ const MembershipCard = () => {
   const {
     fetchUser,
     fetchCard,
+    cardLoaded,
+    userLoaded,
     userLoading: loading,
     currentUser,
-    card,
+    card: user,
   } = useData();
 
   useEffect(() => {
-    if (!Array.isArray(currentUser) || currentUser.length === 0) {
+    if (!userLoaded) {
       fetchUser();
     }
-    if (!Array.isArray(card) || card.length === 0) {
+    if (!cardLoaded) {
       fetchCard();
     }
   }, []);
-  const user = card[0];
 
   const data = [
     {
@@ -83,8 +84,8 @@ const MembershipCard = () => {
     return MembershipCardSkeleton(data);
   }
 
-  if (!currentUser[0]?.isPaid) {
-    return <div className={styles.container}><Payment email={currentUser[0]?.email}/></div>;
+  if (!currentUser?.isPaid) {
+    return <Payment email={currentUser?.email} />;
   }
 
   return (

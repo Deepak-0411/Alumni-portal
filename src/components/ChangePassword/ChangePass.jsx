@@ -1,15 +1,26 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./ChangePass.module.css";
-import Input from "./Input";
-import Loading from "./Loading";
-import { apiRequest } from "./api";
 import { toast } from "react-toastify";
+import Input from "../Input/Input";
+import Loading from "../Spinner/Loading";
+import apiRequest from "../../utility/apiRequest";
 
 const ChangePass = () => {
   const [isUploading, setIsUploading] = useState(false);
   const [data, setData] = useState({ oldPass: "", newPass: "", cnfPass: "" });
-  const [errors, setErrors] = useState({ oldPass: "", newPass: "", cnfPass: "" });
+  const [errors, setErrors] = useState({
+    oldPass: "",
+    newPass: "",
+    cnfPass: "",
+  });
 
+  const navigate = useNavigate();
+  const { token } = useParams();
+
+  const isForgotMode = Boolean(token);
+
+  // Validate confirm password
   useEffect(() => {
     if (data.cnfPass && data.newPass && data.cnfPass !== data.newPass) {
       setErrors((prev) => ({ ...prev, cnfPass: "Passwords do not match." }));
@@ -31,31 +42,51 @@ const ChangePass = () => {
       return;
     }
 
+    const endpoint = isForgotMode
+      ? "/api/alumni/forgot-password/reset/" + token
+      : "/api/alumni/profile/change-password";
+
+    const body = isForgotMode
+      ? {
+          token,
+          newCredential: data.cnfPass,
+        }
+      : {
+          credential: data.oldPass,
+          newCredential: data.cnfPass,
+        };
+
     const response = await apiRequest({
-      url: apiEndPointSingle,
+      url: endpoint,
       method: "POST",
-      body: data,
+      body,
       setLoading: setIsUploading,
     });
 
     if (response.status === "success") {
-      toast.success(`Password changed! ${response.data.message}`);
+      toast.success(`${response.data.message}`);
+      navigate("/alumni/user/profile");
     } else if (response.data?.error) {
-      toast.error(`Upload failed: ${response.data.error}`, { autoClose: 5000 });
+      toast.error(`Something went wrong`);
+      toast.error(`${response.message || "Unknown error"}`);
     } else {
       console.error("Error:", response.message);
-      toast.error(`Upload failed: ${response.message || "Unknown error"}`);
+      toast.error(`Something went wrong`);
+      toast.error(`${response.message || "Unknown error"}`);
     }
   };
 
   const fields = [
-    { name: "oldPass", placeholder: "Old Password" },
+    ...(isForgotMode ? [] : [{ name: "oldPass", placeholder: "Old Password" }]),
     { name: "newPass", placeholder: "New Password" },
     { name: "cnfPass", placeholder: "Confirm Password" },
   ];
 
   return (
     <div className={styles.changePassContainer}>
+      <p className={styles.heading}>
+        {isForgotMode ? "Set New Password" : "Change Password"}
+      </p>
       <form onSubmit={handleSubmit} className={styles.form}>
         {fields.map(({ name, placeholder }) => (
           <div key={name}>
@@ -71,11 +102,18 @@ const ChangePass = () => {
           </div>
         ))}
 
-        <button type="submit" className={styles.uploadBtn} disabled={isUploading}>
+        <button
+          type="submit"
+          className={styles.uploadBtn}
+          disabled={isUploading}
+        >
           {isUploading ? (
             <>
-              Change <Loading size="small" color="white" />
+              {isForgotMode ? "Set Password" : "Change"}
+              <Loading size={"small"} color={"white"} />
             </>
+          ) : isForgotMode ? (
+            "Set Password"
           ) : (
             "Change"
           )}
