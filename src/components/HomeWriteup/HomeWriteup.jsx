@@ -6,6 +6,7 @@ import { RiTeamFill } from "react-icons/ri";
 import fallBackUserPng from "../../assets/user.png";
 import fallBackAssociationPng from "../../assets/imgNotFound.jpg";
 import AutoSwiper from "../AutoSlider/AutoSwiper";
+import { useNavigate } from "react-router-dom";
 
 const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
   return (
@@ -35,11 +36,19 @@ const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
 const distAlumniData = [
   {
     dp: "",
-    name: "Dr. Ajit Kumar",
-    post: "President GBUAA",
-    desc: "Director of Public Relations at Sharda University.He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
+    name: "Ms Gargi Sharma",
+    post: "Dy. Secretary GBUAA",
+    desc: "Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance,Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.",
     linkedInUrl: "",
   },
+  {
+    dp: "",
+    name: "Mr Vikram Singh",
+    post: "Treasurer GBUAA",
+    desc: "Manager- Content at UpGrad. He is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
+    linkedInUrl: "",
+  },
+
   {
     dp: "",
     name: "Mr Amit Jha",
@@ -54,22 +63,17 @@ const distAlumniData = [
     desc: "Assistant General Manager - IT at CSElectric.He contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
     linkedInUrl: "",
   },
+
   {
     dp: "",
-    name: "Ms Gargi Sharma",
-    post: "Dy. Secretary GBUAA",
-    desc: "Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance,Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.",
-    linkedInUrl: "",
-  },
-  {
-    dp: "",
-    name: "Mr Vikram Singh",
-    post: "Treasurer GBUAA",
-    desc: "Manager- Content at UpGrad. He is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
+    name: "Dr. Ajit Kumar",
+    post: "President GBUAA",
+    desc: "Director of Public Relations at Sharda University.He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
     linkedInUrl: "",
   },
 ];
 const AssociationImages = [
+  "https://images.pexels.com/photos/33350503/pexels-photo-33350503.jpeg",
   fallBackAssociationPng,
   fallBackAssociationPng,
   fallBackAssociationPng,
@@ -78,6 +82,7 @@ const AssociationImages = [
 ];
 
 export default function HomeWriteup() {
+  const navigate = useNavigate()
   return (
     <div className={styles.alumniContainer}>
       <h1 className={styles.title}>
@@ -144,7 +149,7 @@ export default function HomeWriteup() {
             Join the GBU Alumni Association to network, contribute and inspire
             future generations.
           </p>
-          <button className={styles.registerBtn}>Register as Alumni</button>
+          <button className={styles.registerBtn} onClick={()=>(navigate("/alumni/register"))}>Register as Alumni</button>
         </div>
       </div>
 

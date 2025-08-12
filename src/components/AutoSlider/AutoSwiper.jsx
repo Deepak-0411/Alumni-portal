@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 const AutoSwiper = ({ children }) => {
+  const id = useId();
   const totalSlides = React.Children.count(children);
 
   if (totalSlides === 0) return null;
@@ -20,14 +21,17 @@ const AutoSwiper = ({ children }) => {
         loop={totalSlides > 1} // loop only if more than 1 slide
         slidesPerView={1}
         navigation={{
-          nextEl: ".custom-next",
-          prevEl: ".custom-prev",
+          nextEl: ".custom-next" + id,
+          prevEl: ".custom-prev" + id,
         }}
         className={styles.swiper}
         wrapperClass={styles.slides}
       >
         {React.Children.map(children, (child, index) => (
-          <SwiperSlide key={index} style={{ display: "flex", justifyContent: "center" }}>
+          <SwiperSlide
+            key={index}
+            style={{ display: "flex", justifyContent: "center" }}
+          >
             {child}
           </SwiperSlide>
         ))}
@@ -35,10 +39,10 @@ const AutoSwiper = ({ children }) => {
 
       {totalSlides > 1 && (
         <>
-          <button className={`custom-prev ${styles.customPrev}`}>
+          <button className={`${"custom-prev" + id} ${styles.customPrev}`}>
             <AiFillCaretLeft />
           </button>
-          <button className={`custom-next ${styles.customNext}`}>
+          <button className={`${"custom-next" + id} ${styles.customNext}`}>
             <AiFillCaretRight />
           </button>
         </>
