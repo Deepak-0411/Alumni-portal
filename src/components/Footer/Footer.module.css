@@ -72,4 +72,5 @@
 .devName {
   color: #6aff82;
   cursor: pointer;
+  user-select: none;
 }
