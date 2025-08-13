@@ -38,7 +38,7 @@ const ForgetPassword = () => {
 
   return (
     <div className={styles.changePassContainer}>
-      <p className={styles.heading}>Change Password</p>
+      <p className={styles.heading}>Forget Password</p>
       <form onSubmit={handleSubmit} className={styles.form}>
         <Input
           type="email"

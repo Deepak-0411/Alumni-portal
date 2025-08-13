@@ -8,27 +8,28 @@ import { toast } from "react-toastify";
 import { useFormValidation } from "../hooks/useFormValidation";
 import { useData } from "../context/DataContext";
 
-const Register = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    enrollmentNo: "",
-    rollNo: "",
-    alumniName: "",
-    fatherName: "",
-    dob: "",
-    yearOfPassing: "",
-    phoneNo: "",
-    email: "",
-    school: "",
-    programme: "",
-    branch: "",
-    imgOfDegree: "",
-  });
+const initialFormState = {
+  title: "",
+  enrollmentNo: "",
+  rollNo: "",
+  alumniName: "",
+  fatherName: "",
+  dob: "",
+  yearOfPassing: "",
+  phoneNo: "",
+  email: "",
+  school: "",
+  programme: "",
+  branch: "",
+};
 
+const Register = () => {
+  const [formData, setFormData] = useState(initialFormState);
+  const [imgOfDegree, setImgOfDegree] = useState(null); // keep file separate
   const [loading, setLoading] = useState(false);
-  const [titleList, setTitleList] = useState(["Mr.", "Dr.", "Ms."]);
+  const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
   const { schoolData: schoolList, fetchSchoolData } = useData();
-  const [passingYears, setPassingYears] = useState(["2021", "2022", "2023"]);
+  const [passingYears] = useState(["2021", "2022", "2023"]);
 
   const navigate = useNavigate();
 
@@ -45,7 +46,7 @@ const Register = () => {
     "school",
     "programme",
     "branch",
-    "degree_picture",
+    "imgOfDegree",
   ];
 
   useEffect(() => {
@@ -54,8 +55,7 @@ const Register = () => {
     }
   }, []);
 
-  const { formErrors, setFormErrors, validate } =
-    useFormValidation(fieldsToValidate);
+  const { formErrors, validate } = useFormValidation(fieldsToValidate);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -63,53 +63,45 @@ const Register = () => {
     if ((name === "enrollmentNo" || name === "phoneNo") && +value < 0) return;
 
     if (type === "file") {
-      const file = e.target.files[0];
+      const file = files[0];
       const maxSize = 2 * 1024 * 1024;
-
       if (file && file.size > maxSize) {
         toast.info("Image size must be less than 2MB");
         e.target.value = "";
         return;
       }
+      setImgOfDegree(file);
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "file" ? files[0] : value,
-    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate(formData)) return;
+    const allData = { ...formData, imgOfDegree };
+
+    if (!validate(allData)) return;
+
+    const formDataToSend = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      formDataToSend.append(key, value);
+    });
+    if (imgOfDegree) {
+      formDataToSend.append("imgOfDegree", imgOfDegree);
+    }
 
     const response = await apiRequest({
       url: "/api/alumni/register",
       method: "POST",
-      body: formData,
+      body: formDataToSend,
       setLoading,
     });
 
     if (response.status === "success") {
-      toast.success("Registered Sucessfully!!! ");
-      setFormData({
-        title: "",
-        enrollmentNo: "",
-        rollNo: "",
-        alumniName: "",
-        fatherName: "",
-        dob: "",
-        yearOfPassing: "",
-        phoneNo: "",
-        email: "",
-        school: "",
-        programme: "",
-        branch: "",
-        imgOfDegree: "",
-      });
-      // navigate("/alumni/checkStatus", { state: { email: formData.email } });
+      toast.success("Registered Successfully!");
+      setFormData(initialFormState);
+      setImgOfDegree(null);
     } else {
-      console.error("Error:", response.message);
       toast.error(`Error: ${response.message}`);
     }
   };
@@ -117,7 +109,8 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Alumni Registration Form</h2>
-      <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        {/* --- first row --- */}
         <div className={styles.threeTiles}>
           <Input
             type="select"
@@ -152,6 +145,7 @@ const Register = () => {
           />
         </div>
 
+        {/* --- second row --- */}
         <div className={styles.threeTiles}>
           <Input
             type="date"
@@ -184,6 +178,7 @@ const Register = () => {
           />
         </div>
 
+        {/* --- third row --- */}
         <div className={styles.twoTiles}>
           <Input
             type="tel"
@@ -207,6 +202,7 @@ const Register = () => {
           />
         </div>
 
+        {/* --- fourth row --- */}
         <div className={styles.threeTiles}>
           <Input
             type="select"
@@ -239,10 +235,11 @@ const Register = () => {
             value={formData.branch}
             options={schoolList[formData?.school]?.[formData.programme] || []}
             onChange={handleChange}
-            error={formErrors.programme}
+            error={formErrors.branch}
           />
         </div>
 
+        {/* --- fifth row --- */}
         <div className={styles.twoTiles}>
           <Input
             type="select"
@@ -257,30 +254,29 @@ const Register = () => {
           />
           <Input
             type="file"
-            name="degree_picture"
+            name="imgOfDegree"
             label="Upload Degree/Marksheet (max size 2MB)"
+            required
+            requiredMark
             onChange={handleChange}
           />
         </div>
 
+        {/* --- submit button --- */}
         <div className={styles.btnContainer}>
           <button
             type="submit"
             className={styles.submitButton}
             disabled={loading}
           >
-            {loading ? (
-              <LoadingScrn size={"small"} color={"white"} />
-            ) : (
-              "Register"
-            )}
+            {loading ? <LoadingScrn size="small" color="white" /> : "Register"}
           </button>
         </div>
       </form>
 
       <div className={styles.btnContainer}>
         <span className={styles.backToLoginSpan}>
-          Alrerady have an account? &nbsp;
+          Already have an account? &nbsp;
           <button
             className={styles.backToLoginBtn}
             onClick={() => navigate("/alumni/login")}

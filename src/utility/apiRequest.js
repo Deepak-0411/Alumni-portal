@@ -9,13 +9,11 @@ const apiRequest = async ({
   method = "GET",
   body = null,
   headers = {},
-  credentials=true,
+  credentials = true,
   setLoading = () => {},
 }) => {
-  
   const redirectTOLogin = (message) => {
     const currentPath = window.location.pathname;
-
     const loginPaths = [
       "/alumni/superAdmin/login",
       "/alumni/login",
@@ -24,7 +22,6 @@ const apiRequest = async ({
 
     if (message === "No token provided.") {
       if (!loginPaths.includes(currentPath)) {
-        // Navigate to login pages
         if (currentPath.startsWith("/alumni/superAdmin")) {
           navigateTo("/alumni/superAdmin/login");
         } else if (currentPath.startsWith("/alumni/sub-admin")) {
@@ -38,16 +35,18 @@ const apiRequest = async ({
 
   try {
     setLoading(true);
+
+    const isFormData = body instanceof FormData;
+
     const options = {
       method,
       ...(credentials && { credentials: "include" }),
       headers: {
-        "Content-Type": "application/json",
+        ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...headers,
       },
-        ...(body && { body: JSON.stringify(body) }),
+      ...(body && { body: isFormData ? body : JSON.stringify(body) }),
     };
-
 
     const response = await fetch(baseURl + url, options);
     const rawText = await response.text();
@@ -56,9 +55,8 @@ const apiRequest = async ({
     try {
       data = rawText ? JSON.parse(rawText) : {};
     } catch {
-      data = { message: rawText }; // fallback if not valid JSON
+      data = { message: rawText };
     }
-    // console.log(data);
 
     if (!response.ok) {
       redirectTOLogin(data.message);

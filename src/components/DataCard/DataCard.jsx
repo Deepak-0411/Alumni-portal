@@ -3,7 +3,13 @@ import styles from "./DataCard.module.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const DataCard = ({ heading, dataItems = [], image, loading = false }) => {
+const DataCard = ({
+  heading,
+  dataItems = [],
+  image,
+  loading = false,
+  imageInput = null,
+}) => {
   return (
     <div className={styles.dataBox}>
       {heading && (
@@ -21,11 +27,25 @@ const DataCard = ({ heading, dataItems = [], image, loading = false }) => {
             : styles.singleBox
         }
       >
-        {loading && image ? (
-          <Skeleton circle height={80} width={80} />
-        ) : (
-          image && <img className={styles.dp} src={image} alt="Profile Pic" />
-        )}
+        {/* Profile Picture */}
+        <div className={styles.imageWrapper}>
+          {loading && image ? (
+            <Skeleton circle height={80} width={80} />
+          ) : (
+            image && <img className={styles.dp} src={image} alt="Profile Pic" />
+          )}
+
+          {/* Show file input if in edit mode */}
+          {imageInput && (
+            <div className={styles.imageInputWrapper}>
+              <label className={styles.changeBtnLabel}>
+                {imageInput}
+              </label>
+            </div>
+          )}
+        </div>
+
+        {/* Data fields */}
         {dataItems.map((item, index) => (
           <div className={styles.subBox} key={index}>
             {React.isValidElement(item) ? (
@@ -37,8 +57,9 @@ const DataCard = ({ heading, dataItems = [], image, loading = false }) => {
                   <Skeleton
                     height={30}
                     width={"100%"}
-                    style={{ maxWidth: "15rem" ,
-                      minWidth:"8rem",
+                    style={{
+                      maxWidth: "15rem",
+                      minWidth: "8rem",
                     }}
                   />
                 ) : (

@@ -11,6 +11,7 @@ export const useFormValidation = (fieldsToValidate = []) => {
     const errors = {};
     const nameRegex = /^[A-Za-z\s]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const rollNoRegex = /^\d{3}\/[a-zA-Z]{3}\/\d{3}$/;
     const urlRegex =
       /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/\S*)?$/;
 
@@ -29,7 +30,7 @@ export const useFormValidation = (fieldsToValidate = []) => {
       shouldValidate("fatherName") &&
       (!formData.fatherName || !nameRegex.test(formData.fatherName.trim()))
     ) {
-      errors.fathername = "Please enter a valid father's name.";      
+      errors.fathername = "Please enter a valid father's name.";
     }
 
     const enrollmentNum = Number(formData.enrollmentNo);
@@ -42,9 +43,9 @@ export const useFormValidation = (fieldsToValidate = []) => {
 
     if (
       shouldValidate("rollNo") &&
-      (!formData.rollNo || !formData.rollNo.trim())
+      (!formData.rollNo || !rollNoRegex.test(formData.rollNo.trim()))
     ) {
-      errors.rollNo = "Roll Number is required.";
+      errors.rollNo = "Roll Number is should be in format (123/abc/234).";
     }
 
     if (shouldValidate("dob") && !formData.dob) {
@@ -108,7 +109,7 @@ export const useFormValidation = (fieldsToValidate = []) => {
       shouldValidate("imgOfDegree") &&
       (!formData.imgOfDegree || !(formData.imgOfDegree instanceof File))
     ) {
-      errors.imgOfDegree = "Please upload a degree certificate image.";
+      errors.imgOfDegree = `Please upload a degree certificate image. ${!formData.imgOfDegree } and ${ !(formData.imgOfDegree instanceof File)}`;
     }
 
     // Display errors via toast

@@ -67,7 +67,7 @@ const AppRoutes = () => {
       {/* User Routes (Protected) */}
       <Route
         path="/alumni/user"
-        element={<ProtectedRoute element={<UserLayout />} user={"user"} />}
+                element={<ProtectedRoute element={<UserLayout />} user={"user"} />}
       >
         <Route index element={<Navigate to="membershipCard" />} />
         <Route path="profile" element={<Profile />} />

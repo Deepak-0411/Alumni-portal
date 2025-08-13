@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
+  const [uploadPreview, setUploadPreview] = useState(null);
 
   const toVerifyFields = [
     "phoneNo",
@@ -24,11 +25,12 @@ const Profile = () => {
     "x",
     "insta",
   ];
+
   const navigate = useNavigate();
   const [draftData, setDraftData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const { formErrors, setFormErrors, validate } =
-    useFormValidation(toVerifyFields);
+  const { formErrors, setFormErrors, validate } = useFormValidation(toVerifyFields);
+
   const {
     fetchUser,
     fetchCard,
@@ -41,16 +43,13 @@ const Profile = () => {
   } = useData();
 
   useEffect(() => {
-    if (!userLoaded) {
-      fetchUser();
-    }
-    if (!cardLoaded) {
-      fetchCard();
-    }
+    if (!userLoaded) fetchUser();
+    if (!cardLoaded) fetchCard();
   }, []);
 
   const startEdit = () => {
     setDraftData(formData);
+    setUploadPreview(null);
     setIsEditing(true);
   };
 
@@ -58,19 +57,49 @@ const Profile = () => {
     setIsEditing(false);
     setDraftData({});
     setFormErrors({});
+    setUploadPreview(null);
   };
 
-  const saveEdit = () => {
+  const saveEdit = async () => {
     if (!validate(draftData)) return;
 
-    setFormData(draftData);
-    setIsEditing(false);
-    setFormErrors({});
+    // Prepare FormData to send file + text
+    const fd = new FormData();
+    for (let key in draftData) {
+      if (key !== "dpFile") {
+        fd.append(key, draftData[key] || "");
+      }
+    }
+    if (draftData.dpFile) {
+      fd.append("dp", draftData.dpFile);
+    }
+
+    const response = await apiRequest({
+      url: "/api/alumni/updateProfile",
+      method: "POST",
+      body: fd,
+      setLoading: () => {},
+    });
+
+    if (response.status === "success") {
+      setFormData(response.data);
+      toast.success("Profile updated successfully");
+      setIsEditing(false);
+      setFormErrors({});
+    } else {
+      toast.error(response.message || "Failed to update profile");
+    }
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDraftData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (name === "dp" && files && files[0]) {
+      const file = files[0];
+      setDraftData((prev) => ({ ...prev, dpFile: file }));
+      setUploadPreview(URL.createObjectURL(file));
+    } else {
+      setDraftData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleLogout = async () => {
@@ -91,9 +120,8 @@ const Profile = () => {
   const buildItems = (fields) =>
     fields.map(({ label, name, editable = false, type = "text" }) => {
       const value = isEditing ? draftData[name] : formData[name];
-
       if (isEditing && editable) {
-        if (name == "description") {
+        if (name === "description") {
           return (
             <textarea
               id="description"
@@ -119,10 +147,7 @@ const Profile = () => {
           );
         }
       } else {
-        return {
-          label,
-          value,
-        };
+        return { label, value };
       }
     });
 
@@ -130,7 +155,17 @@ const Profile = () => {
     {
       heading: "Profile Data",
       dataItems: buildItems([{ label: "Name", name: "alumniName" }]),
-      image: formData.dp || DP,
+      image: uploadPreview || formData.dp || DP,
+      editableImage: isEditing,
+      imageInput: (
+        <input
+          type="file"
+          name="dp"
+          accept="image/*"
+          onChange={handleChange}
+          className={styles.fileInput}
+        />
+      ),
     },
     {
       heading: "Personal Data",
@@ -169,12 +204,7 @@ const Profile = () => {
     {
       heading: "About",
       dataItems: buildItems([
-        {
-          label: "Description",
-          name: "description",
-          editable: true,
-          type: "text",
-        },
+        { label: "Description", name: "description", editable: true, type: "text" },
       ]),
     },
   ];
@@ -184,19 +214,12 @@ const Profile = () => {
       <div className={styles.editBtn}>
         {isEditing ? (
           <>
-            <button onClick={saveEdit} className={styles.saveBtn}>
-              Save
-            </button>
-            <button onClick={cancelEdit} className={styles.cancelBtn}>
-              Cancel
-            </button>
+            <button onClick={saveEdit} className={styles.saveBtn}>Save</button>
+            <button onClick={cancelEdit} className={styles.cancelBtn}>Cancel</button>
           </>
         ) : (
-          <span
-            className="bg-gray-100 rounded-full p-4 pl-5 cursor-pointer"
-            onClick={startEdit}
-          >
-            {<FaUserEdit size={25} />}
+          <span className="bg-gray-100 rounded-full p-4 pl-5 cursor-pointer" onClick={startEdit}>
+            <FaUserEdit size={25} />
           </span>
         )}
       </div>
@@ -208,19 +231,20 @@ const Profile = () => {
           dataItems={section.dataItems}
           image={section.image}
           loading={loading}
+          imageInput={section.editableImage ? section.imageInput : null}
         />
       ))}
 
-      {/* Logout and change Password */}
+      {/* Logout + Change Password */}
       <div className="w-[100%] flex items-center justify-center gap-6 flex-wrap">
         <button
-          className="py-2.5 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3 "
+          className="py-2.5 px-6 rounded-full text-black font-semibold text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3"
           onClick={() => navigate("/alumni/user/changePassword")}
         >
           Change Password
         </button>
         <button
-          className=" w-45 py-2.5 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3 "
+          className="w-45 py-2.5 px-6 rounded-full text-black font-semibold text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.5px] flex items-center justify-center gap-3"
           onClick={handleLogout}
         >
           {logoutLoading ? (
