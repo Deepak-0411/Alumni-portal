@@ -103,21 +103,23 @@ const Home = () => {
 
   return (
     <div className={styles.container}>
-      {/* students pngs */}
-      <StudentPngSection />
+      <div className={styles.topSection}>
+        {/* students pngs */}
 
-      {/* vc sir section */}
-      <VcSirSection />
+        <StudentPngSection />
+
+        {/* vc sir section */}
+        <VcSirSection />
+      </div>
 
       {/* WriteUp Section */}
-      <HomeWriteup/>
+      <HomeWriteup />
 
       {/* notable alumni's section */}
       <NotableAlumniSection />
 
       {/* events section */}
       <EventsSection />
-
     </div>
   );
 };

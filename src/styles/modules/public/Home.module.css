@@ -1,22 +1,13 @@
 .container {
   width: 100%;
+  background-color: #f0f7ff;
+}
+.topSection {
   background: #fff;
-
-  background-image: linear-gradient(
+  background: linear-gradient(
     180deg,
-    hsl(0deg 0% 100%) 0%,
-    hsl(212deg 100% 100%) 3%,
-    hsl(212deg 100% 99%) 7%,
-    hsl(212deg 100% 99%) 11%,
-    hsl(212deg 100% 98%) 15%,
-    hsl(212deg 100% 98%) 20%,
-    hsl(212deg 100% 97%) 26%,
-    hsl(212deg 100% 97%) 32%,
-    hsl(212deg 100% 96%) 40%,
-    hsl(212deg 100% 96%) 49%,
-    hsl(212deg 100% 96%) 60%,
-    hsl(212deg 100% 96%) 75%,
-    hsl(213deg 100% 95%) 100%
+    rgba(255, 255, 255, 1) 0%,
+    rgba(240, 247, 255, 1) 52%
   );
 }
 
@@ -48,7 +39,7 @@
 }
 .taglineText {
   color: #fff;
-  font-family: Roboto;
+  font-family: "Montserrat", "Roboto";
   font-size: clamp(1.5rem, 5vw, 5rem);
   font-weight: 600;
   letter-spacing: -0.15rem;
@@ -100,12 +91,13 @@
   background-color: #f0f7ff;
 }
 .notableAlumniText {
-  margin-left: clamp(1.5rem, 6.5vw, 7rem);
   color: #000;
   font-family: Inter;
   font-size: clamp(1.5rem, 8vw, 3rem);
   font-weight: 600;
-  text-align: center;
+  margin: clamp(1rem, 6vw, 2rem) 0rem;
+  margin-left: clamp(1.5rem, 6.5vw, 7rem);
+  border-left: 4px solid #1e40af;
 }
 
 .events {
