@@ -85,6 +85,7 @@
 }
 .backToLoginBtn {
   color: #1d4ed8;
+  cursor: pointer;
 }
 .btn:hover {
   text-decoration: underline;

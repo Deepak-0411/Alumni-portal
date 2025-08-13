@@ -3,14 +3,17 @@ import AppRoutes from "./routes/AppRoutes";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { DataProvider } from "./context/DataContext";
+import ScrollToTop from "./hooks/ScrollToTop";
 
 function App() {
   return (
     <>
       <Router>
-          <DataProvider>
+        <DataProvider>
+          <ScrollToTop>
             <AppRoutes />
-          </DataProvider>
+          </ScrollToTop>
+        </DataProvider>
         <ToastContainer position="top-right" autoClose={3000} theme="colored" />
       </Router>
     </>
