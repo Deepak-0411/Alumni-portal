@@ -52,7 +52,7 @@ const ForgetPassword = () => {
         <button type="submit" className={styles.uploadBtn} disabled={loading}>
           {loading ? (
             <>
-              Change <Loading size={"small"} color={"white"} />
+              Get link <Loading size={"small"} color={"white"} />
             </>
           ) : (
             "Get link"

@@ -63,7 +63,7 @@ const Home = () => {
   const NotableAlumniSection = () => {
     return (
       <div className={styles.notableAlumni}>
-        <p className={styles.notableAlumniText}>Notable Alumni</p>
+        <p className={styles.notableAlumniText}> &nbsp; Notable Alumni</p>
         <Card />
       </div>
     );
