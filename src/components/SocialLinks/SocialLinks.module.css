@@ -1,4 +1,3 @@
-/* ===== SOCIAL LINKS ===== */
 .linkBox {
   display: flex;
   padding: 1.31rem 1.125rem;
@@ -6,6 +5,7 @@
   align-items: flex-end;
   gap: 1rem;
   flex-wrap: wrap;
+  margin-bottom: .5rem;
 }
 
 .linkBox a {

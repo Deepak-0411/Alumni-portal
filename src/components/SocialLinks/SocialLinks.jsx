@@ -1,15 +1,16 @@
-import getIcons from "../../utility/svgs";
+import { FaFacebook, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import styles from "./SocialLinks.module.css";
-const SocialLinks = ({ location = "" }) => {
-  const { x, linkedin, instagram, youtube } = getIcons(
-    location === "low" ? "small" : ""
-  );
+import { ImYoutube } from "react-icons/im";
+
+const SocialLinks = ({ location = "low" }) => {
+  const size = location === "low" ? 25 : 40;
 
   const links = [
-    { name: "x", icon: x, url: "#" },
-    { name: "linkedin", icon: linkedin, url: "#" },
-    { name: "instagram", icon: instagram, url: "#" },
-    { name: "youtube", icon: youtube, url: "#" },
+    { name: "x", icon: <FaXTwitter size={size} />, url: "#" },
+    { name: "linkedin", icon: <FaLinkedin size={size} />, url: "#" },
+    { name: "facebook", icon: <FaFacebook size={size} />, url: "#" },
+    { name: "youtube", icon: <ImYoutube size={size} />, url: "#" },
   ];
 
   return (
@@ -22,4 +23,5 @@ const SocialLinks = ({ location = "" }) => {
     </div>
   );
 };
+
 export default SocialLinks;
