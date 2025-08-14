@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DP from "../../assets/user.png";
-import Logo from "../../assets/GBULOGO.png";
+import DP from "../../assets/user.webp";
+import Logo from "../../assets/GBULOGO.webp";
 
 import styles from "../../styles/modules/user/MembershipCard.module.css";
 

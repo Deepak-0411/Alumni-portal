@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import GBULOGO from "../../assets/GBULOGO.png";
+import GBULOGO from "../../assets/GBULOGO.webp";
 import styles from "./Header.module.css";
 
 const Header = ({ showButtons, additionalComponent, isAdmin = false }) => {

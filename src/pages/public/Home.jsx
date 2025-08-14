@@ -1,8 +1,8 @@
 import styles from "../../styles/modules/public/Home.module.css";
-import png1 from "../../assets/studentsImg1.png";
-import png2 from "../../assets/studentsImg2.png";
-import png3 from "../../assets/studentsImg3.png";
-import VCimg from "../../assets/VCimg.png";
+import png1 from "../../assets/studentIllustrations/studentsImg1.webp";
+import png2 from "../../assets/studentIllustrations/studentsImg2.webp";
+import png3 from "../../assets/studentIllustrations/studentsImg3.webp";
+import VCimg from "../../assets/VCimg.webp";
 import { useData } from "../../context/DataContext";
 import { useEffect, useState } from "react";
 import Loading from "../../components/Spinner/Loading";

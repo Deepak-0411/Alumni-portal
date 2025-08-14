@@ -52,10 +52,10 @@ const Footer = ({ onlyDevTeamFooter = false }) => {
             {" Ansh"}
           </span>
           ,
-          {/* <span className={styles.devName} onClick={handleDevClick}>
+          <span className={styles.devName} onClick={handleDevClick}>
             {" Daksh"}
           </span>
-          , */}
+          ,
           <span className={styles.devName} onClick={handleDevClick}>
             {" Deepak "}
           </span>

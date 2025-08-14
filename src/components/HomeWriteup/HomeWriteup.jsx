@@ -3,8 +3,18 @@ import styles from "./HomeWriteup.module.css";
 import { FaLinkedin, FaStar } from "react-icons/fa6";
 import { BsGlobe2 } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
-import fallBackUserPng from "../../assets/user.png";
-import fallBackAssociationPng from "../../assets/imgNotFound.jpg";
+import fallBackUserwebp from "../../assets/user.webp";
+import fallBackAssociationwebp from "../../assets/imgNotFound.webp";
+import alumniimg1 from "../../assets/gallery/alumniimg1.webp";
+import alumniimg2 from "../../assets/gallery/alumniimg2.webp";
+import alumniimg3 from "../../assets/gallery/alumniimg3.webp";
+import alumniimg4 from "../../assets/gallery/alumniimg4.webp";
+import ajitKumar from "../../assets/associationMembers/ajitKumar.webp";
+import amitJ from "../../assets/associationMembers/amitJ.webp";
+import gargiSharma from "../../assets/associationMembers/gargiSharma.webp";
+import vikramSingh from "../../assets/associationMembers/vikramSingh.webp";
+import sunilSharma from "../../assets/associationMembers/sunilSharma.webp";
+
 import AutoSwiper from "../AutoSlider/AutoSwiper";
 import { useNavigate } from "react-router-dom";
 
@@ -13,7 +23,7 @@ const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
     <div className={styles.alumniCard} key={name}>
       <div className={styles.leftSection}>
         <img
-          src={dp || fallBackUserPng}
+          src={dp || fallBackUserwebp}
           alt={name}
           className={styles.alumniDP}
         />
@@ -42,51 +52,44 @@ const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
 
 const distAlumniData = [
   {
-    dp: "",
+    dp: gargiSharma,
     name: "Ms Gargi Sharma",
     post: "Dy. Secretary GBUAA",
     desc: "Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance,Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.",
-    linkedInUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/gargi-sharma-ba7464126/",
   },
   {
-    dp: "",
+    dp: vikramSingh,
     name: "Mr Vikram Singh",
     post: "Treasurer GBUAA",
     desc: "Manager- Content at UpGrad.\nHe is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
-    linkedInUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/vikram-singh0996/",
   },
 
   {
-    dp: "",
+    dp: amitJ,
     name: "Mr Amit Jha",
     post: "Vice President GBUAA",
     desc: "HR Manager at JSW Energy Ltd.\nHe is a seasoned corporate leader with expertise in Performance Management System, PolicyDrafting & Development, Talent Acquisition & Talent Management.",
-    linkedInUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/amit-hr/",
   },
   {
-    dp: "",
+    dp: sunilSharma,
     name: "Mr. Sunil Sharma",
     post: "Secretary GBUAA",
     desc: "Assistant General Manager - IT at CSElectric.\nHe contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
-    linkedInUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/sunil-sharma-6a85a662/",
   },
 
   {
-    dp: "",
+    dp: ajitKumar,
     name: "Dr. Ajit Kumar",
     post: "President GBUAA",
     desc: "Director of Public Relations at Sharda University.\n He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
-    linkedInUrl: "",
+    linkedInUrl: "https://www.linkedin.com/in/drajitskumarsharda/",
   },
 ];
-const AssociationImages = [
-  "https://images.pexels.com/photos/33350503/pexels-photo-33350503.jpeg",
-  fallBackAssociationPng,
-  fallBackAssociationPng,
-  fallBackAssociationPng,
-  fallBackAssociationPng,
-  fallBackAssociationPng,
-];
+const AssociationImages = [alumniimg1, alumniimg2, alumniimg3, alumniimg4];
 
 export default function HomeWriteup() {
   const navigate = useNavigate();
@@ -177,7 +180,7 @@ export default function HomeWriteup() {
         <AutoSwiper>
           {AssociationImages.map((AssociationImage, index) => (
             <img
-              src={AssociationImage}
+              src={AssociationImage || fallBackAssociationwebp}
               alt="Image"
               key={index}
               className={styles.associationImage}

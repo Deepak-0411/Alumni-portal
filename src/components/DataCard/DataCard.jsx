@@ -28,22 +28,24 @@ const DataCard = ({
         }
       >
         {/* Profile Picture */}
-        <div className={styles.imageWrapper}>
-          {loading && image ? (
-            <Skeleton circle height={80} width={80} />
-          ) : (
-            image && <img className={styles.dp} src={image} alt="Profile Pic" />
-          )}
+        {image && (
+          <div className={styles.imageWrapper}>
+            {loading ? (
+              <Skeleton circle height={80} width={80} />
+            ) : (
+              image && (
+                <img className={styles.dp} src={image} alt="Profile Pic" />
+              )
+            )}
 
-          {/* Show file input if in edit mode */}
-          {imageInput && (
-            <div className={styles.imageInputWrapper}>
-              <label className={styles.changeBtnLabel}>
-                {imageInput}
-              </label>
-            </div>
-          )}
-        </div>
+            {/* Show file input if in edit mode */}
+            {imageInput && (
+              <div className={styles.imageInputWrapper}>
+                <label className={styles.changeBtnLabel}>{imageInput}</label>
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Data fields */}
         {dataItems.map((item, index) => (

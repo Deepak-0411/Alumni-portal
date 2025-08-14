@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import DP from "../../assets/user.png";
+import DP from "../../assets/user.webp";
 import styles from "../../styles/modules/user/Profile.module.css";
 import DataCard from "../../components/DataCard/DataCard";
 import Input from "../../components/Input/Input";
@@ -73,10 +73,12 @@ const Profile = () => {
     if (draftData.dpFile) {
       fd.append("dp", draftData.dpFile);
     }
+    console.log(fd);
+    
 
     const response = await apiRequest({
-      url: "/api/alumni/updateProfile",
-      method: "POST",
+      url: "/api/alumni/profile/update",
+      method: "PUT",
       body: fd,
       setLoading: () => {},
     });

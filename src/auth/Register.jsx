@@ -24,12 +24,17 @@ const initialFormState = {
 };
 
 const Register = () => {
+  const currentYear = new Date().getFullYear();
+  const yearsArray = Array.from({ length: currentYear - 2010 + 1 }, (_, i) =>
+    (2010 + i).toString()
+  );
+
   const [formData, setFormData] = useState(initialFormState);
-  const [imgOfDegree, setImgOfDegree] = useState(null); // keep file separate
+  const [imgOfDegree, setImgOfDegree] = useState(null);
   const [loading, setLoading] = useState(false);
   const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
   const { schoolData: schoolList, fetchSchoolData } = useData();
-  const [passingYears] = useState(["2021", "2022", "2023"]);
+  const [passingYears] = useState(yearsArray);
 
   const navigate = useNavigate();
 

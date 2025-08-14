@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LOGO from "../assets/GBULOGO.png";
+import LOGO from "../assets/GBULOGO.webp";
 import Input from "../components/Input/Input";
 import LoadingScrn from "../components/Spinner/Loading";
 import styles from "../styles/modules/auth/Login.module.css";
