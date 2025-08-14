@@ -261,7 +261,7 @@ const Register = () => {
             type="file"
             name="imgOfDegree"
             label="Upload Degree/Marksheet (max size 2MB)"
-            required
+            // required
             requiredMark
             onChange={handleChange}
           />
