@@ -51,7 +51,7 @@ const Register = () => {
     "school",
     "programme",
     "branch",
-    "imgOfDegree",
+    // "imgOfDegree",
   ];
 
   useEffect(() => {
