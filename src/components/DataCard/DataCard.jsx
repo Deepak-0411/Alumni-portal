@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./DataCard.module.css";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { MdDriveFolderUpload } from "react-icons/md";
 
 const DataCard = ({
   heading,
@@ -41,7 +42,12 @@ const DataCard = ({
             {/* Show file input if in edit mode */}
             {imageInput && (
               <div className={styles.imageInputWrapper}>
-                <label className={styles.changeBtnLabel}>{imageInput}</label>
+                <label className={styles.changeBtnLabel}>
+                  <span className={styles.uploadSvgBox}>
+                    <MdDriveFolderUpload size={25} />
+                  </span>
+                  {imageInput}
+                </label>
               </div>
             )}
           </div>

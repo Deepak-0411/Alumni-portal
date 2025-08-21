@@ -55,7 +55,7 @@ const distAlumniData = [
     dp: gargiSharma,
     name: "Ms Gargi Sharma",
     post: "Dy. Secretary GBUAA",
-    desc: "Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance,Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.",
+    desc: "Experienced Legal Associate with ademonstrated history of working in the law practice industry. Skilled in Legal Assistance, Analytical Skills, Microsoft Word, Case Studies, and Case Analysis.",
     linkedInUrl: "https://www.linkedin.com/in/gargi-sharma-ba7464126/",
   },
   {

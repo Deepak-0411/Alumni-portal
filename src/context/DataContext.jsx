@@ -51,6 +51,7 @@ export const DataProvider = ({ children }) => {
           return null;
       }
     })();
+    setUserLoaded(false);
 
     const response = await apiRequest({
       url: url,
@@ -70,6 +71,7 @@ export const DataProvider = ({ children }) => {
   };
 
   const fetchCard = async () => {
+    setCardLoaded(false);
     const response = await apiRequest({
       url: "/api/alumni/profile/card",
       setLoading: setUserLoading,
@@ -82,7 +84,7 @@ export const DataProvider = ({ children }) => {
       }
     } else {
       console.error("Error:", response.message);
-      // toast.error(`Failed to fetch Card`);
+      toast.error(`Failed to fetch Card`);
     }
   };
 

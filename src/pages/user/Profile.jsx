@@ -29,7 +29,8 @@ const Profile = () => {
   const navigate = useNavigate();
   const [draftData, setDraftData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const { formErrors, setFormErrors, validate } = useFormValidation(toVerifyFields);
+  const { formErrors, setFormErrors, validate } =
+    useFormValidation(toVerifyFields);
 
   const {
     fetchUser,
@@ -74,7 +75,6 @@ const Profile = () => {
       fd.append("dp", draftData.dpFile);
     }
     console.log(fd);
-    
 
     const response = await apiRequest({
       url: "/api/alumni/profile/update",
@@ -206,7 +206,12 @@ const Profile = () => {
     {
       heading: "About",
       dataItems: buildItems([
-        { label: "Description", name: "description", editable: true, type: "text" },
+        {
+          label: "Description",
+          name: "description",
+          editable: true,
+          type: "text",
+        },
       ]),
     },
   ];
@@ -216,11 +221,18 @@ const Profile = () => {
       <div className={styles.editBtn}>
         {isEditing ? (
           <>
-            <button onClick={saveEdit} className={styles.saveBtn}>Save</button>
-            <button onClick={cancelEdit} className={styles.cancelBtn}>Cancel</button>
+            <button onClick={saveEdit} className={styles.saveBtn}>
+              Save
+            </button>
+            <button onClick={cancelEdit} className={styles.cancelBtn}>
+              Cancel
+            </button>
           </>
         ) : (
-          <span className="bg-gray-100 rounded-full p-4 pl-5 cursor-pointer" onClick={startEdit}>
+          <span
+            className="bg-gray-100 rounded-full p-4 pl-5 cursor-pointer"
+            onClick={startEdit}
+          >
             <FaUserEdit size={25} />
           </span>
         )}

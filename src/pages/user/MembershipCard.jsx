@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import DP from "../../assets/user.webp";
 import Logo from "../../assets/GBULOGO.webp";
+import signature from "../../assets/signature.webp";
 
 import styles from "../../styles/modules/user/MembershipCard.module.css";
 
@@ -9,99 +10,104 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { useData } from "../../context/DataContext";
 import Payment from "../../components/Payment/Payment";
 
-function MembershipCardSkeleton(data) {
-  return (
-    <div className={styles.container}>
-      <div className={styles.card}>
-        <div className={styles.leftCol}>
-          <Skeleton circle height={80} width={80} />
-          <Skeleton height={28} width={100} />
-        </div>
-        <div className={styles.rightCol}>
-          {data.map((section, index) => {
-            const [title, content] = Object.entries(section)[0];
-            return (
-              <div className={styles.box} key={index}>
-                <h2 className={styles.heading}>{title}</h2>
-                <div className={styles.innerBox}>
-                  {Object.entries(content).map(([subHeading, value]) => (
-                    <div className={styles.subBox} key={subHeading}>
-                      <p className={styles.subHeading}>{subHeading}</p>
-                      <Skeleton height={28} width={"100%"} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const MembershipCard = () => {
   const {
     fetchUser,
     fetchCard,
     cardLoaded,
     userLoaded,
-    userLoading: loading,
     currentUser,
-    card: user,
+    card,
+    userLoading: loading,
   } = useData();
 
   useEffect(() => {
-    if (!userLoaded) {
-      fetchUser();
-    }
-    if (!cardLoaded) {
-      fetchCard();
-    }
+    if (!userLoaded) fetchUser();
+    if (!cardLoaded) fetchCard();
   }, []);
 
   const data = [
     {
       "Personal Information": {
-        DOB: user?.["dob"] || "-",
-        "Phone No.": user?.["phoneNo"] || "-",
+        DOB: card?.dob || "-",
+        "Phone No.": card?.phoneNo || "-",
       },
     },
     {
       "Card Information": {
-        "Card Number": user?.["cardNo"] || "-",
-      },
-    },
-    {
-      "Card Information": {
-        Batch: user?.["yearOfPassing"] || "-",
-        Validity: user?.["validity"] || "Lifetime",
+        "Card Number": card?.cardNo || "-",
+        Batch: card?.yearOfPassing || "-",
       },
     },
   ];
 
-  if (loading) {
-    return MembershipCardSkeleton(data);
-  }
-
-  if (!currentUser?.isPaid) {
+  // Case 1: User is unpaid
+  if (!loading && currentUser?.isPaid === false) {
     return <Payment email={currentUser?.email} />;
   }
 
+  // Case 2: User loaded but no card data available
+  if (userLoaded && cardLoaded && !card?.cardNo) {
+    const handleRetry = () => {
+      fetchUser();
+      fetchCard();
+    };
+
+    return (
+      <div className={styles.container}>
+        <div className={styles.titleBox}>
+          <h2 className={styles.title}>Membership Card</h2>
+        </div>
+        <div className={styles.errorBox}>
+          <p>
+            ⚠️ We couldn’t load your Membership Card at the moment. <br />
+            Please try again.
+          </p>
+          <button className={styles.retryBtn} onClick={handleRetry}>
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Case 3: Normal (loading or valid card)
   return (
     <div className={styles.container}>
       <div className={styles.titleBox}>
         <h2 className={styles.title}>Membership Card</h2>
       </div>
       <div className={styles.card}>
+        {/* Left Column */}
         <div className={styles.leftCol}>
-          <img className={styles.userdp} src={DP} alt="Profile Pic" />
-          <p className={styles.name}> {user?.["alumniName"] || "User"}</p>
+          {loading ? (
+            <>
+              <Skeleton circle height={80} width={80} />
+              <Skeleton height={28} width={100} />
+            </>
+          ) : (
+            <>
+              <img className={styles.userdp} src={DP} alt="Profile Pic" />
+              <p className={styles.name}>{card?.alumniName || "User"}</p>
+              <p className={styles.validUpto}>Lifetime Member</p>
+            </>
+          )}
         </div>
+
+        {/* Right Column */}
         <div className={styles.rightCol}>
+          <div className={styles.associationNameDiv}>
+            <p className={styles.associationName}>
+              Gautam Buddha University Alumni Association
+            </p>
+            <p className={styles.cllgAdd}>
+              Yamuna Expressway, Greater Noida, Gautam Buddha Nagar, Uttar
+              Pradesh-201312
+            </p>
+          </div>
+
           {data.map((section, index) => {
             const [title, content] = Object.entries(section)[0];
-
             return (
               <div className={styles.box} key={index}>
                 <h2 className={styles.heading}>{title}</h2>
@@ -109,17 +115,35 @@ const MembershipCard = () => {
                   {Object.entries(content).map(([subHeading, value]) => (
                     <div className={styles.subBox} key={subHeading}>
                       <p className={styles.subHeading}>{subHeading}</p>
-                      <p className={styles.data}>{value}</p>
+                      {loading ? (
+                        <Skeleton height={28} width="100%" />
+                      ) : (
+                        <p className={styles.data}>{value}</p>
+                      )}
                     </div>
                   ))}
                 </div>
               </div>
             );
           })}
-          <img src={Logo} alt="Logo" className={styles.logo} />
+
+          {!loading && (
+            <>
+              <div className={styles.signatureBox}>
+                <img
+                  className={styles.signature}
+                  src={signature}
+                  alt="Secretary GBUAA"
+                />
+                <p className={styles.signatureP}>Secretary, GBUAA</p>
+              </div>
+              <img src={Logo} alt="Logo" className={styles.logo} />
+            </>
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default MembershipCard;

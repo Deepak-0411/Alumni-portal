@@ -1,5 +1,5 @@
 .container {
-  width: clamp(22rem, 90vw, 32rem);
+  width: clamp(22rem, 90vw, 36rem);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -25,7 +25,7 @@
 }
 .leftCol {
   flex-grow: 1;
-  /* min-width: 6.5rem; */
+  min-width: 6.5rem;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -40,9 +40,19 @@
 }
 .name {
   color: #fff;
-  font-family: Roboto;
+  font-family: Montserrat;
+  text-align: center;
   font-size: clamp(0.75rem, 3vw, 1rem);
-  font-weight: 600;
+  font-weight: 700;
+}
+.validUpto {
+  color: #fff;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 0.875rem;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
 }
 .rightCol {
   flex-grow: 2;
@@ -50,8 +60,29 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  position: relative; 
-  overflow: hidden; 
+  position: relative;
+  overflow: hidden;
+}
+.associationNameDiv {
+  width: 100%;
+}
+.associationName {
+  color: #c73535;
+  text-align: center;
+  font-family: "Montserrat";
+  font-size: clamp(0.75rem, 4vw, 1rem);
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.cllgAdd {
+  color: #000;
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 0.55rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .logo {
@@ -59,7 +90,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80%;
+  height: 90%;
   opacity: 0.1;
   pointer-events: none;
 }
@@ -97,4 +128,47 @@
 }
 .subHeading {
   color: #787878;
+}
+.signatureBox {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.signature {
+  width: 6rem;
+  flex-shrink: 0;
+}
+.signatureP {
+  color: #000;
+  font-family: Montserrat;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* error box */
+.errorBox {
+  text-align: center;
+  padding: 2rem;
+  color: #b3261e;
+  background: #fff3f2;
+  border: 1px solid #f5c2c0;
+  border-radius: 8px;
+}
+
+.retryBtn {
+  margin-top: 1rem;
+  padding: 0.5rem 1.2rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.retryBtn:hover {
+  background-color: #0056b3;
 }
