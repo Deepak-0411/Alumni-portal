@@ -47,22 +47,13 @@ const Footer = ({ onlyDevTeamFooter = false }) => {
         }
       >
         <p className={styles.devTeam}>
-          Designed & Developed By
-          <span className={styles.devName} onClick={handleDevClick}>
-            {" Ansh"}
-          </span>
-          ,
-          <span className={styles.devName} onClick={handleDevClick}>
-            {" Daksh"}
-          </span>
-          ,
-          <span className={styles.devName} onClick={handleDevClick}>
-            {" Deepak "}
-          </span>
-          &
-          <span className={styles.devName} onClick={handleDevClick}>
-            {" Harsh"}
-          </span>
+          <button className={styles.devName} onClick={handleDevClick}>
+            Designed & Developed By team
+            <span className={styles.devName}>{" Ansh"}</span>,
+            <span className={styles.devName}>{" Daksh"}</span>,
+            <span className={styles.devName}>{" Deepak "}</span>&
+            <span className={styles.devName}>{" Harsh"}</span>
+          </button>
         </p>
       </div>
     </footer>
