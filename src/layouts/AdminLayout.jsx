@@ -5,7 +5,6 @@ import UserInfo from "../components/UserInfo";
 import AdminNavbar from "../components/AdminNavbar";
 
 const AdminLayout = ({ role }) => {
-
   return (
     <div className={styles.container}>
       <Header

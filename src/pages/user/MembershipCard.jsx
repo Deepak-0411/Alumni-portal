@@ -42,7 +42,7 @@ const MembershipCard = () => {
   ];
 
   // Case 1: User is unpaid
-  if (!loading && currentUser?.isPaid === false) {
+  if (!loading && currentUser?.isPaid == false) {
     return <Payment email={currentUser?.email} />;
   }
 

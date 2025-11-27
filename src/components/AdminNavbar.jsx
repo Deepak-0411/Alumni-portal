@@ -15,7 +15,7 @@ const AdminNavbar = ({ forPage }) => {
   let redirectPath;
   let navlinks;
   switch (forPage) {
-    case "admin":
+    case "superAdmin":
       navlinks = [
         { name: "Sub Admin", path: "subadmin" },
         { name: "Alumni", path: "alumni" },

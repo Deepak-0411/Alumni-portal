@@ -78,7 +78,7 @@ const Profile = () => {
 
     const response = await apiRequest({
       url: "/api/alumni/profile/update",
-      method: "PUT",
+      method: "POST",
       body: fd,
       setLoading: () => {},
     });

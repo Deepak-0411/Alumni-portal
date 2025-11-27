@@ -5,29 +5,21 @@ import { toast } from "react-toastify";
 const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  // Sub-Admin Data
   const [verifyUsersList, setVerifyUsersList] = useState([]);
   const [activeUsersList, setActiveUsersList] = useState([]);
   const [approvedUsersList, setApprovedUsersList] = useState([]);
-
-  // Admin Data
   const [alumniList, setAlumniList] = useState([]);
   const [subAdminList, setSubAdminList] = useState([]);
 
   // User Data
-  const [currentUser, setCurrentUser] = useState([]); // this is for all i.e user/admin/subAdmin
+  const [currentUser, setCurrentUser] = useState([]); // Keep as array
   const [userLoading, setUserLoading] = useState(false);
   const [card, setCard] = useState([]);
-
-  // School & branch Data
   const [schoolData, setSchoolData] = useState([]);
-
-  // others
   const [events, setEvents] = useState([]);
   const [cardLoaded, setCardLoaded] = useState(false);
   const [userLoaded, setUserLoaded] = useState(false);
 
-  // functions
   const clearAll = () => {
     setVerifyUsersList([]);
     setActiveUsersList([]);
@@ -36,6 +28,8 @@ export const DataProvider = ({ children }) => {
     setSubAdminList([]);
     setCurrentUser([]);
     setCard([]);
+    setCardLoaded(false);
+    setUserLoaded(false);
   };
 
   const fetchUser = async (forUser = "user") => {
@@ -57,16 +51,16 @@ export const DataProvider = ({ children }) => {
       url: url,
       setLoading: setUserLoading,
     });
-    // console.log(response);
+
     setUserLoaded(true);
 
     if (response.status === "success") {
-      if (response?.data) {
-        setCurrentUser(response.data?.entries);
+      if (response?.data?.entries) {
+        const data = response.data.entries;
+        setCurrentUser(data);
       }
     } else {
       console.error("Error:", response.message);
-      toast.error(`Failed to fetch user`);
     }
   };
 
@@ -83,8 +77,10 @@ export const DataProvider = ({ children }) => {
         setCard(response.data?.entries);
       }
     } else {
-      console.error("Error:", response.message);
-      toast.error(`Failed to fetch Card`);
+      // console.error("Error:", response.message);
+      if (!response.message === "No alumni card found") {
+        toast.error(`Failed to fetch Card`);
+      }
     }
   };
 
@@ -96,9 +92,11 @@ export const DataProvider = ({ children }) => {
     if (response.status === "success") {
       if (response?.data?.entries) {
         setSchoolData(response.data.entries);
+      } else if (Array.isArray(response?.data)) {
+        setSchoolData(response.data);
       }
     } else {
-      console.error("Error:", response.message);
+      // console.error("Error:", response.message);
       toast.error(`Error: Failed to fetch school list.`);
     }
   };
@@ -110,11 +108,11 @@ export const DataProvider = ({ children }) => {
     });
 
     if (response.status === "success") {
-      if (response?.data.entries) {
+      if (response?.data?.entries) {
         setEvents(response.data.entries);
       }
     } else {
-      console.error("Error:", response.message);
+      // console.error("Error:", response.message);
       toast.error(`Failed to load events`);
     }
   };
@@ -125,9 +123,9 @@ export const DataProvider = ({ children }) => {
         verifyUsersList,
         setVerifyUsersList,
         activeUsersList,
+        setActiveUsersList,
         approvedUsersList,
         setApprovedUsersList,
-        setActiveUsersList,
         alumniList,
         setAlumniList,
         subAdminList,
@@ -144,8 +142,6 @@ export const DataProvider = ({ children }) => {
         setCard,
         cardLoaded,
         userLoaded,
-
-        // Functions
         clearAll,
         fetchUser,
         fetchCard,

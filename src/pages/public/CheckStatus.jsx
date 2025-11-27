@@ -61,7 +61,7 @@ const CheckStatus = () => {
       ) : isVerified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
-          {isPaid === false && <Payment email={email} />}
+          {isPaid == false && <Payment email={email} />}
           {isPaid && (
             <button
               className={styles.btn}
@@ -74,7 +74,7 @@ const CheckStatus = () => {
           )}
         </div>
       ) : (
-        isVerified === false && (
+        isVerified == false && (
           <div className={styles.data}>
             <p>
               You are not yet verified — please wait a moment.
