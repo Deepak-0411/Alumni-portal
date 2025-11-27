@@ -1,4 +1,4 @@
-import Footer from "../components/Footer/Footer";
+import DevFooter from "../components/Footer/DevFooter";
 import Header from "../components/Header/Header";
 import styles from "../styles/modules/layout/Layout.module.css";
 import Login from "./Login";
@@ -10,7 +10,7 @@ const AdminLogin = () => {
       <div className={styles.outlet}>
         <Login user={"superAdmin"} />
       </div>
-      <Footer onlyDevTeamFooter={true} />
+      <DevFooter/>
     </div>
   );
 };

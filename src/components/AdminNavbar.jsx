@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import apiRequest from "../utility/apiRequest";
 import { useState } from "react";
 import Loading from "./Spinner/Loading";
+import DevFooter from "../components/Footer/DevFooter";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useData } from "../context/DataContext";
@@ -18,7 +19,7 @@ const AdminNavbar = ({ forPage }) => {
       navlinks = [
         { name: "Sub Admin", path: "subadmin" },
         { name: "Alumni", path: "alumni" },
-        { name: "Finance", path: "finance" },
+        // { name: "Finance", path: "finance" },
         // { name: "School", path: "school" },
         { name: "Events", path: "events" },
       ];
@@ -57,7 +58,7 @@ const AdminNavbar = ({ forPage }) => {
 
   return (
     // <aside className="w-58 bg-gray-50 shadow-md border-r  border-gray-200">
-    <div className="w-60 bg-gray-50 shadow-md border-r  border-gray-200 flex items-center justify-between flex-col">
+    <div className="bg-gray-50 shadow-md border-r  border-gray-200 flex items-center justify-between flex-col">
       <nav className="flex pt-10 flex-col  items-center text-center  space-y-6 bg-transparent">
         {navlinks.map(({ name, path }) => (
           <NavLink
@@ -76,20 +77,22 @@ const AdminNavbar = ({ forPage }) => {
           </NavLink>
         ))}
       </nav>
-
-      <div className=" py-6">
-        <button
-          className=" w-45 py-3 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.35px] flex items-center justify-center gap-3 "
-          onClick={handleLogout}
-        >
-          {loading ? (
-            <Loading color="blue" size="small" />
-          ) : (
-            <>
-              Logout <FiLogOut size={18} strokeWidth={2.65} />
-            </>
-          )}
-        </button>
+      <div className=" w-full flex items-center flex-col">
+        <div className=" py-6">
+          <button
+            className=" w-45 py-3 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.35px] flex items-center justify-center gap-3 "
+            onClick={handleLogout}
+          >
+            {loading ? (
+              <Loading color="blue" size="small" />
+            ) : (
+              <>
+                Logout <FiLogOut size={18} strokeWidth={2.65} />
+              </>
+            )}
+          </button>
+        </div>
+        <DevFooter styles={{ position: "inherit" }} />
       </div>
     </div>
     // </aside>

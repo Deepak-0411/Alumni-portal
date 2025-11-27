@@ -53,6 +53,7 @@ const Login = ({ user = "user" }) => {
   })();
 
   const handleLogin = async (e) => {
+    navigate(reqForward);
     e.preventDefault();
     if (!(userId && password)) return;
 

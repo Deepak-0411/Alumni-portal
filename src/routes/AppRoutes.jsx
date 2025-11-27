@@ -108,6 +108,7 @@ const AppRoutes = () => {
       <Route
         path="/alumni/superAdmin/"
         element={
+          // <AdminLayout role={"admin"} /> // for testing
           <ProtectedRoute
             element={<AdminLayout role={"admin"} />}
             user={"super-Admin"}
