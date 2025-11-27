@@ -18,7 +18,7 @@ const initialFormState = {
   yearOfPassing: "",
   phoneNo: "",
   email: "",
-  school: "",
+  schoolName: "",
   programme: "",
   branch: "",
 };
@@ -30,7 +30,7 @@ const Register = () => {
   );
 
   const [formData, setFormData] = useState(initialFormState);
-  const [imgOfDegree, setImgOfDegree] = useState(null);
+  const [degreeImg, setDegreeImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
   const { schoolData: schoolList, fetchSchoolData } = useData();
@@ -48,10 +48,10 @@ const Register = () => {
     "yearOfPassing",
     "phoneNo",
     "email",
-    "school",
+    "schoolName",
     "programme",
     "branch",
-    // "imgOfDegree",
+    "degreeImg",
   ];
 
   useEffect(() => {
@@ -75,15 +75,21 @@ const Register = () => {
         e.target.value = "";
         return;
       }
-      setImgOfDegree(file);
+      setDegreeImg(file);
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      let processedValue = value;
+
+      if (name === "phoneNo") {
+        processedValue = processedValue.replace(/^0+/, "");
+      }
+
+      setFormData((prev) => ({ ...prev, [name]: processedValue }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const allData = { ...formData, imgOfDegree };
+    const allData = { ...formData, degreeImg };
 
     if (!validate(allData)) return;
 
@@ -91,8 +97,8 @@ const Register = () => {
     Object.entries(formData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
     });
-    if (imgOfDegree) {
-      formDataToSend.append("imgOfDegree", imgOfDegree);
+    if (degreeImg) {
+      formDataToSend.append("degreeImg", degreeImg);
     }
 
     const response = await apiRequest({
@@ -105,7 +111,7 @@ const Register = () => {
     if (response.status === "success") {
       toast.success("Registered Successfully!");
       setFormData(initialFormState);
-      setImgOfDegree(null);
+      setDegreeImg(null);
     } else {
       toast.error(`Error: ${response.message}`);
     }
@@ -211,14 +217,14 @@ const Register = () => {
         <div className={styles.threeTiles}>
           <Input
             type="select"
-            name="school"
+            name="schoolName"
             label="Select School"
             required
             requiredMark
-            value={formData.school}
+            value={formData.schoolName}
             options={Object.keys(schoolList)}
             onChange={handleChange}
-            error={formErrors.school}
+            error={formErrors.schoolName}
           />
           <Input
             type="select"
@@ -227,7 +233,7 @@ const Register = () => {
             required
             requiredMark
             value={formData.programme}
-            options={Object.keys(schoolList[formData?.school] ?? {})}
+            options={Object.keys(schoolList[formData?.schoolName] ?? {})}
             onChange={handleChange}
             error={formErrors.programme}
           />
@@ -238,7 +244,9 @@ const Register = () => {
             required
             requiredMark
             value={formData.branch}
-            options={schoolList[formData?.school]?.[formData.programme] || []}
+            options={
+              schoolList[formData?.schoolName]?.[formData.programme] || []
+            }
             onChange={handleChange}
             error={formErrors.branch}
           />
@@ -259,9 +267,9 @@ const Register = () => {
           />
           <Input
             type="file"
-            name="imgOfDegree"
+            name="degreeImg"
             label="Upload Degree/Marksheet (max size 2MB)"
-            // required
+            required
             requiredMark
             onChange={handleChange}
           />
@@ -284,7 +292,7 @@ const Register = () => {
           Already have an account? &nbsp;
           <button
             className={styles.backToLoginBtn}
-            onClick={() => navigate("/alumni/login")}
+            onClick={() => navigate("/alumni/user")}
           >
             log in
           </button>

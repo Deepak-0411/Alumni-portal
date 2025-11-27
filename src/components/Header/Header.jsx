@@ -36,7 +36,7 @@ const Header = ({ showButtons, additionalComponent, isAdmin = false }) => {
           </button>
           <button
             className={`${styles.loginBtn} ${styles.btn}`}
-            onClick={() => navigate("/alumni/login")}
+            onClick={() => navigate("/alumni/user")}
           >
             Login
           </button>

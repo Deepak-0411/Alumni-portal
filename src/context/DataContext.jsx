@@ -90,12 +90,12 @@ export const DataProvider = ({ children }) => {
 
   const fetchSchoolData = async () => {
     const response = await apiRequest({
-      url: `/api/data/filter `,
+      url: `/api/school`,
     });
 
     if (response.status === "success") {
-      if (response?.data) {
-        setSchoolData(response.data);
+      if (response?.data?.entries) {
+        setSchoolData(response.data.entries);
       }
     } else {
       console.error("Error:", response.message);
