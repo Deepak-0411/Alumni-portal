@@ -14,7 +14,6 @@
 .customNext {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
@@ -23,13 +22,13 @@
   cursor: pointer;
   font-size: 20px;
   z-index: 10;
-  transition: all 0.3s ease;
 }
 
 .customPrev:hover,
 .customNext:hover {
   background: rgba(0, 0, 0, 0.8);
 }
+
 
 /* Desktop positioning */
 .customPrev {

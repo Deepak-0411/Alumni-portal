@@ -6,7 +6,6 @@ import { RiTeamFill } from "react-icons/ri";
 import fallBackUserwebp from "../../assets/user.webp";
 import fallBackAssociationwebp from "../../assets/imgNotFound.webp";
 import alumniimg1 from "../../assets/gallery/alumniimg1.webp";
-import alumniimg2 from "../../assets/gallery/alumniimg2.webp";
 import alumniimg3 from "../../assets/gallery/alumniimg3.webp";
 import alumniimg4 from "../../assets/gallery/alumniimg4.webp";
 import ajitKumar from "../../assets/associationMembers/ajitKumar.webp";
@@ -52,6 +51,28 @@ const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
 
 const distAlumniData = [
   {
+    dp: ajitKumar,
+    name: "Dr. Ajit Kumar",
+    post: "President GBUAA",
+    desc: "Director of Public Relations at Sharda University.\n He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
+    linkedInUrl: "https://www.linkedin.com/in/drajitskumarsharda/",
+  },
+  {
+    dp: amitJ,
+    name: "Mr Amit Jha",
+    post: "Vice President GBUAA",
+    desc: "HR Manager at JSW Energy Ltd.\nHe is a seasoned corporate leader with expertise in Performance Management System, PolicyDrafting & Development, Talent Acquisition & Talent Management.",
+    linkedInUrl: "https://www.linkedin.com/in/amit-hr/",
+  },
+
+  {
+    dp: sunilSharma,
+    name: "Mr. Sunil Sharma",
+    post: "Secretary GBUAA",
+    desc: "Assistant General Manager - IT at CSElectric.\nHe contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
+    linkedInUrl: "https://www.linkedin.com/in/sunil-sharma-6a85a662/",
+  },
+  {
     dp: gargiSharma,
     name: "Ms Gargi Sharma",
     post: "Dy. Secretary GBUAA",
@@ -65,31 +86,8 @@ const distAlumniData = [
     desc: "Manager- Content at UpGrad.\nHe is Data and Mathematics Research Enthusiast, having expertise in the area of AI & ML.",
     linkedInUrl: "https://www.linkedin.com/in/vikram-singh0996/",
   },
-
-  {
-    dp: amitJ,
-    name: "Mr Amit Jha",
-    post: "Vice President GBUAA",
-    desc: "HR Manager at JSW Energy Ltd.\nHe is a seasoned corporate leader with expertise in Performance Management System, PolicyDrafting & Development, Talent Acquisition & Talent Management.",
-    linkedInUrl: "https://www.linkedin.com/in/amit-hr/",
-  },
-  {
-    dp: sunilSharma,
-    name: "Mr. Sunil Sharma",
-    post: "Secretary GBUAA",
-    desc: "Assistant General Manager - IT at CSElectric.\nHe contributed over 18 years of rich experience in the IT field, playing a pivotal role in driving the digital transformation and operational effectiveness of the association.",
-    linkedInUrl: "https://www.linkedin.com/in/sunil-sharma-6a85a662/",
-  },
-
-  {
-    dp: ajitKumar,
-    name: "Dr. Ajit Kumar",
-    post: "President GBUAA",
-    desc: "Director of Public Relations at Sharda University.\n He brings visionary leadership and a deep passion for building meaningfulalumni engagement.",
-    linkedInUrl: "https://www.linkedin.com/in/drajitskumarsharda/",
-  },
 ];
-const AssociationImages = [alumniimg1, alumniimg2, alumniimg3, alumniimg4];
+const AssociationImages = [alumniimg1, alumniimg3, alumniimg4];
 
 export default function HomeWriteup() {
   const navigate = useNavigate();

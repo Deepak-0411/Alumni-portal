@@ -1,6 +1,6 @@
 .alumniContainer {
   font-family: "Montserrat", "Roboto";
-  padding: 5rem 0.9rem;
+  padding: 5rem 0.9rem 0rem 0.9rem;
   background: #f0f7ff;
   display: flex;
   align-items: center;
@@ -118,9 +118,13 @@
   border-left: 4px solid #1e40af;
 }
 
+.distinguishedAlumni{
+  width: 100%;
+}
+
 .distinguishedAlumniCards {
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-wrap: wrap;
   /* align-items: center; */
   justify-content: center;
   gap: 1rem;
@@ -170,9 +174,11 @@
   font-weight: 500;
 }
 
-.imgGallery{
+.imgGallery {
   width: 100%;
 }
-.associationImage{
-  width: clamp(20rem, 88vw, 40rem);
+.associationImage {
+  width: clamp(22rem, 88vw, 40rem);
+  aspect-ratio: 16/9;
+  /* object-fit: cover; */
 }
