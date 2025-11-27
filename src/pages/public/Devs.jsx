@@ -1,33 +1,45 @@
-import { DevCard } from "../components/DevCard/DevCard";
-import { Particles } from "../components/DevCard/particals";
+import { DevCard } from "../../components/DevCard/DevCard";
+import { Particles } from "../../components/DevCard/particals";
+import dhruv from "../../assets/devs/dhruv.webp";
+import ansh from "../../assets/devs/ansh.webp";
+import deepak from "../../assets/devs/deepak.webp";
 
 function Devs() {
   const developers = [
     {
-      image:
-        "https://images.pexels.com/photos/33209129/pexels-photo-33209129.jpeg",
+      image: ansh,
       name: "Nikku Ansh",
-      role: "Ui Designer",
+      role: "UI Designer",
       description: "B.Tech CSE\n235/UCS/026",
-      instagram: "https://instagram.com",
+      github: "",
+      linkedin: "https://www.linkedin.com/in/ansh-gusain-aa8880290/",
+      instagram: "https://www.instagram.com/anshstable/",
     },
     {
-      image: "https://images.pexels.com/photos/262391/pexels-photo-262391.jpeg",
+      image: deepak,
       name: "Deepak Kumar",
-      role: "Frontent Developer",
+      role: "Frontend Developer",
       description: "B.Tech CSE\n235/UCS/050",
+      github: "https://github.com/Deepak-0411/",
+      linkedin: "https://www.linkedin.com/in/deepak-kumar-a49559369/",
+      instagram: "https://www.instagram.com/___de.epak/",
     },
     {
       image: "https://images.pexels.com/photos/904332/pexels-photo-904332.jpeg",
       name: "Harsh Singh",
       role: "Backend Developer",
       description: "B.Tech CSE\n235/UCS/058",
+      github: "https://github.com/harshuh/",
+      linkedin: "https://www.linkedin.com/in/harshuh/",
+      instagram: "https://www.instagram.com/harshexist/",
     },
     {
-      image: "https://images.pexels.com/photos/977796/pexels-photo-977796.jpeg",
+      image: dhruv,
       name: "Daksh Verma",
-      role: "HR",
       description: "B.Tech CSE Int.\n225/ICS/013",
+      github: "https://github.com/DakshVerma0001",
+      linkedin: "https://www.linkedin.com/in/daksh-verma-210189248",
+      instagram: "https://www.instagram.com/__dakshx",
     },
   ];
 

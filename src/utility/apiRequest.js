@@ -1,7 +1,5 @@
 import { navigateTo } from "./navigation";
-
-const baseURl = "https://gbu-alumniserver.vercel.app";
-// const baseURl = "http://192.168.137.12:1212";
+import baseURL from "./baseURL";
 
 const apiRequest = async ({
   url,
@@ -47,7 +45,7 @@ const apiRequest = async ({
       ...(body && { body: isFormData ? body : JSON.stringify(body) }),
     };
 
-    const response = await fetch(baseURl + url, options);
+    const response = await fetch(baseURL + url, options);
     const rawText = await response.text();
 
     let data;

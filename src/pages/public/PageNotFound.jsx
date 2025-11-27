@@ -1,4 +1,4 @@
-import Error404 from "../assets/error404.svg?react";
+import Error404 from "../../assets/error404.svg?react";
 import { useNavigate } from "react-router-dom";
 const PageNotFound = () => {
   const container = {

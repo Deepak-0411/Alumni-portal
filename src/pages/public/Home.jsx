@@ -78,9 +78,9 @@ const Home = () => {
           <Loading color={"white"} />
         ) : events.length > 0 ? (
           <div className={styles.eventList}>
-            {events.map((event) => {
+            {events.map((event,i) => {
               return (
-                <div className={styles.eventCard} key={event._id}>
+                <div className={styles.eventCard} key={event._id+i}>
                   <h3 className={styles.eventName}>{event.title}</h3>
                   {/* {event.tags.map((tag) => {
                     return (

@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
-import PageNotFound from "../pages/PageNotFound";
 
 // Public Pages
 import Home from "../pages/public/Home";
@@ -9,7 +8,8 @@ import ContactUs from "../pages/public/ContactUs";
 import CheckStatus from "../pages/public/CheckStatus";
 import ForgetPassword from "../pages/public/ForgetPassword";
 import ChangePass from "../components/ChangePassword/ChangePass";
-import Devs from "../pages/Devs";
+import Devs from "../pages/public/Devs";
+import PageNotFound from "../pages/public/PageNotFound";
 
 // Auth Pages
 import Login from "../auth/Login";

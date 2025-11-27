@@ -1,9 +1,8 @@
 import React from "react";
-import { FaGithub, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const SOCIAL_ICONS = {
   github: { icon: <FaGithub />, label: "GitHub" },
-  x: { icon: <FaTwitter />, label: "X" },
   instagram: { icon: <FaInstagram />, label: "Instagram" },
   linkedin: { icon: <FaLinkedin />, label: "LinkedIn" },
 };
@@ -14,13 +13,11 @@ export const DevCard = ({
   role,
   description,
   github,
-  x,
   instagram,
   linkedin,
 }) => {
   const socials = [
     { url: github, ...SOCIAL_ICONS.github },
-    { url: x, ...SOCIAL_ICONS.x },
     { url: instagram, ...SOCIAL_ICONS.instagram },
     { url: linkedin, ...SOCIAL_ICONS.linkedin },
   ].filter((s) => s.url);
@@ -54,6 +51,7 @@ export const DevCard = ({
           {socials.map(({ url, icon, label }, index) => (
             <a
               key={index}
+              role="button"
               href={url}
               target="_blank"
               rel="noopener noreferrer"
