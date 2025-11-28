@@ -3,10 +3,12 @@ import { toast } from "react-toastify";
 
 export default async function makePayment(email, setLoading = () => {}) {
   if (!email) return;
+
   const response = await apiRequest({
-    url: `/api/payment/initiate-payment/?email=${email}`,
+    url: `/api/payment/initiate-payment`,
     method: "POST",
-    credentials:false,
+    body: { email },
+    credentials: false,
     setLoading,
   });
 
