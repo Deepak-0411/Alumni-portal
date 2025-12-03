@@ -50,6 +50,7 @@ const AdminNavbar = ({ forPage }) => {
 
     if (response.status === "success") {
       clearAll();
+      localStorage.setItem(forPage, "false");
       navigate(redirectPath);
     } else {
       toast.error("Failed to logout");

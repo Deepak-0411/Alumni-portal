@@ -35,6 +35,14 @@
   font-size: 1.75rem;
   margin-top: 1.8rem;
 }
+.message {
+  font-family: "Montserrat", "Roboto", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #333;
+  text-align: center;
+}
 
 .btn {
   background: #5a6dff;
@@ -49,7 +57,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .8rem;
+  gap: 0.8rem;
 }
 .btn:disabled {
   opacity: 0.5;

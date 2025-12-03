@@ -61,17 +61,20 @@ const CheckStatus = () => {
       ) : isVerified ? (
         <div className={styles.data}>
           <p className={styles.verified}> Account Verified </p>
+          <p className={styles.message}>
+            An email with your account credentials has been sent to you.
+            <br />
+            Kindly review your inbox and proceed as directed.
+          </p>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              navigate("/alumni/user");
+            }}
+          >
+            Proceed to Login
+          </button>
           {isPaid == false && <Payment email={email} />}
-          {isPaid && (
-            <button
-              className={styles.btn}
-              onClick={() => {
-                navigate("/alumni/login");
-              }}
-            >
-              Proceed to Login
-            </button>
-          )}
         </div>
       ) : (
         isVerified == false && (

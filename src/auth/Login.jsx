@@ -70,6 +70,8 @@ const Login = ({ user = "user" }) => {
     if (response.status === "success") {
       toast.success("LoggedIn Sucessfully!!! ");
 
+      localStorage.setItem(user, "true");
+
       navigate(reqForward);
     } else {
       console.error("Error:", response.message);

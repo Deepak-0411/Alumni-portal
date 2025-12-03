@@ -7,22 +7,42 @@ import apiRequest from "../../utility/apiRequest";
 
 const ProtectedRoute = ({ element, user }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
-  let defaultRoot = "";
-  let url = "";
+  const [prevLoginState, setPrevLoginState] = useState(null);
 
-  if (user === "user") {
-    defaultRoot = "/alumni/login";
-    url = "/api/members-only/alumni-auth";
-  } else if (user === "sub-Admin") {
-    defaultRoot = "/alumni/sub-admin/login";
-    url = "/api/members-only/subadmin-auth";
-  } else if (user === "super-Admin") {
-    defaultRoot = "/alumni/superAdmin/login";
-    url = "/api/members-only/admin-auth";
-  }
+  const config = {
+    user: {
+      defaultRoot: "/alumni/login",
+      url: "/api/members-only/alumni-auth",
+      storageKey: "user",
+    },
+    "sub-Admin": {
+      defaultRoot: "/alumni/sub-admin/login",
+      url: "/api/members-only/subadmin-auth",
+      storageKey: "subAdmin",
+    },
+    "super-Admin": {
+      defaultRoot: "/alumni/superAdmin/login",
+      url: "/api/members-only/admin-auth",
+      storageKey: "superAdmin",
+    },
+  };
+
+  const { defaultRoot, url, storageKey } = config[user];
 
   useEffect(() => {
+    const stored = localStorage.getItem(storageKey);
+    setPrevLoginState(stored === "true");
+  }, [storageKey]);
+
+  useEffect(() => {
+    if (prevLoginState === null) return;
+
     const checkAuth = async () => {
+      if (prevLoginState === false) {
+        setIsAuthorized(false);
+        return;
+      }
+
       const response = await apiRequest({
         url: url,
         method: "GET",
@@ -32,19 +52,15 @@ const ProtectedRoute = ({ element, user }) => {
         setIsAuthorized(true);
       } else {
         console.error("Error:", response.message);
-        toast.info(`Session expired. Login again!!!`);
+        toast.info("Session expired. Login again!");
         setIsAuthorized(false);
       }
     };
 
     checkAuth();
-  }, []);
+  }, [prevLoginState]);
 
-  // if (!authToken) {
-  //   return <Navigate to={`${defaultRoot}`} />;
-  // }
-
-  // Handle loading state
+  // Loading screen
   if (isAuthorized === null) {
     return (
       <div className={styles.loaderContainer}>
@@ -53,8 +69,8 @@ const ProtectedRoute = ({ element, user }) => {
     );
   }
 
-  // Redirect unauthorized users immediately
-  return isAuthorized ? element : <Navigate to={`${defaultRoot}`} replace />;
+  // Redirect unauthorized
+  return isAuthorized ? element : <Navigate to={defaultRoot} replace />;
 };
 
 export default ProtectedRoute;

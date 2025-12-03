@@ -113,6 +113,7 @@ const Profile = () => {
 
     if (response.status === "success") {
       clearAll();
+      localStorage.setItem("user", "false");
       navigate("/alumni/login");
     } else {
       toast.error("Failed to logout");
