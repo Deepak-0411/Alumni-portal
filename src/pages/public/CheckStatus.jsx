@@ -37,7 +37,7 @@ const CheckStatus = () => {
       url: `/api/user/check-status`,
       method: "POST",
       body: {
-        email: email,
+        email,
       },
       setLoading,
     });

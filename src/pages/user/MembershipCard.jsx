@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import DP from "../../assets/user.webp";
+import FallBackDP from "../../assets/user.webp";
+import baseURL from "../../utility/baseURL";
 import Logo from "../../assets/GBULOGO.webp";
 import signature from "../../assets/signature.webp";
 
@@ -87,7 +88,11 @@ const MembershipCard = () => {
             </>
           ) : (
             <>
-              <img className={styles.userdp} src={DP} alt="Profile Pic" />
+              <img
+                className={styles.userdp}
+                src={baseURL + card?.profileImg || FallBackDP}
+                alt="Profile Pic"
+              />
               <p className={styles.name}>{card?.alumniName || "User"}</p>
               <p className={styles.validUpto}>Lifetime Member</p>
             </>

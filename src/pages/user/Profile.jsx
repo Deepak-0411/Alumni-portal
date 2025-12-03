@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import DP from "../../assets/user.webp";
+import baseURL from "../../utility/baseURL";
+import FallBackDP from "../../assets/user.webp";
 import styles from "../../styles/modules/user/Profile.module.css";
 import DataCard from "../../components/DataCard/DataCard";
 import Input from "../../components/Input/Input";
@@ -67,14 +68,13 @@ const Profile = () => {
     // Prepare FormData to send file + text
     const fd = new FormData();
     for (let key in draftData) {
-      if (key !== "dpFile") {
+      if (key !== "profileImg") {
         fd.append(key, draftData[key] || "");
       }
     }
-    if (draftData.dpFile) {
-      fd.append("dp", draftData.dpFile);
+    if (draftData.profileImg) {
+      fd.append("profileImg", draftData.profileImg);
     }
-    console.log(fd);
 
     const response = await apiRequest({
       url: "/api/alumni/profile/update",
@@ -95,9 +95,9 @@ const Profile = () => {
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "dp" && files && files[0]) {
+    if (name === "profileImg" && files && files[0]) {
       const file = files[0];
-      setDraftData((prev) => ({ ...prev, dpFile: file }));
+      setDraftData((prev) => ({ ...prev, profileImg: file }));
       setUploadPreview(URL.createObjectURL(file));
     } else {
       setDraftData((prev) => ({ ...prev, [name]: value }));
@@ -158,12 +158,12 @@ const Profile = () => {
     {
       heading: "Profile Data",
       dataItems: buildItems([{ label: "Name", name: "alumniName" }]),
-      image: uploadPreview || formData.dp || DP,
+      image: uploadPreview || baseURL + formData.profileImg || FallBackDP,
       editableImage: isEditing,
       imageInput: (
         <input
           type="file"
-          name="dp"
+          name="profileImg"
           accept="image/*"
           onChange={handleChange}
           className={styles.fileInput}

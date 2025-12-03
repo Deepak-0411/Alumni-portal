@@ -57,6 +57,7 @@ export const DataProvider = ({ children }) => {
     if (response.status === "success") {
       if (response?.data?.entries) {
         const data = response.data.entries;
+
         setCurrentUser(data);
       }
     } else {
