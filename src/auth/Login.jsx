@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import LOGO from "../assets/GBULOGO.webp";
 import Input from "../components/Input/Input";
 import LoadingScrn from "../components/Spinner/Loading";
@@ -136,22 +136,14 @@ const Login = ({ user = "user" }) => {
       </form>
       {user === "user" && (
         <div>
-          <button
-            type="button"
-            className={styles.checkStatusBtn}
-            onClick={() => navigate("/alumni/checkStatus")}
-          >
+          <Link className={styles.checkStatusBtn} to="/alumni/checkStatus">
             Check Status
-          </button>
+          </Link>
           <span className={styles.checkLabel}>
             {"Not registered? "}
-            <button
-              type="button"
-              className={styles.btn}
-              onClick={() => navigate("/alumni/register")}
-            >
+            <Link className={styles.btn} to="/alumni/register">
               Create account
-            </button>
+            </Link>
           </span>
         </div>
       )}

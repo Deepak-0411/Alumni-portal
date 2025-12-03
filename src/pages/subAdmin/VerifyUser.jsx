@@ -4,6 +4,7 @@ import DataCard from "../../components/DataCard/DataCard.jsx";
 import Overlay from "../../components/Overlay/Overlay.jsx";
 import { toast } from "react-toastify";
 import apiRequest from "../../utility/apiRequest.js";
+import baseURL from "../../utility/baseURL.js";
 import { getNextIndex } from "../../utility/navigateIndex.js";
 import Loading from "../../components/Spinner/Loading.jsx";
 import fallbackImage from "../../assets/imgNotFound.webp";
@@ -44,7 +45,9 @@ const VerifyUser = ({
     () => filteredData[index] || null,
     [filteredData, index]
   );
-  const imageURL = currentUser?.imgOfDegree || fallbackImage;
+  const imageURL = currentUser?.degreeImg
+    ? `${baseURL}/public/uploads/degrees/${currentUser.degreeImg}`
+    : fallbackImage;
 
   const userDetails = useMemo(
     () => getUserDetails(currentUser || {}),

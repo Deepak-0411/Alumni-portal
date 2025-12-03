@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import styles from "../../styles/modules/public/CheckStatus.module.css";
 import Input from "../../components/Input/Input";
 import Loading from "../../components/Spinner/Loading";
@@ -12,7 +13,20 @@ const CheckStatus = () => {
   const [isPaid, setIsPaid] = useState(null);
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+  const paymentStatus = searchParams.get("paymentStatus");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (paymentStatus == "success") {
+      toast.success("Payment Successful ");
+      navigate("/alumni/user");
+    }
+    if (paymentStatus == "failed") {
+      toast.error("Payment failed, Try again. ");
+      navigate("/alumni/checkStatus");
+    }
+  }, []);
 
   const handleSearch = async (e) => {
     e.preventDefault();

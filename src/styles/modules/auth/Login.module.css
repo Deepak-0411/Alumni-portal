@@ -8,7 +8,7 @@
   background: #fff;
   flex-wrap: wrap;
   gap: 1.25rem;
-    box-shadow: -101px 104px 40px 0 rgba(0, 0, 0, 0),
+  box-shadow: -101px 104px 40px 0 rgba(0, 0, 0, 0),
     -64px 66px 37px 0 rgba(0, 0, 0, 0.01), -36px 37px 31px 0 rgba(0, 0, 0, 0.05),
     -16px 17px 23px 0 rgba(0, 0, 0, 0.09), -4px 4px 13px 0 rgba(0, 0, 0, 0.1);
 }
@@ -77,9 +77,12 @@
   cursor: pointer;
 }
 .checkStatusBtn {
+  text-align: center;
   background: #cfd7de;
   color: #000;
-    margin-bottom: .5rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  width: 100%;
 }
 .loginBtn:disabled {
   opacity: 0.6;

@@ -42,10 +42,9 @@ const Home = () => {
         <div className={styles.card}>
           <div className={styles.VCwordsContainer}>
             <p className={styles.VCwords}>
-              "Our alumni are the torchbearers of Gautam Buddha University,
-              illuminating the world with their knowledge, integrity, and
-              innovation. This portal is a bridge to reconnect, collaborate, and
-              inspire future generations."
+              Our alumni light the world with their knowledge, integrity, and
+              innovation. This portal bridges connections, fosters
+              collaboration, and inspires future generations.
             </p>
             <p className={styles.VCSignature}>
               — Prof. Rana Pratap Singh <br />
@@ -78,9 +77,9 @@ const Home = () => {
           <Loading color={"white"} />
         ) : events.length > 0 ? (
           <div className={styles.eventList}>
-            {events.map((event,i) => {
+            {events.map((event, i) => {
               return (
-                <div className={styles.eventCard} key={event._id+i}>
+                <div className={styles.eventCard} key={event._id + i}>
                   <h3 className={styles.eventName}>{event.title}</h3>
                   {/* {event.tags.map((tag) => {
                     return (

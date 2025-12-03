@@ -106,10 +106,10 @@ export const useFormValidation = (fieldsToValidate = []) => {
     }
 
     if (
-      shouldValidate("imgOfDegree") &&
-      (!formData.imgOfDegree || !(formData.imgOfDegree instanceof File))
+      shouldValidate("degreeImg") &&
+      (!formData.degreeImg || !(formData.degreeImg instanceof File))
     ) {
-      errors.imgOfDegree = `Please upload a degree certificate image.`;
+      errors.degreeImg = `Please upload a degree certificate image.`;
     }
 
     // Display errors via toast

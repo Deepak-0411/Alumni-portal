@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./HomeWriteup.module.css";
 import { FaLinkedin, FaStar } from "react-icons/fa6";
 import { BsGlobe2 } from "react-icons/bs";
@@ -13,9 +14,7 @@ import amitJ from "../../assets/associationMembers/amitJ.webp";
 import gargiSharma from "../../assets/associationMembers/gargiSharma.webp";
 import vikramSingh from "../../assets/associationMembers/vikramSingh.webp";
 import sunilSharma from "../../assets/associationMembers/sunilSharma.webp";
-
 import AutoSwiper from "../AutoSlider/AutoSwiper";
-import { useNavigate } from "react-router-dom";
 
 const alumniCard = ({ dp, name, post, desc, linkedInUrl }) => {
   return (
@@ -90,7 +89,6 @@ const distAlumniData = [
 const AssociationImages = [alumniimg1, alumniimg3, alumniimg4];
 
 export default function HomeWriteup() {
-  const navigate = useNavigate();
   return (
     <div className={styles.alumniContainer}>
       <h1 className={styles.title}>
@@ -157,12 +155,9 @@ export default function HomeWriteup() {
             Join the GBU Alumni Association to network, contribute and inspire
             future generations.
           </p>
-          <button
-            className={styles.registerBtn}
-            onClick={() => navigate("/alumni/register")}
-          >
+          <Link className={styles.registerBtn} to="/alumni/register">
             Register as Alumni
-          </button>
+          </Link>
         </div>
       </div>
 
