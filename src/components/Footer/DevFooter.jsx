@@ -1,24 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const DevFooter = ({styles={}}) => {
-  const navigate = useNavigate();
-
-  const handleDevClick = () => {
-    navigate("/devTeam");
-  };
-
+const DevFooter = ({ styles = {} }) => {
   return (
-    <div className="fixed bottom-0 left-0 w-full flex items-center justify-center text-center p-4" style={styles}>
-      <button
+    <div
+      className="fixed bottom-0 left-0 w-full flex items-center justify-center text-center p-4"
+      style={styles}
+    >
+      <Link
         className="text-black text-[0.9rem] font-normal select-none cursor-pointer"
-        onClick={handleDevClick}
+        to="/devTeam"
       >
         Designed & Developed By
         <span className="text-[#5a4fcf]"> Ansh</span>,
         <span className="text-[#5a4fcf]"> Daksh</span>,
         <span className="text-[#5a4fcf]"> Deepak </span>&
         <span className="text-[#5a4fcf]"> Harsh</span>
-      </button>
+      </Link>
     </div>
   );
 };

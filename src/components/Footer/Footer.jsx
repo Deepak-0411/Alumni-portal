@@ -1,15 +1,9 @@
 import styles from "./Footer.module.css";
 import logo from "../../assets/logo.webp";
 import SocialLinks from "../SocialLinks/SocialLinks";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const navigate = useNavigate();
-
-  const handleDevClick = () => {
-    navigate("/devTeam");
-  };
-
   return (
     <footer className={styles.footer}>
       <div className={styles.links}>
@@ -37,13 +31,13 @@ const Footer = () => {
 
       <div className={styles.devTeamDiv}>
         <p className={styles.devTeam}>
-          <button onClick={handleDevClick}>
+          <Link to="/devTeam">
             Designed & Developed By team
             <span className={styles.devName}>{" Ansh"}</span>,
             <span className={styles.devName}>{" Daksh"}</span>,
             <span className={styles.devName}>{" Deepak "}</span>&
             <span className={styles.devName}>{" Harsh"}</span>
-          </button>
+          </Link>
         </p>
       </div>
     </footer>

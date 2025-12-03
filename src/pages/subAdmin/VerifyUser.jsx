@@ -46,7 +46,7 @@ const VerifyUser = ({
     [filteredData, index]
   );
   const imageURL = currentUser?.degreeImg
-    ? `${baseURL}/public/uploads/degrees/${currentUser.degreeImg}`
+    ? baseURL + currentUser.degreeImg
     : fallbackImage;
 
   const userDetails = useMemo(
