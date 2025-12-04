@@ -33,7 +33,7 @@ const ChangePass = ({ isForgotMode = false }) => {
   };
 
   const { mutate, isPending: isUploading } = useMutation({
-    mutationFn: async (URL, body) => {
+    mutationFn: async ({ URL, body }) => {
       return await apiRequest({
         url: URL,
         method: "POST",
@@ -41,7 +41,7 @@ const ChangePass = ({ isForgotMode = false }) => {
       });
     },
     onSuccess: (response) => {
-      toast.success(`${response.data.message}`);
+      toast.success(`${response.message}`);
       navigate("/alumni/user/profile");
     },
     onError: (error) => {
@@ -72,7 +72,7 @@ const ChangePass = ({ isForgotMode = false }) => {
           newCredential: data.cnfPass,
         };
 
-    mutate(endpoint, body);
+    mutate({ URL: endpoint, body });
   };
 
   const fields = [
