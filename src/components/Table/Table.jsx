@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./Table.module.css";
 import Overlay from "../Overlay/Overlay";
 import Input from "../Input/Input";
-import { truncateText } from "../../utility/truncateText";
 
 const Table = ({
   tableHeadings = [],
@@ -46,7 +45,7 @@ const Table = ({
     >
       <td>{index + 1}</td>
       {tableColumn.map((colKey) => (
-        <td key={`${colKey}-${index}`}>{truncateText(item[colKey])}</td>
+        <td key={`${colKey}-${index}`}>{item[colKey]}</td>
       ))}
       {showToggleBtn && (
         <td

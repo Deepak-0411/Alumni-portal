@@ -1,9 +1,17 @@
-import Container from "../../layouts/ContentBox"
+import ContentBox from "../../layouts/ContentBox";
 
 const Finance = () => {
-  return (
-        <Container heading={"Finance"} placeholder={"Search By Enrollment No."} />
-
-  )
-}
-export default Finance
+  const config = {
+    createBtnOpen: false,
+    showToggleBtn: false,
+    title: "Finance",
+    apiGet: `/api/transactions`,
+    searchBoxPlaceholder: "Search by roll no.",
+    idKey: "rollNo",
+    nameKey: "name",
+    tableHeading: ["Alumni Name", "Roll No.", "Txn-ID", "Txn-Date"],
+    tableColumn: ["alumniName", "rollNo", "trxId", "trx_date"],
+  };
+  return <ContentBox {...config} />;
+};
+export default Finance;

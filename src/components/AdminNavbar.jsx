@@ -16,7 +16,7 @@ const AdminNavbar = ({ forPage }) => {
       navlinks = [
         { name: "Sub Admin", path: "subadmin" },
         { name: "Alumni", path: "alumni" },
-        // { name: "Finance", path: "finance" },
+        { name: "Finance", path: "finance" },
         // { name: "School", path: "school" },
         { name: "Events", path: "events" },
       ];
