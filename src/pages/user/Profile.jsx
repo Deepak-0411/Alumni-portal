@@ -52,7 +52,7 @@ const Profile = () => {
   const { mutate: mutateSave } = useMutation({
     mutationFn: async (body) => {
       return await apiRequest({
-        url: `/api/alumni/logout`,
+        url: `/api/alumni/profile/update`,
         method: "POST",
         body,
       });
@@ -67,8 +67,8 @@ const Profile = () => {
       setIsEditing(false);
       setFormErrors({});
     },
-    onError: () => {
-      toast.error(response.message || "Failed to update profile");
+    onError: (error) => {
+      toast.error(error.message || "Failed to update profile");
     },
   });
 
@@ -122,7 +122,7 @@ const Profile = () => {
 
   const buildItems = (fields) =>
     fields.map(({ label, name, editable = false, type = "text" }) => {
-      const value = isEditing ? draftData[name] : formData[name];
+      const value = isEditing ? draftData?.[name] : formData?.[name];
       if (isEditing && editable) {
         if (name === "description") {
           return (
@@ -158,7 +158,10 @@ const Profile = () => {
     {
       heading: "Profile Data",
       dataItems: buildItems([{ label: "Name", name: "alumniName" }]),
-      image: uploadPreview || baseURL + formData.profileImg || FallBackDP,
+      image:
+        uploadPreview ||
+        (formData?.profileImg ? baseURL + formData.profileImg : FallBackDP),
+
       editableImage: isEditing,
       imageInput: (
         <input
@@ -239,16 +242,17 @@ const Profile = () => {
         )}
       </div>
 
-      {sections.map((section, idx) => (
-        <DataCard
-          key={idx}
-          heading={section.heading}
-          dataItems={section.dataItems}
-          image={section.image}
-          loading={isLoading}
-          imageInput={section.editableImage ? section.imageInput : null}
-        />
-      ))}
+      {!isLoading &&
+        sections.map((section, idx) => (
+          <DataCard
+            key={idx}
+            heading={section.heading}
+            dataItems={section.dataItems}
+            image={section.image}
+            loading={isLoading}
+            imageInput={section.editableImage ? section.imageInput : null}
+          />
+        ))}
 
       {/* Logout + Change Password */}
       <div className="w-[100%] flex items-center justify-center gap-6 flex-wrap">

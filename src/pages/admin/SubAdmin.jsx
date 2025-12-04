@@ -23,7 +23,7 @@ const SubAdmin = () => {
         value: "",
         placeholder: "School Name",
         role: "select",
-        options: Object.keys(schoolData),
+        options: Object.keys(schoolData || []),
       },
     },
     tableHeading: ["School", "Name", "Username"],

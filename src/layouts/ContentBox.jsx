@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Input from "../components/Input/Input";
 import Table from "../components/Table/Table";
@@ -39,7 +39,12 @@ const ContentBox = ({
   const debouncedSearchTerm = useDebouncedValue(searchTerm, 300);
 
   // Fetch list
-  const { data: dataList = [], isLoading } = useQuery({
+  const {
+    data: dataList = [],
+    isLoading,
+    isError,
+    error,
+  } = useQuery({
     queryKey: [apiGet],
     queryFn: async () => {
       const response = await apiRequest({
@@ -47,10 +52,7 @@ const ContentBox = ({
         method: "GET",
       });
 
-      if (response.status !== "success")
-        throw new Error(response?.message || "Failed to fetch data");
-
-      return response?.data?.entries || [];
+      return response?.data?.entries || response?.entries || [];
     },
   });
 
@@ -113,6 +115,12 @@ const ContentBox = ({
     return result;
   }, [dataList, debouncedSearchTerm, showToggleBtn, nameKey, idKey]);
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(error?.message || "Something went wrong");
+    }
+  }, [isError, error]);
+
   return (
     <div className={styles.container}>
       {isCreating && (
@@ -163,7 +171,7 @@ const ContentBox = ({
       </div>
 
       {isLoading ? (
-        <Loading />
+        <Loading isFullScrn={true} />
       ) : (
         <Table
           tableHeadings={tableHeading}
