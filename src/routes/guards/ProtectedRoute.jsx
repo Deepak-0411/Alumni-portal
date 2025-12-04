@@ -43,7 +43,6 @@ const ProtectedRoute = ({ element, user }) => {
   useEffect(() => {
     if (isSuccess) {
       setIsAuthorized(true);
-      toast.success("LoggedIn SuccessFully!");
     }
     if (isError) {
       console.error("Auth error:", error?.message);

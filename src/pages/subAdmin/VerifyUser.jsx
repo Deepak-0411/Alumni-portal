@@ -11,7 +11,7 @@ import fallbackImage from "../../assets/imgNotFound.webp";
 import useIndexNavigation from "../../hooks/useIndexNavigation.js.js";
 import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
 import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox.jsx";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -31,7 +31,7 @@ const getCollegeDetails = (user) => [
 const VerifyUser = ({
   currentIndex = 0,
   filteredData = [],
-  setUsersList,
+  queryKey,
   onClose,
   showBtns = false,
 }) => {
@@ -40,6 +40,8 @@ const VerifyUser = ({
   const [showRejectOverlay, setShowRejectOverlay] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const currentUser = useMemo(
     () => filteredData[index] || null,
@@ -85,13 +87,20 @@ const VerifyUser = ({
         body,
       });
     },
+
     onSuccess: () => {
       toast.success(`Marked as ${type}`);
-      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+
+      queryClient.setQueryData([queryKey], (oldData) => {
+        if (!Array.isArray(oldData)) return oldData;
+        return oldData.filter((item) => item.enrollmentNo !== enrollmentNo);
+      });
+
       setIndex((prev) => Math.max(0, prev - 1));
     },
+
     onError: (error) => {
-      toast.error(`Error: ${error.message}`);
+      toast.error(`Error: ${error?.message || "Failed"}`);
     },
   });
 

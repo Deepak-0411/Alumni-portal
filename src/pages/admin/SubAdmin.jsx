@@ -1,10 +1,7 @@
-import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import { useSchoolList } from "../../apis/school.query";
 
 const SubAdmin = () => {
-  const { subAdminList, setSubAdminList } = useData();
-
   const { data: schoolData } = useSchoolList();
 
   const config = {
@@ -31,8 +28,6 @@ const SubAdmin = () => {
     },
     tableHeading: ["School", "Name", "Username"],
     tableColumn: ["schoolName", "name", "username"],
-    dataList: subAdminList,
-    setDataList: setSubAdminList,
     // dataOverlayContent: ({ index, onClose }) => {
     // <VerifyUsers
     //   usersList={alumniList}

@@ -1,37 +1,21 @@
-import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import VerifyUser from "./VerifyUser";
 
 const UsersList = ({ role }) => {
-  const {
-    verifyUsersList,
-    setVerifyUsersList,
-    activeUsersList,
-    setActiveUsersList,
-    approvedUsersList,
-    setApprovedUsersList,
-  } = useData();
-
-  const { dataList, setDataList, apiGet, title } = (() => {
+  const { apiGet, title } = (() => {
     switch (role) {
       case "active":
         return {
-          dataList: activeUsersList,
-          setDataList: setActiveUsersList,
           apiGet: "/api/panel/activeUsers",
           title: "Active Users",
         };
       case "approved":
         return {
-          dataList: approvedUsersList,
-          setDataList: setApprovedUsersList,
           apiGet: "/api/approval/approved-users",
           title: "Approved Users",
         };
       case "verify":
         return {
-          dataList: verifyUsersList,
-          setDataList: setVerifyUsersList,
           apiGet: "/api/approval/pending-users",
           title: "Verify Users",
         };
@@ -72,13 +56,11 @@ const UsersList = ({ role }) => {
       "rollNo",
       "yearOfPassing",
     ],
-    dataList,
-    setDataList,
     dataOverlayContent: ({ index, onClose, data }) => {
       return (
         <VerifyUser
           filteredData={data}
-          setUsersList={setDataList}
+          queryKey={apiGet}
           currentIndex={index}
           onClose={onClose}
           showBtns={role === "verify" ? true : false}

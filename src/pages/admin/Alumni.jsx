@@ -1,10 +1,7 @@
-import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 import VerifyUser from "../subAdmin/VerifyUser";
 
 const Alumni = () => {
-  const { alumniList, setAlumniList } = useData();
-
   const config = {
     createBtnOpen: false,
     showToggleBtn: true,
@@ -24,18 +21,16 @@ const Alumni = () => {
     },
     tableHeading: ["Name", "Father's Name", "School", "Roll no.", "Card No"],
     tableColumn: ["alumniName", "fatherName", "schoolName", "rollNo", "cardNo"],
-    dataList: alumniList,
-    setDataList: setAlumniList,
     dataOverlayContent: ({ index, onClose, data }) => {
       // console.log("data",data);
-      return(
-      <VerifyUser
-        filteredData={data}
-        setUsersList={setAlumniList}
-        currentIndex={index}
-        onClose={onClose}
-      />)
-      
+      return (
+        <VerifyUser
+          filteredData={data}
+          queryKey={apiGet}
+          currentIndex={index}
+          onClose={onClose}
+        />
+      );
     },
   };
 

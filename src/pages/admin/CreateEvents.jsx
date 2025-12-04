@@ -1,9 +1,6 @@
-import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
 
 const CreateEvents = () => {
-  const { events, setEvents } = useData();
-
   const config = {
     createBtnOpen: true,
     showToggleBtn: false,
@@ -25,15 +22,13 @@ const CreateEvents = () => {
     },
     tableHeading: ["Title", "Date", "Venue", "Description"],
     tableColumn: ["title", "date", "venue", "description"],
-    dataList: events,
-    setDataList: setEvents,
     // dataOverlayContent: ({ index, onClose }) => {
-      // <VerifyUsers
-      //   usersList={alumniList}
-      //   setUsersList={setAlumniList}
-      //   currentIndex={index}
-      //   onClose={onClose}
-      // />
+    // <VerifyUsers
+    //   usersList={alumniList}
+    //   setUsersList={setAlumniList}
+    //   currentIndex={index}
+    //   onClose={onClose}
+    // />
     // },
   };
 
