@@ -3,7 +3,7 @@ import Input from "../components/Input/Input";
 import Table from "../components/Table/Table";
 import styles from "../styles/modules/layout/Container.module.css";
 import useDebouncedValue from "../hooks/Debounce";
-import apiRequest from "../utility/apiRequest";
+import apiRequest from "../apis/apiRequest";
 import Overlay from "../components/Overlay/Overlay";
 import Create from "../components/Create/Create";
 import { toast } from "react-toastify";
@@ -28,7 +28,7 @@ const ContentBox = ({
   dataList = [],
   setDataList,
   dataOverlayContent,
-}) => {  
+}) => {
   const [searchTerm, setSearchTearm] = useState("");
   const [loading, setLoading] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
@@ -46,10 +46,9 @@ const ContentBox = ({
       setLoading,
     });
 
-    if (response.status === "success") {      
+    if (response.status === "success") {
       if (response?.data.entries) {
         setDataList(response.data.entries);
-        
       }
     } else {
       console.error("Error:", response.message);
@@ -57,8 +56,8 @@ const ContentBox = ({
     }
   };
 
-  useEffect(() => {    
-    if (!Array.isArray(dataList) || dataList.length === 0) {      
+  useEffect(() => {
+    if (!Array.isArray(dataList) || dataList.length === 0) {
       fetchData();
     }
   }, []);
@@ -142,7 +141,9 @@ const ContentBox = ({
       )}
 
       <div className={styles.headingDiv}>
-        <h1 className={styles.heading}>{title}({dataList.length})</h1>
+        <h1 className={styles.heading}>
+          {title}({dataList.length})
+        </h1>
         <div className={styles.interactionSide}>
           <Input
             type={"text"}

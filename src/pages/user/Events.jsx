@@ -1,17 +1,9 @@
-import { useEffect, useState } from "react";
-import { useData } from "../../context/DataContext";
 import styles from "../../styles/modules/user/Events.module.css";
 import Loading from "../../components/Spinner/Loading";
+import { useEvents } from "../../apis/events.query";
 
 const Events = () => {
-  const { events, fetchEvents } = useData();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!Array.isArray(events) || events.length === 0) {
-      fetchEvents(setLoading);
-    }
-  }, []);
+  const { data: events, isLoading } = useEvents();
 
   return (
     <div className={styles.events}>
@@ -19,9 +11,10 @@ const Events = () => {
         <h2 className={styles.eventTitle}>EVENTS 2025</h2>
       </div>
 
-      {loading ? (
+      {isLoading ? (
         <div className="flex items-center justify-center w-[100%] h-[20vh]">
-        <Loading /></div>
+          <Loading />
+        </div>
       ) : events.length > 0 ? (
         events.map((event) => {
           return (

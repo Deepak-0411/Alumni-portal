@@ -4,7 +4,7 @@ import LOGO from "../assets/GBULOGO.webp";
 import Input from "../components/Input/Input";
 import LoadingScrn from "../components/Spinner/Loading";
 import styles from "../styles/modules/auth/Login.module.css";
-import apiRequest from "../utility/apiRequest";
+import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
 
 const Login = ({ user = "user" }) => {

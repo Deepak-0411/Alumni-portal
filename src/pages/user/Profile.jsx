@@ -10,8 +10,8 @@ import { FiLogOut } from "react-icons/fi";
 import Loading from "../../components/Spinner/Loading";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../utility/apiRequest";
-import { useData } from "../../context/DataContext";
 import { toast } from "react-toastify";
+import { useUser } from "../../apis/user.query";
 
 const Profile = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
@@ -33,21 +33,7 @@ const Profile = () => {
   const { formErrors, setFormErrors, validate } =
     useFormValidation(toVerifyFields);
 
-  const {
-    fetchUser,
-    fetchCard,
-    clearAll,
-    cardLoaded,
-    userLoaded,
-    userLoading: loading,
-    currentUser: formData,
-    setCurrentUser: setFormData,
-  } = useData();
-
-  useEffect(() => {
-    if (!userLoaded) fetchUser();
-    if (!cardLoaded) fetchCard();
-  }, []);
+  const { data: formData, isLoading, refetch: refetchUser } = useUser();
 
   const startEdit = () => {
     setDraftData(formData);
@@ -245,7 +231,7 @@ const Profile = () => {
           heading={section.heading}
           dataItems={section.dataItems}
           image={section.image}
-          loading={loading}
+          loading={isLoading}
           imageInput={section.editableImage ? section.imageInput : null}
         />
       ))}

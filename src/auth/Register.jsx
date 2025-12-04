@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import styles from "../styles/modules/auth/Register.module.css";
 import LoadingScrn from "../components/Spinner/Loading";
-import apiRequest from "../utility/apiRequest";
+import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
 import { useFormValidation } from "../hooks/useFormValidation";
-import { useData } from "../context/DataContext";
+import { useSchoolList } from "../apis/school.query";
 
 const initialFormState = {
   title: "",
@@ -33,7 +33,7 @@ const Register = () => {
   const [degreeImg, setDegreeImg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
-  const { schoolData: schoolList, fetchSchoolData } = useData();
+  const { data: schoolList } = useSchoolList();
   const [passingYears] = useState(yearsArray);
 
   const navigate = useNavigate();
@@ -53,12 +53,6 @@ const Register = () => {
     "branch",
     "degreeImg",
   ];
-
-  useEffect(() => {
-    if (!Array.isArray(schoolList) || schoolList.length === 0) {
-      fetchSchoolData();
-    }
-  }, []);
 
   const { formErrors, validate } = useFormValidation(fieldsToValidate);
 

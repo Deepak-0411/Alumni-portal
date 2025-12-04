@@ -1,4 +1,4 @@
-import apiRequest from "./apiRequest";
+import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
 
 export default async function makePayment(email, setLoading = () => {}) {
@@ -43,4 +43,3 @@ export default async function makePayment(email, setLoading = () => {}) {
     );
   }
 }
-

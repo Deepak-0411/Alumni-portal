@@ -1,17 +1,11 @@
-import { useEffect } from "react";
 import { useData } from "../../context/DataContext";
 import ContentBox from "../../layouts/ContentBox";
-import VerifyUsers from "../subAdmin/VerifyUser";
+import { useSchoolList } from "../../apis/school.query";
 
 const SubAdmin = () => {
-  const { subAdminList, setSubAdminList, fetchSchoolData, schoolData } =
-    useData();
+  const { subAdminList, setSubAdminList } = useData();
 
-  useEffect(() => {
-    if (!Array.isArray(schoolData) || schoolData.length === 0) {
-      fetchSchoolData();
-    }
-  }, []);
+  const { data: schoolData } = useSchoolList();
 
   const config = {
     createBtnOpen: true,
@@ -40,12 +34,12 @@ const SubAdmin = () => {
     dataList: subAdminList,
     setDataList: setSubAdminList,
     // dataOverlayContent: ({ index, onClose }) => {
-      // <VerifyUsers
-      //   usersList={alumniList}
-      //   setUsersList={setAlumniList}
-      //   currentIndex={index}
-      //   onClose={onClose}
-      // />
+    // <VerifyUsers
+    //   usersList={alumniList}
+    //   setUsersList={setAlumniList}
+    //   currentIndex={index}
+    //   onClose={onClose}
+    // />
     // },
   };
 

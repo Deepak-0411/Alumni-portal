@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import apiRequest from "../utility/apiRequest";
+import apiRequest from "../apis/apiRequest";
 import { useState } from "react";
 import Loading from "./Spinner/Loading";
 import DevFooter from "../components/Footer/DevFooter";

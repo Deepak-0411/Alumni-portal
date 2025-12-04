@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Logo from "../../assets/logo.webp";
 import styles from "../../styles/modules/others/ProtectedRoute.module.css";
 import { toast } from "react-toastify";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 
 const ProtectedRoute = ({ element, user }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);

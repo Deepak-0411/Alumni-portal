@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styles from "../../components/ChangePassword/ChangePass.module.css";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 import Input from "../../components/Input/Input";
 import Loading from "../../components/Spinner/Loading";
 

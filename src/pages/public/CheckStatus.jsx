@@ -4,7 +4,7 @@ import styles from "../../styles/modules/public/CheckStatus.module.css";
 import Input from "../../components/Input/Input";
 import Loading from "../../components/Spinner/Loading";
 import { toast } from "react-toastify";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 import { useNavigate } from "react-router-dom";
 import Payment from "../../components/Payment/Payment";
 

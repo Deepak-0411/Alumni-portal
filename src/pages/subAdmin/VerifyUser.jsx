@@ -3,7 +3,7 @@ import styles from "../../styles/modules/subAdmin/VerifyUsers.module.css";
 import DataCard from "../../components/DataCard/DataCard.jsx";
 import Overlay from "../../components/Overlay/Overlay.jsx";
 import { toast } from "react-toastify";
-import apiRequest from "../../utility/apiRequest.js";
+import apiRequest from "../../apis/apiRequest.js";
 import baseURL from "../../utility/baseURL.js";
 import { getNextIndex } from "../../utility/navigateIndex.js";
 import Loading from "../../components/Spinner/Loading.jsx";

@@ -1,16 +1,10 @@
 import { useEffect } from "react";
-import { useData } from "../context/DataContext";
+import { useUser } from "../apis/user.query";
 
 const UserInfo = ({ name = "User", role = "superAdmin", image = null }) => {
   const getInitial = (name) => name?.charAt(0)?.toUpperCase() || "U";
 
-  const { fetchUser, currentUser, userLoading } = useData();
-
-  useEffect(() => {
-    if (!Array.isArray(currentUser) || currentUser.length === 0) {
-      fetchUser(role);
-    }
-  }, []);
+  const { data: currentUser } = useUser(role);
 
   const userRole = (() => {
     switch (role) {

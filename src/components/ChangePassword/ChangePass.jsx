@@ -4,7 +4,7 @@ import styles from "./ChangePass.module.css";
 import { toast } from "react-toastify";
 import Input from "../Input/Input";
 import Loading from "../Spinner/Loading";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 
 const ChangePass = ({ isForgotMode = false }) => {
   const [isUploading, setIsUploading] = useState(false);
@@ -17,7 +17,6 @@ const ChangePass = ({ isForgotMode = false }) => {
 
   const navigate = useNavigate();
   const { token } = useParams();
-
 
   // Validate confirm password
   useEffect(() => {

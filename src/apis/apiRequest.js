@@ -26,7 +26,6 @@ const apiRequest = async ({
       error.message ||
       "Request failed";
 
-    // Important for React Query or calling code
     throw new Error(message);
   }
 };

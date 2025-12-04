@@ -8,24 +8,18 @@ import styles from "../../styles/modules/user/MembershipCard.module.css";
 
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { useData } from "../../context/DataContext";
 import Payment from "../../components/Payment/Payment";
+import { useUser } from "../../apis/user.query";
+import { useCard } from "../../apis/card.query";
 
 const MembershipCard = () => {
   const {
-    fetchUser,
-    fetchCard,
-    cardLoaded,
-    userLoaded,
-    currentUser,
-    card,
-    userLoading: loading,
-  } = useData();
-
-  useEffect(() => {
-    if (!userLoaded) fetchUser();
-    if (!cardLoaded) fetchCard();
-  }, []);
+    data: currentUser,
+    isLoading,
+    isSuccess: userLoaded,
+    refetch: refetchUser,
+  } = useUser();
+  const { data: card, isSuccess: cardLoaded, refetch: refetchCard } = useCard();
 
   const data = [
     {
@@ -43,15 +37,15 @@ const MembershipCard = () => {
   ];
 
   // Case 1: User is unpaid
-  if (!loading && currentUser?.isPaid == false) {
+  if (!isLoading && currentUser?.isPaid == false) {
     return <Payment email={currentUser?.email} />;
   }
 
   // Case 2: User loaded but no card data available
   if (userLoaded && cardLoaded && !card?.cardNo) {
     const handleRetry = () => {
-      fetchUser();
-      fetchCard();
+      refetchUser();
+      refetchCard();
     };
 
     return (
@@ -72,7 +66,7 @@ const MembershipCard = () => {
     );
   }
 
-  // Case 3: Normal (loading or valid card)
+  // Case 3: Normal (isLoading or valid card)
   return (
     <div className={styles.container}>
       <div className={styles.titleBox}>
@@ -81,7 +75,7 @@ const MembershipCard = () => {
       <div className={styles.card}>
         {/* Left Column */}
         <div className={styles.leftCol}>
-          {loading ? (
+          {isLoading ? (
             <>
               <Skeleton circle height={80} width={80} />
               <Skeleton height={28} width={100} />
@@ -120,7 +114,7 @@ const MembershipCard = () => {
                   {Object.entries(content).map(([subHeading, value]) => (
                     <div className={styles.subBox} key={subHeading}>
                       <p className={styles.subHeading}>{subHeading}</p>
-                      {loading ? (
+                      {isLoading ? (
                         <Skeleton height={28} width="100%" />
                       ) : (
                         <p className={styles.data}>{value}</p>
@@ -132,7 +126,7 @@ const MembershipCard = () => {
             );
           })}
 
-          {!loading && (
+          {!isLoading && (
             <>
               <div className={styles.signatureBox}>
                 <img

@@ -3,20 +3,12 @@ import png1 from "../../assets/studentIllustrations/studentsImg1.webp";
 import png2 from "../../assets/studentIllustrations/studentsImg2.webp";
 import png3 from "../../assets/studentIllustrations/studentsImg3.webp";
 import VCimg from "../../assets/VCimg.webp";
-import { useData } from "../../context/DataContext";
-import { useEffect, useState } from "react";
 import Loading from "../../components/Spinner/Loading";
 import Card from "../../components/NotableAlumni/Card";
 import HomeWriteup from "../../components/HomeWriteup/HomeWriteup";
+import { useEvents } from "../../apis/events.query";
 const Home = () => {
-  const { events, fetchEvents } = useData();
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (!Array.isArray(events) || events.length === 0) {
-      fetchEvents(setLoading);
-    }
-  }, []);
+  const { data: events, isLoading } = useEvents();
 
   const StudentPngSection = () => {
     return (
@@ -73,7 +65,7 @@ const Home = () => {
         <div className={styles.eventTitleContainer}>
           <h2 className={styles.eventTitle}>EVENTS 2025</h2>
         </div>
-        {loading ? (
+        {isLoading ? (
           <Loading color={"white"} />
         ) : events.length > 0 ? (
           <div className={styles.eventList}>

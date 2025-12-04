@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Create.module.css";
 import { toast } from "react-toastify";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 import Input from "../Input/Input";
 
 const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
@@ -11,7 +11,6 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
       Object.entries(dataToSend).map(([key, obj]) => [key, obj.value])
     )
   );
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +49,7 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
         {Object.keys(dataToSend).map((key) => {
-          return (            
+          return (
             <div key={key}>
               <Input
                 type={dataToSend[key].role}
