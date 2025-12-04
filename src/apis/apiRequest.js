@@ -22,10 +22,7 @@ const apiRequest = async ({
     return response.data;
   } catch (error) {
     const message =
-      error?.response?.data?.message ||
-      error.message ||
-      "Request failed";
-
+      error?.response?.data?.message || error.message || "Request failed";
     throw new Error(message);
   }
 };

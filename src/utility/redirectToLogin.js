@@ -8,17 +8,19 @@ const redirectToLogin = (message) => {
   ];
 
   if (
+    message === "Unauthorized: No token provided" ||
+    message === "No token provided" ||
     message === "No token provided." ||
     message === "Invalid token" ||
     message === "Token expired"
   ) {
     if (!loginPaths.includes(currentPath)) {
       if (currentPath.startsWith("/alumni/superAdmin")) {
-        window.location.href("/alumni/superAdmin/login");
+        window.location.href = "/alumni/superAdmin/login";
       } else if (currentPath.startsWith("/alumni/sub-admin")) {
-        window.location.href("/alumni/sub-admin/login");
+        window.location.href = "/alumni/sub-admin/login";
       } else {
-        window.location.href("/alumni/login");
+        window.location.href = "/alumni/login";
       }
     }
   }

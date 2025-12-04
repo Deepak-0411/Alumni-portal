@@ -41,13 +41,8 @@ const ChangePass = ({ isForgotMode = false }) => {
       });
     },
     onSuccess: (response) => {
-      if (response.status === "success") {
-        toast.success(`${response.data.message}`);
-        navigate("/alumni/user/profile");
-      } else if (response.data?.error) {
-        toast.error(`Something went wrong`);
-        toast.error(`${response.message || "Unknown error"}`);
-      }
+      toast.success(`${response.data.message}`);
+      navigate("/alumni/user/profile");
     },
     onError: (error) => {
       console.error("Error:", error.message);

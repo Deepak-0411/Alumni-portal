@@ -89,14 +89,10 @@ const Register = () => {
         body: formDataToSend,
       });
     },
-    onSuccess: (response) => {
-      if (response.status === "success") {
-        toast.success("Registered Successfully!");
-        setFormData(initialFormState);
-        setDegreeImg(null);
-      } else {
-        toast.error(`Error: ${response.message}`);
-      }
+    onSuccess: () => {
+      toast.success("Registered Successfully!");
+      setFormData(initialFormState);
+      setDegreeImg(null);
     },
     onError: (error) => {
       toast.error(error?.message || "Something went wrong!");

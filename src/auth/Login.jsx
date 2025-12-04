@@ -64,14 +64,9 @@ const Login = ({ user = "user" }) => {
       });
     },
     onSuccess: (response, variables) => {
-      if (response?.status === "success") {
-        toast.success("LoggedIn Successfully!!!");
-
-        localStorage.setItem(variables.user, "true");
-        navigate(variables.reqForward);
-      } else {
-        toast.error(`Error: ${response?.message}`);
-      }
+      toast.success("LoggedIn Successfully!!!");
+      localStorage.setItem(variables.user, "true");
+      navigate(variables.reqForward);
     },
     onError: (error) => {
       console.error("Login Error:", error);

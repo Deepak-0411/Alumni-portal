@@ -1,15 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import apiRequest from "../apis/apiRequest";
-import { useState } from "react";
 import Loading from "./Spinner/Loading";
 import DevFooter from "../components/Footer/DevFooter";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { useData } from "../context/DataContext";
 import { useMutation } from "@tanstack/react-query";
 
 const AdminNavbar = ({ forPage }) => {
-  const { clearAll } = useData();
   const navigate = useNavigate();
   let logoutApi;
   let redirectPath;
@@ -48,14 +45,9 @@ const AdminNavbar = ({ forPage }) => {
         method: "POST",
       });
     },
-    onSuccess: (response) => {
-      if (response.status === "success") {
-        clearAll();
-        localStorage.setItem(forPage, "false");
-        navigate(redirectPath);
-      } else {
-        toast.error("Failed to logout");
-      }
+    onSuccess: () => {
+      localStorage.setItem(forPage, "false");
+      navigate(redirectPath);
     },
     onError: () => {
       toast.error("Failed to logout");

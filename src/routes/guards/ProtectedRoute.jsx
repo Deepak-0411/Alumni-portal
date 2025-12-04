@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import Logo from "../../assets/logo.webp";
 import styles from "../../styles/modules/others/ProtectedRoute.module.css";
 import { toast } from "react-toastify";
-import apiRequest from "../../apis/apiRequest";
+import { createQuery } from "../../lib/createQuery";
 
 const ProtectedRoute = ({ element, user }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
-  const [prevLoginState, setPrevLoginState] = useState(null);
 
   const config = {
     user: {
@@ -29,38 +28,31 @@ const ProtectedRoute = ({ element, user }) => {
 
   const { defaultRoot, url, storageKey } = config[user];
 
-  useEffect(() => {
-    const stored = localStorage.getItem(storageKey);
-    setPrevLoginState(stored === "true");
-  }, [storageKey]);
+  const stored = localStorage.getItem(storageKey);
+  const isLoggedBefore = stored === "true";
 
   useEffect(() => {
-    if (prevLoginState === null) return;
+    if (!isLoggedBefore) setIsAuthorized(false);
+  }, [isLoggedBefore]);
 
-    const checkAuth = async () => {
-      if (prevLoginState === false) {
-        setIsAuthorized(false);
-        return;
-      }
+  const { error, isSuccess, isError } = createQuery(storageKey, url, {
+    enabled: isLoggedBefore === true,
+    staleTime: 0,
+  });
 
-      const response = await apiRequest({
-        url: url,
-        method: "GET",
-      });
+  useEffect(() => {
+    if (isSuccess) {
+      setIsAuthorized(true);
+      toast.success("LoggedIn SuccessFully!");
+    }
+    if (isError) {
+      console.error("Auth error:", error?.message);
+      setIsAuthorized(false);
+      toast.info("Session expired. Login again!");
+    }
+  }, [isSuccess, isError]);
 
-      if (response.status === "success") {
-        setIsAuthorized(true);
-      } else {
-        console.error("Error:", response.message);
-        toast.info("Session expired. Login again!");
-        setIsAuthorized(false);
-      }
-    };
-
-    checkAuth();
-  }, [prevLoginState]);
-
-  // Loading screen
+  // Loader
   if (isAuthorized === null) {
     return (
       <div className={styles.loaderContainer}>
@@ -69,7 +61,6 @@ const ProtectedRoute = ({ element, user }) => {
     );
   }
 
-  // Redirect unauthorized
   return isAuthorized ? element : <Navigate to={defaultRoot} replace />;
 };
 

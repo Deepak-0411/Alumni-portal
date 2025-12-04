@@ -6,7 +6,7 @@ export const createQuery = (key, url, options = {}) => {
     queryKey: Array.isArray(key) ? key : [key],
     queryFn: async () => {
       const res = await apiRequest({ url });
-      return res?.data?.entries || res?.data || [];
+      return res?.entries || res?.data?.entries || [];
     },
     staleTime: 1000 * 60 * 60,
     refetchOnWindowFocus: false,

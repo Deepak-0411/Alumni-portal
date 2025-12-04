@@ -7,14 +7,11 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const message =
-      error?.response?.data?.message ||
-      error.message ||
-      "Something went wrong";
+      error?.response?.data?.message || error.message || "Something went wrong";
 
     redirectToLogin(message);
 
