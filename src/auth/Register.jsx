@@ -7,6 +7,7 @@ import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
 import { useFormValidation } from "../hooks/useFormValidation";
 import { useSchoolList } from "../apis/school.query";
+import { useMutation } from "@tanstack/react-query";
 
 const initialFormState = {
   title: "",
@@ -31,7 +32,6 @@ const Register = () => {
 
   const [formData, setFormData] = useState(initialFormState);
   const [degreeImg, setDegreeImg] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
   const { data: schoolList } = useSchoolList();
   const [passingYears] = useState(yearsArray);
@@ -81,6 +81,28 @@ const Register = () => {
     }
   };
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (formDataToSend) => {
+      return await apiRequest({
+        url: "/api/alumni/register",
+        method: "POST",
+        body: formDataToSend,
+      });
+    },
+    onSuccess: (response) => {
+      if (response.status === "success") {
+        toast.success("Registered Successfully!");
+        setFormData(initialFormState);
+        setDegreeImg(null);
+      } else {
+        toast.error(`Error: ${response.message}`);
+      }
+    },
+    onError: (error) => {
+      toast.error(error?.message || "Something went wrong!");
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const allData = { ...formData, degreeImg };
@@ -95,20 +117,7 @@ const Register = () => {
       formDataToSend.append("degreeImg", degreeImg);
     }
 
-    const response = await apiRequest({
-      url: "/api/alumni/register",
-      method: "POST",
-      body: formDataToSend,
-      setLoading,
-    });
-
-    if (response.status === "success") {
-      toast.success("Registered Successfully!");
-      setFormData(initialFormState);
-      setDegreeImg(null);
-    } else {
-      toast.error(`Error: ${response.message}`);
-    }
+    mutate(formData);
   };
 
   return (
@@ -274,9 +283,13 @@ const Register = () => {
           <button
             type="submit"
             className={styles.submitButton}
-            disabled={loading}
+            disabled={isPending}
           >
-            {loading ? <LoadingScrn size="small" color="white" /> : "Register"}
+            {isPending ? (
+              <LoadingScrn size="small" color="white" />
+            ) : (
+              "Register"
+            )}
           </button>
         </div>
       </form>

@@ -9,7 +9,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import Loading from "../../components/Spinner/Loading";
 import { useNavigate } from "react-router-dom";
-import apiRequest from "../../utility/apiRequest";
+import apiRequest from "../../apis/apiRequest";
 import { toast } from "react-toastify";
 import { useUser } from "../../apis/user.query";
 

@@ -1,5 +1,3 @@
-import history from "./history";
-
 const redirectToLogin = (message) => {
   const currentPath = window.location.pathname;
 
@@ -16,11 +14,11 @@ const redirectToLogin = (message) => {
   ) {
     if (!loginPaths.includes(currentPath)) {
       if (currentPath.startsWith("/alumni/superAdmin")) {
-        history.push("/alumni/superAdmin/login");
+        window.location.href("/alumni/superAdmin/login");
       } else if (currentPath.startsWith("/alumni/sub-admin")) {
-        history.push("/alumni/sub-admin/login");
+        window.location.href("/alumni/sub-admin/login");
       } else {
-        history.push("/alumni/login");
+        window.location.href("/alumni/login");
       }
     }
   }

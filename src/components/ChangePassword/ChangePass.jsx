@@ -5,9 +5,9 @@ import { toast } from "react-toastify";
 import Input from "../Input/Input";
 import Loading from "../Spinner/Loading";
 import apiRequest from "../../apis/apiRequest";
+import { useMutation } from "@tanstack/react-query";
 
 const ChangePass = ({ isForgotMode = false }) => {
-  const [isUploading, setIsUploading] = useState(false);
   const [data, setData] = useState({ oldPass: "", newPass: "", cnfPass: "" });
   const [errors, setErrors] = useState({
     oldPass: "",
@@ -32,6 +32,29 @@ const ChangePass = ({ isForgotMode = false }) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const { mutate, isPending: isUploading } = useMutation({
+    mutationFn: async (URL, body) => {
+      return await apiRequest({
+        url: URL,
+        method: "POST",
+        body,
+      });
+    },
+    onSuccess: (response) => {
+      if (response.status === "success") {
+        toast.success(`${response.data.message}`);
+        navigate("/alumni/user/profile");
+      } else if (response.data?.error) {
+        toast.error(`Something went wrong`);
+        toast.error(`${response.message || "Unknown error"}`);
+      }
+    },
+    onError: (error) => {
+      console.error("Error:", error.message);
+      toast.error(`${error.message || "Unknown error"}`);
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,23 +77,7 @@ const ChangePass = ({ isForgotMode = false }) => {
           newCredential: data.cnfPass,
         };
 
-    const response = await apiRequest({
-      url: endpoint,
-      method: "POST",
-      body,
-      setLoading: setIsUploading,
-    });
-
-    if (response.status === "success") {
-      toast.success(`${response.data.message}`);
-      navigate("/alumni/user/profile");
-    } else if (response.data?.error) {
-      toast.error(`Something went wrong`);
-      toast.error(`${response.message || "Unknown error"}`);
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`${response.message || "Unknown error"}`);
-    }
+    mutate(endpoint, body);
   };
 
   const fields = [

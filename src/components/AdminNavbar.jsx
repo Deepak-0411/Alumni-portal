@@ -6,9 +6,9 @@ import DevFooter from "../components/Footer/DevFooter";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
 import { useData } from "../context/DataContext";
+import { useMutation } from "@tanstack/react-query";
 
 const AdminNavbar = ({ forPage }) => {
-  const [loading, setLoading] = useState(false);
   const { clearAll } = useData();
   const navigate = useNavigate();
   let logoutApi;
@@ -41,21 +41,26 @@ const AdminNavbar = ({ forPage }) => {
       redirectPath = ``;
   }
 
-  const handleLogout = async () => {
-    const response = await apiRequest({
-      url: logoutApi,
-      method: "POST",
-      setLoading,
-    });
-
-    if (response.status === "success") {
-      clearAll();
-      localStorage.setItem(forPage, "false");
-      navigate(redirectPath);
-    } else {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => {
+      return await apiRequest({
+        url: logoutApi,
+        method: "POST",
+      });
+    },
+    onSuccess: (response) => {
+      if (response.status === "success") {
+        clearAll();
+        localStorage.setItem(forPage, "false");
+        navigate(redirectPath);
+      } else {
+        toast.error("Failed to logout");
+      }
+    },
+    onError: () => {
       toast.error("Failed to logout");
-    }
-  };
+    },
+  });
 
   return (
     // <aside className="w-58 bg-gray-50 shadow-md border-r  border-gray-200">
@@ -82,9 +87,9 @@ const AdminNavbar = ({ forPage }) => {
         <div className=" py-6">
           <button
             className=" w-45 py-3 px-6 rounded-full text-black font-semibold  text-base tracking-wide transition-all duration-600 cursor-pointer border-[1.35px] flex items-center justify-center gap-3 "
-            onClick={handleLogout}
+            onClick={mutate}
           >
-            {loading ? (
+            {isPending ? (
               <Loading color="blue" size="small" />
             ) : (
               <>

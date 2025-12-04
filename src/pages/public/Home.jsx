@@ -67,7 +67,7 @@ const Home = () => {
         </div>
         {isLoading ? (
           <Loading color={"white"} />
-        ) : events.length > 0 ? (
+        ) : (events ?? []).length > 0 ? (
           <div className={styles.eventList}>
             {events.map((event, i) => {
               return (

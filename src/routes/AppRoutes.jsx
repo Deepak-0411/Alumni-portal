@@ -33,11 +33,8 @@ import CreateEvents from "../pages/admin/CreateEvents";
 
 // Route Guards
 import ProtectedRoute from "./guards/ProtectedRoute";
-import { useEffect } from "react";
-import { setGlobalNavigate } from "../utility/redirectTOLogin";
 
 const AppRoutes = () => {
-
   return (
     <Routes>
       <Route path="devTeam" element={<Devs />} />

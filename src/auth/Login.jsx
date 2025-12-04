@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { useNavigate, Link } from "react-router-dom";
 import LOGO from "../assets/GBULOGO.webp";
 import Input from "../components/Input/Input";
@@ -10,8 +11,7 @@ import { toast } from "react-toastify";
 const Login = ({ user = "user" }) => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
-  const [remember, setRemember] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [remember] = useState(false);
 
   const navigate = useNavigate();
 
@@ -52,31 +52,38 @@ const Login = ({ user = "user" }) => {
     }
   })();
 
-  const handleLogin = async (e) => {
-    navigate(reqForward);
+  const { mutate, isPending } = useMutation({
+    mutationFn: async ({ userId, password, user }) => {
+      return await apiRequest({
+        url: URL,
+        method: "POST",
+        body: {
+          [user === "user" ? "email" : "username"]: userId,
+          credential: password,
+        },
+      });
+    },
+    onSuccess: (response, variables) => {
+      if (response?.status === "success") {
+        toast.success("LoggedIn Successfully!!!");
+
+        localStorage.setItem(variables.user, "true");
+        navigate(variables.reqForward);
+      } else {
+        toast.error(`Error: ${response?.message}`);
+      }
+    },
+    onError: (error) => {
+      console.error("Login Error:", error);
+      toast.error(error?.message || "Something went wrong!");
+    },
+  });
+
+  const handleLogin = (e) => {
     e.preventDefault();
     if (!(userId && password)) return;
 
-    const response = await apiRequest({
-      url: URL,
-      method: "POST",
-      body: {
-        [user === "user" ? "email" : "username"]: userId,
-        credential: password,
-      },
-      setLoading,
-    });
-
-    if (response.status === "success") {
-      toast.success("LoggedIn Sucessfully!!! ");
-
-      localStorage.setItem(user, "true");
-
-      navigate(reqForward);
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Error: ${response.message}`);
-    }
+    mutate({ userId, password, user, reqForward });
   };
 
   return (
@@ -129,20 +136,20 @@ const Login = ({ user = "user" }) => {
         <button
           type="submit"
           className={styles.loginBtn}
-          disabled={loading || !(userId && password)}
+          disabled={isPending || !(userId && password)}
         >
-          {loading ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
+          {isPending ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
         </button>
       </form>
       {user === "user" && (
         <div>
-          <Link className={styles.checkStatusBtn} to="/alumni/checkStatus">
-            Check Status
+          <Link to="/alumni/checkStatus">
+            <button className={styles.checkStatusBtn}>Check Status</button>
           </Link>
           <span className={styles.checkLabel}>
             {"Not registered? "}
-            <Link className={styles.btn} to="/alumni/register">
-              Create account
+            <Link to="/alumni/register">
+              <button className={styles.btn}>Create account</button>
             </Link>
           </span>
         </div>
