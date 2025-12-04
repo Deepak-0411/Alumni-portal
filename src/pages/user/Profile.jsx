@@ -12,9 +12,10 @@ import { useNavigate } from "react-router-dom";
 import apiRequest from "../../apis/apiRequest";
 import { toast } from "react-toastify";
 import { useUser } from "../../apis/user.query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Profile = () => {
-  const [logoutLoading, setLogoutLoading] = useState(false);
+  const queryClient = useQueryClient();
   const [uploadPreview, setUploadPreview] = useState(null);
 
   const toVerifyFields = [
@@ -33,7 +34,7 @@ const Profile = () => {
   const { formErrors, setFormErrors, validate } =
     useFormValidation(toVerifyFields);
 
-  const { data: formData, isLoading, refetch: refetchUser } = useUser();
+  const { data: formData, isLoading } = useUser();
 
   const startEdit = () => {
     setDraftData(formData);
@@ -47,6 +48,29 @@ const Profile = () => {
     setFormErrors({});
     setUploadPreview(null);
   };
+
+  const { mutate: mutateSave } = useMutation({
+    mutationFn: async (body) => {
+      return await apiRequest({
+        url: `/api/alumni/logout`,
+        method: "POST",
+        body,
+      });
+    },
+    onSuccess: (data) => {
+      toast.success("Profile updated successfully");
+      // Update cache of useUser query
+      queryClient.setQueryData(["user", "user"], (oldData) => ({
+        ...oldData,
+        ...data,
+      }));
+      setIsEditing(false);
+      setFormErrors({});
+    },
+    onError: () => {
+      toast.error(response.message || "Failed to update profile");
+    },
+  });
 
   const saveEdit = async () => {
     if (!validate(draftData)) return;
@@ -62,21 +86,7 @@ const Profile = () => {
       fd.append("profileImg", draftData.profileImg);
     }
 
-    const response = await apiRequest({
-      url: "/api/alumni/profile/update",
-      method: "POST",
-      body: fd,
-      setLoading: () => {},
-    });
-
-    if (response.status === "success") {
-      setFormData(response.data);
-      toast.success("Profile updated successfully");
-      setIsEditing(false);
-      setFormErrors({});
-    } else {
-      toast.error(response.message || "Failed to update profile");
-    }
+    mutateSave(fd);
   };
 
   const handleChange = (e) => {
@@ -90,20 +100,24 @@ const Profile = () => {
     }
   };
 
-  const handleLogout = async () => {
-    const response = await apiRequest({
-      url: `/api/alumni/logout`,
-      method: "POST",
-      setLoading: setLogoutLoading,
-    });
-
-    if (response.status === "success") {
-      clearAll();
+  const { mutate: logout, isPending: logoutLoading } = useMutation({
+    mutationFn: async () => {
+      return await apiRequest({
+        url: `/api/alumni/logout`,
+        method: "POST",
+      });
+    },
+    onSuccess: () => {
       localStorage.setItem("user", "false");
       navigate("/alumni/login");
-    } else {
+    },
+    onError: () => {
       toast.error("Failed to logout");
-    }
+    },
+  });
+
+  const handleLogout = async () => {
+    logout();
   };
 
   const buildItems = (fields) =>

@@ -1,39 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styles from "../../components/ChangePassword/ChangePass.module.css";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
 import apiRequest from "../../apis/apiRequest";
 import Input from "../../components/Input/Input";
 import Loading from "../../components/Spinner/Loading";
+import { useMutation } from "@tanstack/react-query";
 
 const ForgetPassword = () => {
-  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
 
-  const navigate = useNavigate();
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (email) => {
+      return await apiRequest({
+        url: "/api/alumni/forgot-password",
+        method: "POST",
+        body: {
+          email,
+        },
+      });
+    },
+    onSuccess: (response) => {
+      toast.success(`${response.data.message}`);
+    },
+    onError: (error) => {
+      console.error("Error:", error.message);
+      toast.error(`${response.message || "Unknown error"}`);
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await apiRequest({
-      url: "/api/alumni/forgot-password",
-      method: "POST",
-      body: {
-        email,
-      },
-      setLoading,
-    });
-
-    if (response.status === "success") {
-      toast.success(`${response.data.message}`);
-    } else if (response.data?.error) {
-      toast.error(`something went wrong`);
-      toast.error(`${response.message || "Unknown error"}`);
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`something went wrong`);
-      toast.error(`${response.message || "Unknown error"}`);
-    }
+    mutate(body);
   };
 
   return (
@@ -49,8 +47,8 @@ const ForgetPassword = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <button type="submit" className={styles.uploadBtn} disabled={loading}>
-          {loading ? (
+        <button type="submit" className={styles.uploadBtn} disabled={isPending}>
+          {isPending ? (
             <>
               Get link <Loading size={"small"} color={"white"} />
             </>

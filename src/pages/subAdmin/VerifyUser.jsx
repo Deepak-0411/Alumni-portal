@@ -11,6 +11,7 @@ import fallbackImage from "../../assets/imgNotFound.webp";
 import useIndexNavigation from "../../hooks/useIndexNavigation.js.js";
 import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
 import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox.jsx";
+import { useMutation } from "@tanstack/react-query";
 
 // ----- Helper Functions -----
 const getUserDetails = (user) => [
@@ -38,7 +39,6 @@ const VerifyUser = ({
   const [showOverlay, setShowOverlay] = useState(false);
   const [showRejectOverlay, setShowRejectOverlay] = useState(false);
   const [rejectionReason, setRejectionReason] = useState("");
-  const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const currentUser = useMemo(
@@ -77,25 +77,30 @@ const VerifyUser = ({
   const handleImageClick = () => setShowOverlay(true);
   const handleCloseOverlay = () => setShowOverlay(false);
 
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: async ({ method, url, body }) => {
+      return await apiRequest({
+        url,
+        method,
+        body,
+      });
+    },
+    onSuccess: () => {
+      toast.success(`Marked as ${type}`);
+      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
+      setIndex((prev) => Math.max(0, prev - 1));
+    },
+    onError: (error) => {
+      toast.error(`Error: ${error.message}`);
+    },
+  });
+
   const verifyUser = async (type) => {
     if (!currentUser?.enrollmentNo)
       return toast.error("Missing enrollment number.");
 
     const enrollmentNo = currentUser.enrollmentNo;
     setShowRejectOverlay(false);
-    setLoading(true);
-
-    // ---- Simulate Request ----
-    // setTimeout(() => {
-    //   setLoading(false);
-    //   removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
-    //   setIndex((prev) => Math.max(0, prev - 1));
-    //   toast.success(`Marked as ${type}`);
-    //   setRejectionReason(""); // clear reason after use
-    // }, 500);
-
-    // ---- Real API Request (uncomment for production) ----
-    // /*
     const requestConfig = {
       accept: {
         method: "POST",
@@ -110,18 +115,9 @@ const VerifyUser = ({
 
     const { method, url, body } = requestConfig[type];
 
-    const response = await apiRequest({ method, url, body, setLoading });
-
-    if (response.status === "success") {
-      toast.success(`Marked as ${type}`);
-      removeFromStateByKey([setUsersList], "enrollmentNo", enrollmentNo);
-      setIndex((prev) => Math.max(0, prev - 1));
-    } else {
-      toast.error(`Error: ${response.message}`);
-    }
+    mutate({ method, url, body });
 
     setRejectionReason("");
-    // */
   };
 
   return (

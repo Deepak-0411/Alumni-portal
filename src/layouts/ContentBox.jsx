@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo, useCallback } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Input from "../components/Input/Input";
 import Table from "../components/Table/Table";
 import styles from "../styles/modules/layout/Container.module.css";
@@ -25,68 +26,60 @@ const ContentBox = ({
   formFields,
   tableHeading,
   tableColumn,
-  dataList = [],
-  setDataList,
   dataOverlayContent,
 }) => {
+  const queryClient = useQueryClient();
+
   const [searchTerm, setSearchTearm] = useState("");
-  const [loading, setLoading] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [editLoading, setEditLoading] = useState(false);
-  const [userId, setUserId] = useState(false);
+  const [userId, setUserId] = useState(null);
   const [msgText, setMsgText] = useState("");
 
   const debouncedSearchTerm = useDebouncedValue(searchTerm, 300);
 
-  const fetchData = async () => {
-    const response = await apiRequest({
-      url: apiGet,
-      method: "GET",
-      setLoading,
-    });
+  // Fetch list
+  const { data: dataList = [], isLoading } = useQuery({
+    queryKey: [apiGet],
+    queryFn: async () => {
+      const response = await apiRequest({
+        url: apiGet,
+        method: "GET",
+      });
 
-    if (response.status === "success") {
-      if (response?.data.entries) {
-        setDataList(response.data.entries);
-      }
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Error: Failed to fetch data.`);
-    }
-  };
+      if (response.status !== "success")
+        throw new Error(response?.message || "Failed to fetch data");
 
-  useEffect(() => {
-    if (!Array.isArray(dataList) || dataList.length === 0) {
-      fetchData();
-    }
-  }, []);
+      return response?.data?.entries || [];
+    },
+  });
 
-  const confirmToggle = async () => {
-    if (!Array.isArray(dataList)) return;
-    const exists = dataList.some((user) => user[idKey] === userId);
-    if (!exists) {
-      toast.error("User not found.");
-      return;
-    }
-    const response = await apiRequest({
-      url: apiToggle + userId,
-      method: "PATCH",
-      setLoading: setEditLoading,
-    });
+  // Toggle mutation
+  const toggleMutation = useMutation({
+    mutationFn: () =>
+      apiRequest({
+        url: apiToggle + userId,
+        method: "PATCH",
+      }),
 
-    if (response.status === "success") {
-      const updated = dataList.map((user) =>
-        user[idKey] === userId ? { ...user, status: !user.status } : user
+    onSuccess: () => {
+      queryClient.setQueryData([apiGet], (oldList) =>
+        oldList.map((item) =>
+          item[idKey] === userId ? { ...item, status: !item.status } : item
+        )
       );
 
-      setDataList(updated);
+      toast.success(`${msgText} successful`);
       setShowConfirm(false);
-      toast.success(`Sucessfully ${msgText.toLowerCase()} user ${userId}`);
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Failed to ${msgText.toLowerCase()} user ${userId}.`);
-    }
+    },
+
+    onError: (err) => {
+      toast.error(err?.message || `Failed to ${msgText.toLowerCase()} user`);
+    },
+  });
+
+  const confirmToggle = () => {
+    toggleMutation.mutate();
   };
 
   const cancelDelete = () => {
@@ -94,28 +87,31 @@ const ContentBox = ({
     setUserId(null);
   };
 
-  const handleToggleBtn = (user) => {
-    setShowConfirm(true);
-    setUserId(user[idKey]);
-    setMsgText(user.status ? "Disable" : "Enable");
-  };
+  const handleToggleBtn = useCallback(
+    (user) => {
+      setUserId(user[idKey]);
+      setMsgText(user.status ? "Disable" : "Enable");
+      setShowConfirm(true);
+    },
+    [idKey]
+  );
 
-  const filteredData = Array.isArray(dataList)
-    ? dataList.filter((item) => {
-        const name = item[nameKey]?.toLowerCase() || "";
-        const id = item[idKey]?.toString().toLowerCase() || "";
-        return (
-          name.includes(debouncedSearchTerm.toLowerCase()) ||
-          id.includes(debouncedSearchTerm.toLowerCase())
-        );
-      })
-    : [];
+  // Filter + sort optimized
+  const processedData = useMemo(() => {
+    const lower = debouncedSearchTerm.toLowerCase();
 
-  const sortedData = showToggleBtn
-    ? [...filteredData].sort(
-        (a, b) => (b.status === true) - (a.status === true)
-      )
-    : filteredData;
+    const result = dataList.filter((item) => {
+      const name = item[nameKey]?.toLowerCase() || "";
+      const id = item[idKey]?.toString().toLowerCase() || "";
+      return name.includes(lower) || id.includes(lower);
+    });
+
+    if (showToggleBtn) {
+      result.sort((a, b) => Number(b.status) - Number(a.status));
+    }
+
+    return result;
+  }, [dataList, debouncedSearchTerm, showToggleBtn, nameKey, idKey]);
 
   return (
     <div className={styles.container}>
@@ -131,49 +127,47 @@ const ContentBox = ({
       {showConfirm && (
         <Overlay onClose={cancelDelete}>
           <ConfirmationBox
-            message={`Do you really want to ${msgText.toLowerCase()} user ${userId} ?`}
+            message={`Do you really want to ${msgText.toLowerCase()} user ${userId}?`}
             onConfirm={confirmToggle}
             onCancel={cancelDelete}
             action={msgText}
-            loading={editLoading}
+            loading={toggleMutation.isPending}
           />
         </Overlay>
       )}
 
       <div className={styles.headingDiv}>
         <h1 className={styles.heading}>
-          {title}({dataList.length})
+          {title} ({dataList.length})
         </h1>
+
         <div className={styles.interactionSide}>
           <Input
-            type={"text"}
-            name={"searchBox"}
+            type="text"
+            name="searchBox"
             placeHolder={searchBoxPlaceholder}
             value={searchTerm}
             onChange={(e) => setSearchTearm(e.target.value)}
             className={styles.searchbar}
           />
+
           {createBtnOpen && (
-            <div>
-              <button
-                className={styles.createBtn}
-                onClick={() => setIsCreating(true)}
-              >
-                + {addText}
-              </button>
-            </div>
+            <button
+              className={styles.createBtn}
+              onClick={() => setIsCreating(true)}
+            >
+              + {addText}
+            </button>
           )}
         </div>
       </div>
 
-      {loading ? (
-        <div className="w-full h-full">
-          <Loading />
-        </div>
+      {isLoading ? (
+        <Loading />
       ) : (
         <Table
           tableHeadings={tableHeading}
-          filteredData={sortedData}
+          filteredData={processedData}
           idKey={idKey}
           handleToggleBtn={handleToggleBtn}
           tableColumn={tableColumn}

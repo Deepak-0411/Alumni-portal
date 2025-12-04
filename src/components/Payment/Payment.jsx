@@ -1,13 +1,11 @@
-import { useState } from "react";
+import { useMakePayment } from "../../hooks/useMakePayment";
 import Loading from "../Spinner/Loading";
 import styles from "./Payment.module.css";
-import makePayment from "../../utility/makePayment";
 
 const Payment = ({ email }) => {
-  const [loading, setLoading] = useState(false);
-
+  const { mutate: makePayment, isLoading } = useMakePayment();
   const handlePayClick = () => {
-    makePayment(email, setLoading);
+    makePayment(email);
   };
 
   return (
@@ -27,10 +25,10 @@ const Payment = ({ email }) => {
       <button
         className={styles.btn}
         onClick={handlePayClick}
-        disabled={loading}
+        disabled={isLoading}
       >
         Proceed to Pay
-        {loading && <Loading size="small" color="white" />}
+        {isLoading && <Loading size="small" color="white" />}
       </button>
     </div>
   );

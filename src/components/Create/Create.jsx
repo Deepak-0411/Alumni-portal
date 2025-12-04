@@ -3,9 +3,9 @@ import styles from "./Create.module.css";
 import { toast } from "react-toastify";
 import apiRequest from "../../apis/apiRequest";
 import Input from "../Input/Input";
+import { useMutation } from "@tanstack/react-query";
 
 const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
-  const [isUploading, setIsUploading] = useState(false);
   const [data, setData] = useState(
     Object.fromEntries(
       Object.entries(dataToSend).map(([key, obj]) => [key, obj.value])
@@ -20,29 +20,27 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
     }));
   };
 
+  const { mutate, isPending: isUploading } = useMutation({
+    mutationFn: async ({ url, body }) => {
+      return await apiRequest({
+        url,
+        method: "POST",
+        body,
+      });
+    },
+    onSuccess: (response) => {
+      toast.success(`Added successfully! ${response.data.message}`);
+    },
+    onError: (error) => {
+      console.error("Error:", error.message);
+      toast.error(`Upload failed: ${error.message || "Unknown error"}`);
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await apiRequest({
-      url: apiEndPointSingle,
-      method: "POST",
-      body: data,
-      setLoading: setIsUploading,
-    });
-
-    if (response.status === "success") {
-      toast.success(`Added successfully! ${response.data.message}`);
-    } else if (response.data?.error) {
-      toast.error(
-        `Upload failed: ${response.data.error || "Unknown error 11"}`,
-        {
-          autoClose: 5000,
-        }
-      );
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`Upload failed: ${response.message || "Unknown error"}`);
-    }
+    mutate({ url: apiEndPointSingle, body: data });
   };
 
   return (

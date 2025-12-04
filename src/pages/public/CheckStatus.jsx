@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 import apiRequest from "../../apis/apiRequest";
 import { useNavigate } from "react-router-dom";
 import Payment from "../../components/Payment/Payment";
+import { useMutation } from "@tanstack/react-query";
 
 const CheckStatus = () => {
   const [isVerified, setIsVerified] = useState(null);
   const [isPaid, setIsPaid] = useState(null);
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   const [searchParams] = useSearchParams();
   const paymentStatus = searchParams.get("paymentStatus");
   const navigate = useNavigate();
@@ -28,27 +28,33 @@ const CheckStatus = () => {
     }
   }, []);
 
+  const { mutate, isPending: loading } = useMutation({
+    mutationFn: async (email) => {
+      return await apiRequest({
+        url: `/api/user/check-status`,
+        method: "POST",
+        body: {
+          email,
+        },
+      });
+    },
+    onSuccess: (response) => {
+      setIsPaid(response.data?.isPaid);
+      setIsVerified(response.data?.isVerified);
+    },
+    onError: (error) => {
+      console.error("Error:", error.message);
+      toast.error(`${response.message}`);
+    },
+  });
+
   const handleSearch = async (e) => {
     e.preventDefault();
     if (!email) return;
     setIsPaid(null);
     setIsVerified(null);
-    const response = await apiRequest({
-      url: `/api/user/check-status`,
-      method: "POST",
-      body: {
-        email,
-      },
-      setLoading,
-    });
 
-    if (response.status === "success") {
-      setIsPaid(response.data?.isPaid);
-      setIsVerified(response.data?.isVerified);
-    } else {
-      console.error("Error:", response.message);
-      toast.error(`${response.message}`);
-    }
+    mutate(email);
   };
 
   return (
