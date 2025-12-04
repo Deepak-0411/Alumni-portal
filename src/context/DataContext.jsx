@@ -12,7 +12,7 @@ export const DataProvider = ({ children }) => {
   const [subAdminList, setSubAdminList] = useState([]);
 
   // User Data
-  const [currentUser, setCurrentUser] = useState([]); // Keep as array
+  const [currentUser, setCurrentUser] = useState([]); 
   const [userLoading, setUserLoading] = useState(false);
   const [card, setCard] = useState([]);
   const [schoolData, setSchoolData] = useState([]);
