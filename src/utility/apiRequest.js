@@ -1,83 +1,33 @@
-import { navigateTo } from "./navigation";
-import baseURL from "./baseURL";
+import axiosInstance from "./axiosInstance";
 
 const apiRequest = async ({
   url,
   method = "GET",
   body = null,
   headers = {},
-  credentials = true,
-  setLoading = () => {},
 }) => {
-  const redirectTOLogin = (message) => {
-    const currentPath = window.location.pathname;
-    const loginPaths = [
-      "/alumni/superAdmin/login",
-      "/alumni/login",
-      "/alumni/sub-admin/login",
-    ];
-
-    if (message === "No token provided.") {
-      if (!loginPaths.includes(currentPath)) {
-        if (currentPath.startsWith("/alumni/superAdmin")) {
-          navigateTo("/alumni/superAdmin/login");
-        } else if (currentPath.startsWith("/alumni/sub-admin")) {
-          navigateTo("/alumni/sub-admin/login");
-        } else {
-          navigateTo("/alumni/login");
-        }
-      }
-    }
-  };
-
   try {
-    setLoading(true);
-
     const isFormData = body instanceof FormData;
 
-    const options = {
+    const response = await axiosInstance({
+      url,
       method,
-      ...(credentials && { credentials: "include" }),
+      data: body,
       headers: {
         ...(isFormData ? {} : { "Content-Type": "application/json" }),
         ...headers,
       },
-      ...(body && { body: isFormData ? body : JSON.stringify(body) }),
-    };
+    });
 
-    const response = await fetch(baseURL + url, options);
-    const rawText = await response.text();
-
-    let data;
-    try {
-      data = rawText ? JSON.parse(rawText) : {};
-    } catch {
-      data = { message: rawText };
-    }
-
-    if (!response.ok) {
-      redirectTOLogin(data.message);
-      return {
-        status: "error",
-        message: data.message || `Error ${response.status}`,
-        data: null,
-      };
-    }
-
-    return {
-      status: "success",
-      message: "Request successful",
-      data,
-    };
+    return response.data;
   } catch (error) {
-    redirectTOLogin(error.message);
-    return {
-      status: "error",
-      message: error.message || "Unknown error occurred",
-      data: null,
-    };
-  } finally {
-    setLoading(false);
+    const message =
+      error?.response?.data?.message ||
+      error.message ||
+      "Request failed";
+
+    // Important for React Query or calling code
+    throw new Error(message);
   }
 };
 

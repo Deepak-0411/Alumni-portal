@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import UserLayout from "../layouts/UserLayout";
 import AdminLayout from "../layouts/AdminLayout";
 
@@ -34,14 +34,9 @@ import CreateEvents from "../pages/admin/CreateEvents";
 // Route Guards
 import ProtectedRoute from "./guards/ProtectedRoute";
 import { useEffect } from "react";
-import { setGlobalNavigate } from "../utility/navigation";
+import { setGlobalNavigate } from "../utility/redirectTOLogin";
 
 const AppRoutes = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    setGlobalNavigate(navigate);
-  }, []);
 
   return (
     <Routes>
