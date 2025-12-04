@@ -9,7 +9,6 @@ import { getNextIndex } from "../../utility/navigateIndex.js";
 import Loading from "../../components/Spinner/Loading.jsx";
 import fallbackImage from "../../assets/imgNotFound.webp";
 import useIndexNavigation from "../../hooks/useIndexNavigation.js.js";
-import { removeFromStateByKey } from "../../utility/removeFromStateByKey.js";
 import ConfirmationBox from "../../components/ConfirmationBox/ConfirmationBox.jsx";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
