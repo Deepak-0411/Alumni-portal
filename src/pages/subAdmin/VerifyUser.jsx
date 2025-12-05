@@ -65,11 +65,6 @@ const VerifyUser = ({
     if (filteredData.length === 0) onClose();
   }, [filteredData, onClose]);
 
-  useIndexNavigation({
-    handleIndexChange,
-    disabled: showOverlay || loading,
-  });
-
   function handleIndexChange(direction) {
     const newIndex = getNextIndex(index, filteredData.length, direction);
     setIndex(newIndex);
@@ -87,7 +82,7 @@ const VerifyUser = ({
       });
     },
 
-    onSuccess: () => {
+    onSuccess: (data, { type, enrollmentNo }) => {
       toast.success(`Marked as ${type}`);
 
       queryClient.setQueryData([queryKey], (oldData) => {
@@ -123,10 +118,15 @@ const VerifyUser = ({
 
     const { method, url, body } = requestConfig[type];
 
-    mutate({ method, url, body });
+    mutate({ method, url, body, type, enrollmentNo });
 
     setRejectionReason("");
   };
+
+  useIndexNavigation({
+    handleIndexChange,
+    disabled: showOverlay || loading,
+  });
 
   return (
     <div className={styles.container}>
