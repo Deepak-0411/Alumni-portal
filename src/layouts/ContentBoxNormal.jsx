@@ -36,6 +36,7 @@ const ContentBoxNormal = ({
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [apiGet],
     refetchOnWindowFocus: false,
+    staleTime: 1000 * 60 * 10,
     queryFn: async () => {
       const res = await apiRequest({ url: apiGet, method: "GET" });
       return res?.data?.entries || res?.entries || [];
