@@ -37,6 +37,7 @@ const ContentBoxInfinite = ({
     error,
   } = useInfiniteQuery({
     queryKey: isSearchMode ? [apiGet, fetchTerm] : [apiGet],
+    refetchOnWindowFocus: false,
     queryFn: async ({ pageParam = 1 }) => {
       const query = fetchTerm
         ? `?query=${encodeURIComponent(fetchTerm)}&page=${pageParam}&limit=10`

@@ -21,6 +21,7 @@ const Table = ({
   hasNextPage,
 }) => {
   const data = Array.isArray(commingData) ? commingData : [];
+  // console.log("data => ",data);
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayIndex, setOverlayIndex] = useState(null);

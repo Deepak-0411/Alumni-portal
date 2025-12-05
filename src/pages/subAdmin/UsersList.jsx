@@ -1,4 +1,4 @@
-import ContentBoxNormal from "../../layouts/ContentBoxNormal";
+import ContentBoxInfinite from "../../layouts/ContentBoxInfinite";
 import VerifyUser from "./VerifyUser";
 
 const UsersList = ({ role }) => {
@@ -65,7 +65,7 @@ const UsersList = ({ role }) => {
       );
     },
   };
-  return <ContentBoxNormal {...config} />;
+  return <ContentBoxInfinite {...config} />;
 };
 
 export default UsersList;

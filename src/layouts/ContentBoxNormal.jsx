@@ -35,6 +35,7 @@ const ContentBoxNormal = ({
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: [apiGet],
+    refetchOnWindowFocus: false,
     queryFn: async () => {
       const res = await apiRequest({ url: apiGet, method: "GET" });
       return res?.data?.entries || res?.entries || [];
@@ -49,8 +50,9 @@ const ContentBoxNormal = ({
       }),
     onSuccess: (data, { id, queryKey }) => {
       if (queryKey) {
-        queryClient.setQueryData(queryKey, (oldData) => {
+        queryClient.setQueryData([queryKey], (oldData) => {
           if (!oldData) return oldData;
+
           return oldData.filter((item) => item.id !== id);
         });
       }
