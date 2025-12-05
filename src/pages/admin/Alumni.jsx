@@ -26,7 +26,7 @@ const Alumni = () => {
       return (
         <VerifyUser
           filteredData={data}
-          queryKey={apiGet}
+          queryKey={config.apiGet}
           currentIndex={index}
           onClose={onClose}
         />
