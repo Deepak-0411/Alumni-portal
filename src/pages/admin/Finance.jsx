@@ -4,6 +4,7 @@ const Finance = () => {
   const config = {
     createBtnOpen: false,
     showToggleBtn: false,
+    isInfiniteScroll: true,
     title: "Finance",
     apiGet: `/api/transactions`,
     searchBoxPlaceholder: "Search by roll no.",

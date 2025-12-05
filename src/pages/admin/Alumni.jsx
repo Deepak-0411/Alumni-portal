@@ -4,6 +4,7 @@ import VerifyUser from "../subAdmin/VerifyUser";
 const Alumni = () => {
   const config = {
     createBtnOpen: false,
+    isInfiniteScroll: true,
     showToggleBtn: true,
     title: "Alumni",
     apiGet: `/api/panel/admin/activeUsers`,

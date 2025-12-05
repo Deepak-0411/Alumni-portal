@@ -13,7 +13,7 @@
   justify-content: space-between;
 }
 .heading {
-  font-size:2.3rem;
+  font-size: 2.3rem;
   font-family: Poppins;
   font-weight: 500;
   color: #000;
@@ -43,12 +43,22 @@
   border-radius: 9999px;
 }
 
+.fetchBtn {
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 600;
+  border: 1px solid #e9d5ff;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background-color: #155dfc;
+}
+
 .createBtn:hover {
   background-color: #e5e7eb;
 }
-.interactionSide{
-    display: flex;
-    gap: 1rem;
+.interactionSide {
+  display: flex;
+  gap: 1rem;
 }
 .searchbar {
   width: 20rem;
@@ -59,10 +69,10 @@
   color: #1e293b;
   outline: none;
 }
-.contentContainer{
-    width: 100%;
-    height: 100%;
-    /* background-color: #9d9d9d; */
-    overflow-y: auto;
-    /* padding: 1rem; */
+.contentContainer {
+  width: 100%;
+  height: 100%;
+  /* background-color: #9d9d9d; */
+  overflow-y: auto;
+  /* padding: 1rem; */
 }

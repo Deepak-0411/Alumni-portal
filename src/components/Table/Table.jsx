@@ -1,25 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Overlay from "../Overlay/Overlay";
 import Input from "../Input/Input";
+import { useIsVisible } from "../../hooks/useIsVisible";
+import { MdDelete } from "react-icons/md";
+import Loading from "../Spinner/Loading";
 
 const Table = ({
   tableHeadings = [],
-  filteredData = [],
+  data,
   idKey = "id",
   tableColumn = [],
-  showToggleBtn = true,
-  handleToggleBtn,
   dataOverlayContent,
+  showToggleBtn = false,
+  handleToggleBtn = () => {},
+  showDeleteBtn = false,
+  handleDeleteBtn = () => {},
+  fetchNextPage,
+  isFetchingNextPage,
+  hasNextPage,
 }) => {
+  console.log(data);
+
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayIndex, setOverlayIndex] = useState(null);
 
-  const handleRowClick = (index) => {
-    if (dataOverlayContent) {
-      setOverlayIndex(index);
-      setShowOverlay(true);
+  const { ref, isVisible } = useIsVisible();
+
+  useEffect(() => {
+    if (isVisible && hasNextPage && fetchNextPage) {
+      fetchNextPage();
     }
+  }, [isVisible, hasNextPage, fetchNextPage]);
+
+  const handleRowClick = (index) => {
+    if (!dataOverlayContent) return;
+    setOverlayIndex(index);
+    setShowOverlay(true);
   };
 
   const handleOverlayClose = () => {
@@ -27,55 +44,76 @@ const Table = ({
     setOverlayIndex(null);
   };
 
+  // HEADERS
   const renderTableHeadings = () => (
     <tr>
       <th>SR No.</th>
+
       {tableHeadings.map((heading, index) => (
         <th key={heading + index}>{heading}</th>
       ))}
+
       {showToggleBtn && <th>Status</th>}
+      {showDeleteBtn && <th>Delete</th>}
     </tr>
   );
 
+  // RENDER ROWS
   const renderRow = (item, index) => (
     <tr
-      key={`${item[idKey] || index}`}
+      key={item[idKey] || index}
       onClick={() => handleRowClick(index)}
-      className={showToggleBtn && !item.status ? styles.fadeText : ""}
+      className={showToggleBtn && item.status === false ? styles.fadeText : ""}
     >
       <td>{index + 1}</td>
-      {tableColumn.map((colKey) => (
-        <td key={`${colKey}-${index}`}>{item[colKey]}</td>
+
+      {tableColumn.map((col) => (
+        <td key={`${col}-${index}`}>{item[col]}</td>
       ))}
+
       {showToggleBtn && (
-        <td
-          onClick={(e) => e.stopPropagation()}
-          className={`${styles.noClick} "${item["rollNo"]}" `}
-        >
+        <td className={styles.noClick} onClick={(e) => e.stopPropagation()}>
           <Input
             type="check"
             value={item.status}
-            addonClassName={item["rollNo"]}
-            id={item["rollNo"]}
             onChange={() => handleToggleBtn(item)}
           />
+        </td>
+      )}
+
+      {showDeleteBtn && (
+        <td className={styles.noClick} onClick={(e) => e.stopPropagation()}>
+          <button
+            className={styles.deleteBtn}
+            onClick={() => handleDeleteBtn(item)}
+          >
+            <MdDelete />
+          </button>
         </td>
       )}
     </tr>
   );
 
   const renderTableBody = () => {
-    if (!filteredData.length) {
+    if (data.length === 0) {
       return (
         <tr>
-          <td colSpan={2 + tableHeadings.length} className={styles.noData}>
+          <td
+            colSpan={
+              1 +
+              tableHeadings.length +
+              (showToggleBtn ? 1 : 0) +
+              (showDeleteBtn ? 1 : 0)
+            }
+            className={styles.noData}
+          >
             No data found.
           </td>
         </tr>
       );
     }
 
-    return filteredData.map(renderRow);
+    return data.map(renderRow);
   };
 
   return (
@@ -85,14 +123,19 @@ const Table = ({
           <thead className={styles.tableHead}>{renderTableHeadings()}</thead>
           <tbody className={styles.tableBody}>{renderTableBody()}</tbody>
         </table>
+
+        {/* Intersection observer loader row */}
+        <div ref={ref} className={styles.loaderBox}>
+          {isFetchingNextPage && <Loading size="small" />}
+        </div>
       </div>
 
+      {/* Row Overlay */}
       {showOverlay && dataOverlayContent && (
         <Overlay onClose={handleOverlayClose}>
-          {/* {console.log("filteredData", filteredData)} */}
           {dataOverlayContent({
             index: overlayIndex,
-            data: filteredData,
+            data: data, // pass flattened data
             onClose: handleOverlayClose,
           })}
         </Overlay>
