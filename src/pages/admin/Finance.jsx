@@ -1,18 +1,17 @@
-import ContentBox from "../../layouts/ContentBox";
+import ContentBoxInfinite from "../../layouts/ContentBoxInfinite";
 
 const Finance = () => {
   const config = {
-    createBtnOpen: false,
-    showToggleBtn: false,
-    isInfiniteScroll: true,
     title: "Finance",
     apiGet: `/api/transactions`,
+    createBtnOpen: false,
+    showToggleBtn: false,
     searchBoxPlaceholder: "Search by roll no.",
     idKey: "rollNo",
     nameKey: "name",
     tableHeading: ["Alumni Name", "Roll No.", "Txn-ID", "Txn-Date"],
     tableColumn: ["alumniName", "rollNo", "trxId", "trx_date"],
   };
-  return <ContentBox {...config} />;
+  return <ContentBoxInfinite {...config} />;
 };
 export default Finance;

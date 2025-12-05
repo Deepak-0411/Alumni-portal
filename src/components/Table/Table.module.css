@@ -51,12 +51,12 @@
   background-color: #f6f6f6;
   cursor: pointer;
 }
-.fadeText{
+.fadeText {
   color: #8a8a8a;
 }
 
 .noClick {
- cursor: default;
+  cursor: default;
 }
 
 .noData {
@@ -64,4 +64,12 @@
   font-style: italic;
   color: #777;
   padding: 1.5rem;
+}
+.deleteBtn {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #e6462d;
+  place-items: center;
+  border-radius: 0.2rem;
+  cursor: pointer;
 }

@@ -1,13 +1,12 @@
-import ContentBox from "../../layouts/ContentBox";
+import ContentBoxInfinite from "../../layouts/ContentBoxInfinite";
 import VerifyUser from "../subAdmin/VerifyUser";
 
 const Alumni = () => {
   const config = {
-    createBtnOpen: false,
-    isInfiniteScroll: true,
-    showToggleBtn: true,
     title: "Alumni",
     apiGet: `/api/panel/admin/activeUsers`,
+    createBtnOpen: false,
+    showToggleBtn: true,
     apiToggle: `/api/panel/alumnitoggle/`,
     apiEndPointCreate: ``,
     searchBoxPlaceholder: "Search by card no. or roll no.",
@@ -35,6 +34,6 @@ const Alumni = () => {
     },
   };
 
-  return <ContentBox {...config} />;
+  return <ContentBoxInfinite {...config} />;
 };
 export default Alumni;

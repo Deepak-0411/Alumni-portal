@@ -1,15 +1,15 @@
-import ContentBox from "../../layouts/ContentBox";
+import ContentBoxNormal from "../../layouts/ContentBoxNormal";
 import { useSchoolList } from "../../apis/school.query";
 
 const SubAdmin = () => {
   const { data: schoolData } = useSchoolList();
 
   const config = {
-    createBtnOpen: true,
-    showToggleBtn: true,
     title: "Sub-Admins",
     apiGet: `/api/panel/view-subadmins`,
     apiToggle: `/api/panel/toggle/`,
+    createBtnOpen: true,
+    showToggleBtn: true,
     apiEndPointCreate: `/api/subadmin/signup`,
     searchBoxPlaceholder: "Search by username.",
     idKey: "username",
@@ -38,6 +38,6 @@ const SubAdmin = () => {
     // },
   };
 
-  return <ContentBox {...config} />;
+  return <ContentBoxNormal {...config} />;
 };
 export default SubAdmin;

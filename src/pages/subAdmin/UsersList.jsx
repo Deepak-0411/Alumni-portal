@@ -1,4 +1,4 @@
-import ContentBox from "../../layouts/ContentBox";
+import ContentBoxNormal from "../../layouts/ContentBoxNormal";
 import VerifyUser from "./VerifyUser";
 
 const UsersList = ({ role }) => {
@@ -26,12 +26,9 @@ const UsersList = ({ role }) => {
   })();
 
   const config = {
-    isSuperadmin: false,
-    createBtnOpen: false,
     title: title,
     apiGet: apiGet,
-    apiDelete: ``,
-    apiEndPointCreate: ``,
+    createBtnOpen: false,
     searchBoxPlaceholder: "Search by name or roll no.",
     idKey: "rollNo",
     nameKey: "Name",
@@ -68,7 +65,7 @@ const UsersList = ({ role }) => {
       );
     },
   };
-  return <ContentBox {...config} />;
+  return <ContentBoxNormal {...config} />;
 };
 
 export default UsersList;

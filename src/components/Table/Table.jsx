@@ -8,7 +8,7 @@ import Loading from "../Spinner/Loading";
 
 const Table = ({
   tableHeadings = [],
-  data,
+  data: commingData,
   idKey = "id",
   tableColumn = [],
   dataOverlayContent,
@@ -20,7 +20,7 @@ const Table = ({
   isFetchingNextPage,
   hasNextPage,
 }) => {
-  console.log(data);
+  const data = Array.isArray(commingData) ? commingData : [];
 
   const [showOverlay, setShowOverlay] = useState(false);
   const [overlayIndex, setOverlayIndex] = useState(null);
@@ -87,7 +87,7 @@ const Table = ({
             className={styles.deleteBtn}
             onClick={() => handleDeleteBtn(item)}
           >
-            <MdDelete />
+            <MdDelete color="white" />
           </button>
         </td>
       )}
@@ -95,7 +95,7 @@ const Table = ({
   );
 
   const renderTableBody = () => {
-    if (data.length === 0) {
+    if (data?.length === 0) {
       return (
         <tr>
           <td

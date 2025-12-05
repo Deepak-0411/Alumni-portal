@@ -58,6 +58,7 @@
 }
 .interactionSide {
   display: flex;
+  place-items: center;
   gap: 1rem;
 }
 .searchbar {

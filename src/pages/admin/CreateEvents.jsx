@@ -1,11 +1,12 @@
-import ContentBox from "../../layouts/ContentBox";
+import ContentBoxNormal from "../../layouts/ContentBoxNormal";
 
 const CreateEvents = () => {
   const config = {
-    createBtnOpen: true,
-    showToggleBtn: false,
     title: "Events",
     apiGet: `/api/events/`,
+    createBtnOpen: true,
+    showToggleBtn: false,
+    showDeleteBtn: true,
     apiToggle: `/api/panel/toggle/`,
     apiEndPointCreate: `/api/events/`,
     searchBoxPlaceholder: "Search by name.",
@@ -32,6 +33,6 @@ const CreateEvents = () => {
     // },
   };
 
-  return <ContentBox {...config} />;
+  return <ContentBoxNormal {...config} />;
 };
 export default CreateEvents;
