@@ -3,6 +3,7 @@ import styles from "./Table.module.css";
 import Overlay from "../Overlay/Overlay";
 import Input from "../Input/Input";
 import { useIsVisible } from "../../hooks/useIsVisible";
+import { MdDelete } from "react-icons/md";
 import Loading from "../Spinner/Loading";
 
 const Table = ({
@@ -10,10 +11,10 @@ const Table = ({
   data = [],
   idKey = "id",
   tableColumn = [],
-  showToggleBtn = true,
-  handleToggleBtn,
-  showDeleteBtn = false,
-  handleDeleteBtn,
+  showToggleBtn,
+  handleToggleBtn = () => {},
+  showDeleteBtn,
+  handleDeleteBtn = () => {},
   dataOverlayContent,
   fetchNextPage,
   isFetchingNextPage,
@@ -72,10 +73,10 @@ const Table = ({
       )}
       {showDeleteBtn && (
         <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
-          <button onChange={() => handleToggleBtn(item)}>
-            value={item.status}
+          <button onChange={() => handleDeleteBtn(item)}>
+            {" "}
+            <MdDelete />
           </button>
-          />
         </td>
       )}
     </tr>

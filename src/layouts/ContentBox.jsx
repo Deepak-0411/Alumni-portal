@@ -20,11 +20,13 @@ import Loading from "../components/Spinner/Loading";
 const ContentBox = ({
   isSuperadmin = true,
   showToggleBtn = false,
+  showDeleteBtn = false,
   createBtnOpen = true,
   isInfiniteScroll = false,
   title,
   apiGet,
   apiToggle,
+  apiDelete,
   apiEndPointCreate,
   searchBoxPlaceholder,
   idKey,
@@ -240,6 +242,7 @@ const ContentBox = ({
           tableColumn={tableColumn}
           dataOverlayContent={dataOverlayContent}
           showToggleBtn={showToggleBtn}
+          showDeleteBtn={showDeleteBtn}
         />
       )}
       {isInfiniteScroll && (
@@ -251,6 +254,7 @@ const ContentBox = ({
           dataOverlayContent={dataOverlayContent}
           showToggleBtn={showToggleBtn}
           handleToggleBtn={handleToggleBtn}
+          showDeleteBtn={showDeleteBtn}
           fetchNextPage={fetchNextPage}
           isFetchingNextPage={infiniteLoading}
           hasNextPage={hasMorePage}
