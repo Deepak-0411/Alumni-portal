@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./Table.module.css";
 import Overlay from "../Overlay/Overlay";
 import Input from "../Input/Input";
-import useIsVisible from "../../hooks/useIsVisible";
+import { useIsVisible } from "../../hooks/useIsVisible";
 import Loading from "../Spinner/Loading";
 
 const Table = ({
@@ -12,6 +12,8 @@ const Table = ({
   tableColumn = [],
   showToggleBtn = true,
   handleToggleBtn,
+  showDeleteBtn = false,
+  handleDeleteBtn,
   dataOverlayContent,
   fetchNextPage,
   isFetchingNextPage,
@@ -65,6 +67,14 @@ const Table = ({
             type="check"
             value={item.status}
             onChange={() => handleToggleBtn(item)}
+          />
+        </td>
+      )}
+      {showDeleteBtn && (
+        <td onClick={(e) => e.stopPropagation()} className={styles.noClick}>
+          <button onChange={() => handleToggleBtn(item)}>
+            value={item.status}
+          </button>
           />
         </td>
       )}
