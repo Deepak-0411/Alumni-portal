@@ -8,12 +8,32 @@
   gap: 1rem;
   padding: clamp(1rem, 3vw, 2rem);
 }
-.editBtn {
+.topBar {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   gap: 1rem;
+}
+.title {
+  color: #002e57;
+  font-family: "Annapurna SIL";
+  font-size: clamp(2rem, 8vw, 3rem);
+  font-weight: 700;
+  padding: 0.4rem;
+  width: 100%;
+}
+.editBtn {
+  width: 3.5rem;
+  height: 3rem;
+  background-color: #f4f5fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  padding-left: 0.5rem;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 .textarea {
   width: 100%;
@@ -74,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .8rem;
+  gap: 0.8rem;
 }
 
 .uploadBtn {

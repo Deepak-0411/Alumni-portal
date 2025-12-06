@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import FallBackDP from "../../assets/user.webp";
 import baseURL from "../../utility/baseURL";
 import Logo from "../../assets/GBULOGO.webp";
