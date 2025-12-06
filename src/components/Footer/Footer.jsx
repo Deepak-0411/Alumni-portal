@@ -32,7 +32,7 @@ const Footer = () => {
       <div className={styles.devTeamDiv}>
         <p className={styles.devTeam}>
           <Link to="/devTeam">
-            Designed & Developed By team
+            Designed & Developed By
             <span className={styles.devName}>{" Ansh"}</span>,
             <span className={styles.devName}>{" Daksh"}</span>,
             <span className={styles.devName}>{" Deepak "}</span>&

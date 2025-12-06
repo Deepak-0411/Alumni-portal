@@ -116,10 +116,12 @@ const Register = () => {
       formDataToSend.append(key, value);
     });
     if (degreeImg) {
+      console.log(degreeImg);
+
       formDataToSend.append("degreeImg", degreeImg);
     }
 
-    mutate(formData);
+    mutate(formDataToSend);
   };
 
   return (

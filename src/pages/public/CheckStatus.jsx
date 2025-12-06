@@ -39,12 +39,12 @@ const CheckStatus = () => {
       });
     },
     onSuccess: (response) => {
-      setIsPaid(response.data?.isPaid);
-      setIsVerified(response.data?.isVerified);
+      setIsPaid(response?.isPaid);
+      setIsVerified(response?.isVerified);
     },
     onError: (error) => {
       console.error("Error:", error.message);
-      toast.error(`${response.message}`);
+      toast.error(`${error.message}`);
     },
   });
 
