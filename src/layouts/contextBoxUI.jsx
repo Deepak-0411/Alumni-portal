@@ -18,6 +18,7 @@ const ContentBoxUI = ({
   showDeleteBtn,
   searchBoxPlaceholder,
   displayedData,
+  totalDataLength,
   showConfirm,
   msgText,
   userId,
@@ -28,11 +29,11 @@ const ContentBoxUI = ({
   tableHeading,
   tableColumn,
   dataOverlayContent,
+  searchTerm,
+  setSearchTerm,
 
   //  NORMAL MODE ONLY
 
-  searchTerm, // used only in Normal mode
-  setSearchTerm, // used only in Normal mode
   isLoading, // Normal mode loading
   isCreating, // normal mode
   setIsCreating, // normal mode
@@ -41,12 +42,10 @@ const ContentBoxUI = ({
   //   INFINITE MODE ONLY
 
   isInfiniteScroll, // flag to know which UI to show
-  fetchTerm, // only used in Infinite mode
-  setFetchTerm, // only infinite
-  fetchData, // only infinite
   fetchNextPage, // only infinite
   isFetchingNextPage, // only infinite
   hasNextPage, // only infinite
+  queryKey,
 
   // SHARED ACTIONS
   confirmToggle,
@@ -77,35 +76,17 @@ const ContentBoxUI = ({
       {/* HEADER */}
       <div className={styles.headingDiv}>
         <h1 className={styles.heading}>
-          {title} ({displayedData?.length || ""})
+          {title} ({totalDataLength || displayedData.length || "0"})
         </h1>
 
         <div className={styles.interactionSide}>
-          {!isInfiniteScroll ? (
-            <Input
-              type="text"
-              placeHolder={searchBoxPlaceholder}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className={styles.searchbar}
-            />
-          ) : (
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex gap-4 items-center"
-            >
-              <Input
-                type="text"
-                placeHolder={searchBoxPlaceholder}
-                value={fetchTerm}
-                onChange={(e) => setFetchTerm(e.target.value)}
-                className={styles.searchbar}
-              />
-              <button className={styles.fetchBtn} onClick={fetchData}>
-                Fetch
-              </button>
-            </form>
-          )}
+          <Input
+            type="text"
+            placeHolder={searchBoxPlaceholder}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchbar}
+          />
 
           {createBtnOpen && (
             <button
@@ -135,6 +116,7 @@ const ContentBoxUI = ({
           fetchNextPage={fetchNextPage}
           isFetchingNextPage={isInfiniteScroll ? isFetchingNextPage : undefined}
           hasNextPage={isInfiniteScroll ? hasNextPage : undefined}
+          queryKey={queryKey}
         />
       )}
     </div>

@@ -21,12 +21,12 @@ const Alumni = () => {
     },
     tableHeading: ["Name", "Father's Name", "School", "Roll no.", "Card No"],
     tableColumn: ["alumniName", "fatherName", "schoolName", "rollNo", "cardNo"],
-    dataOverlayContent: ({ index, onClose, data }) => {
+    dataOverlayContent: ({ index, onClose, data, queryKey }) => {
       // console.log("data",data);
       return (
         <VerifyUser
           filteredData={data}
-          queryKey={config.apiGet}
+          queryKey={queryKey}
           currentIndex={index}
           onClose={onClose}
         />

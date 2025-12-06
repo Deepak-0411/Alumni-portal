@@ -85,14 +85,22 @@ const VerifyUser = ({
     onSuccess: (data, { type, enrollmentNo }) => {
       toast.success(`Marked as ${type}`);
 
-      queryClient.setQueryData([queryKey], (oldData) => {
-        if (!Array.isArray(oldData)) return oldData;
-        return oldData.filter((item) => item.enrollmentNo !== enrollmentNo);
+      queryClient.setQueryData(queryKey, (oldData) => {
+        if (!oldData) return oldData;
+
+        return {
+          ...oldData,
+          pages: oldData.pages.map((page) => ({
+            ...page,
+            entries: page.entries.filter(
+              (item) => item.enrollmentNo !== enrollmentNo
+            ),
+          })),
+        };
       });
 
       setIndex((prev) => Math.max(0, prev - 1));
     },
-
     onError: (error) => {
       toast.error(`Error: ${error?.message || "Failed"}`);
     },

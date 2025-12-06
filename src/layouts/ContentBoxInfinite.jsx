@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import apiRequest from "../apis/apiRequest";
 import useToggle from "../hooks/useToggle";
 import ContentBoxUI from "./contextBoxUI";
+import useDebouncedValue from "../hooks/Debounce";
 
 const ContentBoxInfinite = ({
   title,
@@ -25,7 +26,9 @@ const ContentBoxInfinite = ({
   const [showConfirm, setShowConfirm] = useState(false);
   const [userId, setUserId] = useState(null);
   const [msgText, setMsgText] = useState("");
-  const [isSearchMode, setIsSearchMode] = useState(false);
+  const [dataLength, setDataLength] = useState(0);
+
+  const debounced = useDebouncedValue(fetchTerm, 500);
 
   const {
     data,
@@ -36,16 +39,18 @@ const ContentBoxInfinite = ({
     isError,
     error,
   } = useInfiniteQuery({
-    queryKey: isSearchMode ? [apiGet, fetchTerm] : [apiGet],
+    queryKey: [apiGet, debounced],
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 10,
     queryFn: async ({ pageParam = 1 }) => {
-      const query = fetchTerm
-        ? `?query=${encodeURIComponent(fetchTerm)}&page=${pageParam}&limit=10`
+      const query = debounced
+        ? `?query=${encodeURIComponent(debounced)}&page=${pageParam}&limit=10`
         : `?page=${pageParam}&limit=10`;
 
       const res = await apiRequest({ url: apiGet + query, method: "GET" });
       const payload = res?.data || {};
+
+      setDataLength(payload.totalItems);
 
       return {
         entries: payload.entries || [],
@@ -59,18 +64,11 @@ const ContentBoxInfinite = ({
 
   const flatData = data?.pages?.flatMap((p) => p.entries) || [];
 
-  const fetchData = () => {
-    if (!fetchTerm.trim()) return toast.error("Enter search text first");
-    setIsSearchMode(true);
-    refetch();
-  };
-
   useEffect(() => {
-    if (!fetchTerm.trim()) {
-      setIsSearchMode(false);
+    if (!debounced.trim()) {
       refetch();
     }
-  }, [fetchTerm]);
+  }, [debounced]);
 
   useEffect(() => {
     if (isError) toast.error(error?.message || "Something went wrong");
@@ -110,6 +108,7 @@ const ContentBoxInfinite = ({
       showDeleteBtn={showDeleteBtn}
       searchBoxPlaceholder={searchBoxPlaceholder}
       displayedData={flatData}
+      totalDataLength={dataLength}
       showConfirm={showConfirm}
       msgText={msgText}
       userId={userId}
@@ -121,14 +120,14 @@ const ContentBoxInfinite = ({
       tableHeading={tableHeading}
       tableColumn={tableColumn}
       dataOverlayContent={dataOverlayContent}
+      searchTerm={fetchTerm}
+      setSearchTerm={setFetchTerm}
       // infinite only
-      fetchTerm={fetchTerm}
-      setFetchTerm={setFetchTerm}
-      fetchData={fetchData}
       fetchNextPage={fetchNextPage}
       isFetchingNextPage={isFetchingNextPage}
       hasNextPage={hasNextPage}
       isLoading={false}
+      queryKey={[apiGet, debounced]}
       // flag
       isInfiniteScroll={true}
       // shared

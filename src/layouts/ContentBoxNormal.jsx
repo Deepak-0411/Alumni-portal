@@ -137,9 +137,9 @@ const ContentBoxNormal = ({
       tableHeading={tableHeading}
       tableColumn={tableColumn}
       dataOverlayContent={dataOverlayContent}
-      // NORMAL MODE ONLY
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
+      // NORMAL MODE ONLY
       isLoading={isLoading}
       isCreating={isCreating}
       setIsCreating={setIsCreating}

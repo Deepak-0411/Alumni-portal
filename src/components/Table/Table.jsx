@@ -19,6 +19,7 @@ const Table = ({
   fetchNextPage,
   isFetchingNextPage,
   hasNextPage,
+  queryKey,
 }) => {
   const data = Array.isArray(commingData) ? commingData : [];
   // console.log("data => ",data);
@@ -138,6 +139,7 @@ const Table = ({
             index: overlayIndex,
             data: data, // pass flattened data
             onClose: handleOverlayClose,
+            queryKey,
           })}
         </Overlay>
       )}

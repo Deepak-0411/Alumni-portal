@@ -53,11 +53,11 @@ const UsersList = ({ role }) => {
       "rollNo",
       "yearOfPassing",
     ],
-    dataOverlayContent: ({ index, onClose, data }) => {
+    dataOverlayContent: ({ index, onClose, data, queryKey }) => {
       return (
         <VerifyUser
           filteredData={data}
-          queryKey={apiGet}
+          queryKey={queryKey}
           currentIndex={index}
           onClose={onClose}
           showBtns={role === "verify" ? true : false}
