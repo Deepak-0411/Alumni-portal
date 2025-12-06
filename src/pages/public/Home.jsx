@@ -7,8 +7,16 @@ import Loading from "../../components/Spinner/Loading";
 import Card from "../../components/NotableAlumni/Card";
 import HomeWriteup from "../../components/HomeWriteup/HomeWriteup";
 import { useEvents } from "../../apis/events.query";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 const Home = () => {
-  const { data: events, isLoading } = useEvents();
+  const { data: events, isLoading, isError } = useEvents();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to fetch events");
+    }
+  }, [isError]);
 
   const StudentPngSection = () => {
     return (
@@ -71,7 +79,7 @@ const Home = () => {
           <div className={styles.eventList}>
             {events.map((event, i) => {
               return (
-                <div className={styles.eventCard} key={event._id + i}>
+                <div className={styles.eventCard} key={`${event._id}` + i}>
                   <h3 className={styles.eventName}>{event.title}</h3>
                   {/* {event.tags.map((tag) => {
                     return (

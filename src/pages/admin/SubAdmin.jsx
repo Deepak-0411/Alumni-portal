@@ -1,8 +1,16 @@
 import ContentBoxNormal from "../../layouts/ContentBoxNormal";
 import { useSchoolList } from "../../apis/school.query";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const SubAdmin = () => {
-  const { data: schoolData } = useSchoolList();
+  const { data: schoolData = [], isError } = useSchoolList();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to fetch school list.");
+    }
+  }, [isError]);
 
   const config = {
     title: "Sub-Admins",

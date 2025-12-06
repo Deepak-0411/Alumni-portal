@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import styles from "../styles/modules/auth/Register.module.css";
@@ -33,10 +33,16 @@ const Register = () => {
   const [formData, setFormData] = useState(initialFormState);
   const [degreeImg, setDegreeImg] = useState(null);
   const [titleList] = useState(["Mr.", "Dr.", "Ms."]);
-  const { data: schoolList } = useSchoolList();
+  const { data: schoolList = [], isError } = useSchoolList();
   const [passingYears] = useState(yearsArray);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to fetch school list");
+    }
+  }, [isError]);
 
   const fieldsToValidate = [
     "title",

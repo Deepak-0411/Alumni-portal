@@ -1,9 +1,17 @@
 import styles from "../../styles/modules/user/Events.module.css";
 import Loading from "../../components/Spinner/Loading";
 import { useEvents } from "../../apis/events.query";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const Events = () => {
-  const { data: events, isLoading } = useEvents();
+  const { data: events, isLoading, isError } = useEvents();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to fetch events");
+    }
+  }, [isError]);
 
   return (
     <div className={styles.events}>
