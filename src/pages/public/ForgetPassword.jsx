@@ -10,7 +10,7 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (email) => {
+    mutationFn: async () => {
       return await apiRequest({
         url: "/api/alumni/forgot-password",
         method: "POST",
@@ -20,18 +20,20 @@ const ForgetPassword = () => {
       });
     },
     onSuccess: (response) => {
-      toast.success(`${response.data.message}`);
+      console.log("response", response);
+
+      toast.success(`${response?.message}`);
     },
     onError: (error) => {
-      console.error("Error:", error.message);
-      toast.error(`${response.message || "Unknown error"}`);
+      console.error("Error:", error?.message);
+      toast.error(`${error?.message || "Unknown error"}`);
     },
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    mutate(body);
+    mutate();
   };
 
   return (
