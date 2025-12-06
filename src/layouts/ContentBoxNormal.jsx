@@ -44,7 +44,7 @@ const ContentBoxNormal = ({
     },
   });
 
-  const { mutate: deleteEvent } = useMutation({
+  const { mutate: deleteEvent, isPending } = useMutation({
     mutationFn: ({ id }) =>
       apiRequest({
         url: `api/events/${id}`,
@@ -146,6 +146,7 @@ const ContentBoxNormal = ({
       setIsCreating={setIsCreating}
       handleDelete={handleDelete}
       apiEndPointCreate={apiEndPointCreate}
+      isPending={isPending}
       //   need to made isCreating
       // falg
       isInfiniteScroll={false}

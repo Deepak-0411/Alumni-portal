@@ -49,7 +49,7 @@ const Profile = () => {
     setUploadPreview(null);
   };
 
-  const { mutate: mutateSave } = useMutation({
+  const { mutate: mutateSave, isPending } = useMutation({
     mutationFn: async (body) => {
       return await apiRequest({
         url: `/api/alumni/profile/update`,
@@ -225,8 +225,12 @@ const Profile = () => {
       <div className={styles.editBtn}>
         {isEditing ? (
           <>
-            <button onClick={saveEdit} className={styles.saveBtn}>
-              Save
+            <button
+              disabled={isPending}
+              onClick={saveEdit}
+              className={styles.saveBtn}
+            >
+              Save {isPending && <Loading size="small" />}
             </button>
             <button onClick={cancelEdit} className={styles.cancelBtn}>
               Cancel

@@ -20,6 +20,7 @@ const Table = ({
   isFetchingNextPage,
   hasNextPage,
   queryKey,
+  isPending,
 }) => {
   const data = Array.isArray(commingData) ? commingData : [];
   // console.log("data => ",data);
@@ -86,10 +87,11 @@ const Table = ({
       {showDeleteBtn && (
         <td className={styles.noClick} onClick={(e) => e.stopPropagation()}>
           <button
+            disabled={isPending}
             className={styles.deleteBtn}
             onClick={() => handleDeleteBtn(item)}
           >
-            <MdDelete color="white" />
+            {isPending ? <Loading size="small" /> : <MdDelete color="white" />}
           </button>
         </td>
       )}

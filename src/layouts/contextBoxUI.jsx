@@ -38,6 +38,7 @@ const ContentBoxUI = ({
   setIsCreating, // normal mode
   handleDelete, // normal mode
   apiEndPointCreate,
+  isPending,
 
   //   INFINITE MODE ONLY
 
@@ -120,6 +121,7 @@ const ContentBoxUI = ({
           isFetchingNextPage={isInfiniteScroll ? isFetchingNextPage : undefined}
           hasNextPage={isInfiniteScroll ? hasNextPage : undefined}
           queryKey={queryKey}
+          isPending={isPending}
         />
       )}
     </div>
