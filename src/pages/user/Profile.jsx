@@ -109,6 +109,7 @@ const Profile = () => {
     },
     onSuccess: () => {
       localStorage.setItem("user", "false");
+      queryClient.clear();
       navigate("/alumni/login");
     },
     onError: () => {

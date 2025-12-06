@@ -4,9 +4,10 @@ import Loading from "./Spinner/Loading";
 import DevFooter from "../components/Footer/DevFooter";
 import { FiLogOut } from "react-icons/fi";
 import { toast } from "react-toastify";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AdminNavbar = ({ forPage }) => {
+  const queryClient = useQueryClient();
   const navigate = useNavigate();
   let logoutApi;
   let redirectPath;
@@ -47,6 +48,7 @@ const AdminNavbar = ({ forPage }) => {
     },
     onSuccess: () => {
       localStorage.setItem(forPage, "false");
+      QueryClient.clear();
       navigate(redirectPath);
     },
     onError: () => {
