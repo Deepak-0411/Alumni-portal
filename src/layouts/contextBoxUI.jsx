@@ -25,7 +25,6 @@ const ContentBoxUI = ({
   handleToggleBtn,
   toggleLoading,
   formFields,
-  apiGet,
   tableHeading,
   tableColumn,
   dataOverlayContent,
@@ -38,6 +37,7 @@ const ContentBoxUI = ({
   isCreating, // normal mode
   setIsCreating, // normal mode
   handleDelete, // normal mode
+  apiEndPointCreate,
 
   //   INFINITE MODE ONLY
 
@@ -56,7 +56,10 @@ const ContentBoxUI = ({
       {/* CREATE OVERLAY */}
       {isCreating && (
         <Overlay onClose={() => setIsCreating(false)}>
-          <Create dataToSend={formFields} apiEndPointSingle={apiGet} />
+          <Create
+            dataToSend={formFields}
+            apiEndPointSingle={apiEndPointCreate}
+          />
         </Overlay>
       )}
 

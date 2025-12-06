@@ -29,11 +29,11 @@ const Create = ({ dataToSend = {}, apiEndPointSingle }) => {
       });
     },
     onSuccess: (response) => {
-      toast.success(`Added successfully! ${response.data.message}`);
+      toast.success(`Added successfully! ${response?.message}`);
     },
     onError: (error) => {
-      console.error("Error:", error.message);
-      toast.error(`Upload failed: ${error.message || "Unknown error"}`);
+      console.error("Error:", error?.message);
+      toast.error(`Upload failed: ${error?.message || "Unknown error"}`);
     },
   });
 

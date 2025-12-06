@@ -6,7 +6,7 @@ const UsersList = ({ role }) => {
     switch (role) {
       case "active":
         return {
-          apiGet: "/api/panel/activeUsers",
+          apiGet: "/api/approval/activeUsers",
           title: "Active Users",
         };
       case "approved":

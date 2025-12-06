@@ -10,6 +10,7 @@ import ContentBoxUI from "./contextBoxUI";
 const ContentBoxNormal = ({
   title,
   apiGet,
+  apiEndPointCreate,
   apiToggle,
   createBtnOpen = true,
   showToggleBtn = false,
@@ -144,6 +145,7 @@ const ContentBoxNormal = ({
       isCreating={isCreating}
       setIsCreating={setIsCreating}
       handleDelete={handleDelete}
+      apiEndPointCreate={apiEndPointCreate}
       //   need to made isCreating
       // falg
       isInfiniteScroll={false}
