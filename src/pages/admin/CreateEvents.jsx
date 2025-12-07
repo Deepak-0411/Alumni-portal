@@ -18,8 +18,6 @@ const CreateEvents = () => {
       description: { value: "", placeholder: "Description", role: "text" },
       date: { value: "", placeholder: "Date", role: "date" },
       venue: { value: "", placeholder: "Venue", role: "text" },
-      imageURL: { value: "", placeholder: "Image", role: "file" },
-      tags: { value: "", placeholder: "tags", role: "text" },
     },
     tableHeading: ["Title", "Date", "Venue", "Description"],
     tableColumn: ["title", "date", "venue", "description"],
