@@ -88,7 +88,7 @@ const ContentBoxInfinite = ({
     toggle({
       id: userId,
       apiToggle,
-      queryKey: apiGet,
+      queryKey: [apiGet, debounced],
       setShowConfirm,
     });
   };

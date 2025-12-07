@@ -16,16 +16,47 @@ const useToggle = () => {
       const { id, queryKey } = variables;
 
       if (queryKey) {
-        queryClient.setQueryData([queryKey], (oldData) => {
+        queryClient.setQueryData(queryKey, (oldData) => {
           if (!oldData) return oldData;
 
-          return oldData.map((item) =>
-            item.username === id ? { ...item, status: data.isActive } : item
-          );
+          // Handle useInfiniteQuery
+          if (oldData.pages && Array.isArray(oldData.pages)) {
+            return {
+              ...oldData,
+              pages: oldData.pages.map((page) => {
+                if (!Array.isArray(page.entries)) return page;
+
+                return {
+                  ...page,
+                  entries: page.entries.map((item) => {
+                    return item.rollNo === id
+                      ? { ...item, status: data.isActive }
+                      : item;
+                  }),
+                };
+              }),
+            };
+          }
+
+          // Handle normal useQuery
+          if (Array.isArray(oldData)) {
+            return oldData.map((item) =>
+              item.username === id ? { ...item, status: data.isActive } : item
+            );
+          }
+
+          // If your normal query returns a single object
+          if (typeof oldData === "object") {
+            return oldData.username === id
+              ? { ...oldData, status: data.isActive }
+              : oldData;
+          }
+
+          return oldData;
         });
       }
 
-      toast.success(`Alumni ${id} ${data.isActive ? "enabled" : "disabled"}`);
+      toast.success(`User ${id} ${data.isActive ? "enabled" : "disabled"}`);
     },
 
     onError: (error, { errorMsg }) => {

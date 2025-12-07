@@ -64,21 +64,21 @@ const Table = ({
   // RENDER ROWS
   const renderRow = (item, index) => (
     <tr
-      key={item[idKey] || index}
+      key={item?.[idKey] || index}
       onClick={() => handleRowClick(index)}
-      className={showToggleBtn && item.status === false ? styles.fadeText : ""}
+      className={showToggleBtn && item?.status === false ? styles.fadeText : ""}
     >
       <td>{index + 1}</td>
 
       {tableColumn.map((col) => (
-        <td key={`${col}-${index}`}>{item[col]}</td>
+        <td key={`${col}-${index}`}>{item?.[col]}</td>
       ))}
 
       {showToggleBtn && (
         <td className={styles.noClick} onClick={(e) => e.stopPropagation()}>
           <Input
             type="check"
-            value={item.status}
+            value={item?.status}
             onChange={() => handleToggleBtn(item)}
           />
         </td>
@@ -105,7 +105,7 @@ const Table = ({
           <td
             colSpan={
               1 +
-              tableHeadings.length +
+              tableHeadings?.length +
               (showToggleBtn ? 1 : 0) +
               (showDeleteBtn ? 1 : 0)
             }

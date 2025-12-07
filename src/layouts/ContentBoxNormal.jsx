@@ -91,7 +91,7 @@ const ContentBoxNormal = ({
     toggle({
       id: userId,
       apiToggle,
-      queryKey: apiGet,
+      queryKey: [apiGet],
       setShowConfirm,
     });
   };
