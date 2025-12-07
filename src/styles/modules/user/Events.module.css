@@ -1,6 +1,6 @@
 .events {
   display: flex;
-  max-width: 65.25rem;
+  width: clamp(18rem, 90vw, 65.5rem);
   padding: 3rem clamp(1.2rem, 6.5vw, 1.875rem);
   flex-direction: column;
   align-items: flex-start;
@@ -14,7 +14,7 @@
 }
 .eventTitle {
   color: #78335d;
-  font-size: clamp(1.8rem ,10vw,3rem);
+  font-size: clamp(1.8rem, 10vw, 3rem);
   font-weight: 700;
 }
 .eventCard {
@@ -24,8 +24,8 @@
   align-items: flex-start;
   gap: 1.25rem;
   align-self: stretch;
-  border-right: .1rem solid #a6a6a6;
-  border-bottom: .1rem solid #a6a6a6;
+  border-right: 0.1rem solid #a6a6a6;
+  border-bottom: 0.1rem solid #a6a6a6;
   background: #fff;
   box-shadow: 149px 191px 68px 0px rgba(0, 0, 0, 0),
     95px 122px 62px 0px rgba(0, 0, 0, 0), 54px 69px 52px 0px rgba(0, 0, 0, 0.01),
@@ -42,7 +42,7 @@
 .aboutEvent {
   color: #010101;
   font-family: Inter;
-  font-size: clamp(.75rem, 4vw ,1rem);
+  font-size: clamp(0.75rem, 4vw, 1rem);
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -52,7 +52,7 @@
   font-family: Inter;
   font-size: 1rem;
   font-weight: 500;
-  padding: clamp(.45rem , 2.5vw , 0.625rem);
+  padding: clamp(0.45rem, 2.5vw, 0.625rem);
   border-radius: 0.5rem;
   background: #002e57;
   border: none;

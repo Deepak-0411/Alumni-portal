@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import baseURL from "../../utility/baseURL";
 import FallBackDP from "../../assets/user.webp";
 import styles from "../../styles/modules/user/Profile.module.css";
@@ -223,7 +223,8 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.editBtn}>
+      <div className={styles.topBar}>
+        <h2 className={styles.title}>Profile</h2>
         {isEditing ? (
           <>
             <button
@@ -238,26 +239,22 @@ const Profile = () => {
             </button>
           </>
         ) : (
-          <span
-            className="bg-gray-100 rounded-full p-4 pl-5 cursor-pointer"
-            onClick={startEdit}
-          >
+          <span className={styles.editBtn} onClick={startEdit}>
             <FaUserEdit size={25} />
           </span>
         )}
       </div>
 
-      {!isLoading &&
-        sections.map((section, idx) => (
-          <DataCard
-            key={idx}
-            heading={section.heading}
-            dataItems={section.dataItems}
-            image={section.image}
-            loading={isLoading}
-            imageInput={section.editableImage ? section.imageInput : null}
-          />
-        ))}
+      {sections.map((section, idx) => (
+        <DataCard
+          key={idx}
+          heading={section.heading}
+          dataItems={section.dataItems}
+          image={section.image}
+          loading={isLoading}
+          imageInput={section.editableImage ? section.imageInput : null}
+        />
+      ))}
 
       {/* Logout + Change Password */}
       <div className="w-[100%] flex items-center justify-center gap-6 flex-wrap">

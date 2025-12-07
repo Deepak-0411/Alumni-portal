@@ -1,10 +1,10 @@
 .container {
   display: flex;
-  max-width: 65.25rem;
-  padding:clamp(2rem, 7.7vw,3rem ) clamp(1.2rem , 4.8vw,1.875rem);
+  width: clamp(18rem, 90vw, 63rem);
+
+  padding: clamp(2rem, 7.7vw, 3rem) clamp(1.2rem, 4.8vw, 1.875rem);
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.875rem;
   border-radius: 0.5rem;
   background: #fff;
 }
@@ -16,7 +16,7 @@
 .title {
   color: #002e57;
   font-family: "Annapurna SIL";
-  font-size:clamp(2rem, 7.7vw ,3rem);
+  font-size: clamp(2rem, 7.7vw, 3rem);
   font-weight: 700;
 }
 .card {
@@ -24,7 +24,6 @@
   padding: 1.1875rem 0.875rem;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.25rem;
   align-self: stretch;
   border-right: 1px solid #a6a6a6;
   border-bottom: 1px solid #a6a6a6;
@@ -36,14 +35,14 @@
 .cllgName {
   color: #002e57;
   font-family: Inter;
-  font-size: clamp(1rem, 5.8vw,2rem);
+  font-size: clamp(1rem, 5.8vw, 2rem);
   font-style: normal;
   font-weight: 600;
   padding: 0.625rem 0rem;
 }
 .text {
   font-family: Inter;
-  font-size: clamp(.75rem, 4vw ,1rem);
+  font-size: clamp(0.75rem, 4vw, 1rem);
   font-weight: 400;
   padding: 0.3125rem 0.625rem;
 }

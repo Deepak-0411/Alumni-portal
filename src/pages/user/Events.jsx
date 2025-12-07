@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const Events = () => {
-  const { data: events, isLoading, isError } = useEvents();
+  const { data: events = [], isLoading, isError } = useEvents();
 
   useEffect(() => {
     if (isError) {
