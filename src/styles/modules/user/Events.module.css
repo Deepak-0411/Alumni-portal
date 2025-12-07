@@ -47,6 +47,21 @@
   font-weight: 400;
   line-height: normal;
 }
+.extras {
+  display: flex;
+  gap: 1rem;
+}
+.extrasInfo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background-color: #f4f5fb;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+    rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
 .registerBtn {
   color: #fff;
   font-family: Inter;

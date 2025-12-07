@@ -1,5 +1,7 @@
 import styles from "../../styles/modules/user/Events.module.css";
 import Loading from "../../components/Spinner/Loading";
+import { MdLocationOn } from "react-icons/md";
+import { BsCalendar3Event } from "react-icons/bs";
 import { useEvents } from "../../apis/events.query";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
@@ -26,9 +28,18 @@ const Events = () => {
       ) : events.length > 0 ? (
         events.map((event) => {
           return (
-            <div className={styles.eventCard} key={event._id}>
+            <div className={styles.eventCard} key={event.id}>
               <h3 className={styles.eventName}>{event.title}</h3>
               <p className={styles.aboutEvent}>{event.description}</p>
+              <div className={styles.extras}>
+                <span className={styles.extrasInfo}>
+                  <MdLocationOn /> {event.venue}
+                </span>
+                <span className={styles.extrasInfo}>
+                  <BsCalendar3Event />
+                  {event.date}
+                </span>
+              </div>
             </div>
           );
         })

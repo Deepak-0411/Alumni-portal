@@ -185,7 +185,7 @@ const Profile = () => {
       heading: "Contact",
       dataItems: buildItems([
         { label: "Phone Number", name: "phoneNo", type: "tel", editable: true },
-        { label: "E-mail", name: "email", type: "email", editable: true },
+        { label: "E-mail", name: "email", type: "email", editable: false },
       ]),
     },
     {
@@ -202,8 +202,8 @@ const Profile = () => {
     {
       heading: "Social Media",
       dataItems: buildItems([
-        { label: "X", name: "x", editable: true, type: "url" },
-        { label: "Insta", name: "insta", editable: true, type: "url" },
+        { label: "X", name: "twitter", editable: true, type: "url" },
+        { label: "Insta", name: "instagram", editable: true, type: "url" },
         { label: "LinkedIn", name: "linkedIn", type: "url", editable: true },
         { label: "Github", name: "gitHub", type: "url", editable: true },
       ]),

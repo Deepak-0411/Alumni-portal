@@ -18,6 +18,22 @@ const getUserDetails = (user) => [
   { label: "Father's Name", value: user.fatherName || "-" },
 ];
 
+const getUserContacts = (user) => [
+  { label: "Phone Number", value: user.phone || "-" },
+  { label: "E-mail", value: user.email || "-" },
+];
+
+const getUserSocial = (user) => [
+  { label: "X", value: user.twitter || "-" },
+  { label: "Insta", value: user.instagram || "-" },
+  { label: "LinkedIn", value: user.linkedIn || "-" },
+  { label: "Github", value: user.github || "-" },
+];
+
+const getUserAbout = (user) => [
+  { label: "Description", value: user.description || "-" },
+];
+
 const getCollegeDetails = (user) => [
   { label: "Enrollment Number", value: user.enrollmentNo || "-" },
   { label: "Roll Number", value: user.rollNo || "-" },
@@ -56,6 +72,18 @@ const VerifyUser = ({
   );
   const collegeDetails = useMemo(
     () => getCollegeDetails(currentUser || {}),
+    [currentUser]
+  );
+  const userContact = useMemo(
+    () => getUserContacts(currentUser || {}),
+    [currentUser]
+  );
+  const userSocial = useMemo(
+    () => getUserSocial(currentUser || {}),
+    [currentUser]
+  );
+  const userAbout = useMemo(
+    () => getUserAbout(currentUser || {}),
     [currentUser]
   );
 
@@ -155,7 +183,15 @@ const VerifyUser = ({
         </div>
 
         <DataCard dataItems={userDetails} heading="Personal Details" />
+        {!showBtns && <DataCard dataItems={userContact} heading="Contact" />}
         <DataCard dataItems={collegeDetails} heading="College Details" />
+        {!showBtns && (
+          <>
+            <DataCard dataItems={userSocial} heading="Social Media" />
+
+            <DataCard dataItems={userAbout} heading="About" />
+          </>
+        )}
       </div>
 
       {showOverlay && (

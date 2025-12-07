@@ -79,7 +79,7 @@ const Home = () => {
           <div className={styles.eventList}>
             {events.map((event, i) => {
               return (
-                <div className={styles.eventCard} key={`${event._id}` + i}>
+                <div className={styles.eventCard} key={`${event.id}` + i}>
                   <h3 className={styles.eventName}>{event.title}</h3>
                   {/* {event.tags.map((tag) => {
                     return (

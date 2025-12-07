@@ -11,7 +11,8 @@ export const useFormValidation = (fieldsToValidate = []) => {
     const errors = {};
     const nameRegex = /^[A-Za-z\s]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const rollNoRegex = /^\d{3}\/[a-zA-Z]{3}\/\d{3}$/;
+    const rollNoRegex = /^\d+[A-Za-z]+\d+$/;
+
     const urlRegex =
       /^(https?:\/\/)?(www\.)?[a-zA-Z0-9-]+(\.[a-zA-Z]{2,})(\/\S*)?$/;
 
@@ -45,7 +46,7 @@ export const useFormValidation = (fieldsToValidate = []) => {
       shouldValidate("rollNo") &&
       (!formData.rollNo || !rollNoRegex.test(formData.rollNo.trim()))
     ) {
-      errors.rollNo = "Roll Number is should be in format (123/abc/234).";
+      errors.rollNo = "Roll Number is should be in format (123abc234).";
     }
 
     if (shouldValidate("dob") && !formData.dob) {

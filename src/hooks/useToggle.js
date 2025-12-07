@@ -8,7 +8,7 @@ const useToggle = () => {
   const mutation = useMutation({
     mutationFn: ({ apiUrl, id }) =>
       apiRequest({
-        url: `${apiUrl}${encodeURIComponent(id)}`,
+        url: `${apiUrl}${id}`,
         method: "PATCH",
       }),
 
@@ -25,7 +25,7 @@ const useToggle = () => {
         });
       }
 
-      toast.success(`user ${id} ${data.isActive ? "enabled" : "disabled"}`);
+      toast.success(`Alumni ${id} ${data.isActive ? "enabled" : "disabled"}`);
     },
 
     onError: (error, { errorMsg }) => {

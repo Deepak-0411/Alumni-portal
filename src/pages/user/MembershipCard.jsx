@@ -35,6 +35,9 @@ const MembershipCard = () => {
     },
   ];
 
+  const profileImg =
+    card?.profileImg == "N/A" ? FallBackDP : baseURL + card?.profileImgs;
+
   // Case 1: User is unpaid
   if (!isLoading && currentUser?.isPaid == false) {
     return <Payment email={currentUser?.email} />;
@@ -83,7 +86,7 @@ const MembershipCard = () => {
             <>
               <img
                 className={styles.userdp}
-                src={baseURL + card?.profileImg || FallBackDP}
+                src={profileImg}
                 alt="Profile Pic"
               />
               <p className={styles.name}>{card?.alumniName || "User"}</p>
