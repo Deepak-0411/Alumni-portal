@@ -13,7 +13,7 @@ const useToggle = () => {
       }),
 
     onSuccess: (data, variables) => {
-      const { id, queryKey } = variables;
+      const { id, queryKey, idKey } = variables;
 
       if (queryKey) {
         queryClient.setQueryData(queryKey, (oldData) => {
@@ -25,11 +25,12 @@ const useToggle = () => {
               ...oldData,
               pages: oldData.pages.map((page) => {
                 if (!Array.isArray(page.entries)) return page;
+                console.log(idKey);
 
                 return {
                   ...page,
                   entries: page.entries.map((item) => {
-                    return item.rollNo === id
+                    return item?.[`${idKey}`] === id
                       ? { ...item, status: data.isActive }
                       : item;
                   }),
@@ -47,7 +48,7 @@ const useToggle = () => {
 
           // If your normal query returns a single object
           if (typeof oldData === "object") {
-            return oldData.username === id
+            return oldData?.[`${idKey}`] === id
               ? { ...oldData, status: data.isActive }
               : oldData;
           }
@@ -78,12 +79,13 @@ const useToggle = () => {
     },
   });
 
-  const toggle = ({ id, apiToggle, queryKey, setShowConfirm }) => {
+  const toggle = ({ id, apiToggle, queryKey, setShowConfirm, ...others }) => {
     mutation.mutate({
       id,
       apiUrl: apiToggle,
       queryKey,
       setShowConfirm,
+      ...others,
     });
   };
 

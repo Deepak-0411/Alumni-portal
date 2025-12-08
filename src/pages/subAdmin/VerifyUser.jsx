@@ -49,6 +49,7 @@ const VerifyUser = ({
   queryKey,
   onClose,
   showBtns = false,
+  isSuperAdmin = false,
 }) => {
   const [index, setIndex] = useState(currentIndex);
   const [showOverlay, setShowOverlay] = useState(false);
@@ -183,13 +184,11 @@ const VerifyUser = ({
         </div>
 
         <DataCard dataItems={userDetails} heading="Personal Details" />
-        {!showBtns && <DataCard dataItems={userContact} heading="Contact" />}
+        {isSuperAdmin && <DataCard dataItems={userContact} heading="Contact" />}
         <DataCard dataItems={collegeDetails} heading="College Details" />
-        {!showBtns && (
+        {isSuperAdmin && (
           <>
             <DataCard dataItems={userSocial} heading="Social Media" />
-
-            <DataCard dataItems={userAbout} heading="About" />
           </>
         )}
       </div>

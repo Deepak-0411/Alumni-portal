@@ -29,6 +29,7 @@ const Alumni = () => {
           queryKey={queryKey}
           currentIndex={index}
           onClose={onClose}
+          isSuperAdmin={true}
         />
       );
     },
