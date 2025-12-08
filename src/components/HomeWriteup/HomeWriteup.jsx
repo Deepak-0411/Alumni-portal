@@ -175,6 +175,7 @@ export default function HomeWriteup() {
             <img
               src={AssociationImage || fallBackAssociationwebp}
               alt="Image"
+              loading="lazy"
               key={index}
               className={styles.associationImage}
             />

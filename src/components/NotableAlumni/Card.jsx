@@ -10,7 +10,12 @@ const CardCover = ({ name, year, description, image, socials }) => {
     <>
       <div className={styles.card}>
         <div className={styles.imageSection}>
-          <img src={image} alt="Joey" className={styles.profileImage} />
+          <img
+            loading="lazy"
+            src={image}
+            alt={name}
+            className={styles.profileImage}
+          />
         </div>
         <div className={styles.textSection}>
           <div className={styles.userInfo}>
