@@ -3,6 +3,16 @@ import styles from "./Card.module.css";
 import { FaXTwitter, FaLinkedin, FaInstagram } from "react-icons/fa6";
 import Overlay from "../Overlay/Overlay";
 import AutoSwiper from "../AutoSlider/AutoSwiper";
+import fallbackIMG from "../../assets/user.webp";
+import MohammadZakwanZaheen from "../../assets/notableAlumnis/MohammadZakwanZaheen.webp";
+import RohitDwivedi from "../../assets/notableAlumnis/RohitDwivedi.webp";
+import SachinMishra from "../../assets/notableAlumnis/SachinMishra.webp";
+import MoumitaDas from "../../assets/notableAlumnis/MoumitaDas.webp";
+import WarisNawazKhan from "../../assets/notableAlumnis/WarisNawazKhan.webp";
+import SANYUKTASRIVASTAVA from "../../assets/notableAlumnis/SANYUKTASRIVASTAVA.webp";
+import DineshKumar from "../../assets/notableAlumnis/DineshKumar.webp";
+import PreetyBajwa from "../../assets/notableAlumnis/PreetyBajwa.webp";
+import RituBhardwaj from "../../assets/notableAlumnis/RituBhardwaj.webp";
 
 const CardCover = ({ name, year, description, image, socials }) => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -12,7 +22,7 @@ const CardCover = ({ name, year, description, image, socials }) => {
         <div className={styles.imageSection}>
           <img
             loading="lazy"
-            src={image}
+            src={image || fallbackIMG}
             alt={name}
             className={styles.profileImage}
           />
@@ -29,30 +39,36 @@ const CardCover = ({ name, year, description, image, socials }) => {
             </p>
           </div>
           <div className={styles.socials}>
-            <a
-              href={socials.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.iconLink}
-            >
-              <FaXTwitter className={styles.icon} />
-            </a>
-            <a
-              href={socials.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.iconLink}
-            >
-              <FaLinkedin className={styles.icon} />
-            </a>
-            <a
-              href={socials.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.iconLink}
-            >
-              <FaInstagram className={styles.icon} />
-            </a>
+            {socials?.x && (
+              <a
+                href={socials?.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconLink}
+              >
+                <FaXTwitter className={styles.icon} />
+              </a>
+            )}
+            {socials?.linkedin && (
+              <a
+                href={socials?.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconLink}
+              >
+                <FaLinkedin className={styles.icon} />
+              </a>
+            )}
+            {socials?.instagram && (
+              <a
+                href={socials?.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.iconLink}
+              >
+                <FaInstagram className={styles.icon} />
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -69,48 +85,120 @@ const CardCover = ({ name, year, description, image, socials }) => {
 
 const notableAlumnis = [
   {
-    name: "Joey",
-    year: "2012",
+    name: "Divya Nangia",
+    year: "2010-2015",
     description:
-      "Software engineer at Google, focused on AI and machine learning.",
-    image: "https://i.pravatar.cc/150?img=12",
+      "Senior Software Engineer at GE Digital |Cybersecurity|SCADA|IEC61850|NERC-CIP|Power System",
+    image: "",
     socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      x: "https://twitter.com",
+      linkedin: "https://www.linkedin.com/in/divya-nangia-50b2ab8a",
     },
   },
   {
-    name: "Riya",
-    year: "2014",
-    description: "Entrepreneur and founder of a successful health startup.",
-    image: "https://i.pravatar.cc/150?img=31",
+    name: "Mohammad Zakwan Zaheen",
+    year: "2019-2023",
+    description:
+      "Mechanical Engineer - Radiation Safety Officer - NDT Engineer",
+    image: MohammadZakwanZaheen,
     socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      x: "https://twitter.com",
+      linkedin: "https://www.linkedin.com/in/mohammad-zakwan-zaheen-b9246521a",
     },
   },
   {
-    name: "Alex",
-    year: "2015",
-    description: "Marketing manager at a global tech firm.",
-    image: "https://i.pravatar.cc/150?img=45",
+    name: "Sumit Kumar Singh",
+    year: "2009-2012",
+    description:
+      "Salesforce - Technical Solution Lead / Architect / Manager | Agentic AI & Agentforce Champion | CSPO",
+    image: "",
     socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      x: "https://twitter.com",
+      linkedin: "https://www.linkedin.com/in/sumit-kumar-singh-20396a46",
     },
   },
   {
-    name: "Sam",
-    year: "2017",
-    description: "UX/UI designer working on global apps.",
-    image: "https://i.pravatar.cc/150?img=53",
+    name: "Abhishek Kumar",
+    year: "2012-2017",
+    description: "Cell Therapy & Immunotherapy",
+    image: "",
     socials: {
-      linkedin: "https://linkedin.com",
-      instagram: "https://instagram.com",
-      x: "https://twitter.com",
+      linkedin: "https://www.linkedin.com/in/abhishek-k-473106b8",
+    },
+  },
+  {
+    name: "Rohit Dwivedi ",
+    year: "2011-2013",
+    description:
+      "Associate Director- Priority Banking| IIM Calcutta |Securities and Commodities Authority, UAE (SCA Certified)",
+    image: RohitDwivedi,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/rohitdwivedi-adcb",
+    },
+  },
+  {
+    name: "Sachin Mishra ",
+    year: "2010-2015",
+    description:
+      "Founder, CEO & Director @ Synaptic Delver, Singapore NeuroTechnology & NeuroRobotics",
+    image: SachinMishra,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/sachinmishra92me",
+    },
+  },
+  {
+    name: "Moumita Das ",
+    year: "2011-2016",
+    description:
+      "Innovation Manager @ GSI Helmholtz | Innovation Marketing | Project Management | Managed GSI/FAIR Innovation LinkedIn Page",
+    image: MoumitaDas,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/moumitadas20",
+    },
+  },
+  {
+    name: "Waris Nawaz Khan",
+    year: "2010-2015",
+    description:
+      "Post Doctoral Researcher at Polytechnique Montreal II Ph.D. Indian Institute of Technology Jodhpur",
+    image: WarisNawazKhan,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/waris-nawaz-khan-aab2a84b",
+    },
+  },
+  {
+    name: "Sanyukta Srivanstava",
+    year: "2010-2015",
+    description:
+      "Supervisor Food Safety and Assurance| Supervisor Sanitation| PCQI",
+    image: SANYUKTASRIVASTAVA,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/sanyuktasrivastava",
+    },
+  },
+  {
+    name: "Dinesh Kumar",
+    year: "2008-2010",
+    description: "Associate Director – Digital & Finance Transformation | SAP",
+    image: DineshKumar,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/dinesh-kumar-12180617",
+    },
+  },
+  {
+    name: "Preety Bajwa",
+    year: "2009-2012",
+    description: "Cancer Research Scientist|Gynaecology Oncology",
+    image: PreetyBajwa,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/preetybajwa",
+    },
+  },
+  {
+    name: "Ritu Bhardwaj ",
+    year: "2009-2012",
+    description:
+      "Healthcare Strategy | Business Transformation | Regulatory Compliance | Innovation | CAPM",
+    image: RituBhardwaj,
+    socials: {
+      linkedin: "https://www.linkedin.com/in/ritubhardwajj",
     },
   },
 ];

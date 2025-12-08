@@ -5,7 +5,7 @@
   border-radius: 8px;
   overflow: hidden;
   width: clamp(20rem, 88vw, 40rem);
-  height: clamp(10rem, 46vw, 20rem);
+  height: clamp(12rem, 46vw, 16rem);
 }
 
 .imageSection {
@@ -34,17 +34,17 @@
 
 .name {
   margin: 0;
-  font-size:clamp(1rem, 4vw , 1.8rem);
+  font-size: clamp(1rem, 4vw, 1.8rem);
 }
 
 .year {
-  margin: 0 0 clamp(.3rem,1.2vw,1rem) 0;
+  margin: 0 0 clamp(0.3rem, 1.2vw, 1rem) 0;
   font-size: 0.9rem;
   color: #ccc;
 }
 
 .description {
-  font-size: clamp(.75rem, 3vw, 0.85rem);
+  font-size: clamp(0.75rem, 3vw, 0.85rem);
   line-height: 1.4;
   color: #ddd;
 }
@@ -60,12 +60,12 @@
   cursor: pointer;
 }
 
-.OverlayDiv{
-    background-color: black;
-    color: #ddd;
-    border-radius: .625rem;
-    max-width: 90vw;
-    max-height: 80vh;
-    overflow: auto;
-    padding: 1rem;
+.OverlayDiv {
+  background-color: black;
+  color: #ddd;
+  border-radius: 0.625rem;
+  max-width: 90vw;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 1rem;
 }
