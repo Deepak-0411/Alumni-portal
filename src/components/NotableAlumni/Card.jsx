@@ -13,6 +13,9 @@ import SANYUKTASRIVASTAVA from "../../assets/notableAlumnis/SANYUKTASRIVASTAVA.w
 import DineshKumar from "../../assets/notableAlumnis/DineshKumar.webp";
 import PreetyBajwa from "../../assets/notableAlumnis/PreetyBajwa.webp";
 import RituBhardwaj from "../../assets/notableAlumnis/RituBhardwaj.webp";
+import AbhishekKumar from "../../assets/notableAlumnis/AbhishekKumar.webp";
+import SumitKumarSingh from "../../assets/notableAlumnis/SumitKumarSingh.webp";
+import DivyaNangia from "../../assets/notableAlumnis/DivyaNangia.webp";
 
 const CardCover = ({ name, year, description, image, socials }) => {
   const [showOverlay, setShowOverlay] = useState(false);
@@ -89,7 +92,7 @@ const notableAlumnis = [
     year: "2010-2015",
     description:
       "Senior Software Engineer at GE Digital |Cybersecurity|SCADA|IEC61850|NERC-CIP|Power System",
-    image: "",
+    image: DivyaNangia,
     socials: {
       linkedin: "https://www.linkedin.com/in/divya-nangia-50b2ab8a",
     },
@@ -109,7 +112,7 @@ const notableAlumnis = [
     year: "2009-2012",
     description:
       "Salesforce - Technical Solution Lead / Architect / Manager | Agentic AI & Agentforce Champion | CSPO",
-    image: "",
+    image: SumitKumarSingh,
     socials: {
       linkedin: "https://www.linkedin.com/in/sumit-kumar-singh-20396a46",
     },
@@ -118,7 +121,7 @@ const notableAlumnis = [
     name: "Abhishek Kumar",
     year: "2012-2017",
     description: "Cell Therapy & Immunotherapy",
-    image: "",
+    image: AbhishekKumar,
     socials: {
       linkedin: "https://www.linkedin.com/in/abhishek-k-473106b8",
     },

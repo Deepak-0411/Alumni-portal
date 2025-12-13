@@ -3,6 +3,7 @@ import { Particles } from "../../components/DevCard/particals";
 import dhruv from "../../assets/devs/dhruv.webp";
 import ansh from "../../assets/devs/ansh.webp";
 import deepak from "../../assets/devs/deepak.webp";
+import harsh from "../../assets/devs/harsh.webp";
 
 function Devs() {
   const developers = [
@@ -25,7 +26,7 @@ function Devs() {
       instagram: "https://www.instagram.com/___de.epak/",
     },
     {
-      image: "https://images.pexels.com/photos/904332/pexels-photo-904332.jpeg",
+      image: harsh,
       name: "Harsh Singh",
       role: "Backend Developer",
       description: "B.Tech CSE\n235/UCS/058",
