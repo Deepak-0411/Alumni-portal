@@ -1,6 +1,6 @@
 import axios from "axios";
-import baseURL from "../utility/baseURL";
-import redirectToLogin from "../utility/redirectTOLogin";
+import baseURL from "../utility/baseURL.js";
+import redirectToLogin from "../utility/redirectTOLogin.js";
 
 const axiosInstance = axios.create({
   baseURL,
