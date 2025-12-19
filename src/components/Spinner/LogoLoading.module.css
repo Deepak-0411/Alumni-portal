@@ -1,0 +1,11 @@
+.loaderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  /* font-size: 1.4rem;
+    color: #555; */
+}
+.logo {
+  width: clamp(8rem, 15vw, 15rem);
+}

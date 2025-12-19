@@ -1,11 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Logo from "../../assets/logo.webp";
-import styles from "../../styles/modules/others/ProtectedRoute.module.css";
 import { toast } from "react-toastify";
 import { createQuery } from "../../lib/createQuery";
+import LogoLoading from "../../components/Spinner/LogoLoading";
 
-const ProtectedRoute = ({ element, user }) => {
+const ProtectedRoute = ({ children, user }) => {
   const [isAuthorized, setIsAuthorized] = useState(null);
 
   const config = {
@@ -53,14 +52,10 @@ const ProtectedRoute = ({ element, user }) => {
 
   // Loader
   if (isAuthorized === null) {
-    return (
-      <div className={styles.loaderContainer}>
-        <img className={styles.logo} src={Logo} alt="logo" />
-      </div>
-    );
+    return <LogoLoading />;
   }
 
-  return isAuthorized ? element : <Navigate to={defaultRoot} replace />;
+  return isAuthorized ? children : <Navigate to={defaultRoot} replace />;
 };
 
 export default ProtectedRoute;
