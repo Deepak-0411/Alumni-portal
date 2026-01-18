@@ -30,10 +30,10 @@ const ContentBoxUI = ({
   dataOverlayContent,
   searchTerm,
   setSearchTerm,
+  isLoading,
 
   //  NORMAL MODE ONLY
 
-  isLoading, // Normal mode loading
   isCreating, // normal mode
   setIsCreating, // normal mode
   handleDelete, // normal mode

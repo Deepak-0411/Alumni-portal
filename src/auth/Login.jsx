@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate, Link } from "react-router-dom";
 import LOGO from "../assets/GBULOGO.webp";
 import Input from "../components/Input/Input";
-import LoadingScrn from "../components/Spinner/Loading";
+import Loading from "../components/Spinner/Loading";
 import styles from "../styles/modules/auth/Login.module.css";
 import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
@@ -133,7 +133,7 @@ const Login = ({ user = "user" }) => {
           className={styles.loginBtn}
           disabled={isPending || !(userId && password)}
         >
-          {isPending ? <LoadingScrn size={"small"} color={"white"} /> : "Login"}
+          {isPending ? <Loading size={"small"} color={"white"} /> : "Login"}
         </button>
       </form>
       {user === "user" && (

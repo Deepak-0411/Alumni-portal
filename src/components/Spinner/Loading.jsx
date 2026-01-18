@@ -1,23 +1,19 @@
 import styles from "./Loading.module.css";
 
-const Loading = ({ color, size = "big", isFullScrn }) => {
-  const spinnerStyle = {};
-  if (color === "white") {
-    spinnerStyle.border = "0.2rem solid #ffffff80";
-    spinnerStyle.borderTop = "0.23rem solid #ffffff";
-  }
-  if (size === "small") {
-    spinnerStyle.width = "1.5rem";
-    spinnerStyle.height = "1.5rem";
-  }
-
+const Loading = ({ color = "primary", size = "big", isFullScrn = false }) => {
   return (
     <div
-      className={`${styles.spinnerContainer} ${
-        isFullScrn ? styles.fullScrn : ""
-      }`}
+      className={`
+        ${styles.spinnerContainer}
+        ${isFullScrn ? styles.fullScrn : ""}
+      `}
+      aria-busy="true"
+      aria-live="polite"
     >
-      <div className={styles.spinner} style={spinnerStyle}></div>
+      <span
+        className={`${styles.spinner}  ${styles[size]}
+        ${styles[color]}`}
+      />
     </div>
   );
 };

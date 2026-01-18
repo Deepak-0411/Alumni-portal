@@ -34,6 +34,7 @@ const ContentBoxInfinite = ({
     data,
     fetchNextPage,
     isFetchingNextPage,
+    isPending,
     refetch,
     hasNextPage,
     isError,
@@ -113,6 +114,7 @@ const ContentBoxInfinite = ({
       showConfirm={showConfirm}
       msgText={msgText}
       userId={userId}
+      isLoading={isPending}
       // UI flags
       handleToggleBtn={handleToggleBtn}
       toggleLoading={toggleLoading}
@@ -127,7 +129,6 @@ const ContentBoxInfinite = ({
       fetchNextPage={fetchNextPage}
       isFetchingNextPage={isFetchingNextPage}
       hasNextPage={hasNextPage}
-      isLoading={false}
       queryKey={[apiGet, debounced]}
       // flag
       isInfiniteScroll={true}

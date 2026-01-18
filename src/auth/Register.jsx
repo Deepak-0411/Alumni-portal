@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../components/Input/Input";
 import styles from "../styles/modules/auth/Register.module.css";
-import LoadingScrn from "../components/Spinner/Loading";
+import Loading from "../components/Spinner/Loading";
 import apiRequest from "../apis/apiRequest";
 import { toast } from "react-toastify";
 import { useFormValidation } from "../hooks/useFormValidation";
@@ -289,11 +289,7 @@ const Register = () => {
             className={styles.submitButton}
             disabled={isPending}
           >
-            {isPending ? (
-              <LoadingScrn size="small" color="white" />
-            ) : (
-              "Register"
-            )}
+            {isPending ? <Loading size="small" color="white" /> : "Register"}
           </button>
         </div>
       </form>

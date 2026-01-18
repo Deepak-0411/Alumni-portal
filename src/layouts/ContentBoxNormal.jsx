@@ -141,8 +141,8 @@ const ContentBoxNormal = ({
       dataOverlayContent={dataOverlayContent}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
-      // NORMAL MODE ONLY
       isLoading={isLoading}
+      // NORMAL MODE ONLY
       isCreating={isCreating}
       setIsCreating={setIsCreating}
       handleDelete={handleDelete}
