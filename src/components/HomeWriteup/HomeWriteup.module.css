@@ -118,13 +118,17 @@
   border-left: 4px solid #1e40af;
 }
 
-.distinguishedAlumni{
+.distinguishedAlumni {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .distinguishedAlumniCards {
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
+  max-width: 1080px;
   /* align-items: center; */
   justify-content: center;
   gap: 1rem;

@@ -71,7 +71,9 @@ const Home = () => {
     return (
       <div className={styles.events}>
         <div className={styles.eventTitleContainer}>
-          <h2 className={styles.eventTitle}>EVENTS 2025</h2>
+          <h2 className={styles.eventTitle}>
+            EVENTS {new Date().getFullYear()}
+          </h2>
         </div>
         {isLoading ? (
           <Loading color={"white"} />
