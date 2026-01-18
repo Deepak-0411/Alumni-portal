@@ -3,7 +3,7 @@ import ProtectedRoute from "./guards/ProtectedRoute";
 import { lazy, Suspense } from "react";
 import LogoLoading from "../components/Spinner/LogoLoading";
 const AdminLayout = lazy(() => import("../layouts/AdminLayout"));
-const VerifyUsersList = lazy(() => import("../pages/subAdmin/UsersList"));
+import VerifyUsersList from "../pages/subAdmin/UsersList";
 
 const SubAdminRoutes = () => {
   return (
@@ -11,10 +11,9 @@ const SubAdminRoutes = () => {
       path="/alumni/sub-admin/"
       element={
         <Suspense fallback={<LogoLoading />}>
-          <ProtectedRoute
-            element={<AdminLayout role={"subAdmin"} />}
-            user={"sub-Admin"}
-          />
+          <ProtectedRoute user={"sub-Admin"}>
+            <AdminLayout role={"subAdmin"} />
+          </ProtectedRoute>
         </Suspense>
       }
     >
