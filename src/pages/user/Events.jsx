@@ -18,13 +18,15 @@ const Events = () => {
   return (
     <div className={styles.events}>
       <div className={styles.eventTitleContainer}>
-        <h2 className={styles.eventTitle}>EVENTS 2025</h2>
+        <h2 className={styles.eventTitle}>EVENTS </h2>
       </div>
 
       {isLoading ? (
         <div className="flex items-center justify-center w-[100%] h-[20vh]">
           <Loading />
         </div>
+      ) : isError ? (
+        <p className={styles.eventName}>Failed to fetch events</p>
       ) : events.length > 0 ? (
         events.map((event) => {
           return (

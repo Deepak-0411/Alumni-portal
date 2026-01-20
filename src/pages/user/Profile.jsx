@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import baseURL from "../../utility/baseURL";
 import FallBackDP from "../../assets/user.webp";
 import styles from "../../styles/modules/user/Profile.module.css";
@@ -34,7 +34,13 @@ const Profile = () => {
   const { formErrors, setFormErrors, validate } =
     useFormValidation(toVerifyFields);
 
-  const { data: formData, isLoading } = useUser();
+  const { data: formData, isLoading, isError } = useUser();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Failed to load profile");
+    }
+  }, [isError]);
 
   const startEdit = () => {
     setDraftData(formData);

@@ -16,9 +16,15 @@ const MembershipCard = () => {
     data: currentUser,
     isLoading,
     isSuccess: userLoaded,
+    isError: userLoadFailed,
     refetch: refetchUser,
   } = useUser();
-  const { data: card, isSuccess: cardLoaded, refetch: refetchCard } = useCard();
+  const {
+    data: card,
+    isSuccess: cardLoaded,
+    isError: cardLoadFailed,
+    refetch: refetchCard,
+  } = useCard();
 
   const data = [
     {
@@ -44,7 +50,11 @@ const MembershipCard = () => {
   }
 
   // Case 2: User loaded but no card data available
-  if (userLoaded && cardLoaded && !card?.cardNo) {
+  if (
+    cardLoadFailed ||
+    userLoadFailed ||
+    (userLoaded && cardLoaded && !card?.cardNo)
+  ) {
     const handleRetry = () => {
       refetchUser();
       refetchCard();

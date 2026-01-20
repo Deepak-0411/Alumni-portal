@@ -24,15 +24,15 @@ const DataCard = ({
           image
             ? styles.pbox
             : dataItems.length > 1
-            ? styles.box
-            : styles.singleBox
+              ? styles.box
+              : styles.singleBox
         }
       >
         {/* Profile Picture */}
         {image && (
           <div className={styles.imageWrapper}>
             {loading ? (
-              <Skeleton circle height={80} width={80} />
+              <Skeleton circle height={90} width={90} />
             ) : (
               image && (
                 <img className={styles.dp} src={image} alt="Profile Pic" />

@@ -7,6 +7,7 @@
   gap: 1.875rem;
   border-radius: 0.5rem;
   background: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px 0px;
 }
 .eventTitleContainer {
   width: 100%;
@@ -27,9 +28,12 @@
   border-right: 0.1rem solid #a6a6a6;
   border-bottom: 0.1rem solid #a6a6a6;
   background: #fff;
-  box-shadow: 149px 191px 68px 0px rgba(0, 0, 0, 0),
-    95px 122px 62px 0px rgba(0, 0, 0, 0), 54px 69px 52px 0px rgba(0, 0, 0, 0.01),
-    24px 31px 39px 0px rgba(0, 0, 0, 0.02), 6px 8px 21px 0px rgba(0, 0, 0, 0.02);
+  box-shadow:
+    149px 191px 68px 0px rgba(0, 0, 0, 0),
+    95px 122px 62px 0px rgba(0, 0, 0, 0),
+    54px 69px 52px 0px rgba(0, 0, 0, 0.01),
+    24px 31px 39px 0px rgba(0, 0, 0, 0.02),
+    6px 8px 21px 0px rgba(0, 0, 0, 0.02);
 }
 .eventName {
   color: #002e57;
@@ -59,7 +63,8 @@
   background-color: #f4f5fb;
   padding: 0.3rem 0.7rem;
   border-radius: 9999px;
-  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset,
+  box-shadow:
+    rgb(204, 219, 232) 3px 3px 6px 0px inset,
     rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 .registerBtn {
