@@ -98,7 +98,7 @@ export default function HomeWriteup() {
 
       <div className={styles.aboutStatSection}>
         <h3 className={styles.aboutSectionTitle}>About GBUAA</h3>
-        <p>
+        <p className={styles.para}>
           Gautam Buddha University (GBU), Greater Noida, Uttar Pradesh with its
           commitment to academic excellence and holistic development, has
           nurtured generations of professionals, thinkers, and leaders who have
@@ -112,7 +112,7 @@ export default function HomeWriteup() {
           alumni worldwide, they have played a significant role in enhancing
           Gautam Buddha University’s reputation. The Gautam Buddha University
           Alumni Association (GBUAA) serves as the cornerstone for reconnecting
-          and celebrating this remarkable community
+          and celebrating this remarkable community.
         </p>
 
         <div className={styles.statsSection}>
