@@ -1,19 +1,18 @@
 .outerdiv {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 0;
-  position: relative; /* make it the reference point */
+  margin: 40px 0;
+  position: relative;
+  height: 14rem;
 }
 
 .swiper {
   width: 100%;
+  height: 100%;
 }
 
 .customPrev,
 .customNext {
   position: absolute;
-  top: 50%;
+  top: 40%;
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
@@ -28,7 +27,6 @@
 .customNext:hover {
   background: rgba(0, 0, 0, 0.8);
 }
-
 
 /* Desktop positioning */
 .customPrev {

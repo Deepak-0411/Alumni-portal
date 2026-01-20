@@ -25,7 +25,6 @@ const AutoSwiper = ({ children }) => {
           prevEl: ".custom-prev" + id,
         }}
         className={styles.swiper}
-        wrapperClass={styles.slides}
       >
         {React.Children.map(children, (child, index) => (
           <SwiperSlide

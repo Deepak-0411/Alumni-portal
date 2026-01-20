@@ -1,16 +1,25 @@
 .card {
   display: flex;
-  background-color: black;
-  color: white;
-  border-radius: 8px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  background-color: white;
+  border-radius: 0.65rem;
   overflow: hidden;
-  width: clamp(20rem, 88vw, 40rem);
-  height: clamp(12rem, 46vw, 16rem);
+  width: clamp(20rem, 88vw, 65rem);
+  padding: 1.2rem;
+  box-shadow:
+    0 6.4px 14.4px 0 rgb(0 0 0 / 13%),
+    0 1.2px 3.6px 0 rgb(0 0 0 / 11%);
+  height: 13rem;
 }
 
 .imageSection {
-  flex: 1;
-  max-width: 32%;
+  flex-shrink: 0;
+  width: clamp(7rem, 18vw, 10rem);
+  height: clamp(7rem, 18vw, 10rem);
+  border-radius: 10rem;
+  overflow: hidden;
 }
 
 .profileImage {
@@ -20,13 +29,10 @@
 }
 
 .textSection {
-  flex: 1;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-grow: 1;
   max-width: calc(100% - 32%);
   max-height: 100%;
+  text-wrap-mode: wrap;
 }
 .userInfo {
   overflow: hidden;
@@ -34,19 +40,20 @@
 
 .name {
   margin: 0;
+  font-weight: 500;
   font-size: clamp(1rem, 4vw, 1.8rem);
 }
 
 .year {
   margin: 0 0 clamp(0.3rem, 1.2vw, 1rem) 0;
   font-size: 0.9rem;
-  color: #ccc;
+  color: #4d5063;
 }
 
 .description {
   font-size: clamp(0.75rem, 3vw, 0.85rem);
   line-height: 1.4;
-  color: #ddd;
+  color: #000000;
 }
 
 .socials {

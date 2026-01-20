@@ -91,7 +91,7 @@ const notableAlumnis = [
     name: "Divya Nangia",
     year: "2010-2015",
     description:
-      "Senior Software Engineer at GE Digital |Cybersecurity|SCADA|IEC61850|NERC-CIP|Power System",
+      "Senior Software Engineer at GE Digital | Cybersecurity | SCADA | IEC61850 | NERC-CIP | Power System",
     image: DivyaNangia,
     socials: {
       linkedin: "https://www.linkedin.com/in/divya-nangia-50b2ab8a",
@@ -130,7 +130,7 @@ const notableAlumnis = [
     name: "Rohit Dwivedi ",
     year: "2011-2013",
     description:
-      "Associate Director- Priority Banking| IIM Calcutta |Securities and Commodities Authority, UAE (SCA Certified)",
+      "Associate Director - Priority Banking | IIM Calcutta |Securities and Commodities Authority, UAE (SCA Certified)",
     image: RohitDwivedi,
     socials: {
       linkedin: "https://www.linkedin.com/in/rohitdwivedi-adcb",
@@ -170,7 +170,7 @@ const notableAlumnis = [
     name: "Sanyukta Srivanstava",
     year: "2010-2015",
     description:
-      "Supervisor Food Safety and Assurance| Supervisor Sanitation| PCQI",
+      "Supervisor Food Safety and Assurance | Supervisor Sanitation | PCQI",
     image: SANYUKTASRIVASTAVA,
     socials: {
       linkedin: "https://www.linkedin.com/in/sanyuktasrivastava",
@@ -188,7 +188,7 @@ const notableAlumnis = [
   {
     name: "Preety Bajwa",
     year: "2009-2012",
-    description: "Cancer Research Scientist|Gynaecology Oncology",
+    description: "Cancer Research Scientist | Gynaecology Oncology",
     image: PreetyBajwa,
     socials: {
       linkedin: "https://www.linkedin.com/in/preetybajwa",

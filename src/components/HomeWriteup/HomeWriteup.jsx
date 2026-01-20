@@ -170,7 +170,7 @@ export default function HomeWriteup() {
 
       <div className={styles.imgGallery}>
         <h3 className={styles.subHeading}>&nbsp; Gallery</h3>
-        <AutoSwiper>
+        <div className={styles.imagesDiv}>
           {AssociationImages.map((AssociationImage, index) => (
             <img
               src={AssociationImage || fallBackAssociationwebp}
@@ -180,7 +180,7 @@ export default function HomeWriteup() {
               className={styles.associationImage}
             />
           ))}
-        </AutoSwiper>
+        </div>
       </div>
     </div>
   );
