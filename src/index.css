@@ -2,6 +2,9 @@
 
 :root {
   font-family: "Roboto", "Poppins";
+  scroll-behavior: smooth;
+  scrollbar-color: grey transparent;
+  scrollbar-width: thin;
 }
 
 body {
@@ -22,6 +25,6 @@ body {
 button:disabled {
   cursor: not-allowed;
 }
-button:active{
-  transform: translateY(0) scale(.97);
+button:active {
+  transform: translateY(0) scale(0.97);
 }
