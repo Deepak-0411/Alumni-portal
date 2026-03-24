@@ -48,7 +48,7 @@ const AdminNavbar = ({ forPage }) => {
     },
     onSuccess: () => {
       localStorage.setItem(forPage, "false");
-      QueryClient.clear();
+      queryClient.clear();
       navigate(redirectPath);
     },
     onError: () => {
