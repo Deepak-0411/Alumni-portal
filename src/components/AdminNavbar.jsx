@@ -92,7 +92,7 @@ const AdminNavbar = ({ forPage }) => {
             )}
           </button>
         </div>
-        <DevFooter styles={{ position: "inherit" }} />
+        {/* <DevFooter styles={{ position: "inherit" }} /> */}
       </div>
     </div>
     // </aside>

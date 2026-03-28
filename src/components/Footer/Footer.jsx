@@ -29,7 +29,7 @@ const Footer = () => {
         </p>
       </div>
 
-      <div className={styles.devTeamDiv}>
+      {/* <div className={styles.devTeamDiv}>
         <p className={styles.devTeam}>
           <Link to="/devTeam">
             Designed & Developed By
@@ -39,7 +39,7 @@ const Footer = () => {
             <span className={styles.devName}>{" Harsh"}</span>
           </Link>
         </p>
-      </div>
+      </div> */}
     </footer>
   );
 };

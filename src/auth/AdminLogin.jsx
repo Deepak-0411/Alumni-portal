@@ -10,7 +10,7 @@ const AdminLogin = () => {
       <div className={styles.outlet}>
         <Login user={"superAdmin"} />
       </div>
-      <DevFooter/>
+      {/* <DevFooter/> */}
     </div>
   );
 };
