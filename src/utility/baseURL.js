@@ -1,1 +1,1 @@
-export default "https://harshuh.helioho.st/alumni/backend/";
+export default "https://harshuh.helioho.st/api/";
