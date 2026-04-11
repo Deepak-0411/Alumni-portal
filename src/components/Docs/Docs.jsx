@@ -4,20 +4,26 @@ import { Link } from "react-router-dom";
 
 const credentials = {
   superAdmin: {
-    email: "admin@college.edu",
-    password: "Admin@1234",
+    email: "admin",
+    password: "1124",
     loginPath: "/alumni/superAdmin/login",
     dashboardPath: "/alumni/superAdmin",
   },
   subAdmin: {
-    email: "faculty@college.edu",
-    password: "Faculty@1234",
+    email: "subadmin",
+    password: "1124",
     loginPath: "/alumni/sub-admin/login",
     dashboardPath: "/alumni/sub-admin",
   },
-  user: {
-    email: "faculty@college.edu",
-    password: "Faculty@1234",
+  "user-withCard": {
+    email: "trythisharsh@gmail.com",
+    password: "1124",
+    loginPath: "/alumni/login",
+    dashboardPath: "/alumni/user",
+  },
+  "user-withoutCard": {
+    email: "deepak0411.kr@gmail.com",
+    password: "1124",
     loginPath: "/alumni/login",
     dashboardPath: "/alumni/user",
   },
@@ -269,7 +275,14 @@ export default function Docs() {
             <div className={styles.credGrid}>
               <CredentialCard role="SuperAdmin" data={credentials.superAdmin} />
               <CredentialCard role="SubAdmin" data={credentials.subAdmin} />
-              <CredentialCard role="User" data={credentials.user} />
+              <CredentialCard
+                role="User (with Membership Card)"
+                data={credentials["user-withCard"]}
+              />
+              <CredentialCard
+                role="User (without Membership Card)"
+                data={credentials["user-withoutCard"]}
+              />
             </div>
           </section>
 
@@ -402,6 +415,27 @@ export default function Docs() {
               . Source on{" "}
               <a
                 href="https://github.com/Deepak-0411/Alumni-portal"
+                className={styles.footerLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+              .
+            </p>
+            <p className={styles.footerText}>
+              Backend by{" "}
+              <a
+                href="https://github.com/harshuh"
+                className={styles.footerLink}
+                target="_blank"
+                rel="noreferrer"
+              >
+                harshuh
+              </a>
+              . Source on{" "}
+              <a
+                href="https://github.com/harshuh/alumni-backend"
                 className={styles.footerLink}
                 target="_blank"
                 rel="noreferrer"
